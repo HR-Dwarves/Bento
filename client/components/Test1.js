@@ -4,7 +4,7 @@ const Test1 = React.createClass({
   render() {
     return (
       <div>
-        Test1
+        {this.props.testInfo['1'].text}
       </div>
     )
   }

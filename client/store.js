@@ -6,12 +6,13 @@ import { browserHistory } from 'react-router';
 import rootReducer from './reducers/index';
 
 // Import test data if applicable
-// import comments from './data/comments';
+import testInfo from './data/testInfo';
 // import posts from './data/posts';
 
 // create an object for the default data
+  // default state must match reducer (?)
 const defaultState = {
-  test: []
+  testReducer: testInfo
 };
 
 const store = createStore(rootReducer, defaultState);
