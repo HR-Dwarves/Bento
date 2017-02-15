@@ -2,10 +2,11 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actionCreators from '../actions/actionCreators';
 import Main from './Main';
+import database from '../base.js';
 
 function mapStateToProps(state) {
   return {
-    testInfo: state.testReducer,
+    testInfo: state.testReducer
   }
 }
 

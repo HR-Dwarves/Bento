@@ -3,9 +3,9 @@ import { routerReducer } from 'react-router-redux';
 
 // Import reducers
 import testReducer from './testReducer';
-// import comments from './comments';
+import list from './list';
 
 // pass reducers into combineReducers (in first object)
-const rootReducer = combineReducers({testReducer, routing: routerReducer });
+const rootReducer = combineReducers({testReducer, list, routing: routerReducer });
 
 export default rootReducer;

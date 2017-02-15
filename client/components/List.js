@@ -1,13 +1,13 @@
 import React from 'react';
 
-const Test2 = React.createClass({
+const List = React.createClass({
   render() {
     return (
       <div>
-        sup
+        this is a list
       </div>
     )
   }
 });
 
-export default Test2;
+export default List;
