@@ -9,36 +9,36 @@ export function test(index) {
   }
 }
 
-export function getList() {
+export function getDatabase() {
   return dispatch => {
-    dispatch(getListRequestedAction());
+    dispatch(getDBRequestedAction());
     return database.ref('/').once('value', snap => {
-      const list = snap.val();
-      dispatch(getListFulfilledAction(list))
+      const databaseInfo = snap.val();
+      dispatch(getDBFulfilledAction(databaseInfo))
     })
     .catch((error) => {
       console.log(error);
-      dispatch(getListRejectedAction());
+      dispatch(getDBRejectedAction());
     });
   }
 }
 
 
-function getListRequestedAction() {
+function getDBRequestedAction() {
   return {
-    type: ActionTypes.GetListRequested
+    type: ActionTypes.GetDBRequested
   };
 }
 
-function getListRejectedAction() {
+function getDBRejectedAction() {
   return {
-    type: ActionTypes.GetListRejected
+    type: ActionTypes.GetDBRejected
   }
 }
 
-function getListFulfilledAction(list) {
+function getDBFulfilledAction(databaseInfo) {
   return {
-    type: ActionTypes.GetListFulfilled,
-    list
+    type: ActionTypes.GetDBFulfilled,
+    databaseInfo
   };
 }
