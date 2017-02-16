@@ -7,15 +7,15 @@ import database from '../base.js';
 // Map each reducers state to props
 function mapStateToProps(state) {
   return {
-    testInfo: state.testReducer,
-    database: state.dashboard.databaseInfo
+    dashboard: state.dashboard,
+    list: state.list
   }
 }
 
-function mapDispachToProps(dispatch) {
+function mapDispatchToProps(dispatch) {
   return bindActionCreators(actionCreators, dispatch);
 }
 
-const App = connect(mapStateToProps, mapDispachToProps)(Main);
+const App = connect(mapStateToProps, mapDispatchToProps)(Main);
 
 export default App;
