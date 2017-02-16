@@ -5,7 +5,7 @@ const ListItem = React.createClass({
     const item = this.props.listItem;
     return (
       <div>
-        {item}
+        {item.text}
       </div>
     )
   }
