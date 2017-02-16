@@ -17,12 +17,15 @@ function dashboard(state = {}, action) {
       });
     }
     case actionTypes.GetDBFulfilled: {
-      const { databaseInfo } = action;
-      console.log("databaseInfo: ", databaseInfo);
+      const { username, firstName, lastName, email } = action.databaseInfo;
+      console.log("databaseInfo: ", action.databaseInfo);
       const newState = Object.assign({}, state, {
         inProgress: false,
         success: 'Got invite.',
-        databaseInfo
+        username,
+        firstName,
+        lastName,
+        email
       });
       return newState;
     }

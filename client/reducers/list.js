@@ -17,12 +17,35 @@ function list(state = {}, action) {
       });
     }
     case actionTypes.GetListFulfilled: {
-      const { databaseInfo } = action;
-      console.log("databaseInfo: ", databaseInfo);
+      const { username, items } = action.list;
+      console.log("list: ", list);
       const newState = Object.assign({}, state, {
         inProgress: false,
         success: 'Got invite.',
-        databaseInfo
+        username,
+        items
+      });
+      return newState;
+    }
+    case actionTypes.AddToListRequested: {
+      return Object.assign({}, state, {
+        inProgress: true,
+        error: '',
+        success: ''
+      });
+    }
+    case actionTypes.AddToListRejected: {
+      return Object.assign({}, state, {
+        inProgress: false,
+        error: 'Error in getting list.',
+      });
+    }
+    case actionTypes.AddToListFulfilled: {
+      const { newItem } = action;
+      console.log("newItem: ", newItem);
+      const newState = Object.assign({}, state, {
+        inProgress: false,
+        success: 'Got invite.',
       });
       return newState;
     }
