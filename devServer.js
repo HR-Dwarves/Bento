@@ -1,9 +1,11 @@
 var path = require('path');
 var express = require('express');
+var cors = require('cors');
 var webpack = require('webpack');
 var config = require('./webpack.config.dev');
 
 var app = express();
+app.use(cors());
 var compiler = webpack(config);
 
 app.use(require('webpack-dev-middleware')(compiler, {
