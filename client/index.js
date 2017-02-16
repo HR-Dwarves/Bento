@@ -10,6 +10,7 @@ import App from './components/App';
 import Test1 from './components/Test1';
 import Test2 from './components/Test2';
 import Dashboard from './components/Dashboard';
+import Newsfeed from './components/Newsfeed';
 // import timers.setImmediate(callback, arg1, arg2, arg3); from './components/timers.setImmediate(callback, arg1, arg2, arg3);';
 
 // import react router deps
@@ -23,6 +24,7 @@ const router = (
       <Route path="/" component={App}>
         <IndexRoute component={Dashboard}></IndexRoute>
         <Route path="/xxx" component={Test2}></Route>
+        <Route path="/newsfeed" component={Newsfeed}></Route>
       </Route>
     </Router>
   </Provider>
