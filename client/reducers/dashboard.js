@@ -1,22 +1,22 @@
 import actionTypes from '../actions/actionTypes';
 
 // Every function should have three steps: requested, rejected and fulfilled
-function list(state = {}, action) {
+function dashboard(state = {}, action) {
   switch(action.type) {
-    case actionTypes.GetListRequested: {
+    case actionTypes.GetDBRequested: {
       return Object.assign({}, state, {
         inProgress: true,
         error: '',
         success: ''
       });
     }
-    case actionTypes.GetListRejected: {
+    case actionTypes.GetDBRejected: {
       return Object.assign({}, state, {
         inProgress: false,
-        error: 'Error in getting list.',
+        error: 'Error in getting DB.',
       });
     }
-    case actionTypes.GetListFulfilled: {
+    case actionTypes.GetDBFulfilled: {
       const { databaseInfo } = action;
       console.log("databaseInfo: ", databaseInfo);
       const newState = Object.assign({}, state, {
@@ -31,4 +31,4 @@ function list(state = {}, action) {
   }
 }
 
-export default list;
+export default dashboard;
