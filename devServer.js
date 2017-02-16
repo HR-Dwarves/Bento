@@ -13,6 +13,14 @@ app.use(require('webpack-dev-middleware')(compiler, {
   publicPath: config.output.publicPath
 }));
 
+app.use(function (req, res, next) {
+  origin = req.get('Origin') || '*';
+  res.setHeader('Access-Control-Allow-Headers', 'accept, authorization, content-type, x-requested-with');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
+  res.setHeader('Access-Control-Allow-Origin', origin);
+  next();
+});
+
 app.use(require('webpack-hot-middleware')(compiler));
 
 app.get('*', function(req, res) {
