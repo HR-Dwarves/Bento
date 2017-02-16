@@ -1,8 +1,10 @@
 {
-  "username": "mtutt",
-  "items": [
-    "One",
-    "Two",
-    "Three"
-  ]
+  "list": {
+    "username": "mtutt",
+    "items": [
+      "One",
+      "Two",
+      "Three"
+    ]
+  }
 }
