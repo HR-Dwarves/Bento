@@ -16,7 +16,7 @@ const logger = createLogger();
   // default state must match reducer (?)
 
 const defaultState = {
-  testReducer: testInfo
+  
 };
 
 const store = createStore(
