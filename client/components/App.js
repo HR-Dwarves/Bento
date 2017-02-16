@@ -8,7 +8,7 @@ import database from '../base.js';
 function mapStateToProps(state) {
   return {
     testInfo: state.testReducer,
-    list: state.list
+    database: state.dashboard.databaseInfo
   }
 }
 
