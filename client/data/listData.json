@@ -1,10 +1,48 @@
 {
-  "list": {
+  "testUser" : {
     "username": "mtutt",
-    "items": [
-      "One",
-      "Two",
-      "Three"
-    ]
+    "firstName": "Michael",
+    "lastName": "Tutt",
+    "email": "tutt.michael@gmail.com",
+    "list": {
+      "items": {
+        "0": {
+          "text": "Zero",
+          "completed": false
+        },
+        "1": {
+          "text": "One",
+          "completed": false
+        },
+        "2": {
+          "text": "Two",
+          "completed": false
+        },
+        "Nenson": {
+          "text": "Binh",
+          "completed": false
+        }
+      }
+    },
+    "list2": {
+      "items": {
+        "0": {
+          "text": "Zero",
+          "completed": false
+        },
+        "1": {
+          "text": "One",
+          "completed": false
+        },
+        "2": {
+          "text": "Two",
+          "completed": false
+        },
+        "Nenson": {
+          "text": "Binh",
+          "completed": false
+        }
+      }
+    }
   }
 }
