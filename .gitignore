@@ -39,7 +39,4 @@ bower_components/
 .flooignore
 
 ## API keys ##
-server/config/twitter.js
-server/config/haven.js
-public/components/utils/Api.jsx
-server/config/auth0config.js
+client/config/config.js

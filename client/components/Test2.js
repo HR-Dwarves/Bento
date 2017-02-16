@@ -4,7 +4,7 @@ const Test2 = React.createClass({
   render() {
     return (
       <div>
-        Hey
+        sup
       </div>
     )
   }
