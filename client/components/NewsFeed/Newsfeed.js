@@ -77,11 +77,16 @@ class NewsFeed extends React.Component {
     return (
       <div className="column">
         <div className="card">
-          <div className="card-header">
+          <header className="card-header">
             <div className="card-header-title">
-              <i className="fa fa-hacker-news" aria-hidden="true"></i> Hacker News
+              Hacker News
             </div>
-          </div>
+            <div className="card-header-icon">
+              <span className="icon">
+                <i className="fa fa-hacker-news" aria-hidden="true"></i>
+              </span>
+            </div>
+          </header>
           <div className="card-content">
             {this.props.newsfeed.testState ? <div></div> : <a className="button is-loading">Loading</a>}
             {list ? list.map((item, key) => <NewsItem {...this.props} 
