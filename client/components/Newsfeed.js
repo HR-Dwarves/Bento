@@ -65,8 +65,9 @@ class Newsfeed extends React.Component{
       <div>
         <p onClick={this.updateNew}>New</p>
         <p onClick={this.updateTop}>Top</p>
-        {list ? list.map((item) => <NewsItem {...this.props} 
-                                      newsItem={item._rejectionHandler0}/>) : []}
+        {list ? list.map((item, key) => <NewsItem {...this.props} 
+                                      newsItem={item._rejectionHandler0}
+                                      key={key}/>) : []}
       </div>
     )
   }
