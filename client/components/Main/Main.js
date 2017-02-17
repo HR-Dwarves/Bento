@@ -9,9 +9,6 @@ const Main = React.createClass({
     return (
       <div>
         <Nav />
-        <h1>
-          <Link to="/">Dashboard</Link>
-        </h1>
         {React.cloneElement({...this.props}.children, {...this.props})}
       </div>
     )

@@ -30,13 +30,11 @@ class Dashboard extends React.Component {
     if (dashboard) {
       modules = dashboard.modules
       if (modules) {
-        console.log(modules);
         elements = Object.keys(modules).map((moduleKey) => {
           var additionalProps = {
             key: moduleKey,
             db_key: moduleKey
           };
-          console.log(this.components[modules[moduleKey].type]);
           var newProps = Object.assign({}, this.props, additionalProps)
           return React.createElement(this.components[modules[moduleKey].type], newProps)
         });
