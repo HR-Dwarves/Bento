@@ -37,22 +37,6 @@
           "-Kd8QmjmwS6cd7pXV8qI" : {
             "completed" : false,
             "text" : "a;sldkfjasd"
-          },
-          "-Kd8Si4dmSx4X0ZTLBvu" : {
-            "completed" : false,
-            "text" : "work"
-          },
-          "-Kd8VeubePOVnw3PHlUs" : {
-            "completed" : false,
-            "text" : "list 1"
-          },
-          "-Kd8VhlZkoXZfz5tIloi" : {
-            "completed" : false,
-            "text" : "hey"
-          },
-          "-Kd8WLtBJC2vplcKYb6Y" : {
-            "completed" : false,
-            "text" : "k"
           }
         },
         "type" : "List"
@@ -93,6 +77,9 @@
           }
         },
         "type" : "List"
+      },
+      "newsfeed": {
+        "type": "NewsFeed"
       }
     },
     "username" : "mtutt"
