@@ -7,6 +7,9 @@ import List from './List';
 class Dashboard extends React.Component {
   constructor() {
     super();
+    this.components = {
+      'List': List
+    }
   }
 
   componentDidMount() {
@@ -16,13 +19,30 @@ class Dashboard extends React.Component {
     });
   }
 
+
   render() {
+    let dashboard = this.props.dashboard;
+    let modules, elements;
+    if (dashboard) {
+      modules = dashboard.modules
+      if (modules) {
+        elements = Object.keys(modules).map((moduleKey) => {
+          var additionalProps = {
+            key: moduleKey,
+            db_key: moduleKey
+          };
+          var newProps = Object.assign({}, this.props, additionalProps)
+          return React.createElement(this.components[modules[moduleKey].type], newProps)
+        });
+      }
+    }
     return (
       <div>
-        <List {...this.props} {...this.props.children}/>
+        {elements ? elements : []}
       </div>
     ) 
   }
 }
 
 export default Dashboard;
+

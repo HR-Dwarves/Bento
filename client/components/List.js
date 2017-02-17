@@ -9,31 +9,40 @@ class List extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getList();
-    database.ref('/testUser/list').on('value', () => {
-      this.props.getList();
+    let db_key = this.props.db_key;
+    this.props.getList(db_key);
+    database.ref(`/testUser/modules/${db_key}`).on('value', () => {
+      this.props.getList(db_key);
     })
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.formInput.value);
-    
+    let formInput = this.formInput.value;
+    let db_key = this.props.db_key;
+    if (formInput) {
+      let listObj = {
+        text: formInput,
+        completed: false
+      }
+      console.log(formInput);
+      this.props.addToList(listObj, db_key);
+    }
     this.listForm.reset();
   }
 
   render() {
     let dashboard = this.props.dashboard;
+    let db_key = this.props.db_key;
     if (dashboard) {
       var { username, email, firstName, lastName } = dashboard;
     }
-    let list = this.props.list;
+    let list = dashboard.modules[db_key];
     let items;
     if (list) {
-      if (list) {
         items = list.items;
-      }
     }
+
     return (
       <div>
         <p>Username: {username}</p>

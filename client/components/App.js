@@ -9,8 +9,7 @@ var bundledActionCreators = Object.assign({}, actionCreators, listActionCreators
 // Map each reducers state to props
 function mapStateToProps(state) {
   return {
-    dashboard: state.dashboard,
-    list: state.list
+    dashboard: state.dashboard
   }
 }
 
