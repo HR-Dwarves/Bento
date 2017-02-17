@@ -1,0 +1,12 @@
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.listItem {
+  display: flex;
+  margin-bottom: 2px !important;
+}
+
+
