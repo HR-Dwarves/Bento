@@ -66,9 +66,11 @@ class NewsFeed extends React.Component {
         <div className="card">
           <p onClick={this.updateNew}>New</p>
           <p onClick={this.updateTop}>Top</p>
-          {list ? list.map((item, key) => <NewsItem {...this.props} 
-                                        newsItem={item._rejectionHandler0}
-                                        key={key}/>) : []}
+          <div className="card-content">
+            {list ? list.map((item, key) => <NewsItem {...this.props} 
+                                          newsItem={item._rejectionHandler0}
+                                          key={key}/>) : []}
+          </div>
         </div>
       </div>
     )
