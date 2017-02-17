@@ -5,14 +5,16 @@ import styles from './Dashboard.css'
 
 // Import dashboard components as you add them!
 import List from '../List/List';
-import NewsFeed from '../NewsFeed/NewsFeed'
+import NewsFeed from '../NewsFeed/NewsFeed';
+import WeatherDetails from '../WeatherDetails/WeatherDetails';
 
 class Dashboard extends React.Component {
   constructor() {
     super();
     this.components = {
       'List': List,
-      'NewsFeed': NewsFeed
+      'NewsFeed': NewsFeed,
+      'WeatherDetails': WeatherDetails
     }
   }
 
@@ -41,7 +43,7 @@ class Dashboard extends React.Component {
       }
     }
     return (
-      <div className='section'>
+      <div className='section' height='100vh'>
         <div className='container is-fluid'>
           <div className='columns'>
             {elements ? elements : []}
