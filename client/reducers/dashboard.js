@@ -18,15 +18,16 @@ function dashboard(state = {}, action) {
     }
     case actionTypes.GetDBFulfilled: {
       const { username, firstName, lastName, email } = action.databaseInfo;
+      const database = Object.assign({}, action.databaseInfo)
       console.log("databaseInfo: ", action.databaseInfo);
       const newState = Object.assign({}, state, {
         inProgress: false,
         success: 'Got invite.',
-        username,
-        firstName,
-        lastName,
-        email
-      });
+        // username,
+        // firstName,
+        // lastName,
+        // email
+      }, database);
       return newState;
     }
     default:

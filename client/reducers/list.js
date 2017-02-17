@@ -17,12 +17,11 @@ function list(state = {}, action) {
       });
     }
     case actionTypes.GetListFulfilled: {
-      const { username, items } = action.list;
+      const { items } = action.list;
       console.log("list: ", list);
       const newState = Object.assign({}, state, {
         inProgress: false,
         success: 'Got invite.',
-        username,
         items
       });
       return newState;
@@ -41,11 +40,9 @@ function list(state = {}, action) {
       });
     }
     case actionTypes.AddToListFulfilled: {
-      const { newItem } = action;
-      console.log("newItem: ", newItem);
       const newState = Object.assign({}, state, {
         inProgress: false,
-        success: 'Got invite.',
+        success: 'List item added.',
       });
       return newState;
     }
