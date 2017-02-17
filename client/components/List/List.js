@@ -27,7 +27,6 @@ class List extends React.Component {
         text: formInput,
         completed: false
       }
-      console.log(formInput);
       this.props.addToList(listObj, db_key);
     }
     this.listForm.reset();
@@ -50,20 +49,22 @@ class List extends React.Component {
     return (
       <div className={cssClasses}>
         <div className='card'>
-
-          <p>List items:</p>
-          <form action="submit"
-                className="control"
-                onSubmit={(e) => this.handleSubmit(e)}
-                ref={(input) => this.listForm = input}
-                >
-            <label htmlFor="" className="label">Add task:</label>
-            <p className="control">
-              <input className="input" type="text" ref={(input) => this.formInput = input}/>
-            </p>
-            <button type="sumbit">Add</button>
-          </form>
-
+          <header className="card-header">
+            <p className="card-header-title">List items:</p>
+          </header>
+          <div className="card-content">
+            <form action="submit"
+                  className="control"
+                  onSubmit={(e) => this.handleSubmit(e)}
+                  ref={(input) => this.listForm = input}
+                  >
+              <label htmlFor="" className="label">Add task:</label>
+              <p className="control">
+                <input className="input is-small" type="text" ref={(input) => this.formInput = input}/>
+              </p>
+              <button className="button is-small" type="sumbit">Add</button>
+            </form>
+          </div>
           <div className='card-content'>
             <div className='media-content'>
               {items ? Object.keys(items).map((key, ind) => <ListItem {...this.props} 

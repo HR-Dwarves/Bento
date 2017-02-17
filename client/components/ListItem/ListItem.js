@@ -32,10 +32,10 @@ class ListItem extends React.Component {
     return (
       <div>
         {item.text}
-        <span className="icon" onClick={() => this.handleCheckClick(itemKey)}>
+        <span className="icon is-small" onClick={() => this.handleCheckClick(itemKey)}>
           {checked}
         </span>
-        <span className="icon">
+        <span className="icon is-small">
           <i onClick={() => this.handleDelete(itemKey)} 
              className="fa fa-times" aria-hidden="true"></i>
         </span>
