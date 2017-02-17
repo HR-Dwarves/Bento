@@ -72,3 +72,72 @@ function addToListFulfilledAction(newItem) {
     newItem
   };
 }
+
+export function deleteFromList(itemKey, db_key) {
+  return dispatch => {
+    dispatch(deleteFromListRequestedAction());
+    const itemRef = database.ref(`/testUser/modules/${db_key}/items/${itemKey}`);
+
+    itemRef.remove()
+    .then((snap) => {
+      dispatch(deleteFromListFulfilledAction())
+    })
+    .catch((error) => {
+      console.log(error);
+      dispatch(deleteFromListRejectedAction());
+    });
+  }
+}
+
+function deleteFromListRequestedAction() {
+  return {
+    type: ActionTypes.DeleteFromListRequested
+  };
+}
+
+function deleteFromListRejectedAction() {
+  return {
+    type: ActionTypes.DeleteFromListRejected
+  }
+}
+
+function deleteFromListFulfilledAction(newItem) {
+  return {
+    type: ActionTypes.DeleteFromListFulfilled,
+    newItem
+  };
+}
+
+export function toggleListItemStatus(itemKey, db_key, newStatus) {
+  return dispatch => {
+    dispatch(toggleListStatusRequestedAction());
+    const statusRef = database.ref(`/testUser/modules/${db_key}/items/${itemKey}`).child('completed');
+
+    statusRef.set(newStatus)
+    .then((snap) => {
+      dispatch(toggleListStatusFulfilledAction())
+    })
+    .catch((error) => {
+      console.log(error);
+      dispatch(toggleListStatusRejectedAction());
+    });
+  }
+}
+
+function toggleListStatusRequestedAction() {
+  return {
+    type: ActionTypes.ToggleListStatusRequested
+  };
+}
+
+function toggleListStatusRejectedAction() {
+  return {
+    type: ActionTypes.ToggleListStatusRejected
+  }
+}
+
+function toggleListStatusFulfilledAction(newItem) {
+  return {
+    type: ActionTypes.ToggleListStatusFulfilled
+  };
+}

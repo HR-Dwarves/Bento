@@ -11,7 +11,14 @@ const actionTypes = {
   AddToListRequested: 'ADD_TO_LIST_REQUESTED',
   AddToListRejected: 'ADD_TO_LIST_REJECTED',
   AddToListFulfilled: 'ADD_TO_LIST_FULFILLED',
-  
+
+  DeleteFromListRequested: 'DELETE_FROM_LIST_REQUESTED',
+  DeleteFromListRejected: 'DELETE_FROM_LIST_REJECTED',
+  DeleteFromListFulfilled: 'DELETE_FROM_LIST_FULFILLED',
+
+  ToggleListStatusRequested: 'TOGGLE_LIST_STATUS_REQUESTED',
+  ToggleListStatusRejected: 'TOGGLE_LIST_STATUS_REJECTED',
+  ToggleListStatusFulfilled: 'TOGGLE_LIST_STATUS_FULFILLED',
 };
 
 export default actionTypes;
