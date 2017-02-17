@@ -1,6 +1,8 @@
 import React from 'react';
-import database from '../base'
-import ListItem from './ListItem'
+import database from '../../base'
+import ListItem from '../ListItem/ListItem'
+
+import styles from './List.css'
 
 
 class List extends React.Component {
@@ -43,21 +45,34 @@ class List extends React.Component {
         items = list.items;
     }
 
+    let cssClasses = `${styles.card} column`;
+
     return (
-      <div>
+      <div className={cssClasses}>
         <p>Username: {username}</p>
-        <p>List items:</p>
-        <form action="submit" 
-              className="control" 
-              onSubmit={(e) => this.handleSubmit(e)}
-              ref={(input) => this.listForm = input}
-              >
-          <input type="text" ref={(input) => this.formInput = input}/>
-          <button type="sumbit">Add</button>
-        </form>
-        {items ? Object.keys(items).map((key, ind) => <ListItem {...this.props} 
-                                                       key={key} 
-                                                       listItem={items[key]}/>) : []}
+
+        <div className='card'>
+
+          <p>List items:</p>
+          <form action="submit"
+                className="control"
+                onSubmit={(e) => this.handleSubmit(e)}
+                ref={(input) => this.listForm = input}
+                >
+            <input type="text" ref={(input) => this.formInput = input}/>
+            <button type="sumbit">Add</button>
+          </form>
+
+          <div className='card-content'>
+            <div className='media-content'>
+
+              {items ? Object.keys(items).map((key, ind) => <ListItem {...this.props}
+                                                             key={key}
+                                                             listItem={items[key]}/>) : []}
+            </div>
+          </div>
+        </div>
+
       </div>
     )
   }

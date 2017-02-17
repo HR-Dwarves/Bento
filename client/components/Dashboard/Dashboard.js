@@ -1,8 +1,10 @@
 import React from 'react';
-import database from '../base'
+import database from '../../base'
+
+import styles from './Dashboard.css'
 
 // Import dashboard components as you add them!
-import List from './List';
+import List from '../List/List';
 
 class Dashboard extends React.Component {
   constructor() {
@@ -37,10 +39,14 @@ class Dashboard extends React.Component {
       }
     }
     return (
-      <div>
-        {elements ? elements : []}
+      <div className='section'>
+        <div className='container is-fluid'>
+          <div className='columns'>
+            {elements ? elements : []}
+          </div>
+        </div>
       </div>
-    ) 
+    )
   }
 }
 
