@@ -5,10 +5,10 @@
 import ActionTypes from './actionTypes';
 import database from '../base';
 
-export function getList() {
+export function getList(db_key) {
   return dispatch => {
     dispatch(getListRequestedAction());
-    return database.ref('/testUser/list').once('value', snap => {
+    return database.ref(`/testUser/modules/${db_key}`).once('value', snap => {
       const list = snap.val();
       dispatch(getListFulfilledAction(list))
     })
@@ -38,15 +38,14 @@ function getListFulfilledAction(list) {
   };
 }
 
-export function addToList(newStuff) {
+export function addToList(newStuff, db_key) {
   return dispatch => {
     dispatch(addToListRequestedAction());
-    const listRef = database.ref('/testUser/list/items');
+    const listRef = database.ref(`/testUser/modules/${db_key}/items`);
 
-    listRef.push({newStuff})
+    listRef.push(newStuff)
     .then((snap) => {
-      const newItem = snap.val();
-      dispatch(addToListFulfilledAction(newItem))
+      dispatch(addToListFulfilledAction())
     })
     .catch((error) => {
       console.log(error);
