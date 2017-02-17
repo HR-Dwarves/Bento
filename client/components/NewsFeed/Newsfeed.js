@@ -24,6 +24,10 @@ class NewsFeed extends React.Component {
       success: function(res) {
         that.getPostContent(res);  
       },
+      error: function(err) {
+        console.log('got an err');
+        console.log(err);
+      }
     });
   }
 
@@ -35,6 +39,7 @@ class NewsFeed extends React.Component {
     Promise.all(postsArray)
     .then((results) => {
       this.props.getHnPosts(postsArray);
+      //this.showSpinner();
     })
   }
 
@@ -50,10 +55,16 @@ class NewsFeed extends React.Component {
   }
 
   updateNew(){
-    this.getPosts(this, 'https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty')
+    console.log('before ' + this.props.newsfeed.testState);
+    this.props.newsfeed.testState = false;
+    console.log('after ' + this.props.newsfeed.testState);
+    this.getPosts(this, 'https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty');
   }
 
   updateTop(){
+    console.log('before ' + this.props.newsfeed.testState);
+    this.props.newsfeed.testState = false;
+    console.log('after ' + this.props.newsfeed.testState);
     this.getPosts(this,  'https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty');
   }
 
@@ -66,12 +77,18 @@ class NewsFeed extends React.Component {
     return (
       <div className="column">
         <div className="card">
-          <div className="card-header">
+          <header className="card-header">
             <div className="card-header-title">
-              <i className="fa fa-hacker-news" aria-hidden="true"></i> Hacker News
+              Hacker News
             </div>
-          </div>
+            <div className="card-header-icon">
+              <span className="icon">
+                <i className="fa fa-hacker-news" aria-hidden="true"></i>
+              </span>
+            </div>
+          </header>
           <div className="card-content">
+            {this.props.newsfeed.testState ? <div></div> : <a className="button is-loading">Loading</a>}
             {list ? list.map((item, key) => <NewsItem {...this.props} 
                                           newsItem={item._rejectionHandler0}
                                           key={key}/>) : []}
