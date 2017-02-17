@@ -1,12 +1,14 @@
 import React from 'react';
+import styles from './ListItem.css'
 
 const ListItem = React.createClass({
   render() {
     const item = this.props.listItem;
+
     return (
-      <div>
+      <p>
         {item.text}
-      </div>
+      </p>
     )
   }
 });
