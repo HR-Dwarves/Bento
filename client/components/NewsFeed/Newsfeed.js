@@ -1,5 +1,5 @@
 import React from 'react';
-import NewsItem from './NewsItem';
+import NewsItem from './../NewsFeedItem/NewsItem';
 import Promise from 'bluebird';
 
 class Newsfeed extends React.Component{

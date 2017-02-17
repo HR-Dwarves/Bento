@@ -33,11 +33,8 @@
     "babel-preset-react": "^6.23.0",
     "bluebird": "^3.4.7",
     "body-parser": "^1.16.1",
-<<<<<<< HEAD
     "bulma": "^0.3.1",
-=======
     "cors": "^2.8.1",
->>>>>>> 8792eeed29b1724e66170cac2fbb1887cd1761c8
     "css-loader": "^0.23.1",
     "eslint": "^2.9.0",
     "eslint-plugin-babel": "^3.2.0",

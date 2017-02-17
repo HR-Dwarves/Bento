@@ -7,9 +7,6 @@ import list from './list';
 import newsfeed from './newsfeed';
 
 // pass reducers into combineReducers (in first object)
-const rootReducer = combineReducers({dashboard, list, routing: routerReducer });
-
-// pass reducers into combineReducers (in first object)
-const rootReducer = combineReducers({testReducer, dashboard, newsfeed, routing: routerReducer });
+const rootReducer = combineReducers({dashboard, list, newsfeed, routing: routerReducer });
 
 export default rootReducer;

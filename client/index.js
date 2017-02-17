@@ -8,7 +8,7 @@ import { render } from 'react-dom';
 // Import Components
 import App from './components/App';
 import Dashboard from './components/Dashboard/Dashboard';
-import Newsfeed from './components/Newsfeed';
+import Newsfeed from './components/NewsFeed/Newsfeed';
 
 // import react router deps
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
