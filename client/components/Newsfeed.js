@@ -8,10 +8,12 @@ class Newsfeed extends React.Component{
     this.getPosts = this.getPosts.bind(this);
     this.getPostContent = this.getPostContent.bind(this);
     this.callHackerNewsApi = Promise.promisify(this.callHackerNewsApi, {context: this});
+    this.updateNew = this.updateNew.bind(this);
+    this.updateTop = this.updateTop.bind(this);
   }
 
-  getPosts(that){
-    let feed = "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty";
+  getPosts(that, url){
+    let feed = url;
     let itemIdArray = [];
     $.ajax({
       url: feed,
@@ -46,8 +48,16 @@ class Newsfeed extends React.Component{
     });
   }
 
+  updateNew(){
+    this.getPosts(this, 'https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty')
+  }
+
+  updateTop(){
+    this.getPosts(this,  'https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty');
+  }
+
   componentWillMount(){
-    this.getPosts(this);
+    this.getPosts(this,  'https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty');
   }
 
   render() {
@@ -55,6 +65,8 @@ class Newsfeed extends React.Component{
     console.log(list);
     return (
       <div>
+        <p onClick={this.updateNew}>New</p>
+        <p onClick={this.updateTop}>Top</p>
         {list ? list.map((item) => <NewsItem {...this.props} 
                                       newsItem={item._rejectionHandler0}/>) : []}
       </div>
