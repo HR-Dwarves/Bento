@@ -5,12 +5,14 @@ import styles from './Dashboard.css'
 
 // Import dashboard components as you add them!
 import List from '../List/List';
+import Newsfeed from '../NewsFeed/Newsfeed'
 
 class Dashboard extends React.Component {
   constructor() {
     super();
     this.components = {
-      'List': List
+      'List': List,
+      'Newsfeed': Newsfeed
     }
   }
 
@@ -28,11 +30,13 @@ class Dashboard extends React.Component {
     if (dashboard) {
       modules = dashboard.modules
       if (modules) {
+        console.log(modules);
         elements = Object.keys(modules).map((moduleKey) => {
           var additionalProps = {
             key: moduleKey,
             db_key: moduleKey
           };
+          console.log(this.components[modules[moduleKey].type]);
           var newProps = Object.assign({}, this.props, additionalProps)
           return React.createElement(this.components[modules[moduleKey].type], newProps)
         });
@@ -43,6 +47,7 @@ class Dashboard extends React.Component {
         <div className='container is-fluid'>
           <div className='columns'>
             {elements ? elements : []}
+            <Newsfeed {...this.props}/>
           </div>
         </div>
       </div>
