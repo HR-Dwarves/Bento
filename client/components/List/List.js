@@ -50,7 +50,6 @@ class List extends React.Component {
     return (
       <div className={cssClasses}>
         <p>Username: {username}</p>
-
         <div className='card'>
 
           <p>List items:</p>
@@ -65,14 +64,13 @@ class List extends React.Component {
 
           <div className='card-content'>
             <div className='media-content'>
-
-              {items ? Object.keys(items).map((key, ind) => <ListItem {...this.props}
-                                                             key={key}
-                                                             listItem={items[key]}/>) : []}
+              {items ? Object.keys(items).map((key, ind) => <ListItem {...this.props} 
+                                                                     key={key}
+                                                                     itemKey={key}
+                                                                     listItem={items[key]}/>) : []}
             </div>
           </div>
         </div>
-
       </div>
     )
   }
