@@ -18,7 +18,6 @@ function list(state = {}, action) {
     }
     case actionTypes.GetListFulfilled: {
       const { items } = action.list;
-      console.log("list: ", list);
       const newState = Object.assign({}, state, {
         inProgress: false,
         success: 'Got invite.',
