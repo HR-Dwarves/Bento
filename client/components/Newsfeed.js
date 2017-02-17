@@ -1,8 +1,16 @@
 import React from 'react';
+import NewsItem from './NewsItem';
+import Promise from 'bluebird';
 
-const Newsfeed = React.createClass({
+class Newsfeed extends React.Component{
+  constructor(){
+    super();
+    this.getPosts = this.getPosts.bind(this);
+    this.getPostContent = this.getPostContent.bind(this);
+    this.callHackerNewsApi = Promise.promisify(this.callHackerNewsApi, {context: this});
+  }
 
-  componentWillMount(){
+  getPosts(that){
     let feed = "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty";
     let itemIdArray = [];
     $.ajax({
@@ -10,33 +18,48 @@ const Newsfeed = React.createClass({
       type: 'GET',
       dataType: 'json', // added data type
       success: function(res) {
-  	    for(var i = 0; i < 5; i++) {
-  	      itemIdArray.push(res[i]);
-   	    }
-        for(var i = 0; i < itemIdArray.length; i++) {
-          $.ajax({
-            url: 'https://hacker-news.firebaseio.com/v0/item/'+ itemIdArray[i] +'.json?print=pretty',
-            type: 'GET',
-            dataType: 'json',
-            success: function(res) {
-              for(var i = 0; i < itemIdArray.length; i++) {
-                itemIdArray[i] = res;
-                console.log(itemIdArray[i].title);	
-              }
-            },
-          });
-        }   
+        that.getPostContent(res);  
       },
     });
-  },
+  }
+
+  getPostContent(ids) { 
+    var postsArray = [];
+    for(var i = 0; i < 5; i++) {
+      postsArray.push(this.callHackerNewsApi(ids[i]));
+    }
+    Promise.all(postsArray)
+    .then((results) => {
+      console.log('inside promise.all ' + JSON.stringify(results[0]))
+      this.props.getHnPosts(postsArray);
+    })
+  }
+
+  callHackerNewsApi(id, callback) {
+    $.ajax({
+      url: 'https://hacker-news.firebaseio.com/v0/item/' + id + '.json?print=pretty',
+      type: 'GET',
+      dataType: 'json',
+      success: function(res) {
+        callback(null, res);
+      }
+    });
+  }
+
+  componentWillMount(){
+    this.getPosts(this);
+  }
 
   render() {
+    let list = this.props.newsfeed.posts;
+    console.log(list);
     return (
       <div>
-        Inside Newsfeed
+        {list ? list.map((item) => <NewsItem {...this.props} 
+                                      newsItem={item._rejectionHandler0}/>) : []}
       </div>
     )
   }
-});
+};
 
 export default Newsfeed;
