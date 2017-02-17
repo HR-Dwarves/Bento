@@ -2,6 +2,8 @@ import React from 'react';
 import NewsItem from './../NewsItem/NewsItem';
 import Promise from 'bluebird';
 
+import styles from './NewsFeed.css';
+
 class NewsFeed extends React.Component {
   constructor(){
     super();
@@ -64,11 +66,20 @@ class NewsFeed extends React.Component {
     return (
       <div className="column">
         <div className="card">
-          <p onClick={this.updateNew}>New</p>
-          <p onClick={this.updateTop}>Top</p>
-          {list ? list.map((item, key) => <NewsItem {...this.props} 
-                                        newsItem={item._rejectionHandler0}
-                                        key={key}/>) : []}
+          <div className="card-header">
+            <div className="card-header-title">
+              <i className="fa fa-hacker-news" aria-hidden="true"></i> Hacker News
+            </div>
+          </div>
+          <div className="card-content">
+            {list ? list.map((item, key) => <NewsItem {...this.props} 
+                                          newsItem={item._rejectionHandler0}
+                                          key={key}/>) : []}
+          </div>
+          <footer className="card-footer">
+            <a className="card-footer-item" onClick={this.updateNew}>New</a>
+            <a className="card-footer-item" onClick={this.updateTop}>Top</a>
+          </footer>
         </div>
       </div>
     )
