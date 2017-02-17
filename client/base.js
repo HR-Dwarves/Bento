@@ -1,5 +1,3 @@
-// Add keys from firebase here:
-// STANDARD FIREBASE PACKAGE
 import firebase from 'firebase';
 import config from './config/config';
 
