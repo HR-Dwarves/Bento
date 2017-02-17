@@ -14,8 +14,6 @@ function newsfeed(state = {}, action) {
   	}
   	case actionTypes.GetHnFulfilled: {
   	  const { posts } = action;
-  	  console.log(action);
-  	  console.log('listInfo: ' + posts );
   	  const newState = Object.assign({}, state, {
   	  	testState: 'got state',
   	  	posts

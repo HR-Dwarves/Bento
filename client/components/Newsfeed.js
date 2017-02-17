@@ -32,7 +32,6 @@ class Newsfeed extends React.Component{
     }
     Promise.all(postsArray)
     .then((results) => {
-      console.log('inside promise.all ' + JSON.stringify(results[0]))
       this.props.getHnPosts(postsArray);
     })
   }
@@ -62,7 +61,6 @@ class Newsfeed extends React.Component{
 
   render() {
     let list = this.props.newsfeed.posts;
-    console.log(list);
     return (
       <div>
         <p onClick={this.updateNew}>New</p>
