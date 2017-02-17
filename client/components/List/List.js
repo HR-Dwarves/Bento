@@ -51,6 +51,11 @@ class List extends React.Component {
         <div className='card'>
           <header className="card-header">
             <p className="card-header-title">List items:</p>
+            <a href="" className="card-header-icon">
+              <span className="icon">
+                <i className="fa fa-th-list" aria-hidden="true"></i>
+              </span>
+            </a>
           </header>
           <div className="card-content">
             <form action="submit"
@@ -62,7 +67,7 @@ class List extends React.Component {
               <p className="control">
                 <input className="input is-small" type="text" ref={(input) => this.formInput = input}/>
               </p>
-              <button className="button is-small" type="sumbit">Add</button>
+              <button className="button is-small is-light" type="sumbit">Add</button>
             </form>
           </div>
           <div className='card-content'>
