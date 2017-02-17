@@ -63,20 +63,23 @@ class NewsFeed extends React.Component {
 
   render() {
     let list = this.props.newsfeed.posts;
-    let cssClasses = `${styles.newsToggles}`;
     return (
       <div className="column">
         <div className="card">
+          <div className="card-header">
+            <div className="card-header-title">
+              <i className="fa fa-hacker-news" aria-hidden="true"></i> Hacker News
+            </div>
+          </div>
           <div className="card-content">
-            <i className="fa fa-hacker-news" aria-hidden="true"></i> Hacker News
-            <ul>
-              <li className={cssClasses}><p onClick={this.updateNew}>New</p></li>
-              <li className={cssClasses}><p onClick={this.updateTop}>Top</p></li>
-            </ul>
             {list ? list.map((item, key) => <NewsItem {...this.props} 
                                           newsItem={item._rejectionHandler0}
                                           key={key}/>) : []}
           </div>
+          <footer className="card-footer">
+            <a className="card-footer-item" onClick={this.updateNew}>New</a>
+            <a className="card-footer-item" onClick={this.updateTop}>Top</a>
+          </footer>
         </div>
       </div>
     )
