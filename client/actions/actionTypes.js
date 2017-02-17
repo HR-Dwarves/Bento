@@ -19,6 +19,10 @@ const actionTypes = {
   ToggleListStatusRequested: 'TOGGLE_LIST_STATUS_REQUESTED',
   ToggleListStatusRejected: 'TOGGLE_LIST_STATUS_REJECTED',
   ToggleListStatusFulfilled: 'TOGGLE_LIST_STATUS_FULFILLED',
+
+  GetHnRequested: 'GET_HN_REQUESTED',
+  GetHnRejected: 'GET_HN_REJECTED',
+  GetHnFulfilled: 'GET_HN_FULFILLED'
 };
 
 export default actionTypes;
