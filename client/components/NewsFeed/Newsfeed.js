@@ -1,8 +1,8 @@
 import React from 'react';
-import NewsItem from './../NewsFeedItem/NewsItem';
+import NewsItem from './../NewsItem/NewsItem';
 import Promise from 'bluebird';
 
-class Newsfeed extends React.Component{
+class NewsFeed extends React.Component {
   constructor(){
     super();
     this.getPosts = this.getPosts.bind(this);
@@ -62,15 +62,17 @@ class Newsfeed extends React.Component{
   render() {
     let list = this.props.newsfeed.posts;
     return (
-      <div>
-        <p onClick={this.updateNew}>New</p>
-        <p onClick={this.updateTop}>Top</p>
-        {list ? list.map((item, key) => <NewsItem {...this.props} 
-                                      newsItem={item._rejectionHandler0}
-                                      key={key}/>) : []}
+      <div className="column">
+        <div className="card">
+          <p onClick={this.updateNew}>New</p>
+          <p onClick={this.updateTop}>Top</p>
+          {list ? list.map((item, key) => <NewsItem {...this.props} 
+                                        newsItem={item._rejectionHandler0}
+                                        key={key}/>) : []}
+        </div>
       </div>
     )
   }
 };
 
-export default Newsfeed;
+export default NewsFeed;

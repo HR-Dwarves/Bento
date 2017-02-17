@@ -49,7 +49,6 @@ class List extends React.Component {
 
     return (
       <div className={cssClasses}>
-        <p>Username: {username}</p>
         <div className='card'>
 
           <p>List items:</p>
@@ -58,7 +57,10 @@ class List extends React.Component {
                 onSubmit={(e) => this.handleSubmit(e)}
                 ref={(input) => this.listForm = input}
                 >
-            <input type="text" ref={(input) => this.formInput = input}/>
+            <label htmlFor="" className="label">Add task:</label>
+            <p className="control">
+              <input className="input" type="text" ref={(input) => this.formInput = input}/>
+            </p>
             <button type="sumbit">Add</button>
           </form>
 
