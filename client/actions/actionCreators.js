@@ -23,13 +23,14 @@ export function getHnPosts(posts) {
   const temp = posts;
   if(temp && temp.length > 0) {
     return dispatch => {
+      // dispatch(getHnRequestedAction());
       dispatch(getHnFulfilledAction(temp));
     }
   }
-  return dispatch => {
-    dispatch(getHnRequestedAction());
-    return getHnFulfilledAction();
-  }
+  // return dispatch => {
+  //   dispatch(getHnRequestedAction());
+  //   return getHnFulfilledAction();
+  // }
 }
 
 function getDBRequestedAction() {
