@@ -80,6 +80,9 @@
       },
       "newsfeed": {
         "type": "NewsFeed"
+      },
+      "weatherdetails": {
+        "type": "WeatherDetails"
       }
     },
     "username" : "mtutt"

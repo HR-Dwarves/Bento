@@ -1,0 +1,27 @@
+.card {
+  display: flex;
+  background-color: white;
+  flex-direction: column;
+}
+
+.cardImage {
+  background-image: url('http://files.softicons.com/download/web-icons/vector-stylish-weather-icons-by-bartosz-kaszubowski/png/256x256/sun.rays.medium.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  text-align: center;
+  font-size: 60px;
+}
+
+.details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.condition {
+  text-align: left;
+}
+
+.location {
+  text-align: right;
+}
