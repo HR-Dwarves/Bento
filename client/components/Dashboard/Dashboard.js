@@ -7,6 +7,7 @@ import styles from './Dashboard.css'
 import List from '../List/List';
 import NewsFeed from '../NewsFeed/NewsFeed';
 import WeatherDetails from '../WeatherDetails/WeatherDetails';
+import StickyNotes from '../StickyNotes/StickyNotes';
 
 class Dashboard extends React.Component {
   constructor() {
@@ -14,7 +15,8 @@ class Dashboard extends React.Component {
     this.components = {
       'List': List,
       'NewsFeed': NewsFeed,
-      'WeatherDetails': WeatherDetails
+      'WeatherDetails': WeatherDetails,
+      'StickyNotes': StickyNotes
     }
   }
 
