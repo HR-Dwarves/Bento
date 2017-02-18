@@ -9,6 +9,7 @@ import NewsFeed from '../NewsFeed/NewsFeed';
 import WeatherDetails from '../WeatherDetails/WeatherDetails';
 import StickyNotes from '../StickyNotes/StickyNotes';
 import Modal from '../Modal/Modal';
+import LatLong from '../LatLong/LatLong';
 
 class Dashboard extends React.Component {
   constructor() {
@@ -17,7 +18,8 @@ class Dashboard extends React.Component {
       'List': List,
       'NewsFeed': NewsFeed,
       'WeatherDetails': WeatherDetails,
-      'StickyNotes': StickyNotes
+      'StickyNotes': StickyNotes,
+      'LatLong': LatLong
     }
     this.state = { isModalOpen: false}
     this.handleSettingsButton = this.handleSettingsButton.bind(this);
