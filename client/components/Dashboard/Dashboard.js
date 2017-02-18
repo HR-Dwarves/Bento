@@ -62,15 +62,17 @@ class Dashboard extends React.Component {
       }
     }
 
-    let mainDashboardPanelCSS = `${styles.mainDashboardPanel} container is-fluid`
+    let mainDashboardPanelCSS = `${styles.mainDashboardPanel}`;
+    let componentStyle = `${styles.component}`;
+    let dashContainer = `${styles.dashContainer}`
 
     return (
-      <div className='section' height='100vh'>
+      <div className={dashContainer}>
         <Modal isOpen={this.state.isModalOpen} onClose={this.closeModal} modules={modulesArray}></Modal>
         <div className={mainDashboardPanelCSS}>
           <button onClick={this.handleSettingsButton} className="button is-primary modal-button"><i className="fa fa-cog" aria-hidden="true"></i></button>
           <div className='columns'>
-            {elements ? elements : []}
+            {elements ? elements.map((element) => <div className={componentStyle}>{element}</div>) : []}
           </div>
         </div>
       </div>
