@@ -10,6 +10,10 @@ div, button {
   justify-content: center;
 }
 
+.dashContainer > * {
+  flex: 1 1 100%;
+}
+
 .mainDashboardPanel {
   padding-top: 80px; 
 }
