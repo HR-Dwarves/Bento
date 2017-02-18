@@ -15,7 +15,10 @@ class Dashboard extends React.Component {
       'NewsFeed': NewsFeed,
       'WeatherDetails': WeatherDetails
     }
+    this.state = { isModalOpen: false}
     this.handleComponentAdd = this.handleComponentAdd.bind(this);
+    this.handleSettingsButton = this.handleSettingsButton.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
   componentDidMount() {
@@ -30,6 +33,20 @@ class Dashboard extends React.Component {
     let dbRef = database.ref('/testUser/modules/');
     dbRef.push({
       type: e.target.value
+    });
+  }
+
+  handleSettingsButton() {
+    console.log('in settings button');
+    this.setState({
+      isModalOpen: !this.state.isModalOpen
+    });
+  }
+
+  closeModal() {
+    console.log('inside closeModal');
+    this.setState({
+      isModalOpen: false
     });
   }
 
@@ -59,13 +76,40 @@ class Dashboard extends React.Component {
 
     return (
       <div className='section' height='100vh'>
+        <Modal isOpen={this.state.isModalOpen} onClose={this.closeModal} modules={modulesArray}></Modal>
         <div className={mainDashboardPanelCSS}>
-          <select onChange={this.handleComponentAdd}>
-            {modulesArray.map((item, key) => <option value={item}>{item}</option>)}
-          </select>
+          <span className="select">
+            <select onChange={this.handleComponentAdd}>
+              {modulesArray.map((item, key) => <option className='testing' value={item}>{item}</option>)}
+            </select>
+          </span>
+          <button onClick={this.handleSettingsButton} className="button is-primary modal-button"><i className="fa fa-cog" aria-hidden="true"></i></button>
           <div className='columns'>
             {elements ? elements : []}
           </div>
+        </div>
+      </div>
+    )
+  }
+}
+
+class Modal extends React.Component {
+  render() {
+    if(!this.props.isOpen) {
+      return null;
+    }
+    console.log(this.props.modules);
+    return(
+      <div className="modal is-active">
+        <div className="modal-background"></div>
+        <div className="modal-card">
+          <header className="modal-card-head">
+            <p className="modal-card-title">Modules</p>
+            <button className="delete" onClick={this.props.onClose}></button>
+          </header>
+          <section className="modal-card-body">
+            {this.props.modules.map((module, key) => <div>{module}</div>)}
+          </section>
         </div>
       </div>
     )
