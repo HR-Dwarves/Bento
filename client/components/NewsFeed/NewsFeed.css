@@ -7,3 +7,8 @@
   background-color: #adf5ea;
   font-weight: 900;
 }
+
+.spinner {
+  position: inherit;
+  border: 0px;
+}

@@ -88,8 +88,10 @@ class NewsFeed extends React.Component {
   render() {
     let list = this.props.newsfeed.posts;
     let cssClasses = `${styles.test}`;
+    let spinner = `${styles.spinner}`
     let newClasses = classnames('card-footer-item', this.props.newsfeed.New ? cssClasses : '');
     let topClasses = classnames('card-footer-item', this.props.newsfeed.New ? '' : cssClasses);
+    let spinnerClasses = classnames('button is-loading', spinner)
     let loaded = this.props.newsfeed.loaded;
     return (
       <div className="column">
@@ -107,7 +109,7 @@ class NewsFeed extends React.Component {
           <div className="card-content">
             {loaded ? list ? list.map((item, key) => <NewsItem {...this.props} 
                                           newsItem={item._rejectionHandler0}
-                                          key={key}/>) : [] : <a className="button is-loading">Loading</a>}
+                                          key={key}/>) : [] : <a className={spinnerClasses}>Loading</a>}
           </div>
           <footer className="card-footer">
             <a value="New" className={newClasses} onClick={this.updateNew}>New</a>
