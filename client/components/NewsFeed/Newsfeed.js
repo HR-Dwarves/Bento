@@ -12,6 +12,7 @@ class NewsFeed extends React.Component {
     this.callHackerNewsApi = Promise.promisify(this.callHackerNewsApi, {context: this});
     this.updateNew = this.updateNew.bind(this);
     this.updateTop = this.updateTop.bind(this);
+    this.updateButtons = this.updateButtons.bind(this);
   }
 
   getPosts(that, url){
@@ -54,18 +55,20 @@ class NewsFeed extends React.Component {
     });
   }
 
-  updateNew(){
-    console.log('before ' + this.props.newsfeed.testState);
-    this.props.newsfeed.testState = false;
-    console.log('after ' + this.props.newsfeed.testState);
+  updateNew(e){
+    e.preventDefault();
+    this.updateButtons(e);
     this.getPosts(this, 'https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty');
   }
 
-  updateTop(){
-    console.log('before ' + this.props.newsfeed.testState);
-    this.props.newsfeed.testState = false;
-    console.log('after ' + this.props.newsfeed.testState);
+  updateTop(e){
+    e.preventDefault();
+    this.updateButtons(e);
     this.getPosts(this,  'https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty');
+  }
+
+  updateButtons(button) {
+    let buttonName = e.target.getAttribute('value');
   }
 
   componentWillMount(){
@@ -94,8 +97,8 @@ class NewsFeed extends React.Component {
                                           key={key}/>) : []}
           </div>
           <footer className="card-footer">
-            <a className="card-footer-item" onClick={this.updateNew}>New</a>
-            <a className="card-footer-item" onClick={this.updateTop}>Top</a>
+            <a value="New" className="card-footer-item" onClick={this.updateNew}>New</a>
+            <a value="Top" className="card-footer-item" onClick={this.updateTop}>Top</a>
           </footer>
         </div>
       </div>
