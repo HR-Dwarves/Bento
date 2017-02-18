@@ -6,74 +6,20 @@
     "modules" : {
       "list" : {
         "items" : {
-          "-Kd7yWnYamgdL6cAxVvS" : {
-            "completed" : false,
-            "text" : "wohoo!"
-          },
-          "-Kd7yaHPxYOzGEIjWcAJ" : {
-            "completed" : false,
-            "text" : "are these magically ordered"
-          },
-          "-Kd8-u5OyiRMze_an0gA" : {
-            "completed" : false,
-            "text" : "trying again"
-          },
-          "-Kd8-vYOKZenNhoYWd-r" : {
-            "completed" : false,
-            "text" : "how quick is this"
-          },
-          "-Kd80NVFb4GHk5dEelbK" : {
-            "completed" : false,
-            "text" : "joey is a bitch"
-          },
-          "-Kd8OE6AFmqgbsugM380" : {
-            "completed" : false,
-            "text" : "adding to list 1"
-          },
-          "-Kd8Oqf04WI8cd4erizS" : {
-            "completed" : false,
-            "text" : "hey"
-          },
-          "-Kd8QmjmwS6cd7pXV8qI" : {
-            "completed" : false,
-            "text" : "a;sldkfjasd"
+          "Kd7432": {
+            "text": "test",
+            "completed": "false",
+            "createdAt": 1234
           }
         },
         "type" : "List"
       },
       "list2" : {
         "items" : {
-          "-Kd8OFHTUkkWe6NjpGiK" : {
-            "completed" : false,
-            "text" : "hello"
-          },
-          "-Kd8QnsvUOpghQbXn_X5" : {
-            "completed" : false,
-            "text" : "hey"
-          },
-          "-Kd8VeJQIO1kM_vjXzs2" : {
-            "completed" : false,
-            "text" : "list 2"
-          },
-          "-Kd8WLQ_ypv89LpudI44" : {
-            "completed" : false,
-            "text" : "l"
-          },
-          "-Kd8YP-xynq0m0zbsZCv" : {
-            "completed" : false,
-            "text" : "testing"
-          },
-          "-Kd8YPbO1_X3Ag2JqwHx" : {
-            "completed" : false,
-            "text" : "one"
-          },
-          "-Kd8YQCY25O8dmQnRXpp" : {
-            "completed" : false,
-            "text" : "two"
-          },
-          "-Kd8YQPk_0z-rG_MLfKP" : {
-            "completed" : false,
-            "text" : "three"
+          "Kd7432": {
+            "text": "test",
+            "completed": "false",
+            "createdAt": 1234
           }
         },
         "type" : "List"
