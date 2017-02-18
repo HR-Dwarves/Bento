@@ -5,4 +5,6 @@ div, button {
 .mainDashboardPanel {
   top: 45px;
   padding-bottom: 45px;
+  display: flex;
+  flex-wrap: wrap;
 }
