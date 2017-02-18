@@ -27,15 +27,16 @@ class Dashboard extends React.Component {
 
   handleComponentAdd(e) {
     e.preventDefault();
-    console.log(e.target.value);
+    let dbRef = database.ref('/testUser/modules/');
+    dbRef.push({
+      type: e.target.value
+    });
   }
 
   render() {
     let dashboard = this.props.dashboard;
     let modules, elements;
     let modulesArray = [];
-
-    let dbRef = database.ref('/testUser').child('modules');
 
     //push each object key into the modules array
     modulesArray = Object.keys(this.components);
