@@ -9,8 +9,6 @@ class StickyNotes extends React.Component {
   }
 
   render() {
-    let headerStyle = `${styles.headerTitle} 'card-header-title'`
-
     return(
       <div className='column'>
         <Draggable bounds='body' cancel='.card-content'>
