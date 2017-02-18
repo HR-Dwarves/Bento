@@ -33,6 +33,12 @@ export function getHnPosts(posts) {
   // }
 }
 
+export function requestHnPosts() {
+  return dispatch => {
+    dispatch(getHnRequestedAction());
+  }
+}
+
 function getDBRequestedAction() {
   return {
     type: ActionTypes.GetDBRequested
