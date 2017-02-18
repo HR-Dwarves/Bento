@@ -29,6 +29,10 @@ class Dashboard extends React.Component {
   render() {
     let dashboard = this.props.dashboard;
     let modules, elements;
+    let modulesArray = [];
+
+    //push each object key into the modules array
+    modulesArray = Object.keys(this.components);
 
     if (dashboard) {
       modules = dashboard.modules
@@ -49,6 +53,9 @@ class Dashboard extends React.Component {
     return (
       <div className='section' height='100vh'>
         <div className={mainDashboardPanelCSS}>
+          <select>
+            {modulesArray.map((item, key) => <option>{item}</option>)}
+          </select>
           <div className='columns'>
             {elements ? elements : []}
           </div>
