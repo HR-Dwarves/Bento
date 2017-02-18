@@ -4,7 +4,9 @@ function newsfeed(state = {}, action) {
   switch(action.type) {
   	case actionTypes.GetHnRequested: {
   	  return Object.assign({}, state, {
-  	  	testState: false
+  	  	loaded: false,
+        Top: false,
+        Bottom: false
   	  });
   	}
   	case actionTypes.GetHnRejected: {
@@ -15,7 +17,7 @@ function newsfeed(state = {}, action) {
   	case actionTypes.GetHnFulfilled: {
   	  const { posts } = action;
   	  const newState = Object.assign({}, state, {
-  	  	testState: true,
+  	  	loaded: true,
         Top: false,
         Bottom: false,
   	  	posts

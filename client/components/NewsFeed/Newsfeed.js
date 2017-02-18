@@ -23,6 +23,7 @@ class NewsFeed extends React.Component {
       type: 'GET',
       dataType: 'json', // added data type
       success: function(res) {
+        that.props.newsfeed.loaded = true;
         that.getPostContent(res);  
       },
       error: function(err) {
@@ -40,7 +41,7 @@ class NewsFeed extends React.Component {
     Promise.all(postsArray)
     .then((results) => {
       this.props.getHnPosts(postsArray);
-      //this.showSpinner();
+      this.props.newsfeed.loaded = true;
     })
   }
 
@@ -59,12 +60,14 @@ class NewsFeed extends React.Component {
     e.preventDefault();
     this.updateButtons(e);
     this.getPosts(this, 'https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty');
+    this.props.requestHnPosts();
   }
 
   updateTop(e){
     e.preventDefault();
     this.updateButtons(e);
     this.getPosts(this,  'https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty');
+    this.props.requestHnPosts();
   }
 
   updateButtons(button) {
@@ -85,10 +88,13 @@ class NewsFeed extends React.Component {
   render() {
     let list = this.props.newsfeed.posts;
     let cssClasses = `${styles.test}`;
+    let spinner = `${styles.spinner}`
     let newClasses = classnames('card-footer-item', this.props.newsfeed.New ? cssClasses : '');
     let topClasses = classnames('card-footer-item', this.props.newsfeed.New ? '' : cssClasses);
+    let spinnerClasses = classnames('button is-loading', spinner)
+    let loaded = this.props.newsfeed.loaded;
     return (
-      <div className="column">
+      <div className="">
         <div className="card">
           <header className="card-header">
             <div className="card-header-title">
@@ -101,10 +107,9 @@ class NewsFeed extends React.Component {
             </div>
           </header>
           <div className="card-content">
-            {this.props.newsfeed.testState ? <div></div> : <a className="button is-loading">Loading</a>}
-            {list ? list.map((item, key) => <NewsItem {...this.props} 
+            {loaded ? list ? list.map((item, key) => <NewsItem {...this.props} 
                                           newsItem={item._rejectionHandler0}
-                                          key={key}/>) : []}
+                                          key={key}/>) : [] : <a className={spinnerClasses}>Loading</a>}
           </div>
           <footer className="card-footer">
             <a value="New" className={newClasses} onClick={this.updateNew}>New</a>
