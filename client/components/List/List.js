@@ -67,7 +67,7 @@ class List extends React.Component {
         }
     }
 
-    let cssClasses = `${styles.card} column`;
+    let cssClasses = `${styles.card}`;
 
     return (
       <div className={cssClasses}>
