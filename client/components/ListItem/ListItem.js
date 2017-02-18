@@ -29,11 +29,20 @@ class ListItem extends React.Component {
     } else {
       checked = <i className="fa fa-square-o" aria-hidden="true"></i>
     }
+
+    let style;
+    if (completed) {
+      style = {"textDecoration": "line-through"}
+    } else {
+      style = {"textDecoration": ""}
+    }
     let listItemCSS = `${styles.listItem} control level`
     let spanIconCSS = `${styles.icon} is-pulled-right level`;
     return (
       <div className={listItemCSS}>
-        {item.text}
+        <span style={style}>
+          {item.text}
+        </span>
         <span className={spanIconCSS}>
           <span className="icon is-small" onClick={() => this.handleCheckClick(itemKey)}>
             {checked}
