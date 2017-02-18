@@ -34,7 +34,7 @@ class WeatherDetails extends React.Component {
   getWeatherData() {
     var unit = this.state.units.fahrenheit;
     var context = this;
-    
+
     // CHANGE AJAX URL TO THIS WHEN LAT/LON PULLING IS COMPLETE
     // url: `http://api.openweathermap.org/data/2.5/weather?lat=${LOCATION_LATITUDE}&long=${LOCATION_LOGITUDE}&type=accurate&units=${unit}&APPID=${context.weatherAPIkey}`,
     $.ajax({
@@ -72,7 +72,7 @@ class WeatherDetails extends React.Component {
     setInterval(() => {
       console.log('grabbing weather');
       this.getWeatherData();
-    }, 600000); // time interval of 10 minutes
+    }, 1800000); // time interval of 30 minutes
   }
 
   render() {
