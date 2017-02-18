@@ -29,6 +29,7 @@ class Dashboard extends React.Component {
   render() {
     let dashboard = this.props.dashboard;
     let modules, elements;
+
     if (dashboard) {
       modules = dashboard.modules
       if (modules) {
@@ -42,9 +43,12 @@ class Dashboard extends React.Component {
         });
       }
     }
+
+    let mainDashboardPanelCSS = `${styles.mainDashboardPanel} container is-fluid`
+
     return (
       <div className='section' height='100vh'>
-        <div className='container is-fluid'>
+        <div className={mainDashboardPanelCSS}>
           <div className='columns'>
             {elements ? elements : []}
           </div>
