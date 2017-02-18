@@ -17,7 +17,6 @@ class Dashboard extends React.Component {
       'WeatherDetails': WeatherDetails
     }
     this.state = { isModalOpen: false}
-    this.handleComponentAdd = this.handleComponentAdd.bind(this);
     this.handleSettingsButton = this.handleSettingsButton.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
@@ -29,23 +28,13 @@ class Dashboard extends React.Component {
     });
   }
 
-  handleComponentAdd(e) {
-    e.preventDefault();
-    let dbRef = database.ref('/testUser/modules/');
-    dbRef.push({
-      type: e.target.value
-    });
-  }
-
   handleSettingsButton() {
-    console.log('in settings button');
     this.setState({
       isModalOpen: !this.state.isModalOpen
     });
   }
 
   closeModal() {
-    console.log('inside closeModal');
     this.setState({
       isModalOpen: false
     });
@@ -79,11 +68,6 @@ class Dashboard extends React.Component {
       <div className='section' height='100vh'>
         <Modal isOpen={this.state.isModalOpen} onClose={this.closeModal} modules={modulesArray}></Modal>
         <div className={mainDashboardPanelCSS}>
-          <span className="select">
-            <select onChange={this.handleComponentAdd}>
-              {modulesArray.map((item, key) => <option className='testing' value={item}>{item}</option>)}
-            </select>
-          </span>
           <button onClick={this.handleSettingsButton} className="button is-primary modal-button"><i className="fa fa-cog" aria-hidden="true"></i></button>
           <div className='columns'>
             {elements ? elements : []}
@@ -102,6 +86,7 @@ class Modal extends React.Component {
       list: []
     }
     this.addModule = this.addModule.bind(this);
+    this.removeModule = this.removeModule.bind(this);
   }
 
   componentDidMount(){
@@ -109,12 +94,10 @@ class Modal extends React.Component {
   }
 
   queryDb() {
-    console.log('inside queryDB');
     let dbRef = database.ref('/testUser/modules');
     var moduleArray = [];
     dbRef.once('value').then(function(snapshot) {
       for(var key in snapshot.val()) {
-        console.log(snapshot.val()[key].type);
         moduleArray.push(snapshot.val()[key].type);
       }
     });
@@ -134,11 +117,19 @@ class Modal extends React.Component {
     });
   }
 
+  removeModule(e) {
+    e.preventDefault();
+    // console.log(e.target.value);
+    // let dbRef = database.ref('/testUser/modules');
+    // dbRef.remove({
+    //   type: e.target.value
+    // });
+  }
+
   render() {
     if(!this.props.isOpen) {
       return null;
     }
-
     return(
       <div className="modal is-active">
         <div className="modal-background"></div>
@@ -148,7 +139,9 @@ class Modal extends React.Component {
             <button className="delete" onClick={this.props.onClose}></button>
           </header>
           <section className="modal-card-body">
-            {this.props.modules.map((module, key) => <div>{module} <button value={module} onClick={this.addModule} className={'button is-primary'}>Add</button></div>)}
+            {this.props.modules.map((module, key) => <div>{module} 
+              <button value={module} onClick={this.addModule} className='button is-primary'>Add</button>
+              {this.state.list.includes({module}.module) ? <button value={module} onClick={this.removeModule} className='button is-primary'>Delete</button> : <p>not found</p>} </div>)}
             <br/>
             {this.state.list.map((module, key) => <div>{module}</div>)}
           </section>
