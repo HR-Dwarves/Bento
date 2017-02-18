@@ -1,7 +1,7 @@
 import React from 'react';
 import NewsItem from './../NewsItem/NewsItem';
 import Promise from 'bluebird';
-
+import classnames from 'classnames';
 import styles from './NewsFeed.css';
 
 class NewsFeed extends React.Component {
@@ -68,7 +68,14 @@ class NewsFeed extends React.Component {
   }
 
   updateButtons(button) {
-    let buttonName = e.target.getAttribute('value');
+    let buttonName = button.target.getAttribute('value');
+    if(buttonName === 'Top') {
+      this.props.newsfeed.Top = true;
+      this.props.newsfeed.New = false;
+    } else {
+      this.props.newsfeed.Top = false;
+      this.props.newsfeed.New = true;
+    }
   }
 
   componentWillMount(){
@@ -77,6 +84,9 @@ class NewsFeed extends React.Component {
 
   render() {
     let list = this.props.newsfeed.posts;
+    let cssClasses = `${styles.test}`;
+    let newClasses = classnames('card-footer-item', this.props.newsfeed.New ? cssClasses : '');
+    let topClasses = classnames('card-footer-item', this.props.newsfeed.New ? '' : cssClasses);
     return (
       <div className="column">
         <div className="card">
@@ -97,8 +107,8 @@ class NewsFeed extends React.Component {
                                           key={key}/>) : []}
           </div>
           <footer className="card-footer">
-            <a value="New" className="card-footer-item" onClick={this.updateNew}>New</a>
-            <a value="Top" className="card-footer-item" onClick={this.updateTop}>Top</a>
+            <a value="New" className={newClasses} onClick={this.updateNew}>New</a>
+            <a value="Top" className={topClasses} onClick={this.updateTop}>Top</a>
           </footer>
         </div>
       </div>

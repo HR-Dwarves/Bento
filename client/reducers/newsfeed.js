@@ -16,6 +16,8 @@ function newsfeed(state = {}, action) {
   	  const { posts } = action;
   	  const newState = Object.assign({}, state, {
   	  	testState: true,
+        Top: false,
+        Bottom: false,
   	  	posts
   	  });
   	  return newState
