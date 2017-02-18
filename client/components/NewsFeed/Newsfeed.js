@@ -105,10 +105,9 @@ class NewsFeed extends React.Component {
             </div>
           </header>
           <div className="card-content">
-            {loaded ? <div></div> : <a className="button is-loading">Loading</a>}
-            {list ? list.map((item, key) => <NewsItem {...this.props} 
+            {loaded ? list ? list.map((item, key) => <NewsItem {...this.props} 
                                           newsItem={item._rejectionHandler0}
-                                          key={key}/>) : []}
+                                          key={key}/>) : [] : <a className="button is-loading">Loading</a>}
           </div>
           <footer className="card-footer">
             <a value="New" className={newClasses} onClick={this.updateNew}>New</a>
