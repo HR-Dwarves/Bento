@@ -20,6 +20,13 @@ class WeatherDetails extends React.Component {
         kelvin: 'Unit Default'
       }
     }
+
+    this.weatherCondition = {
+      'Clear': 'https://68.media.tumblr.com/95f04db0cb5b8ceaf1c4fb1264f2c88d/tumblr_oljwb1sCii1qd4km8o1_400.png',
+      'Rain': 'https://68.media.tumblr.com/1024b9f6ee2a91fb93214cbdf224beaf/tumblr_oljwry0gjD1qd4km8o1_400.png',
+      'Clouds': 'http://demo.sc.chinaz.com/Files/pic/icons/6256/k19.png'
+    }
+
     this.weatherAPIkey = config.openWeatherMapAPIKey;
   }
 
@@ -56,6 +63,15 @@ class WeatherDetails extends React.Component {
   render() {
     let cssCard = `${styles.card} card`;
     let cssCardContent = `${styles.cardImage} card-content`
+    
+    let weatherImage = this.weatherCondition[this.state.condition] || this.weatherCondition['Clear'];
+    let weatherImageStyle = {
+      'backgroundImage': 'url(' + weatherImage + ')',
+      // 'backgroundImage': 'url(' + this.weatherCondition['Clear'] + ')',
+    };
+    console.log('CURRENT CONDITION: ', this.state.condition);
+    console.log('URL TO THE BACKGROUND IMAGE: ', weatherImageStyle.backgroundImage);
+
     return (
       <div className='column'>
         <Draggable bounds='body'>
@@ -63,7 +79,7 @@ class WeatherDetails extends React.Component {
             <header className='card-header'>
               <p className='card-header-title'>Weather</p>
             </header>
-            <div className={cssCardContent}>
+            <div className={cssCardContent} style={weatherImageStyle}>
               <p className={styles.temperature}> 
                 <br/>
                 {this.state.temperature}ºF
