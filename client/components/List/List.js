@@ -22,14 +22,34 @@ class List extends React.Component {
     e.preventDefault();
     let formInput = this.formInput.value;
     let db_key = this.props.db_key;
+    let time = Date.now();
     if (formInput) {
       let listObj = {
         text: formInput,
-        completed: false
+        completed: false,
+        createdAt: time
       }
       this.props.addToList(listObj, db_key);
     }
     this.listForm.reset();
+  }
+
+  sortKeys(items) {
+    return Object.keys(items).sort((a, b) => {
+      if (items[a].completed !== items[b].completed) {
+        if (items[a].completed) {
+          return 1;
+        } else if (items[b].completed) {
+          return -1;
+        }
+      } else {
+        if (items[a].createdAt > items[b].createdAt) {
+          return 1;
+        } else {
+          return -1;
+        }
+      }
+    })
   }
 
   render() {
@@ -39,9 +59,12 @@ class List extends React.Component {
       var { username, email, firstName, lastName } = dashboard;
     }
     let list = dashboard.modules[db_key];
-    let items;
+    let items, keys;
     if (list) {
         items = list.items;
+        if (items) {
+          keys = this.sortKeys(items);
+        }
     }
 
     let cssClasses = `${styles.card} column`;
@@ -72,7 +95,7 @@ class List extends React.Component {
           </div>
           <div className='card-content'>
             <div className='media-content'>
-              {items ? Object.keys(items).map((key, ind) => <ListItem {...this.props} 
+              {items ? keys.map((key, ind) => <ListItem {...this.props} 
                                                                      key={key}
                                                                      itemKey={key}
                                                                      listItem={items[key]}/>) : []}
