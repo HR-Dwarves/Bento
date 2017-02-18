@@ -1,4 +1,6 @@
 import React from 'react';
+import Draggable from 'react-draggable';
+
 import styles from './StickyNotes.css';
 
 class StickyNotes extends React.Component {
