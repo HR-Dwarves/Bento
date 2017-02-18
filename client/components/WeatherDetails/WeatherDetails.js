@@ -28,11 +28,12 @@ class WeatherDetails extends React.Component {
     }
 
     this.weatherAPIkey = config.openWeatherMapAPIKey;
+    this.getWeatherData = this.getWeatherData.bind(this);
   }
 
-  componentDidMount() {
-    var context = this;
+  getWeatherData() {
     var unit = this.state.units.fahrenheit;
+    var context = this;
     $.ajax({
       method: 'GET',
       url: 'http://api.openweathermap.org/data/2.5/weather?id=5391997&type=accurate&units=' + unit + '&APPID=' + context.weatherAPIkey,
@@ -60,17 +61,24 @@ class WeatherDetails extends React.Component {
     });
   }
 
+  componentDidMount() {
+    // var context = this;
+    this.getWeatherData();
+
+    setInterval(() => {
+      console.log('grabbing weather');
+      this.getWeatherData();
+    }, 600000); // time interval of 10 minutes
+  }
+
   render() {
     let cssCard = `${styles.card} card`;
-    let cssCardContent = `${styles.cardImage} card-content`
+    let cssCardContent = `${styles.cardImage} card-content`;
     
     let weatherImage = this.weatherCondition[this.state.condition] || this.weatherCondition['Clear'];
     let weatherImageStyle = {
       'backgroundImage': 'url(' + weatherImage + ')',
-      // 'backgroundImage': 'url(' + this.weatherCondition['Clear'] + ')',
     };
-    console.log('CURRENT CONDITION: ', this.state.condition);
-    console.log('URL TO THE BACKGROUND IMAGE: ', weatherImageStyle.backgroundImage);
 
     return (
       <div className='column'>

@@ -24,4 +24,5 @@
 
 .location {
   text-align: right;
+  overflow-wrap: normal;
 }
