@@ -2,3 +2,8 @@
   display: inline-flex;
   margin-right: 25px;
 }
+
+.test {
+  background-color: #adf5ea;
+  font-weight: 900;
+}
