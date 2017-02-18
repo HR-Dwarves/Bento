@@ -101,10 +101,10 @@ class Modal extends React.Component {
     this.state = {
       list: []
     }
+    this.addModule = this.addModule.bind(this);
   }
 
   componentDidMount(){
-    console.log('inside didmount');
     this.queryDb();
   }
 
@@ -120,10 +120,17 @@ class Modal extends React.Component {
     });
     Promise.all(moduleArray)
     .then((results) => {
-      console.log('this is results ' + moduleArray);
       this.setState({
         list: moduleArray
       });
+    });
+  }
+
+  addModule(e) {
+    e.preventDefault();
+    let dbRef = database.ref('/testUser/modules/');
+    dbRef.push({
+      type: e.target.value
     });
   }
 
@@ -131,7 +138,7 @@ class Modal extends React.Component {
     if(!this.props.isOpen) {
       return null;
     }
-    
+
     return(
       <div className="modal is-active">
         <div className="modal-background"></div>
@@ -141,7 +148,7 @@ class Modal extends React.Component {
             <button className="delete" onClick={this.props.onClose}></button>
           </header>
           <section className="modal-card-body">
-            {this.props.modules.map((module, key) => <div>{module}</div>)}
+            {this.props.modules.map((module, key) => <div>{module} <button value={module} onClick={this.addModule} className={'button is-primary'}>Add</button></div>)}
             <br/>
             {this.state.list.map((module, key) => <div>{module}</div>)}
           </section>
