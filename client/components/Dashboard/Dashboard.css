@@ -2,9 +2,93 @@ div, button {
   font-family: 'El Messiri', serif;
 }
 
-.mainDashboardPanel {
-  top: 45px;
-  padding-bottom: 45px;
+.dashContainer {
   display: flex;
-  flex-wrap: wrap;
+  width: 100vw;
+  height: 100vh;
+  /*border: 1px solid blue;*/
+  justify-content: center;
+}
+
+.mainDashboardPanel {
+  padding-top: 80px; 
+}
+
+.component {
+  /*border: 1px solid goldenrod;*/
+  margin: 10px;
+}
+
+.component > * {
+  flex: 1 1 100%;
+}
+
+
+/*Widescreen CSS*/
+@media all and (max-width: 3000px) {
+  .mainDashboardPanel {
+    width: 100vw;
+    max-width: 1200px;
+    height: 100vh;
+    /*border: 1px solid red;*/
+    /*margin: 5px;*/
+
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-content: flex-start;
+    /*overflow-y: scroll;*/
+
+  }
+
+  .component {
+    height: auto;
+    width: calc(33.333% - 20px);
+  }
+}
+
+/*Desktop CSS*/
+@media all and (max-width: 1100px) {
+  .mainDashboardPanel {
+    width: 100vw;
+    max-width: 1500px;
+    height: 100vh;
+    border: 1px solid red;
+    margin: 0px;
+
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-content: flex-start;
+    overflow-y: scroll;
+
+  }
+
+  .component {
+    height: auto;
+    width: calc(50% - 20px);
+  }
+}
+
+/*Mobile CSS*/
+@media all and (max-width: 550px) {
+  .mainDashboardPanel {
+    height: 100vh;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    /*align-content: flex-start;*/
+    align-items: stretch;
+    /*overflow-y: scroll;*/
+
+  }
+
+  .component {
+    height: auto;
+    display: flex;
+    flex: 1 0 auto;
+    width: calc(100% - 20px);
+  }
 }
