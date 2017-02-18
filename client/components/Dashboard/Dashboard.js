@@ -1,6 +1,5 @@
 import React from 'react';
 import database from '../../base'
-
 import styles from './Dashboard.css'
 
 // Import dashboard components as you add them!
@@ -16,6 +15,7 @@ class Dashboard extends React.Component {
       'NewsFeed': NewsFeed,
       'WeatherDetails': WeatherDetails
     }
+    this.handleComponentAdd = this.handleComponentAdd.bind(this);
   }
 
   componentDidMount() {
@@ -25,11 +25,17 @@ class Dashboard extends React.Component {
     });
   }
 
+  handleComponentAdd(e) {
+    e.preventDefault();
+    console.log(e.target.value);
+  }
 
   render() {
     let dashboard = this.props.dashboard;
     let modules, elements;
     let modulesArray = [];
+
+    let dbRef = database.ref('/testUser').child('modules');
 
     //push each object key into the modules array
     modulesArray = Object.keys(this.components);
@@ -53,8 +59,8 @@ class Dashboard extends React.Component {
     return (
       <div className='section' height='100vh'>
         <div className={mainDashboardPanelCSS}>
-          <select>
-            {modulesArray.map((item, key) => <option>{item}</option>)}
+          <select onChange={this.handleComponentAdd}>
+            {modulesArray.map((item, key) => <option value={item}>{item}</option>)}
           </select>
           <div className='columns'>
             {elements ? elements : []}
