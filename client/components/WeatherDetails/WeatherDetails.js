@@ -34,7 +34,9 @@ class WeatherDetails extends React.Component {
   getWeatherData() {
     var unit = this.state.units.fahrenheit;
     var context = this;
-      // url: `http://api.openweathermap.org/data/2.5/weather?lat=${LOCATION_LATITUDE}&long=${LOCATION_LOGITUDE}&type=accurate&units=${unit}&APPID=${context.weatherAPIkey}`,
+    
+    // CHANGE AJAX URL TO THIS WHEN LAT/LON PULLING IS COMPLETE
+    // url: `http://api.openweathermap.org/data/2.5/weather?lat=${LOCATION_LATITUDE}&long=${LOCATION_LOGITUDE}&type=accurate&units=${unit}&APPID=${context.weatherAPIkey}`,
     $.ajax({
       method: 'GET',
       url: `http://api.openweathermap.org/data/2.5/weather?id=5391997&type=
