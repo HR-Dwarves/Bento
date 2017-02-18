@@ -3,10 +3,20 @@
   height: 70px;
   /* offset-x | offset-y | blur-radius | spread-radius | color */
   box-shadow: 0px 2px 7px 1px rgba(0, 0, 0, 0.15);
-  position: absolute;
+  /*position: absolute;*/
+  position: fixed;
+  display: flex;
+  z-index: 999;
+  background-color: white;
+  justify-content: center;
 }
 
 .pageTitle {
   font-family: 'Italiana', serif;
   font-size: 3.5em;
+  /*align-self: center;*/
+}
+
+.is-clearfix {
+  clear: both;
 }
