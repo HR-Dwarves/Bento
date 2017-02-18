@@ -10,8 +10,17 @@ class StickyNotes extends React.Component {
 
   render() {
     return(
-      <div>
-        StickyNote
+      <div className='column'>
+        <Draggable bounds='body'>
+          <div className='card'>
+            <header className='card-header'>
+              <p className='card-header-title'>Sticky Note</p>
+            </header>
+            <div className='card-content'>
+              <textarea className={styles.textarea} rows='10' cols='30'></textarea>
+            </div>
+          </div>
+        </Draggable>
       </div>
     )
   }
