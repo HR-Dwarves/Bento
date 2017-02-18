@@ -83,6 +83,9 @@
       },
       "weatherdetails": {
         "type": "WeatherDetails"
+      },
+      "stickynotes": {
+        "type": "StickyNotes"
       }
     },
     "username" : "mtutt"
