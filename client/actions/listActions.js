@@ -141,3 +141,9 @@ function toggleListStatusFulfilledAction(newItem) {
     type: ActionTypes.ToggleListStatusFulfilled
   };
 }
+
+export function updateListOrder() {
+  return dispatch => {
+    
+  }
+}
