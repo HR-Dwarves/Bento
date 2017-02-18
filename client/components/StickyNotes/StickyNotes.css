@@ -1,8 +1,8 @@
-.textarea {
+textarea {
   border: none;
   resize: none;
 }
 
-.textarea:focus {
+textarea:focus {
   outline: none;
 }

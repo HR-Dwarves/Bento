@@ -9,15 +9,17 @@ class StickyNotes extends React.Component {
   }
 
   render() {
+    let headerStyle = `${styles.headerTitle} 'card-header-title'`
+
     return(
       <div className='column'>
-        <Draggable bounds='body'>
+        <Draggable bounds='body' cancel='.card-content'>
           <div className='card'>
             <header className='card-header'>
-              <p className='card-header-title'>Sticky Note</p>
+              <textarea className='card-header-title' maxLength='30'></textarea>
             </header>
             <div className='card-content'>
-              <textarea className={styles.textarea} rows='10' cols='30'></textarea>
+              <textarea maxLength='300' rows='15' cols='30'></textarea>
             </div>
           </div>
         </Draggable>
