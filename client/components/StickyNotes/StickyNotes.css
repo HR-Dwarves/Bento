@@ -6,3 +6,8 @@ textarea {
 textarea:focus {
   outline: none;
 }
+
+span {
+  margin-left: 4px;
+  margin-right: 4px;
+}

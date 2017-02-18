@@ -90,6 +90,11 @@ class WeatherDetails extends React.Component {
           <div className={cssCard}>
             <header className='card-header'>
               <p className='card-header-title'>Weather</p>
+              <div className="card-header-icon">
+                <span>
+                  <i className='fa fa-cloud' aria-hidden='true'></i>
+                </span>
+              </div>
             </header>
             <div className={cssCardContent} style={weatherImageStyle}>
               <p className={styles.temperature}> 
