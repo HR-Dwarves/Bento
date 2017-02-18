@@ -1,6 +1,7 @@
 import React from 'react';
-import database from '../../base'
-import styles from './Dashboard.css'
+import database from '../../base';
+import styles from './Dashboard.css';
+import Promise from 'bluebird';
 
 // Import dashboard components as you add them!
 import List from '../List/List';
@@ -94,11 +95,43 @@ class Dashboard extends React.Component {
 }
 
 class Modal extends React.Component {
+  constructor(){
+    super();
+    this.queryDb = Promise.promisify(this.queryDb, {context: this});
+    this.state = {
+      list: []
+    }
+  }
+
+  componentDidMount(){
+    console.log('inside didmount');
+    this.queryDb();
+  }
+
+  queryDb() {
+    console.log('inside queryDB');
+    let dbRef = database.ref('/testUser/modules');
+    var moduleArray = [];
+    dbRef.once('value').then(function(snapshot) {
+      for(var key in snapshot.val()) {
+        console.log(snapshot.val()[key].type);
+        moduleArray.push(snapshot.val()[key].type);
+      }
+    });
+    Promise.all(moduleArray)
+    .then((results) => {
+      console.log('this is results ' + moduleArray);
+      this.setState({
+        list: moduleArray
+      });
+    });
+  }
+
   render() {
     if(!this.props.isOpen) {
       return null;
     }
-    console.log(this.props.modules);
+    
     return(
       <div className="modal is-active">
         <div className="modal-background"></div>
@@ -109,6 +142,8 @@ class Modal extends React.Component {
           </header>
           <section className="modal-card-body">
             {this.props.modules.map((module, key) => <div>{module}</div>)}
+            <br/>
+            {this.state.list.map((module, key) => <div>{module}</div>)}
           </section>
         </div>
       </div>
