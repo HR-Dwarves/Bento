@@ -21,7 +21,7 @@ class StickyNotes extends React.Component {
 
   render() {
     return(
-      <div className='column'>
+      <div className=''>
           <div className='card'>
             <header className='card-header'>
               <textarea className='card-header-title' cols='30' maxLength='30'></textarea>
