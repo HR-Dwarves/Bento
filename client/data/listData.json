@@ -62,7 +62,10 @@
           }
         },
         "type" : "List"
-      }
+      },
+      "sticky1": {
+        "type": "StickyNotes"
+      } 
     },
     "username" : "mtutt"
   }
