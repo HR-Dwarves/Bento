@@ -36,7 +36,7 @@ div, button {
 @media all and (max-width: 3000px) {
   .mainDashboardPanel {
     width: 100vw;
-    max-width: 1200px;
+    /*max-width: 1200px;*/
     height: 100vh;
     /*border: 1px solid red;*/
     /*margin: 5px;*/
@@ -46,7 +46,7 @@ div, button {
     flex-direction: row;
     justify-content: center;
     align-content: flex-start;
-    /*overflow-y: scroll;*/
+    overflow-y: scroll;
 
   }
 
@@ -89,7 +89,7 @@ div, button {
     justify-content: flex-start;
     /*align-content: flex-start;*/
     align-items: stretch;
-    /*overflow-y: scroll;*/
+    overflow-y: scroll;
 
   }
 
