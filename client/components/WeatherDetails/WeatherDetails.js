@@ -57,7 +57,7 @@ class WeatherDetails extends React.Component {
     let cssCard = `${styles.card} card`;
     let cssCardContent = `${styles.cardImage} card-content`
     return (
-      <div className='column'>
+      <div className=''>
         <Draggable bounds='body'>
           <div className={cssCard}>
             <header className='card-header'>

@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './ListItem.css'
 
 class ListItem extends React.Component {
   constructor() {
@@ -29,15 +30,27 @@ class ListItem extends React.Component {
       checked = <i className="fa fa-square-o" aria-hidden="true"></i>
     }
 
+    let style;
+    if (completed) {
+      style = {"textDecoration": "line-through"}
+    } else {
+      style = {"textDecoration": ""}
+    }
+    let listItemCSS = `${styles.listItem} control level`
+    let spanIconCSS = `${styles.icon} is-pulled-right level`;
     return (
-      <div>
-        {item.text}
-        <span className="icon is-small" onClick={() => this.handleCheckClick(itemKey)}>
-          {checked}
+      <div className={listItemCSS}>
+        <span style={style}>
+          {item.text}
         </span>
-        <span className="icon is-small">
-          <i onClick={() => this.handleDelete(itemKey)} 
-             className="fa fa-times" aria-hidden="true"></i>
+        <span className={spanIconCSS}>
+          <span className="icon is-small" onClick={() => this.handleCheckClick(itemKey)}>
+            {checked}
+          </span>
+          <span className="icon is-small">
+            <i onClick={() => this.handleDelete(itemKey)} 
+               className="fa fa-times level" aria-hidden="true"></i>
+          </span>
         </span>
       </div>
     )
