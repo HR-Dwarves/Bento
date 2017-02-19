@@ -1,8 +1,10 @@
 import React from 'react';
 import config from './../../config/config';
 import moment from 'moment'
+import momentTimezone from 'moment-timezone'
 
 import styles from './LatLong.css';
+import Clock from '../Clock/Clock'
 
 
 class LatLong extends React.Component {
@@ -12,11 +14,11 @@ class LatLong extends React.Component {
       lat: null,
       long: null,
       time: null,
-      city: null
+      city: null,
+      clocks: [],
+      timeZones: moment.tz.names()
     };
 
-    // BENSON FOR THE good idea!!
-    // this.setState = this.setState.bind(this);
   }
 
   componentDidMount() {
@@ -34,6 +36,9 @@ class LatLong extends React.Component {
         let lat = position.coords.latitude;
         let long = position.coords.longitude;
 
+        localStorage.setItem('latitude', lat);
+        localStorage.setItem('longitude', long);
+
         context.setState({
           lat: lat,
           long: long
@@ -47,7 +52,7 @@ class LatLong extends React.Component {
         let query = `${queryBase}${lat},${long}&key=${config.googleApiKey}`
 
         $.get(query, function(data) {
-          // console.log('data from ajax get from google', data.results[0])
+          // console.log('data from ajax get from google', data)
           var city = data.results[0].address_components.reduce(function(acc, item) {
             if (item.types.includes('locality')) {
               return acc = item.long_name;
@@ -62,10 +67,16 @@ class LatLong extends React.Component {
         });
       });
     } else {
-      console.log('no geo');
+      // no geo
     }
 
     // TIME
+    // TODO: make ntp time api
+    // $.get('/myApiEndpointForNTP', function(data) {};
+
+
+
+    // get local system time
     var getTime = function() {
       return moment().format("ddd, MMM Do, h:mm a");
     }
@@ -76,29 +87,50 @@ class LatLong extends React.Component {
       });
     }
 
-    setInterval(setTime, 1000)
+    setInterval(setTime, 1000) // poll system time every second
 
+    // this.addClock();
 
-
-
-
+    // this.setState({
+    //   timeZones: this.getTimeZones()
+    // });
   }
 
+  // getTimeZones() {
+  //   return moment.tz.names()
+  // }
+
+  addClock() {
+  }
+
+
   render() {
-
     // let cssClasses = `${styles.card} column`;
-
     return (
       <div className='column'>
         <div className='card'>
+
           <header className="card-header">
             <p className="card-header-title">
               Location and Time
             </p>
           </header>
+
           <div className="card-content">
             <div className="media-content">
-              <p className="title is-2">{this.state.time}</p>
+
+              <p className="title is-4">Add a clock in a timezone</p>
+              <p className="control">
+                <span className="select">
+                  <select>
+                    {this.state.timeZones.map((timeZone, index) => {
+                      return <option key={index}>{timeZone}</option>;
+                    })}
+                  </select>
+                </span>
+              </p>
+
+              <Clock time={this.state.time} />
               <p className="title is-4">{this.state.city}</p>
               <p className="title is-4">Latitude</p>
               <p className="subtitle is-6">{this.state.lat}</p>
@@ -106,16 +138,11 @@ class LatLong extends React.Component {
               <p className="subtitle is-6">{this.state.long}</p>
             </div>
           </div>
+
         </div>
       </div>
     )
   }
-
 }
 
-
 export default LatLong;
-
-
-
-
