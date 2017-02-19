@@ -94,7 +94,7 @@ class NewsFeed extends React.Component {
     let spinnerClasses = classnames('button is-loading', spinner);
     let loaded = this.props.newsfeed.loaded;
     return (
-      <div className="column">
+      <div className="">
         <div className="card">
           <header className="card-header">
             <div className="card-header-title">

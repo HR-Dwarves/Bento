@@ -85,7 +85,7 @@ class WeatherDetails extends React.Component {
     };
 
     return (
-      <div className='column'>
+      <div className=''>
           <div className={cssCard}>
             <header className='card-header'>
               <p className='card-header-title'>Weather</p>
