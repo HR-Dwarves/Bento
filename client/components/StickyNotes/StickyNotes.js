@@ -22,7 +22,6 @@ class StickyNotes extends React.Component {
   render() {
     return(
       <div className='column'>
-        <Draggable bounds='body' cancel='.card-content'>
           <div className='card'>
             <header className='card-header'>
               <textarea className='card-header-title' cols='30' maxLength='30'></textarea>
@@ -39,10 +38,11 @@ class StickyNotes extends React.Component {
               <textarea maxLength='300' rows='15' cols='30'></textarea>
             </div>
           </div>
-        </Draggable>
       </div>
     )
   }
 }
+        // <Draggable bounds='body' cancel='.card-content'>
+        // </Draggable>
 
 export default StickyNotes;

@@ -86,7 +86,6 @@ class WeatherDetails extends React.Component {
 
     return (
       <div className='column'>
-        <Draggable bounds='body'>
           <div className={cssCard}>
             <header className='card-header'>
               <p className='card-header-title'>Weather</p>
@@ -113,10 +112,11 @@ class WeatherDetails extends React.Component {
               </p>
             </div>
           </div>
-        </Draggable>
       </div>
     )
   }
 }
+        // <Draggable bounds='body'>
+        // </Draggable>
 
 export default WeatherDetails;
