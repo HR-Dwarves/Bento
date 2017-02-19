@@ -7,7 +7,8 @@ import Promise from 'bluebird';
 import List from '../List/List';
 import NewsFeed from '../NewsFeed/NewsFeed';
 import WeatherDetails from '../WeatherDetails/WeatherDetails';
-import Modal from '../Modal/Modal'
+import StickyNotes from '../StickyNotes/StickyNotes';
+import Modal from '../Modal/Modal';
 
 class Dashboard extends React.Component {
   constructor() {
@@ -15,7 +16,8 @@ class Dashboard extends React.Component {
     this.components = {
       'List': List,
       'NewsFeed': NewsFeed,
-      'WeatherDetails': WeatherDetails
+      'WeatherDetails': WeatherDetails,
+      'StickyNotes': StickyNotes
     }
     this.state = { isModalOpen: false}
     this.handleSettingsButton = this.handleSettingsButton.bind(this);

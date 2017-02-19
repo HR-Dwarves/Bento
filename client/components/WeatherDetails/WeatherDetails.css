@@ -5,7 +5,7 @@
 }
 
 .cardImage {
-  background-image: url("http://demo.sc.chinaz.com/Files/pic/icons/6256/k19.png");
+  /*background-image: url("http://demo.sc.chinaz.com/Files/pic/icons/6256/k19.png");*/
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
@@ -24,4 +24,5 @@
 
 .location {
   text-align: right;
+  overflow-wrap: normal;
 }
