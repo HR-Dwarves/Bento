@@ -1,4 +1,5 @@
 import React from 'react';
+import Promise from 'bluebird';
 
 
 class Modal extends React.Component {

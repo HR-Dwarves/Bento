@@ -1,12 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router';
 import styles from './Nav.css'
-import Dashboard from './../Dashboard/Dashboard'
+import Modal from './../Modal/Modal'
 
 class Nav extends React.Component {
   constructor() {
     super();
     this.state = {isModalOpen: false}
+    this.handleSettingsButton = this.handleSettingsButton.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+  }
+
+  handleSettingsButton() {
+    this.setState({
+      isModalOpen: !this.state.isModalOpen
+    });
+  }
+
+  closeModal() {
+    this.setState({
+      isModalOpen: false
+    });
   }
 
   render() {
@@ -18,7 +32,8 @@ class Nav extends React.Component {
         <Link to="/">
           <div className={pageTitleCSS}>dashboard</div>
         </Link>
-        <button className="button is-primary modal-button"><i className="fa fa-cog" aria-hidden="true"></i></button>
+        <button onClick={this.handleSettingsButton} className="button is-primary modal-button"><i className="fa fa-cog" aria-hidden="true"></i></button>
+        <Modal isOpen={this.state.isModalOpen} onClose={this.closeModal} modules={['List', 'NewsFeed']}></Modal>
       </div>
     )
   }
