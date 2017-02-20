@@ -1,7 +1,7 @@
 import React from 'react';
 import Promise from 'bluebird';
 import database from '../../base';
-
+import styles from './Modal.css'
 
 
 class Modal extends React.Component {
@@ -41,9 +41,7 @@ class Modal extends React.Component {
     dbRef.push({
       type: e.target.value
     });
-    console.log('state before: ' + this.state.list);
     this.state.list.push(e.target.value);
-    console.log('state after: ' + this.state.list);
   }
 
   removeModule(e) {
@@ -53,10 +51,6 @@ class Modal extends React.Component {
     dbRef.orderByChild('type').equalTo(deleteValue).once('child_added', (snapshot) => {
       snapshot.ref.remove();
     });
-    console.log()
-    // this.setState({
-    //   list: this.state.list.splice(this.state.list.indexOf(deleteValue))
-    // });
     console.log('state before: ' + this.state.list);
     this.state.list.splice(this.state.list.indexOf(deleteValue), 1);
     console.log('state after: ' + this.state.list);
@@ -66,6 +60,7 @@ class Modal extends React.Component {
     if(!this.props.isOpen) {
       return null;
     }
+    let moduleStyles = `${styles.moduleName}`
     return(
       <div className="modal is-active">
         <div className="modal-background"></div>
@@ -75,11 +70,9 @@ class Modal extends React.Component {
             <button className="delete" onClick={this.props.onClose}></button>
           </header>
           <section className="modal-card-body">
-            {this.props.modules.map((module, key) => <div>{module} 
-              <button value={module} onClick={this.addModule} className='button is-primary'>Add</button>
-              {this.state.list.includes({module}.module) ? <button value={module} onClick={this.removeModule} className='button is-primary'>Delete</button> : <p>not found</p>} </div>)}
-            <br/>
-            {this.state.list.map((module, key) => <div>{module}</div>)}
+            {this.props.modules.map((module, key) => <div className={moduleStyles}><span>{module}</span> 
+              <span className={moduleStyles}><span><button value={module} onClick={this.addModule} className='button is-primary'>Add</button></span>
+              {this.state.list.includes({module}.module) ? <span><button value={module} onClick={this.removeModule} className='button is-primary'>Delete</button></span> : ''} </span></div>)}
           </section>
         </div>
       </div>

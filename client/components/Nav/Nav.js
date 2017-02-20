@@ -35,8 +35,10 @@ class Nav extends React.Component {
         <Link to="/">
           <div className={pageTitleCSS}>dashboard</div>
         </Link>
-        <button onClick={this.handleSettingsButton} className="button is-primary modal-button"><i className="fa fa-cog" aria-hidden="true"></i></button>
-        <Modal isOpen={this.state.isModalOpen} onClose={this.closeModal} modules={modulesArray}></Modal>
+        <div>
+          <button onClick={this.handleSettingsButton} className="button is-primary modal-button"><i className="fa fa-cog" aria-hidden="true"></i></button>
+          <Modal isOpen={this.state.isModalOpen} onClose={this.closeModal} modules={modulesArray}></Modal>
+        </div>
       </div>
     )
   }

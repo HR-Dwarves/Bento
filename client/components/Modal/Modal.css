@@ -1,0 +1,7 @@
+.moduleName {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
