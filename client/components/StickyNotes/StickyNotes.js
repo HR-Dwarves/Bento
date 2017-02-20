@@ -9,6 +9,7 @@ class StickyNotes extends React.Component {
     
     this.handleAddSticky = this.handleAddSticky.bind(this);
     this.handleDeleteSticky = this.handleDeleteSticky.bind(this);
+    this.handleStickyEntry = this.handleStickyEntry.bind(this);
   }
 
   handleAddSticky() {
@@ -19,12 +20,20 @@ class StickyNotes extends React.Component {
     console.log('DELETE THIS STICKY');
   }
 
+  handleStickyHeaderEntry() {
+    console.log($('.sticky-header').val());
+  }
+
+  handleStickyBodyEntry() {
+    console.log($('.sticky-content').val());
+  }
+
   render() {
     return(
       <div className='column'>
           <div className='card'>
             <header className='card-header'>
-              <textarea className='card-header-title' cols='30' maxLength='30'></textarea>
+              <textarea className='card-header-title sticky-header' cols='30' maxLength='30' onChange={this.handleStickyHeaderEntry}></textarea>
               <div className="card-header-icon">
                 <span>
                   <i className='fa fa-plus' aria-hidden='true' onClick={this.handleAddSticky}></i>
@@ -35,7 +44,7 @@ class StickyNotes extends React.Component {
               </div>
             </header>
             <div className='card-content'>
-              <textarea maxLength='300' rows='15' cols='30'></textarea>
+              <textarea className='sticky-content' maxLength='600' rows='10' cols='60' onChange={this.handleStickyBodyEntry}></textarea>
             </div>
           </div>
       </div>
