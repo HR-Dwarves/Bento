@@ -74,11 +74,11 @@ class List extends React.Component {
         <div className='card'>
           <header className="card-header">
             <p className="card-header-title">List items:</p>
-            <a href="" className="card-header-icon">
+            <span href="" className="card-header-icon">
               <span className="icon">
                 <i className="fa fa-th-list" aria-hidden="true"></i>
               </span>
-            </a>
+            </span>
           </header>
           <div className="card-content">
             <form action="submit"
