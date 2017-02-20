@@ -41,27 +41,25 @@ class Modal extends React.Component {
     dbRef.push({
       type: e.target.value
     });
+    console.log('state before: ' + this.state.list);
+    this.state.list.push(e.target.value);
+    console.log('state after: ' + this.state.list);
   }
 
   removeModule(e) {
     e.preventDefault();
-    let moduleList = this.state.list;
     let deleteValue = e.target.value;
     let dbRef = database.ref('/testUser/modules/');
-    // dbRef.once('value').then(function(snapshot) {
-    //   for(var key in snapshot.val()){
-    //     if(snapshot.val()[key].type === deleteValue) {
-    //       console.log(snapshot.val());
-    //       let nodeRef = database.ref('/testUser/modules/');
-    //       snapshot.val()[key].type = null;
-    //       //console.log('this is node ref ' + snapshot.val());
-    //       //nodeRef.remove();
-    //     }
-    //   }
-    // });
     dbRef.orderByChild('type').equalTo(deleteValue).once('child_added', (snapshot) => {
       snapshot.ref.remove();
-    })
+    });
+    console.log()
+    // this.setState({
+    //   list: this.state.list.splice(this.state.list.indexOf(deleteValue))
+    // });
+    console.log('state before: ' + this.state.list);
+    this.state.list.splice(this.state.list.indexOf(deleteValue), 1);
+    console.log('state after: ' + this.state.list);
   }
 
   render() {
