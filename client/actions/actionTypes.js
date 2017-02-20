@@ -27,6 +27,10 @@ const actionTypes = {
   GetClocksRequested: 'GET_CLOCKS_REQUESTED',
   GetClocksRejected: 'GET_CLOCKS_REJECTED',
   GetClocksFulfilled: 'GET_CLOCKS_FULFILLED',
+
+  AddToClocksRequested: 'ADD_TO_CLOCKS_REQUESTED',
+  AddToClocksRejected: 'ADD_TO_CLOCKS_REJECTED',
+  AddToClocksFulfilled: 'ADD_TO_CLOCKS_FULFILLED'
 };
 
 export default actionTypes;

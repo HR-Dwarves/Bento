@@ -25,5 +25,29 @@ function clocks(state = {}, action) {
       });
       return newState;
     }
+    case actionTypes.AddToClocksRequested: {
+      return Object.assign({}, state, {
+        inProgress: true,
+        error: '',
+        success: ''
+      });
+    }
+    case actionTypes.AddToClocksRejected: {
+      return Object.assign({}, state, {
+        inProgress: false,
+        error: 'Error in getting Clocks.',
+      });
+    }
+    case actionTypes.AddToClocksFulfilled: {
+      const newState = Object.assign({}, state, {
+        inProgress: false,
+        success: 'New Clock added.',
+      });
+      return newState;
+    }
+    default:
+      return state;
   }
 }
+
+export default list;

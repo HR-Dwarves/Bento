@@ -40,3 +40,40 @@ function getClocksFulfilledAction(clocks) {
     clocks
   };
 }
+
+
+export function addToClocks(newClocks, db_key) {
+  return dispatch => {
+    dispatch(addToClocksRequestedAction());
+
+    const clocksRef = database.ref(`/testUser/modules/${db_key}/clocks`);
+
+    clocksRef.set(newClocks)
+    .then((snap) => {
+      dispatch(addToClocksFulfilledAction())
+    })
+    .catch((error) => {
+      console.log(error);
+      dispatch(addToClocksRejectedAction());
+    });
+  }
+}
+
+function addToClocksRequestedAction() {
+  return {
+    type: ActionTypes.AddToClocksRequested
+  };
+}
+
+function addToClocksRejectedAction() {
+  return {
+    type: ActionTypes.AddToClocksRejected
+  }
+}
+
+function addToClocksFulfilledAction(newClocks) {
+  return {
+    type: ActionTypes.AddToClocksFulfilled,
+    newClocks
+  };
+}
