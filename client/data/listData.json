@@ -65,7 +65,10 @@
       },
       "sticky1": {
         "type": "StickyNotes"
-      } 
+      },
+      "latlong": {
+        "type": "LatLong"
+      }
     },
     "username" : "mtutt"
   }

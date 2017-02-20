@@ -41,6 +41,8 @@
     "eslint-plugin-babel": "^3.2.0",
     "eslint-plugin-react": "^5.0.1",
     "express": "^4.14.1",
+    "moment": "^2.17.1",
+    "moment-timezone": "^0.5.11",
     "morgan": "^1.8.1",
     "path": "^0.12.7",
     "raven-js": "^2.3.0",
