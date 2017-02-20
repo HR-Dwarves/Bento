@@ -19,3 +19,8 @@
 .is-clearfix {
   clear: both;
 }
+
+.settings {
+  display: flex;
+  align-items: center;
+}
