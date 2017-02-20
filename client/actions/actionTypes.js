@@ -1,5 +1,5 @@
 const actionTypes = {
-  
+
   GetDBRequested: 'GET_DB_REQUESTED',
   GetDBRejected: 'GET_DB_REJECTED',
   GetDBFulfilled: 'GET_DB_FULFILLED',
@@ -22,7 +22,11 @@ const actionTypes = {
 
   GetHnRequested: 'GET_HN_REQUESTED',
   GetHnRejected: 'GET_HN_REJECTED',
-  GetHnFulfilled: 'GET_HN_FULFILLED'
+  GetHnFulfilled: 'GET_HN_FULFILLED',
+
+  GetClocksRequested: 'GET_CLOCKS_REQUESTED',
+  GetClocksRejected: 'GET_CLOCKS_REJECTED',
+  GetClocksFulfilled: 'GET_CLOCKS_FULFILLED',
 };
 
 export default actionTypes;

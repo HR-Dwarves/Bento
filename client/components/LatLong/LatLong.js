@@ -1,5 +1,6 @@
 import React from 'react';
 import config from './../../config/config';
+import database from '../../base'
 import moment from 'moment-timezone'
 
 import styles from './LatLong.css';
@@ -80,9 +81,41 @@ class LatLong extends React.Component {
 
     setInterval(setTime, 1000) // poll system time every second
 
-    // add the initial clock at local time zone
+
+
+
+    // get saved clocks from db
+
+    // lists component version
+
+    // let db_key = this.props.db_key;
+    // this.props.getList(db_key);
+    // database.ref(`/testUser/modules/${db_key}`).on('value', () => {
+    //   this.props.getList(db_key);
+    // })
+
+    let db_key = this.props.db_key;
+    this.props.getClocks(db_key);
+    database.ref(`/testUser/modules/${db_key}`).on('value', () => {
+      this.props.getClocks(db_key);
+    });
+
+    let dashboard = this.props.dashboard;
+    let dbClocks = dashboard.modules[db_key].clocks;
+
     this.addClock();
+
+    this.setState({
+      clocks: dbClocks
+    });
+
+    // console.log('this.state ================>', this.state)
+
+    // add the initial clock at local time zone
+
   }
+
+
 
   addClock(e) {
     // todo, make this not be a guess
