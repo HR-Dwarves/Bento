@@ -59,7 +59,7 @@ class Modal extends React.Component {
     //     }
     //   }
     // });
-    dbRef.orderByChild('type').equalTo(deleteValue).on('child_added', (snapshot) => {
+    dbRef.orderByChild('type').equalTo(deleteValue).once('child_added', (snapshot) => {
       snapshot.ref.remove();
     })
   }
