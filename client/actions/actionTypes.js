@@ -22,7 +22,12 @@ const actionTypes = {
 
   GetHnRequested: 'GET_HN_REQUESTED',
   GetHnRejected: 'GET_HN_REJECTED',
-  GetHnFulfilled: 'GET_HN_FULFILLED'
+  GetHnFulfilled: 'GET_HN_FULFILLED',
+
+  UpdateStickyTextRequested: 'UPDATE_STICKY_TEXT_REQUESTED',
+  UpdateStickyTextRejected: 'UPDATE_STICKY_TEXT_REJECTED',
+  UpdateStickytextFulFilled: 'UPDATE_STICKY_TEXT_FULFILLED',
+  
 };
 
 export default actionTypes;
