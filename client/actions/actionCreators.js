@@ -57,7 +57,7 @@ export function deleteModule(db_key, user = 'testUser') {
 
 function deleteModuleRequestedAction() {
   return {
-    type: ActionTypes.GetDBRequested
+    type: ActionTypes.DeleteModuleRequested
   };
 }
 
