@@ -24,9 +24,6 @@ class NewsFeed extends React.Component {
       type: 'GET',
       dataType: 'json', // added data type
       success: function(res) {
-        database.ref('/testUser/modules/' + key).update({
-          loaded: true
-        });
         that.getPostContent(res, key);  
       },
       error: function(err) {
@@ -63,18 +60,21 @@ class NewsFeed extends React.Component {
   }
 
   updateNew(e){
-    e.preventDefault();
-    this.updateButtons(e);
-    this.getPosts(this, 'https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty', this.props.db_key);
     database.ref('/testUser/modules/' + this.props.db_key).update({
       loaded: false
     });
-    
+    e.preventDefault();
+    let ref = database.ref('/testUser/modules/' + this.props.db_key + '/posts');
+    ref.remove();
+    this.updateButtons(e);
+    this.getPosts(this, 'https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty', this.props.db_key);
     this.props.requestHnPosts();
   }
 
   updateTop(e){
     e.preventDefault();
+    let ref = database.ref('/testUser/modules/' + this.props.db_key + '/posts');
+    ref.remove();
     this.updateButtons(e);
     this.getPosts(this, 'https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty', this.props.db_key);
     database.ref('/testUser/modules/' + this.props.db_key).update({
@@ -100,9 +100,12 @@ class NewsFeed extends React.Component {
   }
 
   componentWillMount(){
+    let ref = database.ref('/testUser/modules/' + this.props.db_key + '/posts');
+    ref.remove();
     database.ref('/testUser/modules/' + this.props.db_key).update({
       loaded: false
     });
+
     if(this.props.dashboard.modules[this.props.db_key].top){
       this.getPosts(this,  'https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty', this.props.db_key);
     } else {
