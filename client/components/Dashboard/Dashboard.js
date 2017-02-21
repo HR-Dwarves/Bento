@@ -36,6 +36,7 @@ class Dashboard extends React.Component {
       //     type: 'DefaultModule'
       //   });
       // }
+      console.log('Value event occurred!');
       this.props.getDatabase();
     });
   }
