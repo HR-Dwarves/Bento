@@ -2,11 +2,12 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actionCreators from '../actions/actionCreators';
 import * as listActionCreators from '../actions/listActions';
+import * as stickyNoteActionCreators from '../actions/stickyNoteActions'
 import Main from './Main/Main';
 import bulma from '../../node_modules/bulma/css/bulma.css';
 import database from '../base.js';
 
-var bundledActionCreators = Object.assign({}, actionCreators, listActionCreators);
+var bundledActionCreators = Object.assign({}, actionCreators, listActionCreators, stickyNoteActionCreators);
 // Map each reducers state to props
 function mapStateToProps(state) {
   return {
