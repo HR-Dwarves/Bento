@@ -5,10 +5,10 @@
 import ActionTypes from './actionTypes';
 import database from '../base';
 
-export function getDatabase() {
+export function getDatabase(user = 'testUser') {
   return dispatch => {
     dispatch(getDBRequestedAction());
-    return database.ref('/testUser').once('value', snap => {
+    return database.ref(`/${user}`).once('value', snap => {
       const databaseInfo = snap.val();
       dispatch(getDBFulfilledAction(databaseInfo))
     })
@@ -16,26 +16,6 @@ export function getDatabase() {
       console.log(error);
       dispatch(getDBRejectedAction());
     });
-  }
-}
-
-export function getHnPosts(posts) {
-  const temp = posts;
-  if(temp && temp.length > 0) {
-    return dispatch => {
-      // dispatch(getHnRequestedAction());
-      dispatch(getHnFulfilledAction(temp));
-    }
-  }
-  // return dispatch => {
-  //   dispatch(getHnRequestedAction());
-  //   return getHnFulfilledAction();
-  // }
-}
-
-export function requestHnPosts() {
-  return dispatch => {
-    dispatch(getHnRequestedAction());
   }
 }
 
@@ -56,24 +36,39 @@ function getDBFulfilledAction(databaseInfo) {
     type: ActionTypes.GetDBFulfilled,
     databaseInfo
   };
-
 }
 
-function getHnRequestedAction() {
-  return {
-    type: ActionTypes.GetHnRequested
+export function deleteModule(db_key, user = 'testUser') {
+  return dispatch => {
+    dispatch(deleteModuleRequestedAction());
+    const moduleRef = database.ref(`/${user}/modules/${db_key}`)
+
+    moduleRef.remove()
+    .then((snap) => {
+      dispatch(deleteModuleFulfilledAction());
+    })
+    .catch((error) => {
+      console.error(error);
+      dispatch(deleteModuleRejectedAction());
+    })
+   
   }
 }
 
-function getHnRejectedAction() {
+function deleteModuleRequestedAction() {
   return {
-    type: ActionTypes.GetHnRejected
+    type: ActionTypes.GetDBRequested
+  };
+}
+
+function deleteModuleRejectedAction() {
+  return {
+    type: ActionTypes.DeleteModuleRejected
   }
 }
 
-function getHnFulfilledAction(posts) {
+function deleteModuleFulfilledAction(databaseInfo) {
   return {
-    type: ActionTypes.GetHnFulfilled,
-    posts
-  }
+    type: ActionTypes.DeleteModuleFulfilled
+  };
 }
