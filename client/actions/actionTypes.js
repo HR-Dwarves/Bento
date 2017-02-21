@@ -4,6 +4,10 @@ const actionTypes = {
   GetDBRejected: 'GET_DB_REJECTED',
   GetDBFulfilled: 'GET_DB_FULFILLED',
 
+  DeleteModuleRequested: 'DELETE_MODULE_REQUESTED',
+  DeleteModuleRejected: 'DELETE_MODULE_REJECTED',
+  DeleteModuleFulfilled: 'DELETE_MODULE_FULFILLED',
+
   GetListRequested: 'GET_LIST_REQUESTED',
   GetListRejected: 'GET_LIST_REJECTED',
   GetListFulfilled: 'GET_LIST_FULFILLED',
