@@ -1,5 +1,4 @@
 import React from 'react';
-import _ from 'lodash';
 import database from '../../base';
 import Draggable from 'react-draggable';
 
