@@ -19,12 +19,18 @@ class LatLong extends React.Component {
       // clocks: this.props.dashboard.modules[this.props.db_key].clocks,
       timeZones: moment.tz.names()
     };
+
+    this.pollForTime;
   }
 
   componentWillMount() {
     if (!this.props.dashboard.modules[this.props.db_key].clocks) {
       this.addClock();
     }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.pollForTime);
   }
 
   componentDidMount() {
@@ -86,7 +92,7 @@ class LatLong extends React.Component {
       });
     }
 
-    setInterval(setTime, 1000) // poll system time every second
+    this.pollForTime = setInterval(setTime, 1000) // poll system time every second
 
     // get saved clocks from db
     this.props.getClocks(this.props.db_key);
