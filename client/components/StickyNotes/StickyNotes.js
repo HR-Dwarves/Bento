@@ -17,7 +17,6 @@ class StickyNotes extends React.Component {
     const target = 'headerText';
     const db_ref = database.ref(`/testUser/modules/${db_key}/${target}`);
     let newText = event.target.value;    
-    // db_ref.set(newText);
     this.props.updateText(target, newText, db_key);
   }
 
@@ -41,7 +40,7 @@ class StickyNotes extends React.Component {
               <input className='card-header-title sticky-header' 
                         cols='20' 
                         maxLength='30' 
-                        onChange={this.handleStickyHeaderEntry}
+                        onBlur={this.handleStickyHeaderEntry}
                         value={note.headerText}
                         placeholder="Enter whatever you like!"
                         >
@@ -56,7 +55,7 @@ class StickyNotes extends React.Component {
               <textarea className='sticky-content' 
                         maxLength='600' 
                         rows='10' 
-                        onChange={this.handleStickyBodyEntry}
+                        onBlur={this.handleStickyBodyEntry}
                         value={note.bodyText}
                         >
               </textarea>
