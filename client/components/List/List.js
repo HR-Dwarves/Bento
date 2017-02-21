@@ -11,11 +11,11 @@ class List extends React.Component {
   }
 
   componentDidMount() {
-    let db_key = this.props.db_key;
-    this.props.getList(db_key);
-    database.ref(`/testUser/modules/${db_key}`).on('value', () => {
-      this.props.getList(db_key);
-    })
+    // let db_key = this.props.db_key;
+    // this.props.getList(db_key);
+    // database.ref(`/testUser/modules/${db_key}`).on('value', () => {
+    //   this.props.getList(db_key);
+    // })
   }
 
   handleSubmit(e) {
