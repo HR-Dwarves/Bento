@@ -8,19 +8,9 @@ class StickyNotes extends React.Component {
   constructor(props) {
     super(props);
 
-    // this.handleAddSticky = this.handleAddSticky.bind(this);
-    // this.handleDeleteSticky = this.handleDeleteSticky.bind(this);
     this.handleStickyHeaderEntry = this.handleStickyHeaderEntry.bind(this);
     this.handleStickyBodyEntry = this.handleStickyBodyEntry.bind(this);
   }
-
-  // handleAddSticky() {
-  //   console.log('ADDING ANOTHER STICKY');
-  // }
-
-  // handleDeleteSticky() {
-  //   console.log('DELETE THIS STICKY');
-  // }
 
   handleStickyHeaderEntry(event) {
     const db_key = this.props.db_key;
