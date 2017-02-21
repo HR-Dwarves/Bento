@@ -31,7 +31,12 @@ class Dashboard extends React.Component {
   componentDidMount() {
     this.props.getDatabase();
     database.ref('/testUser').on('value', (snapshot) => {
-      this.props.getDatabase();
+    if(!snapshot.val().hasOwnProperty('modules')) {    
+      database.ref('/testUser/modules').push({   
+        type: 'DefaultModule'    
+      });    
+    }
+    this.props.getDatabase();
     });
   }
 
