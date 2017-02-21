@@ -2,6 +2,7 @@ import React from 'react';
 import NewsItem from './../NewsItem/NewsItem';
 import Promise from 'bluebird';
 import classnames from 'classnames';
+import database from '../../base'
 import styles from './NewsFeed.css';
 
 class NewsFeed extends React.Component {
@@ -73,11 +74,19 @@ class NewsFeed extends React.Component {
   updateButtons(button) {
     let buttonName = button.target.getAttribute('value');
     if(buttonName === 'Top') {
-      this.props.newsfeed.Top = true;
-      this.props.newsfeed.New = false;
+      database.ref('/testUser/modules/' + this.props.db_key).update({
+        top: true,
+        new: false
+      });
+      // this.props.newsfeed.Top = true;
+      // this.props.newsfeed.New = false;
     } else {
-      this.props.newsfeed.Top = false;
-      this.props.newsfeed.New = true;
+      database.ref('/testUser/modules/' + this.props.db_key).update({
+        top: false,
+        new: true
+      });
+      // this.props.newsfeed.Top = false;
+      // this.props.newsfeed.New = true;
     }
   }
 
@@ -93,6 +102,7 @@ class NewsFeed extends React.Component {
     let topClasses = classnames('card-footer-item', this.props.newsfeed.New ? '' : cssClasses);
     let spinnerClasses = classnames('button is-loading', spinner);
     let loaded = this.props.newsfeed.loaded;
+    console.log(this.props.db_key);
     return (
       <div className="">
         <div className="card">
