@@ -1,0 +1,12 @@
+.signup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+}
+
+.signup > * {
+  flex: 1 1 100%;
+  align-self: center;
+}
