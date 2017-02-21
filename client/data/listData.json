@@ -66,6 +66,7 @@
         "type" : "List"
       },
       "latlong": {
+        "clocks": ["America/Los_Angeles", "Africa/Accra", "America/Cancun"],
         "type": "LatLong"
       }
     },

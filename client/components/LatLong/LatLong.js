@@ -1,5 +1,6 @@
 import React from 'react';
 import config from './../../config/config';
+import database from '../../base'
 import moment from 'moment-timezone'
 
 import styles from './LatLong.css';
@@ -7,16 +8,29 @@ import Clock from '../Clock/Clock'
 
 
 class LatLong extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       lat: null,
       long: null,
       time: null,
       city: null,
-      clocks: [],
+      // clocks: [],
+      // clocks: this.props.dashboard.modules[this.props.db_key].clocks,
       timeZones: moment.tz.names()
     };
+
+    this.pollForTime;
+  }
+
+  componentWillMount() {
+    if (!this.props.dashboard.modules[this.props.db_key].clocks) {
+      this.addClock();
+    }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.pollForTime);
   }
 
   componentDidMount() {
@@ -78,49 +92,59 @@ class LatLong extends React.Component {
       });
     }
 
-    setInterval(setTime, 1000) // poll system time every second
+    this.pollForTime = setInterval(setTime, 1000) // poll system time every second
 
-    // add the initial clock at local time zone
-    this.addClock();
+    // get saved clocks from db
+    this.props.getClocks(this.props.db_key);
+
+    database.ref(`/testUser/modules/${this.props.db_key}`).on('value', () => {
+      this.props.getClocks(this.props.db_key);
+    });
   }
 
   addClock(e) {
     // todo, make this not be a guess
     let timeZone = e ? e.target.value : moment.tz.guess()
 
-    // http://stackoverflow.com/questions/26253351/correct-modification-of-state-arrays-in-reactjs
-    let newClocks = Array.from(this.state.clocks)
-    newClocks.push(timeZone)
+    // firebase doesn't have native arrays
+    // but we can create that by pulling down the current as array
+    // reading it as an array. Firebase will interpret as an array that way
+    // or as an object with sequential numerical keys.
+    let currentClocks = this.props.dashboard.modules[this.props.db_key].clocks || [];
+    let newClocksArray = Array.from(currentClocks);
 
-    this.setState({
-      clocks: newClocks
-    })
+    newClocksArray.push(timeZone)
+    this.props.addToClocks(newClocksArray, this.props.db_key);
   }
 
   removeClock(clock) {
-    let newClocks = this.state.clocks.filter(thisClock => thisClock !== clock);
+    let currentClocks = this.props.dashboard.modules[this.props.db_key].clocks;
+    let newClocksArray = currentClocks.filter(thisClock => thisClock !== clock);
 
-    this.setState({
-      clocks: newClocks
-    })
+    this.props.addToClocks(newClocksArray, this.props.db_key);
   }
 
   render() {
-    // let cssClasses = `${styles.card} column`;
+    // let cssClasses = `${styles.card} column`; // just for reference for form.
+    let clocks = this.props.dashboard.modules[this.props.db_key].clocks;
+
     return (
       <div className='card'>
 
         <header className="card-header">
-          <p className="card-header-title">
-            Location and Time
-          </p>
+          <p className="card-header-title">Location and Time</p>
+          <div className="card-header-icon">
+            <span><i className='fa fa-clock-o' aria-hidden='true'></i></span>
+            <span><i className='fa fa-map-marker' aria-hidden='true'></i></span>
+          </div>
         </header>
 
         <div className="card-content">
           <div className="media-content">
             <h4 className='title is-4'>Current: {this.state.city}</h4>
 
-              {this.state.clocks.map((clock, index) => {
+              {clocks &&
+                clocks.map((clock, index) => {
                 return <Clock
                         key={index}
                         time={this.state.time}
