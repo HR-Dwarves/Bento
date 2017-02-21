@@ -16,7 +16,7 @@ class NewsFeed extends React.Component {
     this.updateButtons = this.updateButtons.bind(this);
   }
 
-  getPosts(that, url){
+  getPosts(that, url, key){
     let feed = url;
     let itemIdArray = [];
     $.ajax({
@@ -24,8 +24,10 @@ class NewsFeed extends React.Component {
       type: 'GET',
       dataType: 'json', // added data type
       success: function(res) {
-        that.props.newsfeed.loaded = true;
-        that.getPostContent(res);  
+        database.ref('/testUser/modules/' + key).update({
+          loaded: true
+        });
+        that.getPostContent(res, key);  
       },
       error: function(err) {
         console.log('got an err');
@@ -34,7 +36,7 @@ class NewsFeed extends React.Component {
     });
   }
 
-  getPostContent(ids) { 
+  getPostContent(ids, key) { 
     var postsArray = [];
     for(var i = 0; i < 5; i++) {
       postsArray.push(this.callHackerNewsApi(ids[i]));
@@ -42,7 +44,10 @@ class NewsFeed extends React.Component {
     Promise.all(postsArray)
     .then((results) => {
       this.props.getHnPosts(postsArray);
-      this.props.newsfeed.loaded = true;
+      database.ref('/testUser/modules/' + key).update({
+          loaded: true,
+          posts: results
+      });
     })
   }
 
@@ -60,14 +65,22 @@ class NewsFeed extends React.Component {
   updateNew(e){
     e.preventDefault();
     this.updateButtons(e);
-    this.getPosts(this, 'https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty');
+    this.getPosts(this, 'https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty', this.props.db_key);
+    database.ref('/testUser/modules/' + this.props.db_key).update({
+      loaded: false
+    });
+    
     this.props.requestHnPosts();
   }
 
   updateTop(e){
     e.preventDefault();
     this.updateButtons(e);
-    this.getPosts(this,  'https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty');
+    this.getPosts(this, 'https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty', this.props.db_key);
+    database.ref('/testUser/modules/' + this.props.db_key).update({
+      loaded: false
+    });
+    
     this.props.requestHnPosts();
   }
 
@@ -78,31 +91,34 @@ class NewsFeed extends React.Component {
         top: true,
         new: false
       });
-      // this.props.newsfeed.Top = true;
-      // this.props.newsfeed.New = false;
     } else {
       database.ref('/testUser/modules/' + this.props.db_key).update({
         top: false,
         new: true
       });
-      // this.props.newsfeed.Top = false;
-      // this.props.newsfeed.New = true;
     }
   }
 
   componentWillMount(){
-    this.getPosts(this,  'https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty');
+    database.ref('/testUser/modules/' + this.props.db_key).update({
+      loaded: false
+    });
+    if(this.props.dashboard.modules[this.props.db_key].top){
+      this.getPosts(this,  'https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty', this.props.db_key);
+    } else {
+      this.getPosts(this,  'https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty', this.props.db_key);
+    }
+    
   }
 
   render() {
-    let list = this.props.newsfeed.posts;
+    let list = this.props.dashboard.modules[this.props.db_key].posts;
     let cssClasses = `${styles.test}`;
     let spinner = `${styles.spinner}`
     let newClasses = classnames('card-footer-item', this.props.dashboard.modules[this.props.db_key].new ? cssClasses : '');
     let topClasses = classnames('card-footer-item', this.props.dashboard.modules[this.props.db_key].new ? '' : cssClasses);
     let spinnerClasses = classnames('button is-loading', spinner);
-    let loaded = this.props.newsfeed.loaded;
-    console.log(this.props.db_key);
+    let loaded = this.props.dashboard.modules[this.props.db_key].loaded;
     return (
       <div className="">
         <div className="card">
@@ -118,7 +134,7 @@ class NewsFeed extends React.Component {
           </header>
           <div className="card-content">
             {loaded ? list ? list.map((item, key) => <NewsItem {...this.props} 
-                                          newsItem={item._rejectionHandler0}
+                                          newsItem={item}
                                           key={key}/>) : [] : <a className={spinnerClasses}>Loading</a>}
           </div>
           <footer className="card-footer">
