@@ -51,7 +51,6 @@ class Signup extends React.Component {
           <span>SIGNUP</span>
         </div>
         <div>
-          <p>Sign in to manage your store's inventory</p>
           <button className="google button" onClick={() => this.authenticate('google')}>Log In with Google</button>
           <button className="github button" onClick={() => this.authenticate('github')}>Log In with Github</button>
           <button className="facebook button" onClick={() => this.authenticate('facebook')} >Log In with Facebook</button>

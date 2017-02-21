@@ -24,7 +24,6 @@ class Login extends React.Component {
     return (
       <nav className={styles.login}>
         <div>LOGIN</div>
-        <p>Sign in to manage your store's inventory</p>
         <button className="google" onClick={() => this.authenticate('google')}>Log In with Google</button>
         <button className="github" onClick={() => this.authenticate('github')}>Log In with Github</button>
         <button className="facebook" onClick={() => this.authenticate('facebook')} >Log In with Facebook</button>
