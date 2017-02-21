@@ -75,12 +75,15 @@ class Dashboard extends React.Component {
 
     let mainDashboardPanelCSS = `${styles.mainDashboardPanel}`;
     let componentStyle = `${styles.component}`;
-    let dashContainer = `${styles.dashContainer}`
+    let dashContainer = `${styles.dashContainer}`;
+    let defaultModule = <div className={componentStyle}><DefaultModule key={'abcd'}/></div>;
 
     return (
       <div className={dashContainer}>
         <div className={mainDashboardPanelCSS}>
-            {elements ? elements.map((element) => <div className={componentStyle}>{element}</div>) : '' }
+            {elements ? elements.map((element) => (<div className={componentStyle}>
+                                                    {element}
+                                                    </div>)) : defaultModule }
         </div>
       </div>
     )

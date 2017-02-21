@@ -1,5 +1,9 @@
-div, button {
+div, button, input, textarea {
   font-family: 'El Messiri', serif;
+}
+
+input, textarea {
+  font-size: 14px;
 }
 
 .dashContainer {
