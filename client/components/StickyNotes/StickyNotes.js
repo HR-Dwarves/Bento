@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 import database from '../../base';
 import Draggable from 'react-draggable';
 
@@ -9,7 +10,9 @@ class StickyNotes extends React.Component {
     super(props);
 
     this.handleStickyHeaderEntry = this.handleStickyHeaderEntry.bind(this);
+    this.handleStickyHeaderEntry = _.debounce(this.handleStickyHeaderEntry, 300);
     this.handleStickyBodyEntry = this.handleStickyBodyEntry.bind(this);
+    this.handleStickyBodyEntry = _.debounce(this.handleStickyBodyEntry, 300);
   }
 
   handleStickyHeaderEntry(event) {
@@ -17,7 +20,6 @@ class StickyNotes extends React.Component {
     const target = 'headerText';
     const db_ref = database.ref(`/testUser/modules/${db_key}/${target}`);
     let newText = event.target.value;    
-    // db_ref.set(newText);
     this.props.updateText(target, newText, db_key);
   }
 
