@@ -57,6 +57,7 @@ class Dashboard extends React.Component {
     let dashboard = this.props.dashboard;
     let modules, elements;
     let modulesArray = [];
+    let test = [];
 
     //push each object key into the modules array
     modulesArray = Object.keys(this.components);
