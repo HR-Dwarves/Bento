@@ -31,12 +31,13 @@ class Dashboard extends React.Component {
   componentDidMount() {
     this.props.getDatabase();
     database.ref('/testUser').on('value', (snapshot) => {
-    if(!snapshot.val().hasOwnProperty('modules')) {    
-      database.ref('/testUser/modules').push({   
-        type: 'DefaultModule'    
-      });    
-    }
-    this.props.getDatabase();
+      // if(!snapshot.val().hasOwnProperty('modules')) {
+      //   database.ref('/testUser/modules').push({
+      //     type: 'DefaultModule'
+      //   });
+      // }
+      console.log('Value event occurred!');
+      this.props.getDatabase();
     });
   }
 
@@ -76,12 +77,15 @@ class Dashboard extends React.Component {
 
     let mainDashboardPanelCSS = `${styles.mainDashboardPanel}`;
     let componentStyle = `${styles.component}`;
-    let dashContainer = `${styles.dashContainer}`
+    let dashContainer = `${styles.dashContainer}`;
+    let defaultModule = <div className={componentStyle}><DefaultModule key={'abcd'}/></div>;
 
     return (
       <div className={dashContainer}>
         <div className={mainDashboardPanelCSS}>
-            {elements ? elements.map((element) => <div className={componentStyle}>{element}</div>) : '' }
+            {elements ? elements.map((element) => (<div className={componentStyle}>
+                                                    {element}
+                                                    </div>)) : defaultModule }
         </div>
       </div>
     )

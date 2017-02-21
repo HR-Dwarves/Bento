@@ -8,14 +8,16 @@ import styles from './List.css'
 class List extends React.Component {
   constructor() {
     super();
+
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
-    let db_key = this.props.db_key;
-    this.props.getList(db_key);
-    database.ref(`/testUser/modules/${db_key}`).on('value', () => {
-      this.props.getList(db_key);
-    })
+    // let db_key = this.props.db_key;
+    // this.props.getList(db_key);
+    // database.ref(`/testUser/modules/${db_key}`).on('value', () => {
+    //   this.props.getList(db_key);
+    // })
   }
 
   handleSubmit(e) {
@@ -52,6 +54,13 @@ class List extends React.Component {
     })
   }
 
+  handleDelete() {
+    let db_key = this.props.db_key;
+    // let user = this.props.user.uid;
+
+    this.props.deleteModule(db_key);
+  }
+
   render() {
     let dashboard = this.props.dashboard;
     let db_key = this.props.db_key;
@@ -68,6 +77,7 @@ class List extends React.Component {
     }
 
     let cssClasses = `${styles.card}`;
+    let deleteButton = `${styles.delete} delete`
 
     return (
       <div className={cssClasses}>
@@ -79,6 +89,7 @@ class List extends React.Component {
                 <i className="fa fa-th-list" aria-hidden="true"></i>
               </span>
             </span>
+            <button className={deleteButton} onClick={this.handleDelete}></button>
           </header>
           <div className="card-content">
             <form action="submit"

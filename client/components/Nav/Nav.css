@@ -9,6 +9,11 @@
   z-index: 999;
   background-color: white;
   justify-content: center;
+  align-items: stretch;
+}
+
+.mainNavPanel > * {
+  flex: 1 1 100%;
 }
 
 .pageTitle {
@@ -20,7 +25,13 @@
   clear: both;
 }
 
-.settings {
+.modalButton {
   display: flex;
+  justify-content: flex-end;
   align-items: center;
+
+}
+
+.modalButton button {
+  margin-right: 1rem;
 }

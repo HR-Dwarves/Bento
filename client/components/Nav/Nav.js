@@ -27,17 +27,20 @@ class Nav extends React.Component {
   render() {
     let mainNavPanelCSS = `${styles.mainNavPanel} is-clearfix`
     let pageTitleCSS = `${styles.pageTitle} has-text-centered`
-    let modalButtonStyle = `${styles.settings}`
+    let modalButtonStyle = `${styles.modalButton}`
     let modulesArray = Object.keys(ModuleList);
     console.log(ModuleList);
 
     return(
       <div className={mainNavPanelCSS}>
+        <div></div>
         <Link to="/">
           <div className={pageTitleCSS}>dashboard</div>
         </Link>
         <div className={modalButtonStyle}>
-          <button onClick={this.handleSettingsButton} className="button is-primary modal-button"><i className="fa fa-cog" aria-hidden="true"></i></button>
+          <button onClick={this.handleSettingsButton} className="button is-primary modal-button">
+            <i className="fa fa-plus" aria-hidden="true"></i>
+          </button>
           <Modal isOpen={this.state.isModalOpen} onClose={this.closeModal} modules={modulesArray}></Modal>
         </div>
       </div>

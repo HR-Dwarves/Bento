@@ -17,17 +17,37 @@ function dashboard(state = {}, action) {
       });
     }
     case actionTypes.GetDBFulfilled: {
-      const { username, firstName, lastName, email } = action.databaseInfo;
+      const { modules } = action.databaseInfo;
       const database = Object.assign({}, action.databaseInfo)
+      if (!modules) {
+        // delete state.dashboard.modules;
+        database.modules = null;
+      }
       console.log("databaseInfo: ", action.databaseInfo);
       const newState = Object.assign({}, state, {
         inProgress: false,
-        success: 'Got invite.',
-        // username,
-        // firstName,
-        // lastName,
-        // email
+        success: 'Received dashboard info.',
       }, database);
+      return newState;
+    }
+    case actionTypes.DeleteModuleRequested: {
+      return Object.assign({}, state, {
+        inProgress: true,
+        error: '',
+        success: ''
+      });
+    }
+    case actionTypes.DeleteModuleRejected: {
+      return Object.assign({}, state, {
+        inProgress: false,
+        error: 'Error in getting deleting module.',
+      });
+    }
+    case actionTypes.DeleteModuleFulfilled: {
+      const newState = Object.assign({}, state, {
+        inProgress: false,
+        success: 'Module deleted.',
+      });
       return newState;
     }
     default:

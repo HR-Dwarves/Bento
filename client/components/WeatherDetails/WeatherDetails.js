@@ -90,7 +90,7 @@ class WeatherDetails extends React.Component {
             <header className='card-header'>
               <p className='card-header-title'>Weather</p>
               <div className="card-header-icon">
-                <span>
+                <span className="icon">
                   <i className='fa fa-cloud' aria-hidden='true'></i>
                 </span>
               </div>

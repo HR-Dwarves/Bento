@@ -134,8 +134,8 @@ class LatLong extends React.Component {
         <header className="card-header">
           <p className="card-header-title">Location and Time</p>
           <div className="card-header-icon">
-            <span><i className='fa fa-clock-o' aria-hidden='true'></i></span>
-            <span><i className='fa fa-map-marker' aria-hidden='true'></i></span>
+            <span className="icon"><i className='fa fa-clock-o' aria-hidden='true'></i></span>
+            <span className="icon"><i className='fa fa-map-marker' aria-hidden='true'></i></span>
           </div>
         </header>
 
