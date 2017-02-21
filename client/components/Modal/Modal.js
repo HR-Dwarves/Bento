@@ -54,9 +54,7 @@ class Modal extends React.Component {
     dbRef.orderByChild('type').equalTo(deleteValue).once('child_added', (snapshot) => {
       snapshot.ref.remove();
     });
-    console.log('state before: ' + this.state.list);
     this.state.list.splice(this.state.list.indexOf(deleteValue), 1);
-    console.log('state after: ' + this.state.list);
   }
 
   render() {

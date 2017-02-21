@@ -31,14 +31,11 @@ class Dashboard extends React.Component {
   componentDidMount() {
     this.props.getDatabase();
     database.ref('/testUser').on('value', (snapshot) => {
-      if(!snapshot.val().hasOwnProperty('modules')) {
-        let defaultModule = {
-          type: 'DefaultModule'
-        }
-        database.ref('/testUser/modules').push({
-          type: 'DefaultModule'
-        });
-      }
+      // if(!snapshot.val().hasOwnProperty('modules')) {
+      //   database.ref('/testUser/modules').push({
+      //     type: 'DefaultModule'
+      //   });
+      // }
       this.props.getDatabase();
     });
   }
@@ -59,10 +56,6 @@ class Dashboard extends React.Component {
     let dashboard = this.props.dashboard;
     let modules, elements;
     let modulesArray = [];
-
-    database.ref('/testUser').on('child_removed', function(snapshot) {
-      console.log('fadsfds');
-    });
 
     //push each object key into the modules array
     modulesArray = Object.keys(this.components);
@@ -87,7 +80,7 @@ class Dashboard extends React.Component {
     return (
       <div className={dashContainer}>
         <div className={mainDashboardPanelCSS}>
-            {elements ? elements.map((element) => <div className={componentStyle}>{element}</div>) : <DefaultModule /> }
+            {elements ? elements.map((element) => <div className={componentStyle}>{element}</div>) : '' }
         </div>
       </div>
     )
