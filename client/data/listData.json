@@ -31,6 +31,8 @@
         "type": "WeatherDetails"
       },
       "stickynotes": {
+        "headerText": "",
+        "bodyText": "",
         "type": "StickyNotes"
       },
       "list3" : {
@@ -62,9 +64,6 @@
           }
         },
         "type" : "List"
-      },
-      "sticky1": {
-        "type": "StickyNotes"
       },
       "latlong": {
         "clocks": ["America/Los_Angeles", "Africa/Accra", "America/Cancun"],

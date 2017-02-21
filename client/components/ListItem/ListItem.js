@@ -8,7 +8,7 @@ class ListItem extends React.Component {
 
   handleDelete(itemKey) {
     const db_key = this.props.db_key
-    console.log(itemKey);;
+    console.log(itemKey);
     this.props.deleteFromList(itemKey, db_key, );
   }
 

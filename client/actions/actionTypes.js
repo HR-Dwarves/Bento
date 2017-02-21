@@ -24,6 +24,10 @@ const actionTypes = {
   GetHnRejected: 'GET_HN_REJECTED',
   GetHnFulfilled: 'GET_HN_FULFILLED',
 
+  UpdateStickyTextRequested: 'UPDATE_STICKY_TEXT_REQUESTED',
+  UpdateStickyTextRejected: 'UPDATE_STICKY_TEXT_REJECTED',
+  UpdateStickytextFulFilled: 'UPDATE_STICKY_TEXT_FULFILLED',
+  
   GetClocksRequested: 'GET_CLOCKS_REQUESTED',
   GetClocksRejected: 'GET_CLOCKS_REJECTED',
   GetClocksFulfilled: 'GET_CLOCKS_FULFILLED',
@@ -31,6 +35,7 @@ const actionTypes = {
   AddToClocksRequested: 'ADD_TO_CLOCKS_REQUESTED',
   AddToClocksRejected: 'ADD_TO_CLOCKS_REJECTED',
   AddToClocksFulfilled: 'ADD_TO_CLOCKS_FULFILLED'
+
 };
 
 export default actionTypes;
