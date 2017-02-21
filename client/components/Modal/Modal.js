@@ -38,9 +38,21 @@ class Modal extends React.Component {
   addModule(e) {
     e.preventDefault();
     let dbRef = database.ref('/testUser/modules/');
-    dbRef.push({
-      type: e.target.value
-    });
+    if(e.target.value === 'NewsFeed') {
+      var newsFeedObj = {
+        type: e.target.value,
+        top: true,
+        new: false,
+        loaded: false,
+        newsItems: []
+      };
+      dbRef.push(newsFeedObj)
+    } else {
+      dbRef.push({
+        type: e.target.value
+      });
+    }
+    
     dbRef.orderByChild('type').equalTo('DefaultModule').once('child_added', (snapshot) => {
       snapshot.ref.remove();
     });
