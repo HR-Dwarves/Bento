@@ -72,8 +72,7 @@ class Modal extends React.Component {
           </header>
           <section className="modal-card-body">
             {this.props.modules.map((module, key) => <div className={moduleStyles}><span>{module}</span> 
-              <span className={moduleStyles}><span><button value={module} onClick={this.addModule} className='button is-primary'>Add</button></span>
-              {this.state.list.includes({module}.module) ? <span><button value={module} onClick={this.removeModule} className='button is-primary'>Delete</button></span> : ''} </span></div>)}
+              <span className={moduleStyles}><span><button value={module} onClick={this.addModule} className='button is-primary'>Add</button></span></span></div>)}
           </section>
         </div>
       </div>
