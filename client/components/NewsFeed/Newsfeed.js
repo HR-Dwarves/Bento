@@ -14,6 +14,8 @@ class NewsFeed extends React.Component {
     this.updateNew = this.updateNew.bind(this);
     this.updateTop = this.updateTop.bind(this);
     this.updateButtons = this.updateButtons.bind(this);
+    this.setLoadedToFalse = this.setLoadedToFalse.bind(this);
+    this.removePosts = this.removePosts.bind(this);
   }
 
   getPosts(that, url, key){
@@ -60,12 +62,9 @@ class NewsFeed extends React.Component {
   }
 
   updateNew(e){
-    database.ref('/testUser/modules/' + this.props.db_key).update({
-      loaded: false
-    });
+    this.setLoadedToFalse();
     e.preventDefault();
-    let ref = database.ref('/testUser/modules/' + this.props.db_key + '/posts');
-    ref.remove();
+    this.removePosts();
     this.updateButtons(e);
     this.getPosts(this, 'https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty', this.props.db_key);
     this.props.requestHnPosts();
@@ -73,14 +72,10 @@ class NewsFeed extends React.Component {
 
   updateTop(e){
     e.preventDefault();
-    let ref = database.ref('/testUser/modules/' + this.props.db_key + '/posts');
-    ref.remove();
+    this.removePosts();
     this.updateButtons(e);
     this.getPosts(this, 'https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty', this.props.db_key);
-    database.ref('/testUser/modules/' + this.props.db_key).update({
-      loaded: false
-    });
-    
+    this.setLoadedToFalse();
     this.props.requestHnPosts();
   }
 
@@ -99,13 +94,19 @@ class NewsFeed extends React.Component {
     }
   }
 
-  componentWillMount(){
-    let ref = database.ref('/testUser/modules/' + this.props.db_key + '/posts');
-    ref.remove();
+  setLoadedToFalse(){
     database.ref('/testUser/modules/' + this.props.db_key).update({
       loaded: false
     });
+  }
 
+  removePosts(){
+    database.ref('/testUser/modules/' + this.props.db_key + '/posts').remove();
+  }
+
+  componentWillMount(){
+    this.removePosts();
+    this.setLoadedToFalse();
     if(this.props.dashboard.modules[this.props.db_key].top){
       this.getPosts(this,  'https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty', this.props.db_key);
     } else {
