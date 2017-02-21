@@ -50,6 +50,28 @@ function dashboard(state = {}, action) {
       });
       return newState;
     }
+    case actionTypes.GetGeolocationRequested: {
+      return Object.assign({}, state, {
+        inProgress: true,
+        error: '',
+        success: ''
+      });
+    }
+    case actionTypes.GetGeolocationRejected: {
+      return Object.assign({}, state, {
+        inProgress: false,
+        error: 'User not allowing geolocation.',
+      });
+    }
+    case actionTypes.GetGeolocationFulfilled: {
+      const geocoordinates = action.geocoordinates;
+      const newState = Object.assign({}, state, {
+        inProgress: false,
+        success: 'Latitude and Longitude retrieved.',
+      }, geocoordinates);
+      return newState;
+    }
+
     default:
       return state;
   }

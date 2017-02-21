@@ -31,14 +31,18 @@ const actionTypes = {
   UpdateStickyTextRequested: 'UPDATE_STICKY_TEXT_REQUESTED',
   UpdateStickyTextRejected: 'UPDATE_STICKY_TEXT_REJECTED',
   UpdateStickytextFulFilled: 'UPDATE_STICKY_TEXT_FULFILLED',
-  
+
   GetClocksRequested: 'GET_CLOCKS_REQUESTED',
   GetClocksRejected: 'GET_CLOCKS_REJECTED',
   GetClocksFulfilled: 'GET_CLOCKS_FULFILLED',
 
   AddToClocksRequested: 'ADD_TO_CLOCKS_REQUESTED',
   AddToClocksRejected: 'ADD_TO_CLOCKS_REJECTED',
-  AddToClocksFulfilled: 'ADD_TO_CLOCKS_FULFILLED'
+  AddToClocksFulfilled: 'ADD_TO_CLOCKS_FULFILLED',
+
+  GetGeolocationRequested: 'GET_GEOLOCATION_REQUESTED',
+  GetGeolocationRejected: 'GET_GEOLOCATION_REJECTED',
+  GetGeolocationFulfilled: 'GET_GEOLOCATION_FULFILLED'
 
 };
 

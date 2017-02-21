@@ -1,6 +1,6 @@
 // Action creators are grouped in the App.js component
 // Add new action creators to the 'bundledActionCreators' using
-// Object.assign so new action creators will be bound and passed down 
+// Object.assign so new action creators will be bound and passed down
 
 import ActionTypes from './actionTypes';
 import database from '../base';
@@ -51,7 +51,7 @@ export function deleteModule(db_key, user = 'testUser') {
       console.error(error);
       dispatch(deleteModuleRejectedAction());
     })
-   
+
   }
 }
 
@@ -70,5 +70,54 @@ function deleteModuleRejectedAction() {
 function deleteModuleFulfilledAction(databaseInfo) {
   return {
     type: ActionTypes.DeleteModuleFulfilled
+  };
+}
+
+export function getGeolocation() {
+  return dispatch => {
+
+    dispatch(getGeolocationRequestedAction());
+
+    return navigator.geolocation.getCurrentPosition(function(position) {
+
+      let lat = position.coords.latitude;
+      let long = position.coords.longitude;
+
+      let geocoordinates = {
+        latitude: lat,
+        longitude: long
+      }
+
+      sessionStorage.setItem('latitude', lat);
+      sessionStorage.setItem('longitude', long);
+
+      dispatch(getGeolocationFulfilledAction(geocoordinates))
+    });
+    // not clear how to follow this form here. Above function is
+    // not returning a promise. Post MVP!
+
+    // .catch((error) => {
+    //   console.log(error);
+    //   dispatch(getGeolocationRejectedAction());
+    // });
+  }
+}
+
+function getGeolocationRequestedAction() {
+  return {
+    type: ActionTypes.GetGeolocationRequested
+  };
+}
+
+function getGeolocationRejectedAction() {
+  return {
+    type: ActionTypes.GetGeolocationRejected
+  }
+}
+
+function getGeolocationFulfilledAction(geocoordinates) {
+  return {
+    type: ActionTypes.GetGeolocationFulfilled,
+    geocoordinates
   };
 }

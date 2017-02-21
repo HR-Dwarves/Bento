@@ -40,44 +40,24 @@ class LatLong extends React.Component {
     // GEOLOCATION
     let apiKey = config.googleApiKey;
 
-    if ("geolocation" in navigator) {
-      /* geolocation is available */
+    // LOCATION
+    // https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=YOUR_API_KEY
+    // let queryBase = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=';
+    // let query = `${queryBase}${lat},${long}&key=${config.googleApiKey}`
 
-      navigator.geolocation.getCurrentPosition(function(position) {
+    // $.get(query, function(data) {
+    //   var city = data.results[0].address_components.reduce(function(acc, item) {
+    //     if (item.types.includes('locality')) {
+    //       return acc = item.long_name;
+    //     } else {
+    //       return acc;
+    //     }
+    //   })
 
-        let lat = position.coords.latitude;
-        let long = position.coords.longitude;
-
-        localStorage.setItem('latitude', lat);
-        localStorage.setItem('longitude', long);
-
-        context.setState({
-          lat: lat,
-          long: long
-        });
-
-        // LOCATION
-        // https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=YOUR_API_KEY
-        let queryBase = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=';
-        let query = `${queryBase}${lat},${long}&key=${config.googleApiKey}`
-
-        $.get(query, function(data) {
-          var city = data.results[0].address_components.reduce(function(acc, item) {
-            if (item.types.includes('locality')) {
-              return acc = item.long_name;
-            } else {
-              return acc;
-            }
-          })
-
-          context.setState({
-            city: city
-          });
-        });
-      });
-    } else {
-      // no geo
-    }
+    //   context.setState({
+    //     city: city
+    //   });
+    // });
 
     // TIME
     // TODO: make ntp time api

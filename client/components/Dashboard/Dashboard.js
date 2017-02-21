@@ -34,6 +34,11 @@ class Dashboard extends React.Component {
     database.ref('/testUser').on('value', (snapshot) => {
       this.props.getDatabase();
     });
+
+    // ask user for geocoordinates
+    if ("geolocation" in navigator) {
+      this.props.getGeolocation();
+    }
   }
 
   handleSettingsButton() {
