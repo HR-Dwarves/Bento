@@ -31,11 +31,6 @@ class Dashboard extends React.Component {
   componentDidMount() {
     this.props.getDatabase();
     database.ref('/testUser').on('value', (snapshot) => {
-      // if(!snapshot.val().hasOwnProperty('modules')) {
-      //   database.ref('/testUser/modules').push({
-      //     type: 'DefaultModule'
-      //   });
-      // }
       this.props.getDatabase();
     });
   }
@@ -56,6 +51,7 @@ class Dashboard extends React.Component {
     let dashboard = this.props.dashboard;
     let modules, elements;
     let modulesArray = [];
+    let test = [];
 
     //push each object key into the modules array
     modulesArray = Object.keys(this.components);
