@@ -11,7 +11,8 @@ var moduleList = {
   'NewsFeed': NewsFeed,
   'WeatherDetails': WeatherDetails,
   'StickyNotes': StickyNotes,
-  'LatLong': LatLong
+  'LatLong': LatLong,
+  
 };
 
 export default moduleList;

@@ -9,15 +9,10 @@ class List extends React.Component {
   constructor() {
     super();
 
-    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
-    // let db_key = this.props.db_key;
-    // this.props.getList(db_key);
-    // database.ref(`/testUser/modules/${db_key}`).on('value', () => {
-    //   this.props.getList(db_key);
-    // })
+
   }
 
   handleSubmit(e) {
@@ -89,7 +84,6 @@ class List extends React.Component {
                 <i className="fa fa-th-list" aria-hidden="true"></i>
               </span>
             </span>
-            <button className={deleteButton} onClick={this.handleDelete}></button>
           </header>
           <div className="card-content">
             <form action="submit"

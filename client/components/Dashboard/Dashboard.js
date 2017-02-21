@@ -11,6 +11,7 @@ import WeatherDetails from '../WeatherDetails/WeatherDetails';
 import StickyNotes from '../StickyNotes/StickyNotes';
 import Modal from '../Modal/Modal';
 import LatLong from '../LatLong/LatLong';
+import ModuleWrapper from '../ModuleWrapper/ModuleWrapper';
 
 class Dashboard extends React.Component {
   constructor() {
@@ -31,12 +32,6 @@ class Dashboard extends React.Component {
   componentDidMount() {
     this.props.getDatabase();
     database.ref('/testUser').on('value', (snapshot) => {
-      // if(!snapshot.val().hasOwnProperty('modules')) {
-      //   database.ref('/testUser/modules').push({
-      //     type: 'DefaultModule'
-      //   });
-      // }
-      console.log('Value event occurred!');
       this.props.getDatabase();
     });
   }
@@ -55,7 +50,7 @@ class Dashboard extends React.Component {
 
   render() {
     let dashboard = this.props.dashboard;
-    let modules, elements;
+    let modules, elements, wrappers;
     let modulesArray = [];
     let test = [];
 
@@ -64,13 +59,22 @@ class Dashboard extends React.Component {
     if (dashboard) {
       modules = dashboard.modules
       if (modules) {
-        elements = Object.keys(modules).map((moduleKey) => {
+        // elements = Object.keys(modules).map((moduleKey) => {
+        //   var additionalProps = {
+        //     key: moduleKey,
+        //     db_key: moduleKey
+        //   };
+        //   var newProps = Object.assign({}, this.props, additionalProps)
+        //   return React.createElement(this.components[modules[moduleKey].type], newProps)
+        // });
+        wrappers = Object.keys(modules).map((moduleKey) => {
           var additionalProps = {
             key: moduleKey,
-            db_key: moduleKey
-          };
+            db_key: moduleKey,
+            type: modules[moduleKey].type
+          }
           var newProps = Object.assign({}, this.props, additionalProps)
-          return React.createElement(this.components[modules[moduleKey].type], newProps)
+          return React.createElement(ModuleWrapper, newProps);
         });
       }
     }
@@ -83,9 +87,9 @@ class Dashboard extends React.Component {
     return (
       <div className={dashContainer}>
         <div className={mainDashboardPanelCSS}>
-            {elements ? elements.map((element) => (<div className={componentStyle}>
-                                                    {element}
-                                                    </div>)) : defaultModule }
+            {wrappers ? wrappers.map((wrapper) => (<div className={componentStyle}>
+                                         {wrapper}
+                                         </div>)) : defaultModule }
         </div>
       </div>
     )
@@ -94,3 +98,6 @@ class Dashboard extends React.Component {
 
 export default Dashboard;
 
+// {elements ? elements.map((element) => (<div className={componentStyle}>
+//                                         {element}
+//                                         </div>)) : defaultModule }
