@@ -50,9 +50,12 @@ class Dashboard extends React.Component {
     let modules, elements;
     let modulesArray = [];
 
+    database.ref('/testUser').on('child_removed', function(snapshot) {
+      
+    });
+
     //push each object key into the modules array
     modulesArray = Object.keys(this.components);
-
     if (dashboard) {
       modules = dashboard.modules
       if (modules) {
@@ -80,10 +83,6 @@ class Dashboard extends React.Component {
     )
   }
 }
-
-// FIND PLACE FOR MODAL AND BUTTON
-//   <Modal isOpen={this.state.isModalOpen} onClose={this.closeModal} modules={modulesArray}></Modal>
-//     <button onClick={this.handleSettingsButton} className="button is-primary modal-button"><i className="fa fa-cog" aria-hidden="true"></i></button>
 
 export default Dashboard;
 
