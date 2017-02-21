@@ -64,11 +64,11 @@ function dashboard(state = {}, action) {
       });
     }
     case actionTypes.GetGeolocationFulfilled: {
-      const geocoordinates = action.geocoordinates;
+      const geoStateAdditions = action.geoStateAdditions;
       const newState = Object.assign({}, state, {
         inProgress: false,
-        success: 'Latitude and Longitude retrieved.',
-      }, geocoordinates);
+        success: 'Latitude, Longitude, currentCity retrieved.',
+      }, geoStateAdditions);
       return newState;
     }
 

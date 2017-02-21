@@ -4,6 +4,7 @@
 
 import ActionTypes from './actionTypes';
 import database from '../base';
+import config from '../config/config'
 
 export function getDatabase(user = 'testUser') {
   return dispatch => {
@@ -51,7 +52,6 @@ export function deleteModule(db_key, user = 'testUser') {
       console.error(error);
       dispatch(deleteModuleRejectedAction());
     })
-
   }
 }
 
@@ -83,15 +83,33 @@ export function getGeolocation() {
       let lat = position.coords.latitude;
       let long = position.coords.longitude;
 
-      let geocoordinates = {
-        latitude: lat,
-        longitude: long
-      }
-
+      // add to session storage for usage later
       sessionStorage.setItem('latitude', lat);
       sessionStorage.setItem('longitude', long);
 
-      dispatch(getGeolocationFulfilledAction(geocoordinates))
+      // GET CURRENT CITY
+      // https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=YOUR_API_KEY
+      let queryBase = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=';
+      let query = `${queryBase}${lat},${long}&key=${config.googleApiKey}`
+
+      $.get(query, function(data) {
+        var city = data.results[0].address_components.reduce(function(acc, item) {
+          if (item.types.includes('locality')) {
+            return acc = item.long_name;
+          } else {
+            return acc;
+          }
+        })
+
+        let geoStateAdditions = {
+          latitude: lat,
+          longitude: long,
+          currentCity: city
+        }
+
+        dispatch(getGeolocationFulfilledAction(geoStateAdditions))
+      });
+
     });
     // not clear how to follow this form here. Above function is
     // not returning a promise. Post MVP!
@@ -115,9 +133,9 @@ function getGeolocationRejectedAction() {
   }
 }
 
-function getGeolocationFulfilledAction(geocoordinates) {
+function getGeolocationFulfilledAction(geoStateAdditions) {
   return {
     type: ActionTypes.GetGeolocationFulfilled,
-    geocoordinates
+    geoStateAdditions
   };
 }

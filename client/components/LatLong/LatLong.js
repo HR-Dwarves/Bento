@@ -6,20 +6,14 @@ import moment from 'moment-timezone'
 import styles from './LatLong.css';
 import Clock from '../Clock/Clock'
 
-
 class LatLong extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      lat: null,
-      long: null,
       time: null,
       city: null,
-      // clocks: [],
-      // clocks: this.props.dashboard.modules[this.props.db_key].clocks,
       timeZones: moment.tz.names()
     };
-
     this.pollForTime;
   }
 
@@ -34,31 +28,7 @@ class LatLong extends React.Component {
   }
 
   componentDidMount() {
-
     var context = this;
-
-    // GEOLOCATION
-    let apiKey = config.googleApiKey;
-
-    // LOCATION
-    // https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=YOUR_API_KEY
-    // let queryBase = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=';
-    // let query = `${queryBase}${lat},${long}&key=${config.googleApiKey}`
-
-    // $.get(query, function(data) {
-    //   var city = data.results[0].address_components.reduce(function(acc, item) {
-    //     if (item.types.includes('locality')) {
-    //       return acc = item.long_name;
-    //     } else {
-    //       return acc;
-    //     }
-    //   })
-
-    //   context.setState({
-    //     city: city
-    //   });
-    // });
-
     // TIME
     // TODO: make ntp time api
     // $.get('/myApiEndpointForNTP', function(data) {};
@@ -112,16 +82,18 @@ class LatLong extends React.Component {
       <div className='card'>
 
         <header className="card-header">
-          <p className="card-header-title">Location and Time</p>
+          <p className="card-header-title">Time</p>
           <div className="card-header-icon">
             <span className="icon"><i className='fa fa-clock-o' aria-hidden='true'></i></span>
-            <span className="icon"><i className='fa fa-map-marker' aria-hidden='true'></i></span>
+            {this.props.dashboard.currentCity &&
+              <span className="icon"><i className='fa fa-map-marker' aria-hidden='true'></i></span>}
           </div>
         </header>
 
         <div className="card-content">
           <div className="media-content">
-            <h4 className='title is-4'>Current: {this.state.city}</h4>
+            {this.props.dashboard.currentCity &&
+              <h4 className='title is-4'>Current: {this.props.dashboard.currentCity}</h4>}
 
               {clocks &&
                 clocks.map((clock, index) => {
