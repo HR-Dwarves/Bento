@@ -8,19 +8,19 @@ class StickyNotes extends React.Component {
   constructor(props) {
     super(props);
 
-    this.handleAddSticky = this.handleAddSticky.bind(this);
-    this.handleDeleteSticky = this.handleDeleteSticky.bind(this);
+    // this.handleAddSticky = this.handleAddSticky.bind(this);
+    // this.handleDeleteSticky = this.handleDeleteSticky.bind(this);
     this.handleStickyHeaderEntry = this.handleStickyHeaderEntry.bind(this);
     this.handleStickyBodyEntry = this.handleStickyBodyEntry.bind(this);
   }
 
-  handleAddSticky() {
-    console.log('ADDING ANOTHER STICKY');
-  }
+  // handleAddSticky() {
+  //   console.log('ADDING ANOTHER STICKY');
+  // }
 
-  handleDeleteSticky() {
-    console.log('DELETE THIS STICKY');
-  }
+  // handleDeleteSticky() {
+  //   console.log('DELETE THIS STICKY');
+  // }
 
   handleStickyHeaderEntry(event) {
     const db_key = this.props.db_key;
@@ -48,19 +48,17 @@ class StickyNotes extends React.Component {
       <div className=''>
           <div className='card'>
             <header className='card-header'>
-              <textarea className='card-header-title sticky-header' 
-                        cols='30' 
+              <input className='card-header-title sticky-header' 
+                        cols='20' 
                         maxLength='30' 
                         onChange={this.handleStickyHeaderEntry}
                         value={note.headerText}
+                        placeholder="Enter whatever you like!"
                         >
-              </textarea>
+              </input>
               <div className="card-header-icon">
-                <span>
-                  <i className='fa fa-plus' aria-hidden='true' onClick={this.handleAddSticky}></i>
-                </span>
-                <span>
-                  <i className='fa fa-times' aria-hidden='true' onClick={this.handleDeleteSticky}></i>
+                <span className="icon">
+                  <i className="fa fa-sticky-note-o" aria-hidden="true"></i>
                 </span>
               </div>
             </header>
@@ -68,7 +66,6 @@ class StickyNotes extends React.Component {
               <textarea className='sticky-content' 
                         maxLength='600' 
                         rows='10' 
-                        cols='60'
                         onChange={this.handleStickyBodyEntry}
                         value={note.bodyText}
                         >
