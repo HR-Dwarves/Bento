@@ -22,7 +22,7 @@ class Login extends React.Component {
 
   render() {
     return (
-      <nav className="login">
+      <nav className={styles.login}>
         <div>LOGIN</div>
         <p>Sign in to manage your store's inventory</p>
         <button className="google" onClick={() => this.authenticate('google')}>Log In with Google</button>
