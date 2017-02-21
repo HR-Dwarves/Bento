@@ -4,6 +4,7 @@ import styles from './Dashboard.css';
 import Promise from 'bluebird';
 
 // Import dashboard components as you add them!
+import DefaultModule from '../DefaultModule/DefaultModule';
 import List from '../List/List';
 import NewsFeed from '../NewsFeed/NewsFeed';
 import WeatherDetails from '../WeatherDetails/WeatherDetails';
@@ -19,7 +20,8 @@ class Dashboard extends React.Component {
       'NewsFeed': NewsFeed,
       'WeatherDetails': WeatherDetails,
       'StickyNotes': StickyNotes,
-      'LatLong': LatLong
+      'LatLong': LatLong,
+      'DefaultModule': DefaultModule
     }
     this.state = { isModalOpen: false}
     this.handleSettingsButton = this.handleSettingsButton.bind(this);
@@ -28,7 +30,12 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     this.props.getDatabase();
-    database.ref('/testUser').on('value', () => {
+    database.ref('/testUser').on('value', (snapshot) => {
+      // if(!snapshot.val().hasOwnProperty('modules')) {
+      //   database.ref('/testUser/modules').push({
+      //     type: 'DefaultModule'
+      //   });
+      // }
       this.props.getDatabase();
     });
   }
@@ -52,7 +59,6 @@ class Dashboard extends React.Component {
 
     //push each object key into the modules array
     modulesArray = Object.keys(this.components);
-
     if (dashboard) {
       modules = dashboard.modules
       if (modules) {
@@ -74,16 +80,12 @@ class Dashboard extends React.Component {
     return (
       <div className={dashContainer}>
         <div className={mainDashboardPanelCSS}>
-            {elements ? elements.map((element) => <div className={componentStyle}>{element}</div>) : []}
+            {elements ? elements.map((element) => <div className={componentStyle}>{element}</div>) : '' }
         </div>
       </div>
     )
   }
 }
-
-// FIND PLACE FOR MODAL AND BUTTON
-//   <Modal isOpen={this.state.isModalOpen} onClose={this.closeModal} modules={modulesArray}></Modal>
-//     <button onClick={this.handleSettingsButton} className="button is-primary modal-button"><i className="fa fa-cog" aria-hidden="true"></i></button>
 
 export default Dashboard;
 

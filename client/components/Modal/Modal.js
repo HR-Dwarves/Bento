@@ -41,6 +41,9 @@ class Modal extends React.Component {
     dbRef.push({
       type: e.target.value
     });
+    dbRef.orderByChild('type').equalTo('DefaultModule').once('child_added', (snapshot) => {
+      snapshot.ref.remove();
+    });
     this.state.list.push(e.target.value);
   }
 
@@ -51,9 +54,7 @@ class Modal extends React.Component {
     dbRef.orderByChild('type').equalTo(deleteValue).once('child_added', (snapshot) => {
       snapshot.ref.remove();
     });
-    console.log('state before: ' + this.state.list);
     this.state.list.splice(this.state.list.indexOf(deleteValue), 1);
-    console.log('state after: ' + this.state.list);
   }
 
   render() {

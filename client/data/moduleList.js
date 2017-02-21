@@ -4,6 +4,7 @@ import WeatherDetails from '../components/WeatherDetails/WeatherDetails';
 import StickyNotes from '../components/StickyNotes/StickyNotes';
 import Modal from '../components/Modal/Modal';
 import LatLong from '../components/LatLong/LatLong';
+import DefaultModule from '../components/DefaultModule/DefaultModule'
 
 var moduleList = {
   'List': List,
