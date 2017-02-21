@@ -10,9 +10,7 @@ class StickyNotes extends React.Component {
     super(props);
 
     this.handleStickyHeaderEntry = this.handleStickyHeaderEntry.bind(this);
-    this.handleStickyHeaderEntry = _.debounce(this.handleStickyHeaderEntry, 300);
     this.handleStickyBodyEntry = this.handleStickyBodyEntry.bind(this);
-    this.handleStickyBodyEntry = _.debounce(this.handleStickyBodyEntry, 300);
   }
 
   handleStickyHeaderEntry(event) {
@@ -43,7 +41,7 @@ class StickyNotes extends React.Component {
               <input className='card-header-title sticky-header' 
                         cols='20' 
                         maxLength='30' 
-                        onChange={this.handleStickyHeaderEntry}
+                        onBlur={this.handleStickyHeaderEntry}
                         value={note.headerText}
                         placeholder="Enter whatever you like!"
                         >
@@ -58,7 +56,7 @@ class StickyNotes extends React.Component {
               <textarea className='sticky-content' 
                         maxLength='600' 
                         rows='10' 
-                        onChange={this.handleStickyBodyEntry}
+                        onBlur={this.handleStickyBodyEntry}
                         value={note.bodyText}
                         >
               </textarea>
