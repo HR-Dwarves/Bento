@@ -1,0 +1,17 @@
+.delete {
+  position: relative;
+  top: 10px;
+  left: -10px;
+  z-index: 999;
+  flex: 0 0 0%;
+}
+
+.wrapper {
+  /*display: flex;*/
+  /*position: absolute;*/
+  flex: 1 1 100%;
+}
+
+.wrapper > * {
+  flex: 1 1 100%;
+}
