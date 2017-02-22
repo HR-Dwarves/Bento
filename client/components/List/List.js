@@ -20,6 +20,7 @@ class List extends React.Component {
     e.preventDefault();
     let formInput = this.formInput.value;
     let db_key = this.props.db_key;
+    let user = this.props.user.uid;
     let time = Date.now();
     if (formInput) {
       let listObj = {
@@ -27,7 +28,7 @@ class List extends React.Component {
         completed: false,
         createdAt: time
       }
-      this.props.addToList(listObj, db_key);
+      this.props.addToList(listObj, db_key, user);
     }
     this.listForm.reset();
   }
@@ -52,9 +53,10 @@ class List extends React.Component {
 
   handleDelete() {
     let db_key = this.props.db_key;
+    let user = this.props.user.uid;
     // let user = this.props.user.uid;
 
-    this.props.deleteModule(db_key);
+    this.props.deleteModule(db_key, user);
   }
 
   render() {
