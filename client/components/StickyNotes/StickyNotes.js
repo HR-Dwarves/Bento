@@ -38,14 +38,13 @@ class StickyNotes extends React.Component {
       <div className=''>
           <div className='card'>
             <header className='card-header'>
-              <textarea className='card-header-title sticky-header' 
-                        cols='20' 
-                        maxLength='30' 
-                        onBlur={this.handleStickyHeaderEntry}
-                        placeholder="Enter whatever you like!"
-                        >
-                        {note.headerText}
-              </textarea>
+              <input className='card-header-title sticky-header'
+                      type="text"
+                      maxLength='30' 
+                      onBlur={this.handleStickyHeaderEntry}
+                      placeholder="Enter whatever you like!"
+                      defaultValue={note.headerText}
+                      name="note.headerText"/>
               <div className="card-header-icon">
                 <span className="icon">
                   <i className="fa fa-sticky-note-o" aria-hidden="true"></i>
