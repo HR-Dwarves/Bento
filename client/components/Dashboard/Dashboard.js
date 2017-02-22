@@ -35,7 +35,7 @@ class Dashboard extends React.Component {
           this.props.setDatabase(data);
         });
       } else {
-        console.erorr('NO USER');
+        console.error('NO USER');
         context.props.router.push('/signup');
         // Remove user information from state
 
