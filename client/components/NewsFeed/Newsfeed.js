@@ -2,8 +2,10 @@ import React from 'react';
 import NewsItem from './../NewsItem/NewsItem';
 import Promise from 'bluebird';
 import classnames from 'classnames';
-import database from '../../base'
+import firebaseApp from '../../base'
 import styles from './NewsFeed.css';
+
+const database = firebaseApp.database();
 
 class NewsFeed extends React.Component {
   constructor(){
