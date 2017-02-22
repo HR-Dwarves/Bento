@@ -1,5 +1,5 @@
 import List from '../components/List/List';
-import NewsFeed from '../components/NewsFeed/NewsFeed';
+import NewsFeed from '../components/NewsFeed/NewsFeed.js';
 import WeatherDetails from '../components/WeatherDetails/WeatherDetails';
 import StickyNotes from '../components/StickyNotes/StickyNotes';
 import Modal from '../components/Modal/Modal';
@@ -12,7 +12,7 @@ var moduleList = {
   'WeatherDetails': WeatherDetails,
   'StickyNotes': StickyNotes,
   'LatLong': LatLong,
-  
+
 };
 
 export default moduleList;
