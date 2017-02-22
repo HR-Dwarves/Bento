@@ -2,28 +2,29 @@ import actionTypes from '../actions/actionTypes';
 
 function authentication(state = {}, action) {
   switch(action.type) {
-    case actionTypes.GetListRequested: {
+    case actionTypes.AuthenticateUser: {
+      let { user } = action;
       return Object.assign({}, state, {
-        inProgress: true,
+        loggedIn: true,
         error: '',
-        success: ''
-      });
+        success: '',
+      }, user);
     }
-    case actionTypes.GetListRejected: {
-      return Object.assign({}, state, {
-        inProgress: false,
-        error: 'Error in getting list.',
-      });
-    }
-    case actionTypes.GetListFulfilled: {
-      const { items } = action.list;
-      const newState = Object.assign({}, state, {
-        inProgress: false,
-        success: 'Got invite.',
-        items
-      });
-      return newState;
-    }
+    // case actionTypes.GetListRejected: {
+    //   return Object.assign({}, state, {
+    //     inProgress: false,
+    //     error: 'Error in getting list.',
+    //   });
+    // }
+    // case actionTypes.GetListFulfilled: {
+    //   const { items } = action.list;
+    //   const newState = Object.assign({}, state, {
+    //     inProgress: false,
+    //     success: 'Got invite.',
+    //     items
+    //   });
+    //   return newState;
+    // }
     default:
       return state;
   }
