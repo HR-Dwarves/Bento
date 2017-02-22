@@ -36,7 +36,7 @@ class WeatherDetails extends React.Component {
       success: function(data) {
         // console.log('DATA FROM WEATHER API: ', data);
         context.setState({
-          temperature: data.current.temp_f,
+          temperature: Math.round(data.current.temp_f),
           location: data.location.name,
           condition: data.current.condition.text,
           weatherIcon: data.current.condition.icon
