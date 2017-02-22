@@ -11,14 +11,8 @@ class Signup extends React.Component {
     this.state = {
       user: null
     }
-
-    this.authHandler = this.authHandler.bind(this);
     this.authenticate = this.authenticate.bind(this);
     this.logCurrentUser = this.logCurrentUser.bind(this);
-  }
-
-  handleSignup() {
-
   }
 
   authenticate(provider){
@@ -57,14 +51,6 @@ class Signup extends React.Component {
 
   alertLoginError() {
 
-  }
-
-  authHandler(err, authData) {
-    if (err) {
-      console.error(err);
-    }
-    console.log('AUTH DATA');
-    console.log(authData);
   }
 
   render() {
