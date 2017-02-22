@@ -3,7 +3,8 @@
 // Object.assign so new action creators will be bound and passed down 
 
 import ActionTypes from './actionTypes';
-import database from '../base';
+import firebaseApp from '../base';
+const database = firebaseApp.database();
 
 export function getList(db_key) {
   return dispatch => {

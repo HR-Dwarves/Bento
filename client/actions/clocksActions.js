@@ -4,7 +4,8 @@
 
 
 import ActionTypes from './actionTypes';
-import database from '../base';
+import firebaseApp from '../base';
+const database = firebaseApp.database();
 
 export function getClocks(db_key) {
   return dispatch => {

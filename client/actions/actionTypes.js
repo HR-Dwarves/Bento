@@ -8,6 +8,9 @@ const actionTypes = {
   DeleteModuleRejected: 'DELETE_MODULE_REJECTED',
   DeleteModuleFulfilled: 'DELETE_MODULE_FULFILLED',
 
+  AuthenticateUser: 'AUTHENTICATE_USER',
+  LogoutUser: 'LOGOUT_USER',
+
   GetListRequested: 'GET_LIST_REQUESTED',
   GetListRejected: 'GET_LIST_REJECTED',
   GetListFulfilled: 'GET_LIST_FULFILLED',
