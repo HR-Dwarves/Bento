@@ -19,6 +19,7 @@
 .pageTitle {
   font-family: 'Italiana', serif;
   font-size: 3.5em;
+  font-weight: 600;
 }
 
 .is-clearfix {
@@ -37,7 +38,9 @@
 }
 
 .currentUser {
-  font-family: 'Lobster', serif;
+  /*font-family: 'El Messiri', serif;*/
+  /*font-family: 'Lobster', serif;*/
+  text-transform: uppercase;
   font-size: 1.5em;
   display: flex;
   align-items: center;
