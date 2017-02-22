@@ -11,7 +11,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
 // import react router deps
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { Router, Route, IndexRoute, browserHistory, Redirect } from 'react-router';
 import { Provider } from 'react-redux';
 import store, { history } from './store';
 
@@ -28,6 +28,3 @@ const router = (
 )
 
 render(router, document.getElementById('root'));
-
-// Additional routes React component if needed:
-// <Route path="/xxx" component={}></Route>
