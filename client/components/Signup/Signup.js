@@ -1,8 +1,6 @@
 import React from 'react';
-// import firebase from 'firebase';
 import firebaseApp from '../../base';
 import styles from './Signup.css';
-// import database from '../../base';
 import authProviders from '../../authProviders';
 
 const database = firebaseApp.database();
@@ -28,10 +26,10 @@ class Signup extends React.Component {
     var authProvider = authProviders[provider];
     firebaseApp.auth().signInWithPopup(authProvider)
     .then(function(result) {
-      // context.setState({user: result});
       context.props.authenticateUser(result);
     })
     .catch(function(err) {
+      
       console.error(err);
     })
   }

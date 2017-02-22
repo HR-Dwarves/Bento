@@ -2,18 +2,17 @@ import ActionTypes from './actionTypes';
 import firebaseApp from '../base';
 const database = firebaseApp.database();
 
-export function updateText(target, newStuff, db_key) {
+export function updateText(target, newStuff, db_key, user = 'testUser') {
   return dispatch => {
     dispatch(updateTextRequestedAction());
-    const stickyRef = database.ref(`/testUser/modules/${db_key}/${target}`)
-    // console.log('INSIDE UPDATE HEADER IN STICKYNOTE ACTIONS')
+    const stickyRef = database.ref(`/${user}/modules/${db_key}/${target}`)
     
     stickyRef.set(newStuff)
     .then(snap => {
       dispatch(updateTextFulfilledAction());
     })
     .catch(error => {
-      console.log(error);
+      console.error(error);
       dispatch(updateTextRejectedAction())
     })
   }
