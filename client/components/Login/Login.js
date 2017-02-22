@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Login.css';
-import database from '../../base';
-
+import firebaseApp from '../../base';
+const database = firebaseApp.database();
 
 class Login extends React.Component {
   constructor() {

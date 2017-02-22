@@ -1,8 +1,9 @@
 import React from 'react';
-import database from '../../base';
+import firebaseApp from '../../base';
 import Draggable from 'react-draggable';
-
 import styles from './StickyNotes.css';
+
+const database = firebaseApp.database();
 
 class StickyNotes extends React.Component {
   constructor(props) {

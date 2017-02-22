@@ -1,8 +1,9 @@
 import React from 'react';
 import Promise from 'bluebird';
-import database from '../../base';
+import firebaseApp from '../../base';
 import styles from './Modal.css'
 
+const database = firebaseApp.database();
 
 class Modal extends React.Component {
   constructor(){

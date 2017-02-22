@@ -28,12 +28,15 @@ class Nav extends React.Component {
     let mainNavPanelCSS = `${styles.mainNavPanel} is-clearfix`
     let pageTitleCSS = `${styles.pageTitle} has-text-centered`
     let modalButtonStyle = `${styles.modalButton}`
+    let userInfoStyle = `${styles.currentUser}`
     let modulesArray = Object.keys(ModuleList);
     console.log(ModuleList);
 
     return(
       <div className={mainNavPanelCSS}>
-        <div></div>
+        <div className={userInfoStyle}>
+          <span>{this.props.user.displayName}</span>
+        </div>
         <Link to="/">
           <div className={pageTitleCSS}>dashboard</div>
         </Link>
