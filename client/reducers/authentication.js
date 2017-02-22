@@ -10,12 +10,11 @@ function authentication(state = {}, action) {
         success: '',
       }, user);
     }
-    // case actionTypes.GetListRejected: {
-    //   return Object.assign({}, state, {
-    //     inProgress: false,
-    //     error: 'Error in getting list.',
-    //   });
-    // }
+    case actionTypes.LogoutUser: {
+      return {
+        loggedIn: false
+      };
+    }
     // case actionTypes.GetListFulfilled: {
     //   const { items } = action.list;
     //   const newState = Object.assign({}, state, {
