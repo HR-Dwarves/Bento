@@ -5,8 +5,9 @@ import { routerReducer } from 'react-router-redux';
 import dashboard from './dashboard';
 import list from './list';
 import newsfeed from './newsfeed';
+import authentication from './authentication';
 
 // pass reducers into combineReducers (in first object)
-const rootReducer = combineReducers({dashboard, list, newsfeed, routing: routerReducer });
+const rootReducer = combineReducers({dashboard, list, newsfeed, authentication, routing: routerReducer });
 
 export default rootReducer;
