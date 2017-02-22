@@ -8,17 +8,10 @@ class WeatherDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      weatherData: null,
       temperature: null,
-      min: null,
-      max: null,
-      condition: null,
       location: null,
-      units: {
-        fahrenheit: 'Imperial',
-        celcius: 'Metric',
-        kelvin: 'Unit Default'
-      }
+      condition: null,
+      weatherIcon: null
     }
 
     this.weatherCondition = {
@@ -32,31 +25,22 @@ class WeatherDetails extends React.Component {
   }
 
   getWeatherData() {
-    var unit = this.state.units.fahrenheit;
     var context = this;
 
     // CHANGE AJAX URL TO THIS WHEN LAT/LON PULLING IS COMPLETE
     // url: `http://api.openweathermap.org/data/2.5/weather?lat=${LOCATION_LATITUDE}&long=${LOCATION_LOGITUDE}&type=accurate&units=${unit}&APPID=${context.weatherAPIkey}`,
     $.ajax({
       method: 'GET',
-      url: `http://api.openweathermap.org/data/2.5/weather?id=5391997&type=
-            accurate&units=${unit}&APPID=${context.weatherAPIkey}`,
+      url: `https://api.apixu.com/v1/current.json?key=${config.apixuWeatherApiKey}&q=94105`,
       dataType: 'json',
       success: function(data) {
         // console.log('DATA FROM WEATHER API: ', data);
-        if (data.cod === 200) {
-          context.setState({
-            weatherData: data,
-            temperature: data.main.temp,
-            min: data.main.temp_min,
-            max: data.main.temp_max,
-            condition: data.weather[0].main,
-            description: data.weather[0].description,
-            location: data.name,
-          });
-        } else {
-          console.log('API waiting on request timer');
-        }
+        context.setState({
+          temperature: data.current.temp_f,
+          location: data.location.name,
+          condition: data.current.condition.text,
+          weatherIcon: data.current.condition.icon
+        });
       },
       error: function(err) {
         console.log(err);
@@ -77,13 +61,8 @@ class WeatherDetails extends React.Component {
 
   render() {
     let cssCard = `${styles.card} card`;
-    let cssCardContent = `${styles.cardImage} card-content`;
+    let cssCardContent = `${styles.cardContent} card-content`;
     
-    let weatherImage = this.weatherCondition[this.state.condition] || this.weatherCondition['Clear'];
-    let weatherImageStyle = {
-      'backgroundImage': 'url(' + weatherImage + ')',
-    };
-
     return (
       <div className=''>
           <div className={cssCard}>
@@ -95,16 +74,16 @@ class WeatherDetails extends React.Component {
                 </span>
               </div>
             </header>
-            <div className={cssCardContent} style={weatherImageStyle}>
+            <div className={cssCardContent}>
+              <img src={this.state.weatherIcon} className={styles.image}/>
               <p className={styles.temperature}> 
-                <br/>
                 {this.state.temperature}ºF
               </p>
             </div>
             <div className={styles.details}>
-              <p className={styles.conditions}>
+              <p className={styles.condition}>
                 Condtions: <br/>
-                {this.state.description}
+                {this.state.condition}
               </p>
               <p className={styles.location}>
                 Location: <br/>
