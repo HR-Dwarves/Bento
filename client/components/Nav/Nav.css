@@ -40,6 +40,8 @@
 .currentUser {
   /*font-family: 'El Messiri', serif;*/
   /*font-family: 'Lobster', serif;*/
+  font-family: 'Merriweather', serif;
+
   text-transform: uppercase;
   font-size: 1.5em;
   display: flex;
