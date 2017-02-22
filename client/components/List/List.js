@@ -1,9 +1,10 @@
 import React from 'react';
-import database from '../../base'
+import firebaseApp from '../../base';
 import ListItem from '../ListItem/ListItem'
 
 import styles from './List.css'
 
+const database = firebaseApp.database();
 
 class List extends React.Component {
   constructor() {
@@ -41,9 +42,9 @@ class List extends React.Component {
         }
       } else {
         if (items[a].createdAt > items[b].createdAt) {
-          return 1;
-        } else {
           return -1;
+        } else {
+          return 1;
         }
       }
     })

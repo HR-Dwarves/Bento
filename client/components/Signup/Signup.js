@@ -1,9 +1,11 @@
 import React from 'react';
-import firebase from 'firebase';
+// import firebase from 'firebase';
+import firebaseApp from '../../base';
 import styles from './Signup.css';
-import database from '../../base';
+// import database from '../../base';
 import authProviders from '../../authProviders';
 
+const database = firebaseApp.database();
 
 class Signup extends React.Component {
   constructor() {
@@ -14,6 +16,7 @@ class Signup extends React.Component {
 
     this.authHandler = this.authHandler.bind(this);
     this.authenticate = this.authenticate.bind(this);
+    this.logCurrentUser = this.logCurrentUser.bind(this);
   }
 
   handleSignup() {
@@ -23,9 +26,10 @@ class Signup extends React.Component {
   authenticate(provider){
     var context = this;
     var authProvider = authProviders[provider];
-    firebase.auth().signInWithPopup(authProvider)
+    firebaseApp.auth().signInWithPopup(authProvider)
     .then(function(result) {
-      context.setState({user: result});
+      // context.setState({user: result});
+      context.props.authenticateUser(result);
     })
     .catch(function(err) {
       console.error(err);
@@ -34,6 +38,10 @@ class Signup extends React.Component {
 
   authWithGoogle() {
 
+  }
+
+  logCurrentUser() {
+    console.log(firebaseApp.auth().currentUser);
   }
 
   authHandler(err, authData) {
@@ -51,10 +59,43 @@ class Signup extends React.Component {
           <span>SIGNUP</span>
         </div>
         <div>
-          <button className="google button" onClick={() => this.authenticate('google')}>Log In with Google</button>
-          <button className="github button" onClick={() => this.authenticate('github')}>Log In with Github</button>
-          <button className="facebook button" onClick={() => this.authenticate('facebook')} >Log In with Facebook</button>
-          <button className="twitter button" onClick={() => this.authenticate('twitter')} >Log In with Twitter</button>
+          <button className="google button" onClick={() => this.authenticate('google')}>
+            <span>
+              Log In with Google
+            </span>
+            <span className="icon">
+              <i className="fa fa-google" aria-hidden="true"></i>
+            </span>
+          </button>
+          <button className="github button" onClick={() => this.authenticate('github')}>
+            <span>
+              Log In with Github
+            </span>
+            <span className="icon">
+              <i className="fa fa-github" aria-hidden="true"></i>
+            </span>
+          </button>
+          <button className="facebook button" onClick={() => this.authenticate('facebook')}>
+            <span>
+              Log In with Facebook
+            </span>
+            <span className="icon">
+              <i className="fa fa-facebook-official" aria-hidden="true"></i>
+            </span>
+          </button>
+          <button className="twitter button" onClick={() => this.authenticate('twitter')}>
+            <span>
+              Log In with Twitter
+            </span>
+            <span className="icon">
+              <i className="fa fa-twitter" aria-hidden="true"></i>
+            </span>
+          </button>
+        </div>
+        <div>
+        <button className="button" onClick={this.logCurrentUser}>
+          Check Current User
+        </button>
         </div>
       </nav>
     );

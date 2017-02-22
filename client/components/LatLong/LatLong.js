@@ -1,10 +1,13 @@
 import React from 'react';
 import config from './../../config/config';
-import database from '../../base'
+import firebaseApp from '../../base';
 import moment from 'moment-timezone'
 
 import styles from './LatLong.css';
 import Clock from '../Clock/Clock'
+
+
+const database = firebaseApp.database();
 
 class LatLong extends React.Component {
   constructor(props) {
