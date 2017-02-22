@@ -4,13 +4,10 @@
   flex-direction: column;
 }
 
-.cardImage {
-  /*background-image: url("http://demo.sc.chinaz.com/Files/pic/icons/6256/k19.png");*/
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
+.cardContent {
+  display:flex;
+  justify-content: center;
   text-align: center;
-  font-size: 60px;
 }
 
 .details {
@@ -28,7 +25,12 @@
 }
 
 .temperature {
-  margin-bottom: 50px;
+  font-size:60px;
+}
+
+.image {
+  height: 90px;
+  width: 90px;
 }
 
 input:focus {
