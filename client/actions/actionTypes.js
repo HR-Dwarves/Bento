@@ -4,6 +4,8 @@ const actionTypes = {
   GetDBRejected: 'GET_DB_REJECTED',
   GetDBFulfilled: 'GET_DB_FULFILLED',
 
+  SetDB: 'SET_DATABASE',
+
   DeleteModuleRequested: 'DELETE_MODULE_REQUESTED',
   DeleteModuleRejected: 'DELETE_MODULE_REJECTED',
   DeleteModuleFulfilled: 'DELETE_MODULE_FULFILLED',

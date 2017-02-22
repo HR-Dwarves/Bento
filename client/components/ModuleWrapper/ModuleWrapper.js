@@ -14,20 +14,21 @@ class ModuleWrapper extends React.Component {
 
   handleDelete() {
     let db_key = this.props.db_key;
-    // let user = this.props.user.uid;
+    let user = this.props.user.uid;
 
-    this.props.deleteModule(db_key);
+    this.props.deleteModule(db_key, user);
   }
 
   render() {
     let type = this.props.type;
     let component = moduleList[type];
-    let deleteButton = `${styles.delete} delete`;
+    // let deleteButton = `${styles.delete} delete`;
+    let deleteButton = `${styles.delete} icon fa fa-times-circle`;
     let wrapperStyle = `${styles.wrapper}`;
 
     return (
       <div className={wrapperStyle}>
-          <button className={deleteButton} onClick={this.handleDelete}></button>
+          <i className={deleteButton} onClick={this.handleDelete} aria-hidden="true"></i>
         {React.createElement(component, {...this.props})}
       </div>
     )

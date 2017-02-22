@@ -6,10 +6,10 @@ import ActionTypes from './actionTypes';
 import firebaseApp from '../base';
 const database = firebaseApp.database();
 
-export function getList(db_key) {
+export function getList(db_key, user = 'testUser') {
   return dispatch => {
     dispatch(getListRequestedAction());
-    return database.ref(`/testUser/modules/${db_key}`).once('value', snap => {
+    return database.ref(`/${user}/modules/${db_key}`).once('value', snap => {
       const list = snap.val();
       dispatch(getListFulfilledAction(list))
     })
@@ -39,10 +39,10 @@ function getListFulfilledAction(list) {
   };
 }
 
-export function addToList(newStuff, db_key) {
+export function addToList(newStuff, db_key, user = 'testUser') {
   return dispatch => {
     dispatch(addToListRequestedAction());
-    const listRef = database.ref(`/testUser/modules/${db_key}/items`);
+    const listRef = database.ref(`/${user}/modules/${db_key}/items`);
 
     listRef.push(newStuff)
     .then((snap) => {
@@ -74,10 +74,10 @@ function addToListFulfilledAction(newItem) {
   };
 }
 
-export function deleteFromList(itemKey, db_key) {
+export function deleteFromList(itemKey, db_key, user = 'testUser') {
   return dispatch => {
     dispatch(deleteFromListRequestedAction());
-    const itemRef = database.ref(`/testUser/modules/${db_key}/items/${itemKey}`);
+    const itemRef = database.ref(`/${user}/modules/${db_key}/items/${itemKey}`);
 
     itemRef.remove()
     .then((snap) => {
@@ -104,15 +104,14 @@ function deleteFromListRejectedAction() {
 
 function deleteFromListFulfilledAction(newItem) {
   return {
-    type: ActionTypes.DeleteFromListFulfilled,
-    newItem
+    type: ActionTypes.DeleteFromListFulfilled
   };
 }
 
-export function toggleListItemStatus(itemKey, db_key, newStatus) {
+export function toggleListItemStatus(itemKey, db_key, newStatus, user = 'testUser') {
   return dispatch => {
     dispatch(toggleListStatusRequestedAction());
-    const statusRef = database.ref(`/testUser/modules/${db_key}/items/${itemKey}`).child('completed');
+    const statusRef = database.ref(`/${user}/modules/${db_key}/items/${itemKey}`).child('completed');
 
     statusRef.set(newStatus)
     .then((snap) => {

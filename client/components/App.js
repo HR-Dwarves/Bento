@@ -23,8 +23,7 @@ var bundledActionCreators = Object.assign({},
 function mapStateToProps(state) {
   return {
     dashboard: state.dashboard,
-    user: state.authentication,
-    newsfeed: state.newsfeed
+    user: state.authentication
   }
 }
 

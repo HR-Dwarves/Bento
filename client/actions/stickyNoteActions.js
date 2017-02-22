@@ -4,16 +4,16 @@ const database = firebaseApp.database();
 
 export function updateText(target, newStuff, db_key, user = 'testUser') {
   return dispatch => {
-    dispatch(updateTextRequestedAction());
+    // dispatch(updateTextRequestedAction());
     const stickyRef = database.ref(`/${user}/modules/${db_key}/${target}`)
     
     stickyRef.set(newStuff)
     .then(snap => {
-      dispatch(updateTextFulfilledAction());
+      // dispatch(updateTextFulfilledAction());
     })
     .catch(error => {
       console.error(error);
-      dispatch(updateTextRejectedAction())
+      // dispatch(updateTextRejectedAction())
     })
   }
 }

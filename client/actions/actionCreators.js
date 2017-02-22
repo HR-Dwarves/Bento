@@ -41,6 +41,16 @@ function getDBFulfilledAction(databaseInfo) {
   };
 }
 
+export function setDatabase(data, user = 'testUser') {
+  return dispatch => {
+    console.log(data);
+    dispatch({
+      type: 'SET_DATABASE',
+      data
+    });
+  }
+}
+
 export function deleteModule(db_key, user = 'testUser') {
   return dispatch => {
     dispatch(deleteModuleRequestedAction());
@@ -94,13 +104,17 @@ export function getGeolocation() {
       let query = `${queryBase}${lat},${long}&key=${config.googleApiKey}`
 
       $.get(query, function(data) {
-        var city = data.results[0].address_components.reduce(function(acc, item) {
-          if (item.types.includes('locality')) {
-            return acc = item.long_name;
-          } else {
-            return acc;
-          }
-        })
+        var city;
+        // using if statement to get rid of errors in console
+        if (data.results[0]) {
+          city = data.results[0].address_components.reduce(function(acc, item) {
+            if (item.types.includes('locality')) {
+              return acc = item.long_name;
+            } else {
+              return acc;
+            }
+          })
+        }
 
         let geoStateAdditions = {
           latitude: lat,

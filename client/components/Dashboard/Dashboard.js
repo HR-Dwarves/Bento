@@ -19,25 +19,36 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    // var user = firebaseApp.auth().currentUser;
+
     let context = this;
     let user;
     firebaseApp.auth().onAuthStateChanged((user) => {
       if (user) {
+        let {displayName, uid, email, photoURL} = user;
         console.log('USER', user);
+        let userId = uid || 'testUser';
         context.props.authenticateUser(user);
+        context.props.getDatabase(uid);
+        database.ref(`/${userId}`).on('value', (snapshot) => {
+          // USE OTHER FUNCTION THAN GET DATABASE -- TOO SLOW
+          let data = snapshot.val();
+          this.props.setDatabase(data);
+        });
       } else {
-        console.erorr('NO USER');
+        console.error('NO USER');
+        context.props.router.push('/signup');
         // Remove user information from state
 
       }
     })
     // this.props.authenticateUser(user);
     // console.log('USER', user);
-    this.props.getDatabase();
-    database.ref('/testUser').on('value', (snapshot) => {
-      this.props.getDatabase();
-    });
+    // let userId = 'testUser';
+    // database.ref(`/${userId}`).on('value', (snapshot) => {
+    //   // USE OTHER FUNCTION THAN GET DATABASE -- TOO SLOW
+    //   let data = snapshot.val();
+    //   this.props.setDatabase(data);
+    // });
 
     // ask user for geocoordinates
     if ("geolocation" in navigator) {
@@ -84,7 +95,7 @@ class Dashboard extends React.Component {
     return (
       <div className={dashContainer}>
         <div className={mainDashboardPanelCSS}>
-            {wrappers ? wrappers.map((wrapper) => (<div className={componentStyle}>
+            {wrappers ? wrappers.map((wrapper, ind) => (<div className={componentStyle} key={ind}>
                                          {wrapper}
                                          </div>)) : defaultModule }
         </div>

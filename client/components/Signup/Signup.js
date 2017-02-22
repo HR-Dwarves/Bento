@@ -26,20 +26,37 @@ class Signup extends React.Component {
     var authProvider = authProviders[provider];
     firebaseApp.auth().signInWithPopup(authProvider)
     .then(function(result) {
+      // Save user information within auth container
+      console.log(result);
       context.props.authenticateUser(result);
+      let { displayName, uid, email, photoURL } = result.user;
+      let userRef = database.ref(`/${uid}`);
+      userRef.once('value', snap => {
+        let exists = snap.exists();
+        if (!exists) {
+          let initData = Object.assign({}, {displayName, uid, email, photoURL})
+          userRef.set(initData, function() {
+            console.log('user created!');
+            context.props.router.push('/');
+          });
+        } else {
+          // Redirect user to root page
+          context.props.router.push('/');
+        }
+      })
     })
     .catch(function(err) {
-      
+      alert('Login error, please try and login again');
       console.error(err);
     })
   }
 
-  authWithGoogle() {
-
-  }
-
   logCurrentUser() {
     console.log(firebaseApp.auth().currentUser);
+  }
+
+  alertLoginError() {
+
   }
 
   authHandler(err, authData) {

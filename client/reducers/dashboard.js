@@ -23,11 +23,21 @@ function dashboard(state = {}, action) {
         // delete state.dashboard.modules;
         database.modules = null;
       }
-      console.log("databaseInfo: ", action.databaseInfo);
+      // console.log("databaseInfo: ", action.databaseInfo);
       const newState = Object.assign({}, state, {
         inProgress: false,
         success: 'Received dashboard info.',
       }, database);
+      return newState;
+    }
+    case actionTypes.SetDB: {
+      const { modules } = action.data;
+      let { data } = action;
+      if (!modules) {
+        data.modules = null;
+      }
+      // console.log(data);
+      const newState = Object.assign({}, state, data)
       return newState;
     }
     case actionTypes.DeleteModuleRequested: {

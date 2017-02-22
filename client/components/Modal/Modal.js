@@ -21,7 +21,8 @@ class Modal extends React.Component {
   }
 
   queryDb() {
-    let dbRef = database.ref('/testUser/modules');
+    let user = this.props.user.uid
+    let dbRef = database.ref(`/${user}/modules`);
     var moduleArray = [];
     dbRef.once('value').then(function(snapshot) {
       for(var key in snapshot.val()) {
@@ -38,7 +39,8 @@ class Modal extends React.Component {
 
   addModule(e) {
     e.preventDefault();
-    let dbRef = database.ref('/testUser/modules/');
+    let user = this.props.user.uid;
+    let dbRef = database.ref(`/${user}/modules/`);
     if(e.target.value === 'NewsFeed') {
       var newsFeedObj = {
         type: e.target.value,
@@ -62,8 +64,9 @@ class Modal extends React.Component {
 
   removeModule(e) {
     e.preventDefault();
+    let user = this.props.user.uid
     let deleteValue = e.target.value;
-    let dbRef = database.ref('/testUser/modules/');
+    let dbRef = database.ref(`/${user}/modules/`);
     dbRef.orderByChild('type').equalTo(deleteValue).once('child_added', (snapshot) => {
       snapshot.ref.remove();
     });
