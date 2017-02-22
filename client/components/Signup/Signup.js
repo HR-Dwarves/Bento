@@ -54,39 +54,44 @@ class Signup extends React.Component {
   }
 
   render() {
+    let googleStyle = `${styles.google} button`
+    let githubStyle = `${styles.github} button`
+    let facebookStyle = `${styles.facebook} button`
+    let twitterStyle = `${styles.twitter} button`
+
     return (
       <nav className={styles.signup}>
-        <div>
+        <div className={styles.signupHeader}>
           <span>SIGNUP</span>
         </div>
-        <div>
-          <button className="google button" onClick={() => this.authenticate('google')}>
+        <div className={styles.loginButtons}>
+          <button className={googleStyle} onClick={() => this.authenticate('google')}>
             <span>
-              Log In with Google
+              Google
             </span>
             <span className="icon">
               <i className="fa fa-google" aria-hidden="true"></i>
             </span>
           </button>
-          <button className="github button" onClick={() => this.authenticate('github')}>
+          <button className={githubStyle} onClick={() => this.authenticate('github')}>
             <span>
-              Log In with Github
+              Github
             </span>
             <span className="icon">
               <i className="fa fa-github" aria-hidden="true"></i>
             </span>
           </button>
-          <button className="facebook button" onClick={() => this.authenticate('facebook')}>
+          <button className={facebookStyle} onClick={() => this.authenticate('facebook')}>
             <span>
-              Log In with Facebook
+              Facebook
             </span>
             <span className="icon">
               <i className="fa fa-facebook-official" aria-hidden="true"></i>
             </span>
           </button>
-          <button className="twitter button" onClick={() => this.authenticate('twitter')}>
+          <button className={twitterStyle} onClick={() => this.authenticate('twitter')}>
             <span>
-              Log In with Twitter
+              Twitter
             </span>
             <span className="icon">
               <i className="fa fa-twitter" aria-hidden="true"></i>
@@ -94,9 +99,9 @@ class Signup extends React.Component {
           </button>
         </div>
         <div>
-        <button className="button" onClick={this.logCurrentUser}>
-          Check Current User
-        </button>
+          <button className="button" onClick={this.logCurrentUser}>
+            Check Current User
+          </button>
         </div>
       </nav>
     );
