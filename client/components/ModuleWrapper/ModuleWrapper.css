@@ -1,17 +1,22 @@
 .delete {
   position: relative;
-  top: 10px;
+  top: 12px;
   left: -10px;
   z-index: 2;
   flex: 0 0 0%;
+  display: block;
+  font-size: 1.5rem;
+  cursor: pointer;
+  /*display: inline-block;*/
 }
 
 .wrapper {
-  /*display: flex;*/
+  /*display: inline-flex;*/
   /*position: absolute;*/
   flex: 1 1 100%;
 }
 
 .wrapper > * {
+  /*display: flex;*/
   flex: 1 1 100%;
 }
