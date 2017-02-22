@@ -48,11 +48,11 @@ class Nav extends React.Component {
     let logoutButtonStyle = `${styles.logoutButton} button is-outlined is-primary`;
     let user = this.props.user;
     let loggedIn = user.loggedIn;
-    let displayLogout;
+    let displayButton;
     if (loggedIn) {
-      displayLogout = {"display": ""}
+      displayButton = {"display": ""}
     } else {
-      displayLogout = {"display": "none"}
+      displayButton = {"display": "none"}
     }
     let displayName;
     if (user) {
@@ -64,14 +64,14 @@ class Nav extends React.Component {
     return(
       <div className={mainNavPanelCSS}>
         <div className={userInfoStyle}>
-          <button style={displayLogout} onClick={this.handleLogout} className={logoutButtonStyle}>Logout</button>
+          <button style={displayButton} onClick={this.handleLogout} className={logoutButtonStyle}>Logout</button>
           <span>{displayName}</span>
         </div>
         <Link to="/">
           <div className={pageTitleCSS}>dashboard</div>
         </Link>
         <div className={modalButtonStyle}>
-          <button onClick={this.handleSettingsButton} className="button is-primary modal-button">
+          <button style={displayButton} onClick={this.handleSettingsButton} className="button is-primary modal-button">
             <i className="fa fa-plus" aria-hidden="true"></i>
           </button>
           <Modal {...this.props} isOpen={this.state.isModalOpen} onClose={this.closeModal} modules={modulesArray}></Modal>
