@@ -32,6 +32,7 @@ class LatLong extends React.Component {
 
   componentDidMount() {
     var context = this;
+    const user = this.props.user.uid;
     // TIME
     // TODO: make ntp time api
     // $.get('/myApiEndpointForNTP', function(data) {};
@@ -48,16 +49,17 @@ class LatLong extends React.Component {
     this.pollForTime = setInterval(setTime, 1000) // poll system time every second
 
     // get saved clocks from db
-    this.props.getClocks(this.props.db_key);
+    this.props.getClocks(this.props.db_key, user);
 
-    database.ref(`/testUser/modules/${this.props.db_key}`).on('value', () => {
-      this.props.getClocks(this.props.db_key);
+    database.ref(`/${user}/modules/${this.props.db_key}`).on('value', () => {
+      this.props.getClocks(this.props.db_key, user);
     });
   }
 
   addClock(e) {
     // todo, make this not be a guess
     let timeZone = e ? e.target.value : moment.tz.guess()
+    const user = this.props.user.uid;
 
     // firebase doesn't have native arrays
     // but we can create that by pulling down the current as array
@@ -67,14 +69,14 @@ class LatLong extends React.Component {
     let newClocksArray = Array.from(currentClocks);
 
     newClocksArray.push(timeZone)
-    this.props.addToClocks(newClocksArray, this.props.db_key);
+    this.props.addToClocks(newClocksArray, this.props.db_key, user);
   }
 
   removeClock(clock) {
     let currentClocks = this.props.dashboard.modules[this.props.db_key].clocks;
     let newClocksArray = currentClocks.filter(thisClock => thisClock !== clock);
 
-    this.props.addToClocks(newClocksArray, this.props.db_key);
+    this.props.addToClocks(newClocksArray, this.props.db_key, user);
   }
 
   render() {

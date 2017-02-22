@@ -8,5 +8,73 @@
 
 .signup > * {
   flex: 1 1 100%;
-  align-self: center;
+  /*align-self: center;*/
+}
+
+.signupHeader {
+  flex: 1 1 100%;
+  justify-content: flex-end;
+}
+
+.loginButtons {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.loginButtons > * {
+  flex: 1 1 100%;
+  margin: 1rem;
+}
+
+.google {
+  border: 1px solid #db3236;
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding-bottom: 2px;
+}
+
+.google:hover {
+  border: 1px solid white;
+  background-color: #db3236;
+  color: white;
+}
+
+.github {
+  border: 1px solid #24292e;
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding-bottom: 2px;
+}
+
+.github:hover {
+  border: 1px solid white;
+  background-color: #24292e;
+  color: white;
+}
+
+.facebook {
+  border: 1px solid #3b5998;
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding-bottom: 2px;
+}
+
+.facebook:hover {
+  border: 1px solid white;
+  background-color: #3b5998;
+  color: white;
+}
+
+.twitter {
+  border: 1px solid #00aced;
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding-bottom: 2px;
+}
+
+.twitter:hover {
+  border: 1px solid white;
+  background-color: #00aced;
+  color: white;
 }

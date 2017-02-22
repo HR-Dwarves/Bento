@@ -7,12 +7,12 @@ import ActionTypes from './actionTypes';
 import firebaseApp from '../base';
 const database = firebaseApp.database();
 
-export function getClocks(db_key) {
+export function getClocks(db_key, user = 'testUser') {
   return dispatch => {
 
     dispatch(getClocksRequestedAction());
 
-    return database.ref(`/testUser/modules/${db_key}`).once('value', snap => {
+    return database.ref(`/${user}/modules/${db_key}`).once('value', snap => {
       const clocks = snap.val();
       dispatch(getClocksFulfilledAction(clocks))
     })
@@ -43,11 +43,11 @@ function getClocksFulfilledAction(clocks) {
 }
 
 
-export function addToClocks(newClocks, db_key) {
+export function addToClocks(newClocks, db_key, user = 'testUser') {
   return dispatch => {
     dispatch(addToClocksRequestedAction());
 
-    const clocksRef = database.ref(`/testUser/modules/${db_key}/clocks`);
+    const clocksRef = database.ref(`/${user}/modules/${db_key}/clocks`);
 
     clocksRef.set(newClocks)
     .then((snap) => {
