@@ -30,3 +30,7 @@
 .temperature {
   margin-bottom: 50px;
 }
+
+input:focus {
+  outline: none;
+}
