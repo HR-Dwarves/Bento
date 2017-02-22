@@ -30,7 +30,6 @@ class Nav extends React.Component {
     let modalButtonStyle = `${styles.modalButton}`
     let userInfoStyle = `${styles.currentUser}`
     let modulesArray = Object.keys(ModuleList);
-    console.log(ModuleList);
 
     return(
       <div className={mainNavPanelCSS}>
@@ -44,7 +43,7 @@ class Nav extends React.Component {
           <button onClick={this.handleSettingsButton} className="button is-primary modal-button">
             <i className="fa fa-plus" aria-hidden="true"></i>
           </button>
-          <Modal isOpen={this.state.isModalOpen} onClose={this.closeModal} modules={modulesArray}></Modal>
+          <Modal {...this.props} isOpen={this.state.isModalOpen} onClose={this.closeModal} modules={modulesArray}></Modal>
         </div>
       </div>
     )
