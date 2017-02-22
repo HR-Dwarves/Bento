@@ -7,6 +7,7 @@ import config from '../config/config'
 import firebaseApp from '../base';
 const database = firebaseApp.database();
 
+
 export function getDatabase(user = 'testUser') {
   return dispatch => {
     dispatch(getDBRequestedAction());
@@ -74,11 +75,10 @@ function deleteModuleFulfilledAction(databaseInfo) {
   };
 }
 
+
 export function getGeolocation() {
   return dispatch => {
-
     dispatch(getGeolocationRequestedAction());
-
     return navigator.geolocation.getCurrentPosition(function(position) {
 
       let lat = position.coords.latitude;
@@ -109,18 +109,18 @@ export function getGeolocation() {
         }
 
         dispatch(getGeolocationFulfilledAction(geoStateAdditions))
-      });
+      })
+      .fail(function(error) {
+        console.log( error );
+      })
 
+    }, error => {
+      console.log(error);
+      dispatch(getGeolocationRejectedAction());
     });
-    // not clear how to follow this form here. Above function is
-    // not returning a promise. Post MVP!
-
-    // .catch((error) => {
-    //   console.log(error);
-    //   dispatch(getGeolocationRejectedAction());
-    // });
   }
 }
+
 
 function getGeolocationRequestedAction() {
   return {
