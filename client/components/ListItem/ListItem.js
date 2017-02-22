@@ -9,14 +9,17 @@ class ListItem extends React.Component {
   handleDelete(itemKey) {
     const db_key = this.props.db_key
     console.log(itemKey);
-    this.props.deleteFromList(itemKey, db_key, );
+    let user = this.props.user.uid;
+    this.props.deleteFromList(itemKey, db_key, user);
   }
 
   handleCheckClick(itemKey) {
     const item = this.props.listItem;
     const newStatus = !item.completed;
     const db_key = this.props.db_key
-    this.props.toggleListItemStatus(itemKey, db_key, newStatus);
+    let user = this.props.user.uid;
+
+    this.props.toggleListItemStatus(itemKey, db_key, newStatus, user);
   }
 
   render() {
