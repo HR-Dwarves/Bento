@@ -5,21 +5,25 @@ import * as listActionCreators from '../actions/listActions';
 import * as stickyNoteActionCreators from '../actions/stickyNoteActions'
 import * as clocksActionCreators from '../actions/clocksActions';
 import * as hackerNewsActionCreators from '../actions/hackerNewsActions';
+import * as authenticationActionCreators from '../actions/authenticationActions';
 import Main from './Main/Main';
 import bulma from '../../node_modules/bulma/css/bulma.css';
-import database from '../base.js';
+import firebaseApp from '../base';
+const database = firebaseApp.database();
 
 var bundledActionCreators = Object.assign({}, 
                                           actionCreators, 
                                           listActionCreators, 
                                           clocksActionCreators, 
                                           stickyNoteActionCreators, 
-                                          hackerNewsActionCreators);
+                                          hackerNewsActionCreators,
+                                          authenticationActionCreators);
 
 // Map each reducers state to props
 function mapStateToProps(state) {
   return {
     dashboard: state.dashboard,
+    user: state.authentication,
     newsfeed: state.newsfeed
   }
 }
