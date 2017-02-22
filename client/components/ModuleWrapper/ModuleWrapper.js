@@ -1,7 +1,8 @@
 import React from 'react';
-import database from '../../base';
+import firebaseApp from '../../base';
 import styles from './ModuleWrapper.css';
 import moduleList from '../../data/moduleList';
+const database = firebaseApp.database();
 
 class ModuleWrapper extends React.Component {
   constructor() {
