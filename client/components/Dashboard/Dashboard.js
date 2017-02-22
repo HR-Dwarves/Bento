@@ -1,35 +1,39 @@
 import React from 'react';
-import database from '../../base';
+import firebaseApp from '../../base';
 import styles from './Dashboard.css';
 import Promise from 'bluebird';
 
-// Import dashboard components as you add them!
+// All modules now passed into ModuleWrapper
 import DefaultModule from '../DefaultModule/DefaultModule';
-import List from '../List/List';
-import NewsFeed from '../NewsFeed/NewsFeed';
-import WeatherDetails from '../WeatherDetails/WeatherDetails';
-import StickyNotes from '../StickyNotes/StickyNotes';
-import Modal from '../Modal/Modal';
-import LatLong from '../LatLong/LatLong';
 import ModuleWrapper from '../ModuleWrapper/ModuleWrapper';
+const database = firebaseApp.database();
+
 
 class Dashboard extends React.Component {
   constructor() {
     super();
-    this.components = {
-      'List': List,
-      'NewsFeed': NewsFeed,
-      'WeatherDetails': WeatherDetails,
-      'StickyNotes': StickyNotes,
-      'LatLong': LatLong,
-      'DefaultModule': DefaultModule
-    }
+
     this.state = { isModalOpen: false}
     this.handleSettingsButton = this.handleSettingsButton.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
 
   componentDidMount() {
+    // var user = firebaseApp.auth().currentUser;
+    let context = this;
+    let user;
+    firebaseApp.auth().onAuthStateChanged((user) => {
+      if (user) {
+        console.log('USER', user);
+        context.props.authenticateUser(user);
+      } else {
+        console.erorr('NO USER');
+        // Remove user information from state
+
+      }
+    })
+    // this.props.authenticateUser(user);
+    // console.log('USER', user);
     this.props.getDatabase();
     database.ref('/testUser').on('value', (snapshot) => {
       this.props.getDatabase();
@@ -55,23 +59,11 @@ class Dashboard extends React.Component {
 
   render() {
     let dashboard = this.props.dashboard;
-    let modules, elements, wrappers;
-    let modulesArray = [];
-    let test = [];
+    let modules, wrappers;
 
-    //push each object key into the modules array
-    modulesArray = Object.keys(this.components);
     if (dashboard) {
       modules = dashboard.modules
       if (modules) {
-        // elements = Object.keys(modules).map((moduleKey) => {
-        //   var additionalProps = {
-        //     key: moduleKey,
-        //     db_key: moduleKey
-        //   };
-        //   var newProps = Object.assign({}, this.props, additionalProps)
-        //   return React.createElement(this.components[modules[moduleKey].type], newProps)
-        // });
         wrappers = Object.keys(modules).map((moduleKey) => {
           var additionalProps = {
             key: moduleKey,
@@ -102,7 +94,3 @@ class Dashboard extends React.Component {
 }
 
 export default Dashboard;
-
-// {elements ? elements.map((element) => (<div className={componentStyle}>
-//                                         {element}
-//                                         </div>)) : defaultModule }
