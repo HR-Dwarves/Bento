@@ -41,15 +41,6 @@ class Dashboard extends React.Component {
 
       }
     })
-    // this.props.authenticateUser(user);
-    // console.log('USER', user);
-    // let userId = 'testUser';
-    // database.ref(`/${userId}`).on('value', (snapshot) => {
-    //   // USE OTHER FUNCTION THAN GET DATABASE -- TOO SLOW
-    //   let data = snapshot.val();
-    //   this.props.setDatabase(data);
-    // });
-
     // ask user for geocoordinates
     if ("geolocation" in navigator) {
       this.props.getGeolocation();
