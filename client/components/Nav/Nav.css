@@ -18,7 +18,7 @@
 
 .pageTitle {
   font-family: 'Italiana', serif;
-  font-size: 3.5em;
+  font-size: 3.0em;
   font-weight: 600;
 }
 
@@ -43,7 +43,7 @@
   font-family: 'Merriweather', serif;
 
   text-transform: uppercase;
-  font-size: 1.5em;
+  font-size: 1.2em;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -55,4 +55,10 @@
 
 .username {
 
+}
+
+@media all and (max-width: 800px) {
+  .username {
+    display: none;
+  }
 }
