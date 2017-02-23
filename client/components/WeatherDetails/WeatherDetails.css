@@ -36,6 +36,11 @@
 .searchIcon {
   padding-top: 11px;
 }
+
+input {
+  padding-top: 8px;
+  border: none !important;
+}
+
 input:focus {
-  outline: none;
 }
