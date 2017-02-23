@@ -84,6 +84,9 @@ class LatLong extends React.Component {
     let clocks = this.props.dashboard.modules[this.props.db_key].clocks;
     let collapsed = this.props.collapsed.collapsed;
     let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
+
+    let selectStyles = `${styles.thisSelect} select`
+
     return (
       <div className='card'>
 
@@ -111,7 +114,7 @@ class LatLong extends React.Component {
                 })}
               <form>
                 <p className="control">
-                  <span className="select">
+                  <span className={selectStyles}>
                     <select onChange={this.addClock.bind(this)}>
                       {this.state.timeZones.map((timeZone, index) => {
                         return <option key={index}>{timeZone}</option>;
