@@ -28,7 +28,7 @@ class NewsFeed extends React.Component {
       type: 'GET',
       dataType: 'json', // added data type
       success: function(res) {
-        that.getPostContent(res, key);  
+        that.getPostContent(res, key);
       },
       error: function(err) {
         console.log('got an err');
@@ -37,7 +37,7 @@ class NewsFeed extends React.Component {
     });
   }
 
-  getPostContent(ids, key) { 
+  getPostContent(ids, key) {
     const user = this.props.user.uid;
 
     var postsArray = [];
@@ -125,7 +125,7 @@ class NewsFeed extends React.Component {
     } else {
       this.getPosts(this,  'https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty', db_key);
     }
-    
+
   }
 
   render() {
@@ -150,7 +150,7 @@ class NewsFeed extends React.Component {
             </div>
           </header>
           <div className="card-content">
-            {loaded ? list ? list.map((item, key) => <NewsItem {...this.props} 
+            {loaded ? list ? list.map((item, key) => <NewsItem {...this.props}
                                           newsItem={item}
                                           key={key}/>) : [] : <a className={spinnerClasses}>Loading</a>}
           </div>
