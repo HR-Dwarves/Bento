@@ -1,6 +1,7 @@
 var path = require('path');
 var express = require('express');
 var cors = require('cors');
+var axios = require('axios');
 
 var app = express();
 
@@ -17,7 +18,7 @@ if (process.env.NODE_ENV === 'local') {
   var compiler = webpack(config);
 
   app.use(require('webpack-dev-middleware')(compiler, {
-    noInfo: true,
+    noInfo: false,
     publicPath: config.output.publicPath
   }));
 
@@ -31,6 +32,35 @@ app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
   res.setHeader('Access-Control-Allow-Origin', origin);
   next();
+});
+
+// app.get('/geolocation/:latlong', function(req, res) {
+app.get('/geolocation/:latlong', function(req, res) {
+  var lat = req.params.latlong.split(',')[0];
+  var long = req.params.latlong.split(',')[1];
+  var googleApiKey =
+
+  let queryBase = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=';
+  let query = `${queryBase}${lat},${long}&key=${config.googleApiKey}`
+
+
+  $.axios.get(query, function(data) {
+        var city;
+        // using if statement to get rid of errors in console
+        if (data.results[0]) {
+          city = data.results[0].address_components.reduce(function(acc, item) {
+            if (item.types.includes('locality')) {
+              return acc = item.long_name;
+            } else {
+              return acc;
+            }
+          })
+        }
+
+
+
+  return req.params.latlong;
+
 });
 
 
