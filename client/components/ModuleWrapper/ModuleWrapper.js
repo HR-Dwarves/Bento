@@ -2,14 +2,15 @@ import React from 'react';
 import firebaseApp from '../../base';
 import styles from './ModuleWrapper.css';
 import moduleList from '../../data/moduleList';
+import _ from 'underscore';
 const database = firebaseApp.database();
 
 class ModuleWrapper extends React.Component {
   constructor() {
     super();
-    this.handleDelete = this.handleDelete.bind(this);
     this.state = {collapsed: false}
     this.handleCollapse = this.handleCollapse.bind(this);
+    this.handleDelete = _.debounce(this.handleDelete.bind(this), 300, true);
   }
 
 

@@ -99,6 +99,7 @@ class WeatherDetails extends React.Component {
 
     let collapsed = this.props.collapsed.collapsed;
     let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
+    let weatherIcon = `${styles.weatherIcon} wi wi-day-sunny`;
     return (
       <div className=''>
           <div className={cssCard}>
@@ -113,7 +114,7 @@ class WeatherDetails extends React.Component {
                 <input className={styles.weatherInput} 
                         type='text' 
                         ref={input => this.searchInput = input}
-                        placeholder='Search by zipcode'
+                        placeholder=' Enter zip'
                         />               
               </form>
               <div className="card-header-icon">
@@ -124,7 +125,7 @@ class WeatherDetails extends React.Component {
             </header>
             <div className={collapsedStyle}>
               <div className={cssCardContent}>
-                <img src={this.state.weatherIcon} className={styles.image}/>
+                <i className={weatherIcon}></i>
                 <p className={styles.temperature}> 
                   {this.state.temperature}ºF
                 </p>
@@ -149,3 +150,5 @@ class WeatherDetails extends React.Component {
         // </Draggable>
 
 export default WeatherDetails;
+
+// <img src={this.state.weatherIcon} className={styles.image}/>
