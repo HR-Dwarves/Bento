@@ -72,7 +72,7 @@ class WeatherDetails extends React.Component {
     e.preventDefault();
     const db_key = this.props.db_key;
     const user = this.props.user.uid;
-    const db_ref = database.ref(`/${user}/modules/${db_key}/zip`);
+    const db_ref = database.ref(`users/${user}/modules/${db_key}/zip`);
 
     let zipcode = this.searchInput.value;
 

@@ -51,7 +51,7 @@ class LatLong extends React.Component {
     // get saved clocks from db
     this.props.getClocks(this.props.db_key, user);
 
-    database.ref(`/${user}/modules/${this.props.db_key}`).on('value', () => {
+    database.ref(`users/${user}/modules/${this.props.db_key}`).on('value', () => {
       this.props.getClocks(this.props.db_key, user);
     });
   }

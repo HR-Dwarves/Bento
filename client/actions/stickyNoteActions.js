@@ -5,7 +5,7 @@ const database = firebaseApp.database();
 export function updateText(target, newStuff, db_key, user = 'testUser') {
   return dispatch => {
     // dispatch(updateTextRequestedAction());
-    const stickyRef = database.ref(`/${user}/modules/${db_key}/${target}`)
+    const stickyRef = database.ref(`users/${user}/modules/${db_key}/${target}`)
     
     stickyRef.set(newStuff)
     .then(snap => {

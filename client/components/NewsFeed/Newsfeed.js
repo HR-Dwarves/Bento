@@ -47,7 +47,7 @@ class NewsFeed extends React.Component {
     Promise.all(postsArray)
     .then((results) => {
       this.props.getHnPosts(postsArray);
-      database.ref(`/${user}/modules/${key}`).update({
+      database.ref(`users/${user}/modules/${key}`).update({
           loaded: true,
           posts: results
       });
@@ -89,12 +89,12 @@ class NewsFeed extends React.Component {
 
     let buttonName = button.target.getAttribute('value');
     if(buttonName === 'Top') {
-      database.ref(`/${user}/modules/${db_key}`).update({
+      database.ref(`users/${user}/modules/${db_key}`).update({
         top: true,
         new: false
       });
     } else {
-      database.ref(`/${user}/modules/${db_key}`).update({
+      database.ref(`users/${user}/modules/${db_key}`).update({
         top: false,
         new: true
       });
@@ -104,7 +104,7 @@ class NewsFeed extends React.Component {
   setLoadedToFalse(){
     const user = this.props.user.uid;
     const db_key = this.props.db_key
-    database.ref(`/${user}/modules/${db_key}`).update({
+    database.ref(`users/${user}/modules/${db_key}`).update({
       loaded: false
     });
   }
@@ -112,7 +112,7 @@ class NewsFeed extends React.Component {
   removePosts(){
     const user = this.props.user.uid;
     const db_key = this.props.db_key
-    database.ref(`/${user}/modules/${db_key}/posts`).remove();
+    database.ref(`users/${user}/modules/${db_key}/posts`).remove();
   }
 
   componentWillMount(){

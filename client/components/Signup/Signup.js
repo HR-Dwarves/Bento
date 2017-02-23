@@ -24,7 +24,7 @@ class Signup extends React.Component {
       console.log(result);
       context.props.authenticateUser(result);
       let { displayName, uid, email, photoURL } = result.user;
-      let userRef = database.ref(`/${uid}`);
+      let userRef = database.ref(`users/${uid}`);
       userRef.once('value', snap => {
         let exists = snap.exists();
         if (!exists) {

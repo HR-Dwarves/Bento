@@ -12,7 +12,7 @@ export function getClocks(db_key, user = 'testUser') {
 
     dispatch(getClocksRequestedAction());
 
-    return database.ref(`/${user}/modules/${db_key}`).once('value', snap => {
+    return database.ref(`users/${user}/modules/${db_key}`).once('value', snap => {
       const clocks = snap.val();
       dispatch(getClocksFulfilledAction(clocks))
     })
@@ -47,7 +47,7 @@ export function addToClocks(newClocks, db_key, user = 'testUser') {
   return dispatch => {
     dispatch(addToClocksRequestedAction());
 
-    const clocksRef = database.ref(`/${user}/modules/${db_key}/clocks`);
+    const clocksRef = database.ref(`users/${user}/modules/${db_key}/clocks`);
 
     clocksRef.set(newClocks)
     .then((snap) => {

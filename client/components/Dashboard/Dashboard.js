@@ -29,7 +29,7 @@ class Dashboard extends React.Component {
         let userId = uid || 'testUser';
         context.props.authenticateUser(user);
         context.props.getDatabase(uid);
-        database.ref(`/${userId}`).on('value', (snapshot) => {
+        database.ref(`users/${userId}`).on('value', (snapshot) => {
           // USE OTHER FUNCTION THAN GET DATABASE -- TOO SLOW
           let data = snapshot.val();
           this.props.setDatabase(data);
