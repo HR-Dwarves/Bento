@@ -34,13 +34,38 @@
 }
 
 .searchIcon {
-  padding-top: 11px;
+  /*padding-top: 11px;*/
+  align-self: center;
+  padding-right: 8px;
+  display: flex;
+}
+
+.weatherForm {
+  display: flex;
+  align-items: center;
+}
+
+.weatherForm > * {
+  flex: 0 2 100%;
+}
+
+.weatherInput {
+
 }
 
 input {
-  padding-top: 8px;
-  border: none !important;
+  /*padding-top: 8px;*/
+  /*border: none !important;*/
 }
 
 input:focus {
+}
+
+header {
+  display: flex;
+  align-items: center;
+}
+
+header > * {
+  flex: 0 0 0%;
 }

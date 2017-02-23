@@ -103,11 +103,11 @@ class WeatherDetails extends React.Component {
               <p className='card-header-title'>Weather</p>
               <div className={styles.searchIcon}><i className='fa fa-search' aria-hidden='true'></i></div>
               <form action='submit'
-                    className='zipcode'
+                    className={styles.weatherForm}
                     onSubmit={e => this.handleSubmit(e)}
                     ref={input => this.zipForm = input}
                     >
-                <input className='input' 
+                <input className={styles.weatherInput} 
                         type='text' 
                         ref={input => this.searchInput = input}
                         placeholder='Search by zipcode'
