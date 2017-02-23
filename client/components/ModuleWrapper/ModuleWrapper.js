@@ -30,7 +30,7 @@ class ModuleWrapper extends React.Component {
   render() {
     let type = this.props.type;
     let collapsed = this.state;
-    let handleCollapseFunction = this.handleCollapse;
+    let handleCollapseFunction = this.handleCollapse.bind(this);
     let component = moduleList[type];
     // let deleteButton = `${styles.delete} delete`;
     let deleteButton = `${styles.delete} icon fa fa-times-circle`;
