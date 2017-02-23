@@ -57,6 +57,10 @@
 
 }
 
+.userImg {
+  border-radius: 100px;
+}
+
 @media all and (max-width: 800px) {
   .username {
     display: none;

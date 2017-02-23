@@ -69,7 +69,9 @@ class Nav extends React.Component {
       <div className={mainNavPanelCSS}>
         <div className={userInfoStyle}>
           <button style={displayButton} onClick={this.handleLogout} className={logoutButtonStyle}>Logout</button>
-          <span className={usernameStyle}>{displayName}</span>
+          <figure className="image is-48x48">
+            <img className={styles.userImg} src={this.props.user.photoURL} />
+          </figure>
         </div>
         <Link to="/">
           <div className={pageTitleCSS}>dashboard</div>
@@ -85,5 +87,6 @@ class Nav extends React.Component {
   }
 }
 
+// <span className={usernameStyle}>{displayName}</span>
 
 export default Nav;
