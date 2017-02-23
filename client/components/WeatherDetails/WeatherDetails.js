@@ -1,18 +1,26 @@
 import React from 'react';
 import Draggable from 'react-draggable';
 import config from './../../config/config';
+import database from '../../base';
 
 import styles from './WeatherDetails.css';
 
 class WeatherDetails extends React.Component {
   constructor(props) {
     super(props);
+
+    this.dashboard = this.props.dashboard;
+    this.db_key = this.props.db_key;
+    this.weatherModule = this.dashboard.modules[this.db_key];
+    var context = this;
+    console.log('INSIDE CONSTRUCTOR: ', context.weatherModule.zip);
+
     this.state = {
       temperature: null,
       location: null,
       condition: null,
       weatherIcon: null,
-      zipcode: 94105
+      zipcode: context.weatherModule.zip || 94105
     }
 
     this.weatherCondition = {
@@ -23,19 +31,17 @@ class WeatherDetails extends React.Component {
 
     this.weatherAPIkey = config.openWeatherMapAPIKey;
     this.getWeatherData = this.getWeatherData.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   getWeatherData() {
     var context = this;
 
-    // CHANGE AJAX URL TO THIS WHEN LAT/LON PULLING IS COMPLETE
-    // url: `http://api.openweathermap.org/data/2.5/weather?lat=${LOCATION_LATITUDE}&long=${LOCATION_LOGITUDE}&type=accurate&units=${unit}&APPID=${context.weatherAPIkey}`,
     $.ajax({
       method: 'GET',
       url: `https://api.apixu.com/v1/current.json?key=${config.apixuWeatherApiKey}&q=${context.state.zipcode}`,
       dataType: 'json',
       success: function(data) {
-        // console.log('DATA FROM WEATHER API: ', data);
         context.setState({
           temperature: Math.round(data.current.temp_f),
           location: data.location.name,
@@ -62,8 +68,13 @@ class WeatherDetails extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    const db_key = this.props.db_key;
+    const db_ref = database.ref(`/testUser/modules/${db_key}/zip`);
+
     let zipcode = this.searchInput.value;
-    console.log(zipcode);
+
+    db_ref.set(zipcode);
+
     this.setState({
       zipcode: zipcode
     }, () => {
@@ -73,6 +84,8 @@ class WeatherDetails extends React.Component {
         console.log('grabbing weather');
         this.getWeatherData();
       }, 1800000);
+
+      this.zipForm.reset();
     });
   }
 
@@ -89,8 +102,13 @@ class WeatherDetails extends React.Component {
               <form action='submit'
                     className='zipcode'
                     onSubmit={e => this.handleSubmit(e)}
+                    ref={input => this.zipForm = input}
                     >
-                <input className='input' type='text' ref={input => this.searchInput = input}/>               
+                <input className='input' 
+                        type='text' 
+                        ref={input => this.searchInput = input}
+                        placeholder='Search by zipcode'
+                        />               
               </form>
               <div className="card-header-icon">
                 <span className="icon">
