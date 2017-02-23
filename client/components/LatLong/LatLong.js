@@ -75,7 +75,7 @@ class LatLong extends React.Component {
   removeClock(clock) {
     let currentClocks = this.props.dashboard.modules[this.props.db_key].clocks;
     let newClocksArray = currentClocks.filter(thisClock => thisClock !== clock);
-
+    const user = this.props.user.uid;
     this.props.addToClocks(newClocksArray, this.props.db_key, user);
   }
 

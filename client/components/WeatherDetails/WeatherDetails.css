@@ -8,6 +8,7 @@
   display:flex;
   justify-content: center;
   text-align: center;
+  align-items: center;
 }
 
 .details {
@@ -43,14 +44,24 @@
 .weatherForm {
   display: flex;
   align-items: center;
+  flex: 1 1 100%;
+  width: 50px;
+  max-width: 150px;
 }
 
 .weatherForm > * {
-  flex: 0 2 100%;
+  flex: 1 1 100%;
 }
 
 .weatherInput {
+  flex: 1 1 0%;
+  width: 50px;
+  max-width: 150px;
+}
 
+.weatherIcon {
+  font-size: 3rem;
+  padding: .5em;
 }
 
 input {
