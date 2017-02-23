@@ -75,7 +75,7 @@ class Nav extends React.Component {
           </figure>
         </div>
         <Link to="/">
-          <div className={pageTitleCSS}>dashboarder</div>
+          <div className={pageTitleCSS}>dashboard</div>
         </Link>
         <div className={modalButtonStyle}>
           <button style={displayButton} onClick={this.handleSettingsButton} className="button is-primary modal-button">
