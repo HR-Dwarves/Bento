@@ -43,7 +43,7 @@ function getDBFulfilledAction(databaseInfo) {
 
 export function setDatabase(data, user = 'testUser') {
   return dispatch => {
-    console.log(data);
+    // console.log(data);
     dispatch({
       type: 'SET_DATABASE',
       data
