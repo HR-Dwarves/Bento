@@ -47,9 +47,15 @@ class NewsFeed extends React.Component {
     Promise.all(postsArray)
     .then((results) => {
       this.props.getHnPosts(postsArray);
-      database.ref(`users/${user}/modules/${key}`).update({
+      let dbRef = database.ref(`users/${user}/modules/${key}`)
+      dbRef.once('value', snap => {
+        let exists = snap.exists();
+        if (exists) {
+          dbRef.update({
           loaded: true,
           posts: results
+          });
+        }
       });
     })
   }
