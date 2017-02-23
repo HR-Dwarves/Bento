@@ -136,6 +136,9 @@ class NewsFeed extends React.Component {
     let topClasses = classnames('card-footer-item', this.props.dashboard.modules[this.props.db_key].new ? '' : cssClasses);
     let spinnerClasses = classnames('button is-loading', spinner);
     let loaded = this.props.dashboard.modules[this.props.db_key].loaded;
+    let collapsed = this.props.collapsed.collapsed;
+    let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
+    console.log(collapsed);
     return (
       <div className="">
         <div className="card">
@@ -145,19 +148,21 @@ class NewsFeed extends React.Component {
             </div>
             <div className="card-header-icon">
               <span className="icon">
-                <i className="fa fa-hacker-news" aria-hidden="true"></i>
+                <i onClick={this.props.handleCollapseFunction} className="fa fa-hacker-news" aria-hidden="true"></i>
               </span>
             </div>
           </header>
-          <div className="card-content">
-            {loaded ? list ? list.map((item, key) => <NewsItem {...this.props}
-                                          newsItem={item}
-                                          key={key}/>) : [] : <a className={spinnerClasses}>Loading</a>}
+          <div className={collapsedStyle}>
+            <div className="card-content">
+              {loaded ? list ? list.map((item, key) => <NewsItem {...this.props}
+                                            newsItem={item}
+                                            key={key}/>) : [] : <a className={spinnerClasses}>Loading</a>}
+            </div>
+            <footer className="card-footer">
+              <a value="New" className={newClasses} onClick={this.updateNew}>New</a>
+              <a value="Top" className={topClasses} onClick={this.updateTop}>Top</a>
+            </footer>
           </div>
-          <footer className="card-footer">
-            <a value="New" className={newClasses} onClick={this.updateNew}>New</a>
-            <a value="Top" className={topClasses} onClick={this.updateTop}>Top</a>
-          </footer>
         </div>
       </div>
     )

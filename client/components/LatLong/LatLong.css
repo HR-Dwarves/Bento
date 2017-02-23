@@ -1,0 +1,13 @@
+.height {
+  max-height: 1200px;
+}
+
+.collapsedStyle {
+  max-height: 0;
+  -webkit-transition: max-height 0.3s; 
+  -moz-transition: max-height 0.3s; 
+  -ms-transition: max-height 0.3s; 
+  -o-transition: max-height 0.3s; 
+  transition: max-height 1s;
+  overflow: hidden;
+}

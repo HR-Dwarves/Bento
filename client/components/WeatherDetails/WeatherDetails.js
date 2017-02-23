@@ -2,6 +2,7 @@ import React from 'react';
 import Draggable from 'react-draggable';
 import config from './../../config/config';
 import firebaseApp from '../../base';
+import classnames from 'classnames';
 
 const database = firebaseApp.database();
 
@@ -95,8 +96,10 @@ class WeatherDetails extends React.Component {
   render() {
     let cssCard = `${styles.card} card`;
     let cssCardContent = `${styles.cardContent} card-content`;
+
+    let collapsed = this.props.collapsed.collapsed;
+    let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
     let weatherIcon = `${styles.weatherIcon} wi wi-day-sunny`;
-    
     return (
       <div className=''>
           <div className={cssCard}>
@@ -116,25 +119,27 @@ class WeatherDetails extends React.Component {
               </form>
               <div className="card-header-icon">
                 <span className="icon">
-                  <i className='fa fa-cloud' aria-hidden='true'></i>
+                  <i onClick={this.props.handleCollapseFunction} className='fa fa-cloud' aria-hidden='true'></i>
                 </span>
               </div>
             </header>
-            <div className={cssCardContent}>
-              <i className={weatherIcon}></i>
-              <p className={styles.temperature}> 
-                {this.state.temperature}ºF
-              </p>
-            </div>
-            <div className={styles.details}>
-              <p className={styles.condition}>
-                Condtions: <br/>
-                {this.state.condition}
-              </p>
-              <p className={styles.location}>
-                Location: <br/>
-                {this.state.location}
-              </p>
+            <div className={collapsedStyle}>
+              <div className={cssCardContent}>
+                <i className={weatherIcon}></i>
+                <p className={styles.temperature}> 
+                  {this.state.temperature}ºF
+                </p>
+              </div>
+              <div className={styles.details}>
+                <p className={styles.condition}>
+                  Condtions: <br/>
+                  {this.state.condition}
+                </p>
+                <p className={styles.location}>
+                  Location: <br/>
+                  {this.state.location}
+                </p>
+              </div>
             </div>
           </div>
       </div>

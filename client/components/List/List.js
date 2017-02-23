@@ -1,7 +1,7 @@
 import React from 'react';
 import firebaseApp from '../../base';
 import ListItem from '../ListItem/ListItem'
-
+import classnames from 'classnames';
 import styles from './List.css'
 
 const database = firebaseApp.database();
@@ -77,6 +77,9 @@ class List extends React.Component {
     let cssClasses = `${styles.card}`;
     let deleteButton = `${styles.delete} delete`
 
+    let collapsed = this.props.collapsed.collapsed;
+    let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
+
     return (
       <div className={cssClasses}>
         <div className='card'>
@@ -84,28 +87,30 @@ class List extends React.Component {
             <p className="card-header-title">List</p>
             <span href="" className="card-header-icon">
               <span className="icon">
-                <i className="fa fa-th-list" aria-hidden="true"></i>
+                <i onClick={this.props.handleCollapseFunction} className="fa fa-th-list" aria-hidden="true"></i>
               </span>
             </span>
           </header>
-          <div className="card-content">
-            <form action="submit"
-                  className="control"
-                  onSubmit={(e) => this.handleSubmit(e)}
-                  ref={(input) => this.listForm = input}
-                  >
-              <p className="control">
-                <input className="input is-small" type="text" ref={(input) => this.formInput = input}/>
-              </p>
-              <button className="button is-small is-light" type="sumbit">Add</button>
-            </form>
-          </div>
-          <div className='card-content'>
-            <div className='media-content'>
-              {items ? keys.map((key, ind) => <ListItem {...this.props} 
-                                                                     key={key}
-                                                                     itemKey={key}
-                                                                     listItem={items[key]}/>) : []}
+          <div className={collapsedStyle}>
+            <div className="card-content">
+              <form action="submit"
+                    className="control"
+                    onSubmit={(e) => this.handleSubmit(e)}
+                    ref={(input) => this.listForm = input}
+                    >
+                <p className="control">
+                  <input className="input is-small" type="text" ref={(input) => this.formInput = input}/>
+                </p>
+                <button className="button is-small is-light" type="sumbit">Add</button>
+              </form>
+            </div>
+            <div className='card-content'>
+              <div className='media-content'>
+                {items ? keys.map((key, ind) => <ListItem {...this.props} 
+                                                                       key={key}
+                                                                       itemKey={key}
+                                                                       listItem={items[key]}/>) : []}
+              </div>
             </div>
           </div>
         </div>
