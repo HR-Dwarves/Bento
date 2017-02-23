@@ -1,9 +1,15 @@
 div, button, input, textarea {
+  /*font-family: 'El Messiri', serif;*/
   /*font-family: 'Sansita', serif;*/
   /*font-family: 'Lato', serif;*/
-  font-family: 'Roboto', serif;
+  /*font-family: 'Roboto', serif;*/
   font-family: 'Slabo 27px', serif;
   /*font-family: 'Roboto Condensed', serif;*/
+  /*font-family: 'Roboto Slab', serif;*/
+  /*font-family: 'Merriweather', serif;*/
+  /*font-family: 'Lora', serif;*/
+  /*font-family: 'Playfair Display', serif;*/
+  /*font-family: 'Droid Serif', serif;*/
 }
 
 input, textarea {

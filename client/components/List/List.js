@@ -81,7 +81,7 @@ class List extends React.Component {
       <div className={cssClasses}>
         <div className='card'>
           <header className="card-header">
-            <p className="card-header-title">List items:</p>
+            <p className="card-header-title">List</p>
             <span href="" className="card-header-icon">
               <span className="icon">
                 <i className="fa fa-th-list" aria-hidden="true"></i>
@@ -94,7 +94,6 @@ class List extends React.Component {
                   onSubmit={(e) => this.handleSubmit(e)}
                   ref={(input) => this.listForm = input}
                   >
-              <label htmlFor="" className="label">Add task:</label>
               <p className="control">
                 <input className="input is-small" type="text" ref={(input) => this.formInput = input}/>
               </p>
