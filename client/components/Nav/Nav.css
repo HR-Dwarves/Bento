@@ -62,7 +62,7 @@
 }
 
 @media all and (max-width: 800px) {
-  .username {
+  .userWrapper {
     display: none;
   }
 }

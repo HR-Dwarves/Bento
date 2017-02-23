@@ -46,6 +46,7 @@ class Nav extends React.Component {
     let userInfoStyle = `${styles.currentUser}`
     let logoutButtonStyle = `${styles.logoutButton} button is-outlined is-primary`;
     let usernameStyle = `${styles.username}`;
+    let userWrapperStyle = `${styles.userWrapper} image is-48x48`;
     let modulesArray = Object.keys(ModuleList);
     let user = this.props.user;
     let loggedIn = user.loggedIn;
@@ -67,9 +68,9 @@ class Nav extends React.Component {
 
     return(
       <div className={mainNavPanelCSS}>
-        <div className={userInfoStyle}>
+        <div className={userInfoStyle} >
           <button style={displayButton} onClick={this.handleLogout} className={logoutButtonStyle}>Logout</button>
-          <figure className="image is-48x48">
+          <figure style={displayButton} className={userWrapperStyle}>
             <img className={styles.userImg} src={this.props.user.photoURL} />
           </figure>
         </div>

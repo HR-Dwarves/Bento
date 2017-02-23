@@ -25,11 +25,11 @@ class Dashboard extends React.Component {
     firebaseApp.auth().onAuthStateChanged((user) => {
       if (user) {
         let {displayName, uid, email, photoURL} = user;
-        console.log('USER', user);
+        // console.log('USER', user);
         let userId = uid || 'testUser';
         context.props.authenticateUser(user);
         context.props.getDatabase(uid);
-        database.ref(`/${userId}`).on('value', (snapshot) => {
+        database.ref(`users/${userId}`).on('value', (snapshot) => {
           // USE OTHER FUNCTION THAN GET DATABASE -- TOO SLOW
           let data = snapshot.val();
           this.props.setDatabase(data);

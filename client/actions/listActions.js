@@ -9,7 +9,7 @@ const database = firebaseApp.database();
 export function getList(db_key, user = 'testUser') {
   return dispatch => {
     dispatch(getListRequestedAction());
-    return database.ref(`/${user}/modules/${db_key}`).once('value', snap => {
+    return database.ref(`users/${user}/modules/${db_key}`).once('value', snap => {
       const list = snap.val();
       dispatch(getListFulfilledAction(list))
     })
@@ -42,7 +42,7 @@ function getListFulfilledAction(list) {
 export function addToList(newStuff, db_key, user = 'testUser') {
   return dispatch => {
     dispatch(addToListRequestedAction());
-    const listRef = database.ref(`/${user}/modules/${db_key}/items`);
+    const listRef = database.ref(`users/${user}/modules/${db_key}/items`);
 
     listRef.push(newStuff)
     .then((snap) => {
@@ -77,7 +77,7 @@ function addToListFulfilledAction(newItem) {
 export function deleteFromList(itemKey, db_key, user = 'testUser') {
   return dispatch => {
     dispatch(deleteFromListRequestedAction());
-    const itemRef = database.ref(`/${user}/modules/${db_key}/items/${itemKey}`);
+    const itemRef = database.ref(`users/${user}/modules/${db_key}/items/${itemKey}`);
 
     itemRef.remove()
     .then((snap) => {
@@ -111,7 +111,7 @@ function deleteFromListFulfilledAction(newItem) {
 export function toggleListItemStatus(itemKey, db_key, newStatus, user = 'testUser') {
   return dispatch => {
     dispatch(toggleListStatusRequestedAction());
-    const statusRef = database.ref(`/${user}/modules/${db_key}/items/${itemKey}`).child('completed');
+    const statusRef = database.ref(`users/${user}/modules/${db_key}/items/${itemKey}`).child('completed');
 
     statusRef.set(newStatus)
     .then((snap) => {

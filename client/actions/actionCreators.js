@@ -11,7 +11,7 @@ const database = firebaseApp.database();
 export function getDatabase(user = 'testUser') {
   return dispatch => {
     dispatch(getDBRequestedAction());
-    return database.ref(`/${user}`).once('value', snap => {
+    return database.ref(`users/${user}`).once('value', snap => {
       const databaseInfo = snap.val();
       dispatch(getDBFulfilledAction(databaseInfo))
     })
@@ -43,7 +43,7 @@ function getDBFulfilledAction(databaseInfo) {
 
 export function setDatabase(data, user = 'testUser') {
   return dispatch => {
-    console.log(data);
+    // console.log(data);
     dispatch({
       type: 'SET_DATABASE',
       data
@@ -54,7 +54,7 @@ export function setDatabase(data, user = 'testUser') {
 export function deleteModule(db_key, user = 'testUser') {
   return dispatch => {
     dispatch(deleteModuleRequestedAction());
-    const moduleRef = database.ref(`/${user}/modules/${db_key}`)
+    const moduleRef = database.ref(`users/${user}/modules/${db_key}`)
 
     moduleRef.remove()
     .then((snap) => {
