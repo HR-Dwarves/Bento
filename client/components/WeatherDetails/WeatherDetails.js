@@ -1,7 +1,9 @@
 import React from 'react';
 import Draggable from 'react-draggable';
 import config from './../../config/config';
-import database from '../../base';
+import firebaseApp from '../../base';
+
+const database = firebaseApp.database();
 
 import styles from './WeatherDetails.css';
 
@@ -69,7 +71,8 @@ class WeatherDetails extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const db_key = this.props.db_key;
-    const db_ref = database.ref(`/testUser/modules/${db_key}/zip`);
+    const user = this.props.user.uid;
+    const db_ref = database.ref(`/${user}/modules/${db_key}/zip`);
 
     let zipcode = this.searchInput.value;
 

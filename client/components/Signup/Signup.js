@@ -58,6 +58,10 @@ class Signup extends React.Component {
     let githubStyle = `${styles.github} button`
     let facebookStyle = `${styles.facebook} button`
     let twitterStyle = `${styles.twitter} button`
+    let googleIconStyle = `${styles.loginIcon} fa fa-google`
+    let githubIconStyle = `${styles.loginIcon} fa fa-github`
+    let facebookIconStyle = `${styles.loginIcon} fa fa-facebook`
+    let twitterIconStyle = `${styles.loginIcon} fa fa-twitter`
 
     return (
       <nav className={styles.signup}>
@@ -66,15 +70,15 @@ class Signup extends React.Component {
         </div>
         <div className={styles.loginButtons}>
           <button className={googleStyle} onClick={() => this.authenticate('google')}>
-            <span>
+            <span className={styles.buttonText}>
               Google
             </span>
             <span className="icon">
-              <i className="fa fa-google" aria-hidden="true"></i>
+              <i className={googleIconStyle} aria-hidden="true"></i>
             </span>
           </button>
           <button className={githubStyle} onClick={() => this.authenticate('github')}>
-            <span>
+            <span className={styles.buttonText}>
               Github
             </span>
             <span className="icon">
@@ -82,7 +86,7 @@ class Signup extends React.Component {
             </span>
           </button>
           <button className={facebookStyle} onClick={() => this.authenticate('facebook')}>
-            <span>
+            <span className={styles.buttonText}>
               Facebook
             </span>
             <span className="icon">
@@ -90,7 +94,7 @@ class Signup extends React.Component {
             </span>
           </button>
           <button className={twitterStyle} onClick={() => this.authenticate('twitter')}>
-            <span>
+            <span className={styles.buttonText}>
               Twitter
             </span>
             <span className="icon">

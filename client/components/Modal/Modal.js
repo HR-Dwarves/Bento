@@ -87,7 +87,7 @@ class Modal extends React.Component {
             <button className="delete" onClick={this.props.onClose}></button>
           </header>
           <section className="modal-card-body">
-            {this.props.modules.map((module, key) => <div className={moduleStyles}><span>{module}</span> 
+            {this.props.modules.map((module, key) => <div key={key} className={moduleStyles}><span>{module}</span> 
               <span className={moduleStyles}><span><button value={module} onClick={this.addModule} className='button is-primary'>Add</button></span></span></div>)}
           </section>
         </div>

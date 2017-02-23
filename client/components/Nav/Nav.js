@@ -44,8 +44,9 @@ class Nav extends React.Component {
     let pageTitleCSS = `${styles.pageTitle} has-text-centered`
     let modalButtonStyle = `${styles.modalButton}`
     let userInfoStyle = `${styles.currentUser}`
-    let modulesArray = Object.keys(ModuleList);
     let logoutButtonStyle = `${styles.logoutButton} button is-outlined is-primary`;
+    let usernameStyle = `${styles.username}`;
+    let modulesArray = Object.keys(ModuleList);
     let user = this.props.user;
     let loggedIn = user.loggedIn;
     let displayButton;
@@ -56,7 +57,10 @@ class Nav extends React.Component {
     }
     let displayName;
     if (user) {
-      displayName = this.props.user.displayName;
+      displayName = this.props.user.displayName
+      if (displayName) {
+        displayName = displayName.replace(" ", "\u00a0");
+      }
     } else {
       displayname = '';
     }
@@ -65,7 +69,7 @@ class Nav extends React.Component {
       <div className={mainNavPanelCSS}>
         <div className={userInfoStyle}>
           <button style={displayButton} onClick={this.handleLogout} className={logoutButtonStyle}>Logout</button>
-          <span>{displayName}</span>
+          <span className={usernameStyle}>{displayName}</span>
         </div>
         <Link to="/">
           <div className={pageTitleCSS}>dashboard</div>
