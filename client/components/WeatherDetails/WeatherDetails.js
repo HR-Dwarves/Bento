@@ -95,6 +95,7 @@ class WeatherDetails extends React.Component {
   render() {
     let cssCard = `${styles.card} card`;
     let cssCardContent = `${styles.cardContent} card-content`;
+    let weatherIcon = `${styles.weatherIcon} wi wi-day-sunny`;
     
     return (
       <div className=''>
@@ -110,7 +111,7 @@ class WeatherDetails extends React.Component {
                 <input className={styles.weatherInput} 
                         type='text' 
                         ref={input => this.searchInput = input}
-                        placeholder='Search by zipcode'
+                        placeholder=' Enter zip'
                         />               
               </form>
               <div className="card-header-icon">
@@ -120,7 +121,7 @@ class WeatherDetails extends React.Component {
               </div>
             </header>
             <div className={cssCardContent}>
-              <img src={this.state.weatherIcon} className={styles.image}/>
+              <i className={weatherIcon}></i>
               <p className={styles.temperature}> 
                 {this.state.temperature}ºF
               </p>
@@ -144,3 +145,5 @@ class WeatherDetails extends React.Component {
         // </Draggable>
 
 export default WeatherDetails;
+
+// <img src={this.state.weatherIcon} className={styles.image}/>
