@@ -99,7 +99,6 @@ class LatLong extends React.Component {
           <div className="media-content">
             {this.props.dashboard.currentCity &&
               <h4 className='title is-4'>Current: {this.props.dashboard.currentCity}</h4>}
-
               {clocks &&
                 clocks.map((clock, index) => {
                 return <Clock
@@ -108,8 +107,6 @@ class LatLong extends React.Component {
                         timeZone={clock}
                         delete={this.removeClock.bind(this, clock)} />
               })}
-
-            <p className="title is-4">Add a clock in a timezone</p>
             <form>
               <p className="control">
                 <span className="select">
