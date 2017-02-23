@@ -11,7 +11,8 @@ class WeatherDetails extends React.Component {
       temperature: null,
       location: null,
       condition: null,
-      weatherIcon: null
+      weatherIcon: null,
+      zipcode: 94105
     }
 
     this.weatherCondition = {
@@ -31,7 +32,7 @@ class WeatherDetails extends React.Component {
     // url: `http://api.openweathermap.org/data/2.5/weather?lat=${LOCATION_LATITUDE}&long=${LOCATION_LOGITUDE}&type=accurate&units=${unit}&APPID=${context.weatherAPIkey}`,
     $.ajax({
       method: 'GET',
-      url: `https://api.apixu.com/v1/current.json?key=${config.apixuWeatherApiKey}&q=94105`,
+      url: `https://api.apixu.com/v1/current.json?key=${config.apixuWeatherApiKey}&q=${context.state.zipcode}`,
       dataType: 'json',
       success: function(data) {
         // console.log('DATA FROM WEATHER API: ', data);
@@ -59,6 +60,22 @@ class WeatherDetails extends React.Component {
     }, 1800000); // time interval of 30 minutes
   }
 
+  handleSubmit(e) {
+    e.preventDefault();
+    let zipcode = this.searchInput.value;
+    console.log(zipcode);
+    this.setState({
+      zipcode: zipcode
+    }, () => {
+      this.getWeatherData();
+
+      setInterval(() => {
+        console.log('grabbing weather');
+        this.getWeatherData();
+      }, 1800000);
+    });
+  }
+
   render() {
     let cssCard = `${styles.card} card`;
     let cssCardContent = `${styles.cardContent} card-content`;
@@ -68,6 +85,13 @@ class WeatherDetails extends React.Component {
           <div className={cssCard}>
             <header className='card-header'>
               <p className='card-header-title'>Weather</p>
+              <div className={styles.searchIcon}><i className='fa fa-search' aria-hidden='true'></i></div>
+              <form action='submit'
+                    className='zipcode'
+                    onSubmit={e => this.handleSubmit(e)}
+                    >
+                <input className='input' type='text' ref={input => this.searchInput = input}/>               
+              </form>
               <div className="card-header-icon">
                 <span className="icon">
                   <i className='fa fa-cloud' aria-hidden='true'></i>

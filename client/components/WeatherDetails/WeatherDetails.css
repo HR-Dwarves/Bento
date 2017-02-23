@@ -33,6 +33,9 @@
   width: 90px;
 }
 
+.searchIcon {
+  padding-top: 11px;
+}
 input:focus {
   outline: none;
 }
