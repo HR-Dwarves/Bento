@@ -22,7 +22,7 @@
 /**
  * Module dependencies.
  */
-const app = require('../prodServer');
+const app = require('../server');
 const debug = require('debug')('express:server');
 const http = require('http');
 
