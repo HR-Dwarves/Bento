@@ -21,4 +21,5 @@ header > * {
   -ms-transition: max-height 0.3s; 
   -o-transition: max-height 0.3s; 
   transition: max-height 1s;
+  overflow: hidden;
 }
