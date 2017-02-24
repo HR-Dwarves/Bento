@@ -6,7 +6,7 @@
 
 .cardContent {
   display:flex;
-  justify-content: center;
+  justify-content: space-between;
   text-align: center;
   align-items: center;
 }
@@ -26,7 +26,8 @@
 }
 
 .temperature {
-  font-size:60px;
+  font-size: 2.5em;
+  /*font-size: 40px;*/
 }
 
 .image {

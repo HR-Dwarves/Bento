@@ -3,6 +3,7 @@ import Draggable from 'react-draggable';
 import config from './../../config/config';
 import firebaseApp from '../../base';
 import classnames from 'classnames';
+import weatherConditions from './weatherConditions';
 
 const database = firebaseApp.database();
 
@@ -16,21 +17,21 @@ class WeatherDetails extends React.Component {
     this.db_key = this.props.db_key;
     this.weatherModule = this.dashboard.modules[this.db_key];
     var context = this;
-    console.log('INSIDE CONSTRUCTOR: ', context.weatherModule.zip);
 
     this.state = {
       temperature: null,
       location: null,
       condition: null,
       weatherIcon: null,
-      zipcode: context.weatherModule.zip || 94105
+      zipcode: context.weatherModule.zip || 94105,
+      code: null
     }
 
-    this.weatherCondition = {
-      'Clear': 'https://68.media.tumblr.com/95f04db0cb5b8ceaf1c4fb1264f2c88d/tumblr_oljwb1sCii1qd4km8o1_400.png',
-      'Rain': 'https://68.media.tumblr.com/1024b9f6ee2a91fb93214cbdf224beaf/tumblr_oljwry0gjD1qd4km8o1_400.png',
-      'Clouds': 'http://demo.sc.chinaz.com/Files/pic/icons/6256/k19.png'
-    }
+    // this.weatherCondition = {
+    //   'Clear': 'https://68.media.tumblr.com/95f04db0cb5b8ceaf1c4fb1264f2c88d/tumblr_oljwb1sCii1qd4km8o1_400.png',
+    //   'Rain': 'https://68.media.tumblr.com/1024b9f6ee2a91fb93214cbdf224beaf/tumblr_oljwry0gjD1qd4km8o1_400.png',
+    //   'Clouds': 'http://demo.sc.chinaz.com/Files/pic/icons/6256/k19.png'
+    // }
 
     this.weatherAPIkey = config.openWeatherMapAPIKey;
     this.getWeatherData = this.getWeatherData.bind(this);
@@ -40,16 +41,35 @@ class WeatherDetails extends React.Component {
   getWeatherData() {
     var context = this;
 
+    // $.ajax({
+    //   method: 'GET',
+    //   url: `https://api.apixu.com/v1/current.json?key=${config.apixuWeatherApiKey}&q=${context.state.zipcode}`,
+    //   dataType: 'json',
+    //   success: function(data) {
+    //     context.setState({
+    //       temperature: Math.round(data.current.temp_f),
+    //       location: data.location.name,
+    //       condition: data.current.condition.text,
+    //       weatherIcon: data.current.condition.icon
+    //     });
+    //   },
+    //   error: function(err) {
+    //     console.log(err);
+    //     throw err;
+    //   }
+    // });
+
     $.ajax({
       method: 'GET',
-      url: `https://api.apixu.com/v1/current.json?key=${config.apixuWeatherApiKey}&q=${context.state.zipcode}`,
+      url: `https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="${context.state.zipcode}")&format=json`,
       dataType: 'json',
       success: function(data) {
         context.setState({
-          temperature: Math.round(data.current.temp_f),
-          location: data.location.name,
-          condition: data.current.condition.text,
-          weatherIcon: data.current.condition.icon
+          temperature: data.query.results.channel.item.condition.temp,
+          location: data.query.results.channel.location.city,
+          condition: data.query.results.channel.item.condition.text,
+          weatherIcon: data.query.results.channel.image.url,
+          code: data.query.results.channel.item.condition.code
         });
       },
       error: function(err) {
@@ -99,7 +119,7 @@ class WeatherDetails extends React.Component {
 
     let collapsed = this.props.collapsed.collapsed;
     let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
-    let weatherIcon = `${styles.weatherIcon} wi wi-day-sunny`;
+    let weatherIcon = `${styles.weatherIcon} wi wi-yahoo-${this.state.code}`;
     return (
       <div className=''>
           <div className={cssCard}>
@@ -125,19 +145,13 @@ class WeatherDetails extends React.Component {
             </header>
             <div className={collapsedStyle}>
               <div className={cssCardContent}>
+                <div>
+                  <p className={styles.location}>{this.state.location}</p>
+                  <p className={styles.condition}>{this.state.condition}</p>
+                </div>
                 <i className={weatherIcon}></i>
                 <p className={styles.temperature}> 
                   {this.state.temperature}ºF
-                </p>
-              </div>
-              <div className={styles.details}>
-                <p className={styles.condition}>
-                  Condtions: <br/>
-                  {this.state.condition}
-                </p>
-                <p className={styles.location}>
-                  Location: <br/>
-                  {this.state.location}
                 </p>
               </div>
             </div>

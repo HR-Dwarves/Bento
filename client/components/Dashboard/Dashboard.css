@@ -1,6 +1,10 @@
+body {
+  font-size: 12px;
+}
+
 div, button, input, textarea {
   /*font-family: 'El Messiri', serif;*/
-  font-family: 'Sansita', serif;
+  /*font-family: 'Sansita', serif;*/
   /*font-family: 'Lato', serif;*/
   /*font-family: 'Roboto', serif;*/
   /*font-family: 'Slabo 27px', serif;*/
@@ -10,7 +14,9 @@ div, button, input, textarea {
   /*font-family: 'Lora', serif;*/
   /*font-family: 'Playfair Display', serif;*/
   /*font-family: 'Droid Serif', serif;*/
-  font-size: 18px;
+  font-family: 'Italiana', serif;
+  font-size: 1em;
+  font-weight: 700;
 }
 
 input, textarea {
@@ -18,7 +24,7 @@ input, textarea {
 }
 
 input {
-  line-height: 27px;
+  line-height: 1em;
 }
 
 .dashContainer {
@@ -38,7 +44,7 @@ input {
   padding-bottom: 45px;
   display: flex;
   flex-wrap: wrap;*/
-  padding-top: 80px; 
+  padding-top: 4.5em; 
 }
 
 .component {
@@ -101,7 +107,27 @@ input {
 }
 
 /*Mobile CSS*/
-@media all and (max-width: 550px) {
+@media all and (max-width: 550px) and (-webkit-device-pixel-ratio: 3) {
+  .mainDashboardPanel {
+    height: 100vh;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    /*align-content: flex-start;*/
+    align-items: stretch;
+    overflow-y: scroll;
+
+  }
+
+  .component {
+    height: auto;
+    display: flex;
+    flex: 0 0 auto;
+    width: calc(100% - 20px);
+  }
+}
+
+@media all and (max-width: 600px) {
   .mainDashboardPanel {
     height: 100vh;
     flex-direction: column;
