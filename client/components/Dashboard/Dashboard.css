@@ -1,6 +1,10 @@
+body {
+  font-size: 12px;
+}
+
 div, button, input, textarea {
   /*font-family: 'El Messiri', serif;*/
-  font-family: 'Sansita', serif;
+  /*font-family: 'Sansita', serif;*/
   /*font-family: 'Lato', serif;*/
   /*font-family: 'Roboto', serif;*/
   /*font-family: 'Slabo 27px', serif;*/
@@ -10,7 +14,9 @@ div, button, input, textarea {
   /*font-family: 'Lora', serif;*/
   /*font-family: 'Playfair Display', serif;*/
   /*font-family: 'Droid Serif', serif;*/
-  font-size: 16px;
+  font-family: 'Italiana', serif;
+  font-size: 1em;
+  font-weight: 700;
 }
 
 input, textarea {
@@ -18,7 +24,7 @@ input, textarea {
 }
 
 input {
-  line-height: 27px;
+  line-height: 1em;
 }
 
 .dashContainer {
@@ -38,7 +44,7 @@ input {
   padding-bottom: 45px;
   display: flex;
   flex-wrap: wrap;*/
-  padding-top: 80px; 
+  padding-top: 4.5em; 
 }
 
 .component {
