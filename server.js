@@ -7,23 +7,8 @@ var app = express();
 
 app.use(cors());
 
-console.log('process.env.NODE_ENV', process.env.NODE_ENV);
-console.log('app.get("env")', app.get('env'));
-
-
-
-if (process.env.NODE_ENV === 'local') {
-  var webpack = require('webpack');
-  var config = require('./webpack.config.dev');
-  var compiler = webpack(config);
-
-  app.use(require('webpack-dev-middleware')(compiler, {
-    noInfo: false,
-    publicPath: config.output.publicPath
-  }));
-
-  app.use(require('webpack-hot-middleware')(compiler));
-}
+// console.log('process.env.NODE_ENV', process.env.NODE_ENV);
+// console.log('app.get("env")', app.get('env'));
 
 
 // app.use(function (req, res, next) {
@@ -69,22 +54,13 @@ app.get('/geolocation/:latlong', function(req, res) {
 
 
 // hack for now
-if (process.env.NODE_ENV !== 'local') {
+app.get('/bundle.js', function(req, res) {
+  res.sendFile(path.join(__dirname, './dist/bundle.js'));
+});
 
-  app.get('/bundle.js', function(req, res) {
-    res.sendFile(path.join(__dirname, './dist/bundle.js'));
-  });
-}
-
-if (process.env.NODE_ENV === 'local') {
-  app.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname, 'index.html'));
-  });
-} else {
-  app.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname, './dist/index.html'));
-  });
-}
+app.get('*', function(req, res) {
+  res.sendFile(path.join(__dirname, './dist/index.html'));
+});
 
 
 
