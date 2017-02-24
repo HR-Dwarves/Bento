@@ -8,7 +8,7 @@
     "build": "npm run clean && npm run build:webpack",
     "test": "NODE_ENV=production mocha './test/**/*.spec.js'",
     "clean": "rimraf dist/bundle.js",
-    "dev": "NODE_ENV=local PORT=3000 ./bin/www",
+    "dev": "NODE_ENV=local PORT=3000 nodemon ./bin/www",
     "start": "npm run build && node ./bin/www",
     "tunnel": "browser-sync start --proxy localhost:7770 --tunnel wesbos"
   },
@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/HR-Dwarves/Battleaxe#readme",
   "dependencies": {
+    "axios": "^0.15.3",
     "babel-core": "^6.23.1",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^6.3.0",

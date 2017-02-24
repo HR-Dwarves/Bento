@@ -99,27 +99,15 @@ export function getGeolocation() {
       sessionStorage.setItem('longitude', long);
 
       // GET CURRENT CITY
-      // https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=YOUR_API_KEY
-      let queryBase = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=';
-      let query = `${queryBase}${lat},${long}&key=${config.googleApiKey}`
+
+      let query = `/geolocation/${lat},${long}`
 
       $.get(query, function(data) {
-        var city;
-        // using if statement to get rid of errors in console
-        if (data.results[0]) {
-          city = data.results[0].address_components.reduce(function(acc, item) {
-            if (item.types.includes('locality')) {
-              return acc = item.long_name;
-            } else {
-              return acc;
-            }
-          })
-        }
-
+        // console.log(data)
         let geoStateAdditions = {
           latitude: lat,
           longitude: long,
-          currentCity: city
+          currentCity: data
         }
 
         dispatch(getGeolocationFulfilledAction(geoStateAdditions))
@@ -127,7 +115,6 @@ export function getGeolocation() {
       .fail(function(error) {
         console.log( error );
       })
-
     }, error => {
       console.log(error);
       dispatch(getGeolocationRejectedAction());
