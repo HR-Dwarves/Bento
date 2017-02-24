@@ -8,6 +8,8 @@
   font-size: 1.5rem;
   cursor: pointer;
   /*display: inline-block;*/
+  background-color: white;
+  border-radius: 1200px;
 }
 
 .wrapper {
