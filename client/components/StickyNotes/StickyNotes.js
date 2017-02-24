@@ -42,7 +42,7 @@ class StickyNotes extends React.Component {
     let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
 
     return(
-      <div className=''>
+      <div className='stickynote'>
           <div className='card'>
             <header className='card-header'>
               <input className='card-header-title sticky-header'
