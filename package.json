@@ -11,7 +11,7 @@
     "dev": "NODE_ENV=local PORT=3000 node ./bin/www",
     "start": "npm run build && node ./bin/www",
     "tunnel": "browser-sync start --proxy localhost:7770 --tunnel wesbos",
-    "jest": "jest ./actionTests/*.spec.js",
+    "jest": "jest ./spec/**/*.spec.js",
     "jest:watch": "npm run jest -- --watch"
   },
   "repository": {
