@@ -59,6 +59,5 @@ deployment:
         - gcloud -q app deploy app.yaml --promote --version=staging
         # Run our E2E Test
         # - python e2e_test.py
-        - gcloud -q app deploy app.yaml --promote --version=staging
         # Run our E2E Test
         # - python e2e_test.py

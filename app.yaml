@@ -14,4 +14,6 @@
 # [START app_yaml]
 runtime: nodejs
 env: flex
+env_variables:
+  GOOGLE_API_KEY_GEO: 'AIzaSyAmKXTu8S1QMv9BMQw3NzNAjHPZ8Vl5OOM'
 # [END app_yaml]

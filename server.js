@@ -40,7 +40,8 @@ app.get('/geolocation/:latlong', function(req, res) {
   var long = req.params.latlong.split(',')[1];
 
   // to be put in environment variable in google app engine and circle ci
-  var googleApiKey = 'AIzaSyAmKXTu8S1QMv9BMQw3NzNAjHPZ8Vl5OOM';
+  // var googleApiKey = 'AIzaSyAmKXTu8S1QMv9BMQw3NzNAjHPZ8Vl5OOM';
+  var googleApiKey = process.env.GOOGLE_API_KEY_GEO;
 
   let queryBase = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=';
   let query = `${queryBase}${lat},${long}&key=${googleApiKey}`;
