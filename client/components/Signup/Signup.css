@@ -30,7 +30,7 @@
 
 .loginButtons > * {
   flex: 1 1 100%;
-  margin: 1rem;
+  margin: .2rem;
   display: flex;
   align-items: center;
 }

@@ -103,9 +103,6 @@ class Signup extends React.Component {
           </button>
         </div>
         <div>
-          <button className="button" onClick={this.logCurrentUser}>
-            Check Current User
-          </button>
         </div>
       </nav>
     );
