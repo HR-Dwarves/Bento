@@ -8,7 +8,7 @@ var app = express();
 app.use(cors());
 
 console.log('process.env.NODE_ENV', process.env.NODE_ENV);
-console.log('app.get("env")', app.get('env'))
+console.log('app.get("env")', app.get('env'));
 
 
 
@@ -43,7 +43,7 @@ app.get('/geolocation/:latlong', function(req, res) {
   var googleApiKey = 'AIzaSyAmKXTu8S1QMv9BMQw3NzNAjHPZ8Vl5OOM';
 
   let queryBase = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=';
-  let query = `${queryBase}${lat},${long}&key=${googleApiKey}`
+  let query = `${queryBase}${lat},${long}&key=${googleApiKey}`;
 
   axios.get(query)
     .then(function(response) {
@@ -57,7 +57,7 @@ app.get('/geolocation/:latlong', function(req, res) {
           } else {
             return acc;
           }
-        })
+        });
       }
       res.send(city);
     })
