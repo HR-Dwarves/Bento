@@ -7,8 +7,8 @@ describe('Hacker News Actions', () => {
       expect(typeof HackerNewsActions.getHnPosts).toBe('function');
     });
 
-    it('should return a function', () => {
-      expect(typeof HackerNewsActions.getHnPosts()).toBe('function');
+    it('should return a function when passed in posts', () => {
+      expect(typeof HackerNewsActions.getHnPosts([1])).toBe('function');
     });
   });
 
