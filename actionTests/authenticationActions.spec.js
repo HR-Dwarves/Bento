@@ -14,11 +14,11 @@ describe('Authentication Actions', () => {
 
   describe('logoutUser', () => {
     it('should be a function', () => {
-      expect(typeof AuthenticationActions.authenticateUser).toBe('function');
+      expect(typeof AuthenticationActions.logoutUser).toBe('function');
     });
 
     it('should return a function', () => {
-      expect(typeof AuthenticationActions.authenticateUser()).toBe('function');
+      expect(typeof AuthenticationActions.logoutUser()).toBe('function');
     });
   });
 });
