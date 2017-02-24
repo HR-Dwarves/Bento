@@ -34,33 +34,36 @@ app.use(function (req, res, next) {
   next();
 });
 
-// app.get('/geolocation/:latlong', function(req, res) {
 app.get('/geolocation/:latlong', function(req, res) {
+
   var lat = req.params.latlong.split(',')[0];
   var long = req.params.latlong.split(',')[1];
-  var googleApiKey =
+
+  // to be put in environment variable in google app engine and circle ci
+  var googleApiKey = 'AIzaSyAmKXTu8S1QMv9BMQw3NzNAjHPZ8Vl5OOM';
 
   let queryBase = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=';
-  let query = `${queryBase}${lat},${long}&key=${config.googleApiKey}`
+  let query = `${queryBase}${lat},${long}&key=${googleApiKey}`
 
-
-  $.axios.get(query, function(data) {
-        var city;
-        // using if statement to get rid of errors in console
-        if (data.results[0]) {
-          city = data.results[0].address_components.reduce(function(acc, item) {
-            if (item.types.includes('locality')) {
-              return acc = item.long_name;
-            } else {
-              return acc;
-            }
-          })
-        }
-
-
-
-  return req.params.latlong;
-
+  axios.get(query)
+    .then(function(response) {
+      var city;
+      // using if statement to get rid of errors in console
+      // console.log(response);
+      if (response.data.results[0]) {
+        city = response.data.results[0].address_components.reduce(function(acc, item) {
+          if (item.types.includes('locality')) {
+            return acc = item.long_name;
+          } else {
+            return acc;
+          }
+        })
+      }
+      res.send(city);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 });
 
 

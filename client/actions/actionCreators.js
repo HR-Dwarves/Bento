@@ -100,48 +100,21 @@ export function getGeolocation() {
 
       // GET CURRENT CITY
 
-      let query = `http://localhost:3000/geolocation/${lat},${long}`
-      // let query = `http://localhost:3000/geolocation`
+      let query = `/geolocation/${lat},${long}`
 
       $.get(query, function(data) {
-        console.log(data)
+        // console.log(data)
+        let geoStateAdditions = {
+          latitude: lat,
+          longitude: long,
+          currentCity: data
+        }
+
+        dispatch(getGeolocationFulfilledAction(geoStateAdditions))
       })
-
-      ///////////////////////////////////////
-      // older version performed on client
-      //
-      // https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=YOUR_API_KEY
-      // let queryBase = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=';
-      // let query = `${queryBase}${lat},${long}&key=${config.googleApiKey}`
-
-      // $.get(query, function(data) {
-      //   var city;
-      //   // using if statement to get rid of errors in console
-      //   if (data.results[0]) {
-      //     city = data.results[0].address_components.reduce(function(acc, item) {
-      //       if (item.types.includes('locality')) {
-      //         return acc = item.long_name;
-      //       } else {
-      //         return acc;
-      //       }
-      //     })
-      //   }
-
-      //   let geoStateAdditions = {
-      //     latitude: lat,
-      //     longitude: long,
-      //     currentCity: city
-      //   }
-
-      //   dispatch(getGeolocationFulfilledAction(geoStateAdditions))
-      // })
-      // .fail(function(error) {
-      //   console.log( error );
-      // })
-
-      // end older version
-      //////////////////////////////////////
-
+      .fail(function(error) {
+        console.log( error );
+      })
     }, error => {
       console.log(error);
       dispatch(getGeolocationRejectedAction());
