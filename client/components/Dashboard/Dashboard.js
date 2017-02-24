@@ -13,7 +13,10 @@ class Dashboard extends React.Component {
   constructor() {
     super();
 
-    this.state = { isModalOpen: false}
+    this.state = { 
+      isModalOpen: false,
+      databaseResponded: false
+    }
     this.handleSettingsButton = this.handleSettingsButton.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
@@ -33,6 +36,9 @@ class Dashboard extends React.Component {
           // USE OTHER FUNCTION THAN GET DATABASE -- TOO SLOW
           let data = snapshot.val();
           this.props.setDatabase(data);
+          context.setState({
+            databaseResponded: true
+          })
         });
       } else {
         console.error('NO USER');
@@ -82,16 +88,26 @@ class Dashboard extends React.Component {
     let componentStyle = `${styles.component}`;
     let dashContainer = `${styles.dashContainer}`;
     let defaultModule = <div className={componentStyle}><DefaultModule key={'abcd'}/></div>;
+    let loader = `${styles.loader}`;
 
-    return (
-      <div className={dashContainer}>
-        <div className={mainDashboardPanelCSS}>
-            {wrappers ? wrappers.map((wrapper, ind) => (<div className={componentStyle} key={ind}>
-                                         {wrapper}
-                                         </div>)) : defaultModule }
+    if (this.state.databaseResponded) {
+      return (
+        <div className={dashContainer}>
+          <div className={mainDashboardPanelCSS}>
+              {wrappers ? wrappers.map((wrapper, ind) => (<div className={componentStyle} key={ind}>
+                                           {wrapper}
+                                           </div>)) : defaultModule }
+          </div>
         </div>
-      </div>
-    )
+      )
+    } else {
+      return (
+        <div className={dashContainer}>
+          <img className={loader} src="https://firebasestorage.googleapis.com/v0/b/dashboardapp-3d3c7.appspot.com/o/rolling.gif?alt=media&token=85a30250-6288-4ec9-89a9-60e6a06071f7" alt=""/>
+        </div>
+      )
+    }
+
   }
 }
 
