@@ -10,7 +10,9 @@
     "clean": "rimraf dist/bundle.js",
     "dev": "NODE_ENV=local PORT=3000 node ./bin/www",
     "start": "npm run build && node ./bin/www",
-    "tunnel": "browser-sync start --proxy localhost:7770 --tunnel wesbos"
+    "tunnel": "browser-sync start --proxy localhost:7770 --tunnel wesbos",
+    "jest": "jest ./actionTests/*.spec.js",
+    "jest:watch": "npm run jest -- --watch"
   },
   "repository": {
     "type": "git",
@@ -74,9 +76,12 @@
     "webpack-hot-middleware": "^2.16.1"
   },
   "devDependencies": {
+    "babel-jest": "^19.0.0",
     "chai": "^3.5.0",
+    "enzyme": "^2.7.1",
     "expect": "^1.18.0",
     "expect-jsx": "^2.5.1",
+    "jest": "^19.0.2",
     "mocha": "^3.2.0",
     "react-addons-test-utils": "^15.0.2",
     "request": "^2.79.0"
