@@ -101,7 +101,27 @@ input {
 }
 
 /*Mobile CSS*/
-@media all and (max-width: 550px) {
+@media all and (max-width: 550px) and (-webkit-device-pixel-ratio: 3) {
+  .mainDashboardPanel {
+    height: 100vh;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    /*align-content: flex-start;*/
+    align-items: stretch;
+    overflow-y: scroll;
+
+  }
+
+  .component {
+    height: auto;
+    display: flex;
+    flex: 0 0 auto;
+    width: calc(100% - 20px);
+  }
+}
+
+@media all and (max-width: 600px) {
   .mainDashboardPanel {
     height: 100vh;
     flex-direction: column;
