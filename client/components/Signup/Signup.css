@@ -22,6 +22,12 @@
   width: 50%;
 }
 
+.loader {
+  max-height: 13em;
+  max-width: 13em;
+  align-self: auto;
+}
+
 @media all and (max-width: 550px) {
   .loginButtons {
     width: 95%;
