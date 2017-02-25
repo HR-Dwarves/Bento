@@ -76,6 +76,8 @@ class List extends React.Component {
 
     let cssClasses = `${styles.card}`;
     let deleteButton = `${styles.delete} delete`
+    let formStyle = `${styles.listForm} control`
+    let listButton = `${styles.listButton} button is-small is-light`
 
     let collapsed = this.props.collapsed.collapsed;
     let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
@@ -94,14 +96,12 @@ class List extends React.Component {
           <div className={collapsedStyle}>
             <div className="card-content">
               <form action="submit"
-                    className="control"
+                    className={formStyle}
                     onSubmit={(e) => this.handleSubmit(e)}
                     ref={(input) => this.listForm = input}
                     >
-                <p className="control">
-                  <input className="input is-small" type="text" ref={(input) => this.formInput = input}/>
-                </p>
-                <button className="button is-small is-light" type="sumbit">Add</button>
+                <input className="input is-small" type="text" ref={(input) => this.formInput = input}/>
+                <button className={listButton} type="sumbit">Add</button>
               </form>
             </div>
             <div className='card-content'>

@@ -10,6 +10,18 @@ header > * {
   /*position: relative;*/
 }
 
+.listForm {
+  display: flex;
+}
+
+.listForm > * {
+  /*flex: 1 1 100%;*/
+}
+
+.listButton {
+  margin-left: 1em;
+}
+
 .height {
   max-height: 1200px;
   -webkit-transition: max-height 0.3s; 
@@ -29,3 +41,4 @@ header > * {
   transition: max-height .3s;
   overflow: hidden;
 }
+
