@@ -1,5 +1,5 @@
-import * as ActionTypes from '../client/actions/actionTypes';
-import AuthenticationReducer from '../client/reducers/authentication';
+// import * as ActionTypes from '../client/actions/actionTypes';
+import AuthenticationReducer from '../../client/reducers/authentication';
 
 describe('Authentication Reducer', () => {
   it('should be a function', () => {

@@ -1,6 +1,6 @@
 import actionTypes from '../actions/actionTypes';
 
-function authentication(state = {}, action) {
+function authentication(state = {}, action = '') {
   switch(action.type) {
     case actionTypes.AuthenticateUser: {
       let { user } = action;
