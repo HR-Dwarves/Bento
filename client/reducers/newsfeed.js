@@ -1,6 +1,6 @@
 import actionTypes from '../actions/actionTypes';
 
-function newsfeed(state = {}, action) {
+function newsfeed(state = {}, action = '') {
   switch(action.type) {
   	case actionTypes.GetHnRequested: {
   	  return Object.assign({}, state, {

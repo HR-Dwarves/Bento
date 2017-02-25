@@ -1,5 +1,5 @@
-import * as ActionTypes from '../client/actions/actionTypes';
-import * as HackerNewsActions from '../client/actions/hackerNewsActions';
+// import * as ActionTypes from '../client/actions/actionTypes';
+import * as HackerNewsActions from '../../client/actions/hackerNewsActions';
 
 describe('Hacker News Actions', () => {
   describe('getHnPosts', () => {

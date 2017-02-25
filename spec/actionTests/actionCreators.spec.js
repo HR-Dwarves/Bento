@@ -1,5 +1,5 @@
 // import * as ActionTypes from '../client/actions/actionTypes';
-import * as Actions from '../client/actions/actionCreators';
+import * as Actions from '../../client/actions/actionCreators';
 
 describe('Action Creators', () => {
   describe('getDatabase', () => {

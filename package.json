@@ -6,12 +6,13 @@
   "scripts": {
     "build:webpack": "NODE_ENV=production webpack --config webpack.config.prod.js",
     "build": "npm run clean && npm run build:webpack",
-    "test": "NODE_ENV=production mocha './test/**/*.spec.js'",
+    "test": "npm run test-server && npm run jest",
+    "test-server": "NODE_ENV=production mocha './test/**/*.spec.js'",
     "clean": "rimraf dist/bundle.js",
     "dev": "NODE_ENV=local PORT=3000 node ./bin/www",
     "start": "npm run build && node ./bin/www",
     "tunnel": "browser-sync start --proxy localhost:7770 --tunnel wesbos",
-    "jest": "jest ./actionTests/*.spec.js",
+    "jest": "jest ./spec/**/*.spec.js",
     "jest:watch": "npm run jest -- --watch"
   },
   "repository": {

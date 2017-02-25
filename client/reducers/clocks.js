@@ -1,7 +1,7 @@
 import actionTypes from '../actions/actionTypes';
 
 // Every function should have three steps: requested, rejected and fulfilled
-function clocks(state = {}, action) {
+function clocks(state = {}, action = '') {
   switch(action.type) {
     case actionTypes.GetClocksRequested: {
       return Object.assign({}, state, {
@@ -50,4 +50,4 @@ function clocks(state = {}, action) {
   }
 }
 
-export default list;
+export default clocks;

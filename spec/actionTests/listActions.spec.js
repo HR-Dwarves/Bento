@@ -1,5 +1,5 @@
-import * as ActionTypes from '../client/actions/actionTypes';
-import * as ListActions from '../client/actions/listActions';
+// import * as ActionTypes from '../client/actions/actionTypes';
+import * as ListActions from '../../client/actions/listActions';
 
 describe('List Actions', () => {
   describe('getList', () => {
