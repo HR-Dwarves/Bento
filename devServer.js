@@ -13,12 +13,37 @@ app.use(require('webpack-dev-middleware')(compiler, {
   publicPath: config.output.publicPath
 }));
 
-app.use(function (req, res, next) {
-  origin = req.get('Origin') || '*';
-  res.setHeader('Access-Control-Allow-Headers', 'accept, authorization, content-type, x-requested-with');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
-  res.setHeader('Access-Control-Allow-Origin', origin);
-  next();
+app.get('/geolocation/:latlong', function(req, res) {
+
+  var lat = req.params.latlong.split(',')[0];
+  var long = req.params.latlong.split(',')[1];
+
+  // to be put in environment variable in google app engine and circle ci
+  // var googleApiKey = 'AIzaSyAmKXTu8S1QMv9BMQw3NzNAjHPZ8Vl5OOM';
+  var googleApiKey = process.env.GOOGLE_API_KEY_GEO;
+
+  let queryBase = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=';
+  let query = `${queryBase}${lat},${long}&key=${googleApiKey}`;
+
+  axios.get(query)
+    .then(function(response) {
+      var city;
+      // using if statement to get rid of errors in console
+      // console.log(response);
+      if (response.data.results[0]) {
+        city = response.data.results[0].address_components.reduce(function(acc, item) {
+          if (item.types.includes('locality')) {
+            return acc = item.long_name;
+          } else {
+            return acc;
+          }
+        });
+      }
+      res.send(city);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 });
 
 app.use(require('webpack-hot-middleware')(compiler));
