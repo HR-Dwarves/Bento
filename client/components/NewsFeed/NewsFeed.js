@@ -137,7 +137,7 @@ class NewsFeed extends React.Component {
   render() {
     let list = this.props.dashboard.modules[this.props.db_key].posts;
     let cssClasses = `${styles.test}`;
-    let spinner = `${styles.spinner}`
+    let spinner = `${styles.spinner}`;
     let newClasses = classnames('card-footer-item', this.props.dashboard.modules[this.props.db_key].new ? cssClasses : '');
     let topClasses = classnames('card-footer-item', this.props.dashboard.modules[this.props.db_key].new ? '' : cssClasses);
     let spinnerClasses = classnames('button is-loading', spinner);

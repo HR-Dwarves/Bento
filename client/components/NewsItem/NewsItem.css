@@ -1,6 +1,9 @@
 .newsItem {
   border-bottom: 1px solid #eee;
-  margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 28px;
 }
 
 .newsLink {
