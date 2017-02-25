@@ -1,9 +1,12 @@
 import React from 'react';
+import styles from './DefaultModule.css';
 
 class DefaultModule extends React.Component{
   render() {
+    let defaultStyle = `${styles.defaultCard} card`;
+
   	return(
-  	  <div className="card">
+  	  <div className={defaultStyle}>
   	    <header className="card-header">
   	      <div className="card-header-title">
   	        Welcome!
