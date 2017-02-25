@@ -1,7 +1,7 @@
 import actionTypes from '../actions/actionTypes';
 
 // Every function should have three steps: requested, rejected and fulfilled
-function list(state = {}, action) {
+function list(state = {}, action = '') {
   switch(action.type) {
     case actionTypes.GetListRequested: {
       return Object.assign({}, state, {

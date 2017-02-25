@@ -1,5 +1,5 @@
-import * as ActionTypes from '../client/actions/actionTypes';
-import ListReducer from '../client/reducers/list';
+// import * as ActionTypes from '../client/actions/actionTypes';
+import ListReducer from '../../client/reducers/list';
 
 describe('List Reducer', () => {
   it('should be a function', () => {
