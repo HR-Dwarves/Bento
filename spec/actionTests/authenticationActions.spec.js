@@ -1,5 +1,5 @@
-import * as ActionTypes from '../client/actions/actionTypes';
-import * as AuthenticationActions from '../client/actions/authenticationActions';
+// import * as ActionTypes from '../client/actions/actionTypes';
+import * as AuthenticationActions from '../../client/actions/authenticationActions';
 
 describe('Authentication Actions', () => {
   describe('authenticateUser', () => {

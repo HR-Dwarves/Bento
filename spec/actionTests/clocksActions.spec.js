@@ -1,5 +1,5 @@
-import * as ActionTypes from '../client/actions/actionTypes';
-import * as ClocksActions from '../client/actions/clocksActions';
+// import * as ActionTypes from '../client/actions/actionTypes';
+import * as ClocksActions from '../../client/actions/clocksActions';
 
 describe('Clocks Actions', () => {
   describe('getClocks', () => {
