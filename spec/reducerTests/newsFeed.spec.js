@@ -1,12 +1,14 @@
-import * as ActionTypes from '../client/actions/actionTypes';
-import NewsFeedReducer from '../client/reducers/newsfeed';
+// import ActionTypes from '../../client/actions/actionTypes';
+import NewsFeedReducer from '../../client/reducers/newsfeed';
 
 describe('newsfeed Reducer', () => {
   it('should be a function', () => {
-    expect(typeof NewsFeedReducer).toBe('function');
+    var test = typeof NewsFeedReducer;
+    expect(test).toBe('function');
   });
 
   it('should return an empty object on default', () => {
-    expect(NewsFeedReducer()).toEqual({});
+    var test1 = NewsFeedReducer();
+    expect(test1).toEqual({});
   });
 });
