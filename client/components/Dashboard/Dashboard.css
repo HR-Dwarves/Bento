@@ -1,11 +1,15 @@
 body {
   font-size: 12px;
+  background: #ECE9E6; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #ECE9E6 , #FFFFFF); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #ECE9E6 , #FFFFFF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 
-div, button, input, textarea {
+div, button, input, textarea, option, nav, span, p, form, select {
   /*font-family: 'El Messiri', serif;*/
   /*font-family: 'Sansita', serif;*/
-  /*font-family: 'Lato', serif;*/
+  font-family: 'Lato', serif;
   /*font-family: 'Roboto', serif;*/
   /*font-family: 'Slabo 27px', serif;*/
   /*font-family: 'Roboto Condensed', serif;*/
@@ -14,9 +18,9 @@ div, button, input, textarea {
   /*font-family: 'Lora', serif;*/
   /*font-family: 'Playfair Display', serif;*/
   /*font-family: 'Droid Serif', serif;*/
-  font-family: 'Italiana', serif;
+  /*font-family: 'Italiana', serif;*/
   font-size: 1em;
-  font-weight: 700;
+  font-weight: 900;
 }
 
 input, textarea {
@@ -32,6 +36,7 @@ input {
   width: 100vw;
   height: 100vh;
   /*border: 1px solid blue;*/
+  align-items: center;
   justify-content: center;
 }
 
@@ -44,12 +49,12 @@ input {
   padding-bottom: 45px;
   display: flex;
   flex-wrap: wrap;*/
-  padding-top: 4.5em; 
+  padding-top: 5em; 
 }
 
 .component {
   /*border: 1px solid goldenrod;*/
-  margin: 10px;
+  margin: .1em 1.1em;
   height: 100%;
 }
 
@@ -62,11 +67,8 @@ input {
 @media all and (max-width: 3000px) {
   .mainDashboardPanel {
     width: 100vw;
-    /*max-width: 1200px;*/
     height: 100vh;
     /*border: 1px solid red;*/
-    /*margin: 5px;*/
-
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -86,11 +88,9 @@ input {
 @media all and (max-width: 1100px) {
   .mainDashboardPanel {
     width: 100vw;
-    /*max-width: 1500px;*/
     height: 100vh;
     /*border: 1px solid red;*/
     margin: 0px;
-
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -145,4 +145,10 @@ input {
     flex: 0 0 auto;
     width: calc(100% - 20px);
   }
+}
+
+.loader {
+  max-height: 13em;
+  max-width: 13em;
+  align-self: auto;
 }

@@ -44,7 +44,7 @@ class Nav extends React.Component {
     let pageTitleCSS = `${styles.pageTitle} has-text-centered`
     let modalButtonStyle = `${styles.modalButton}`
     let userInfoStyle = `${styles.currentUser}`
-    let logoutButtonStyle = `${styles.logoutButton} button is-outlined is-primary`;
+    let logoutButtonStyle = `${styles.logoutButton} button is-outlined is-dark`;
     let usernameStyle = `${styles.username}`;
     let userWrapperStyle = `${styles.userWrapper} image is-48x48`;
     let modulesArray = Object.keys(ModuleList);
@@ -78,7 +78,7 @@ class Nav extends React.Component {
           <div className={pageTitleCSS}>dashboard</div>
         </Link>
         <div className={modalButtonStyle}>
-          <button style={displayButton} onClick={this.handleSettingsButton} className="button is-primary modal-button">
+          <button style={displayButton} onClick={this.handleSettingsButton} className="button is-dark modal-button">
             <i className="fa fa-plus" aria-hidden="true"></i>
           </button>
           <Modal {...this.props} isOpen={this.state.isModalOpen} onClose={this.closeModal} modules={modulesArray}></Modal>

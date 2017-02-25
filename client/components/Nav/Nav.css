@@ -2,7 +2,7 @@
   width: 100%;
   height: 70px;
   /* offset-x | offset-y | blur-radius | spread-radius | color */
-  /*box-shadow: 0px 2px 7px 1px rgba(0, 0, 0, 0.15);*/
+  /*box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.15);*/
   /*position: absolute;*/
   position: fixed;
   display: flex;
@@ -10,6 +10,10 @@
   background-color: white;
   justify-content: center;
   align-items: stretch;
+  background: #ECE9E6; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #ECE9E6 , #FFFFFF); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #ECE9E6 , #FFFFFF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 
 .mainNavPanel > * {
@@ -20,6 +24,7 @@
   font-family: 'Italiana', serif;
   font-size: 4.0em;
   font-weight: 600;
+  color: black;
 }
 
 .is-clearfix {
@@ -64,5 +69,9 @@
 @media all and (max-width: 800px) {
   .userWrapper {
     display: none;
+  }
+
+  .modalButton {
+    justify-content: center;
   }
 }

@@ -18,21 +18,27 @@
 
 .condition {
   text-align: left;
+  padding-left: .3em;
 }
 
 .location {
-  text-align: right;
+  text-align: left;
   overflow-wrap: normal;
+  font-size: 3.5em;
+  line-height: 100%;
 }
 
 .temperature {
-  font-size: 2.5em;
-  /*font-size: 40px;*/
+  font-size: 3em;
+  /*font-family: 'Slabo 27px', serif;*/
+  /*font-family: 'Sansita', serif;*/
+  font-family: 'Lato', serif;
+  /*font-family: 'Roboto', serif;*/
 }
 
 .image {
-  height: 90px;
-  width: 90px;
+  height: 5em;
+  width: 5em;
 }
 
 .searchIcon {
@@ -62,7 +68,8 @@
 
 .weatherIcon {
   font-size: 3rem;
-  padding: .5em;
+  padding: .2em;
+  align-self: flex-end;
 }
 
 input {
@@ -84,6 +91,12 @@ header > * {
 
 .height {
   max-height: 1200px;
+  -webkit-transition: max-height 0.3s; 
+  -moz-transition: max-height 0.3s; 
+  -ms-transition: max-height 0.3s; 
+  -o-transition: max-height 0.3s; 
+  transition: max-height .3s;
+  overflow: hidden;
 }
 
 .collapsedStyle {
@@ -92,6 +105,6 @@ header > * {
   -moz-transition: max-height 0.3s; 
   -ms-transition: max-height 0.3s; 
   -o-transition: max-height 0.3s; 
-  transition: max-height 1s;
+  transition: max-height .3s;
   overflow: hidden;
 }

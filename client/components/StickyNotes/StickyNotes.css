@@ -22,6 +22,12 @@ input {
 
 .height {
   max-height: 1200px;
+  -webkit-transition: max-height 0.3s; 
+  -moz-transition: max-height 0.3s; 
+  -ms-transition: max-height 0.3s; 
+  -o-transition: max-height 0.3s; 
+  transition: max-height .3s;
+  overflow: hidden;
 }
 
 .collapsedStyle {
@@ -30,6 +36,6 @@ input {
   -moz-transition: max-height 0.3s; 
   -ms-transition: max-height 0.3s; 
   -o-transition: max-height 0.3s; 
-  transition: max-height 1s;
+  transition: max-height .3s;
   overflow: hidden;
 }

@@ -4,7 +4,7 @@
 }
 
 .test {
-  background-color: #adf5ea;
+  background-color: #EBEBEB;
   font-weight: 900;
 }
 
@@ -15,6 +15,12 @@
 
 .height {
   max-height: 1200px;
+  -webkit-transition: max-height 0.3s; 
+  -moz-transition: max-height 0.3s; 
+  -ms-transition: max-height 0.3s; 
+  -o-transition: max-height 0.3s; 
+  transition: max-height .3s;
+  overflow: hidden;
 }
 
 .collapsedStyle {
@@ -23,6 +29,6 @@
   -moz-transition: max-height 0.3s; 
   -ms-transition: max-height 0.3s; 
   -o-transition: max-height 0.3s; 
-  transition: max-height 1s;
+  transition: max-height .3s;
   overflow: hidden;
 }

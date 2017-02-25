@@ -9,7 +9,8 @@ class Signup extends React.Component {
   constructor() {
     super();
     this.state = {
-      user: null
+      user: null,
+      authInProcess: false
     }
     this.authenticate = this.authenticate.bind(this);
     this.logCurrentUser = this.logCurrentUser.bind(this);
@@ -18,10 +19,16 @@ class Signup extends React.Component {
   authenticate(provider){
     var context = this;
     var authProvider = authProviders[provider];
+    this.setState({
+      authInProcess: true
+    })
     firebaseApp.auth().signInWithPopup(authProvider)
     .then(function(result) {
       // Save user information within auth container
-      console.log(result);
+      // console.log(result);
+      context.setState({
+        authInProcess: false
+      })
       context.props.authenticateUser(result);
       let { displayName, uid, email, photoURL } = result.user;
       let userRef = database.ref(`users/${uid}`);
@@ -42,6 +49,9 @@ class Signup extends React.Component {
     .catch(function(err) {
       alert('Login error, please try and login again');
       console.error(err);
+      context.setState({
+        authInProcess: false
+      })
     })
   }
 
@@ -62,53 +72,60 @@ class Signup extends React.Component {
     let githubIconStyle = `${styles.loginIcon} fa fa-github`
     let facebookIconStyle = `${styles.loginIcon} fa fa-facebook`
     let twitterIconStyle = `${styles.loginIcon} fa fa-twitter`
+    let loader = `${styles.loader}`;
 
-    return (
-      <nav className={styles.signup}>
-        <div className={styles.signupHeader}>
-          <span>SIGNUP</span>
-        </div>
-        <div className={styles.loginButtons}>
-          <button className={googleStyle} onClick={() => this.authenticate('google')}>
-            <span className={styles.buttonText}>
-              Google
-            </span>
-            <span className="icon">
-              <i className={googleIconStyle} aria-hidden="true"></i>
-            </span>
-          </button>
-          <button className={githubStyle} onClick={() => this.authenticate('github')}>
-            <span className={styles.buttonText}>
-              Github
-            </span>
-            <span className="icon">
-              <i className="fa fa-github" aria-hidden="true"></i>
-            </span>
-          </button>
-          <button className={facebookStyle} onClick={() => this.authenticate('facebook')}>
-            <span className={styles.buttonText}>
-              Facebook
-            </span>
-            <span className="icon">
-              <i className="fa fa-facebook-official" aria-hidden="true"></i>
-            </span>
-          </button>
-          <button className={twitterStyle} onClick={() => this.authenticate('twitter')}>
-            <span className={styles.buttonText}>
-              Twitter
-            </span>
-            <span className="icon">
-              <i className="fa fa-twitter" aria-hidden="true"></i>
-            </span>
-          </button>
-        </div>
-        <div>
-          <button className="button" onClick={this.logCurrentUser}>
-            Check Current User
-          </button>
-        </div>
-      </nav>
-    );
+
+    if (!this.state.authInProcess) {
+      return (
+        <nav className={styles.signup}>
+          <div className={styles.signupHeader}>
+            <span>SIGNUP</span>
+          </div>
+          <div className={styles.loginButtons}>
+            <button className={googleStyle} onClick={() => this.authenticate('google')}>
+              <span className={styles.buttonText}>
+                Google
+              </span>
+              <span className="icon">
+                <i className={googleIconStyle} aria-hidden="true"></i>
+              </span>
+            </button>
+            <button className={githubStyle} onClick={() => this.authenticate('github')}>
+              <span className={styles.buttonText}>
+                Github
+              </span>
+              <span className="icon">
+                <i className="fa fa-github" aria-hidden="true"></i>
+              </span>
+            </button>
+            <button className={facebookStyle} onClick={() => this.authenticate('facebook')}>
+              <span className={styles.buttonText}>
+                Facebook
+              </span>
+              <span className="icon">
+                <i className="fa fa-facebook-official" aria-hidden="true"></i>
+              </span>
+            </button>
+            <button className={twitterStyle} onClick={() => this.authenticate('twitter')}>
+              <span className={styles.buttonText}>
+                Twitter
+              </span>
+              <span className="icon">
+                <i className="fa fa-twitter" aria-hidden="true"></i>
+              </span>
+            </button>
+          </div>
+          <div>
+          </div>
+        </nav>
+      );
+    } else {
+      return (
+        <nav className={styles.signup}>
+          <img className={loader} src="https://firebasestorage.googleapis.com/v0/b/dashboardapp-3d3c7.appspot.com/o/rolling.gif?alt=media&token=85a30250-6288-4ec9-89a9-60e6a06071f7" alt=""/>
+        </nav>
+      );
+    }
   }
 }
 
