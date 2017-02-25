@@ -1,7 +1,7 @@
 import React from 'react';
 import firebaseApp from '../../base';
 import styles from './ModuleWrapper.css';
-import moduleList from '../../data/moduleList';
+import moduleMapping from '../../data/moduleMapping';
 import _ from 'underscore';
 const database = firebaseApp.database();
 
@@ -31,7 +31,7 @@ class ModuleWrapper extends React.Component {
     let type = this.props.type;
     let collapsed = this.state;
     let handleCollapseFunction = this.handleCollapse.bind(this);
-    let component = moduleList[type];
+    let component = moduleMapping[type];
     // let deleteButton = `${styles.delete} delete`;
     let deleteButton = `${styles.delete} icon fa fa-times-circle`;
     let wrapperStyle = `${styles.wrapper}`;
