@@ -3,12 +3,13 @@ body {
   background: #ECE9E6; /* fallback for old browsers */
   background: -webkit-linear-gradient(to left, #ECE9E6 , #FFFFFF); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to left, #ECE9E6 , #FFFFFF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 
-div, button, input, textarea {
+div, button, input, textarea, option, nav, span, p, form, select {
   /*font-family: 'El Messiri', serif;*/
   /*font-family: 'Sansita', serif;*/
-  /*font-family: 'Lato', serif;*/
+  font-family: 'Lato', serif;
   /*font-family: 'Roboto', serif;*/
   /*font-family: 'Slabo 27px', serif;*/
   /*font-family: 'Roboto Condensed', serif;*/
@@ -17,9 +18,9 @@ div, button, input, textarea {
   /*font-family: 'Lora', serif;*/
   /*font-family: 'Playfair Display', serif;*/
   /*font-family: 'Droid Serif', serif;*/
-  font-family: 'Italiana', serif;
+  /*font-family: 'Italiana', serif;*/
   font-size: 1em;
-  font-weight: 700;
+  font-weight: 900;
 }
 
 input, textarea {
