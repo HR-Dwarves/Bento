@@ -19,6 +19,7 @@ div, button, input, textarea, option, nav, span, p, form, select {
   /*font-family: 'Playfair Display', serif;*/
   /*font-family: 'Droid Serif', serif;*/
   /*font-family: 'Italiana', serif;*/
+  /*font-family: serif;*/
   font-size: 1em;
   font-weight: 900;
 }
@@ -32,8 +33,10 @@ input {
 }
 
 .dashContainer {
-  display: flex;
-  width: 100vw;
+  display: -webkit-box;   /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+  display: -ms-flexbox;  /* TWEENER - IE 10 */
+  display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+  display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */  width: 100vw;
   height: 100vh;
   /*border: 1px solid blue;*/
   align-items: center;
@@ -69,8 +72,10 @@ input {
     width: 100vw;
     height: 100vh;
     /*border: 1px solid red;*/
-    display: flex;
-    flex-wrap: wrap;
+    display: -webkit-box;   /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+    display: -ms-flexbox;  /* TWEENER - IE 10 */
+    display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+    display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */    flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
     align-content: flex-start;
