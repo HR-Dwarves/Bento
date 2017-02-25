@@ -8,11 +8,10 @@ import DefaultModule from '../components/DefaultModule/DefaultModule'
 
 var moduleList = {
   'List': List,
-  'NewsFeed': NewsFeed,
+  'Hacker News': NewsFeed,
   'Weather': WeatherDetails,
-  'StickyNotes': StickyNotes,
-  'LatLong': LatLong,
-
+  'Sticky Note': StickyNotes,
+  'Clock': LatLong
 };
 
 export default moduleList;
