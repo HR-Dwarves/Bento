@@ -50,4 +50,4 @@ function clocks(state = {}, action) {
   }
 }
 
-export default list;
+export default clocks;
