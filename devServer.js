@@ -3,6 +3,7 @@ var express = require('express');
 var cors = require('cors');
 var webpack = require('webpack');
 var config = require('./webpack.config.dev');
+var axios = require('axios');
 
 var app = express();
 app.use(cors());
