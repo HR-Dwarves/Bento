@@ -77,14 +77,17 @@ class Modal extends React.Component {
     if(!this.props.isOpen) {
       return null;
     }
+    let moduleHeader = `${styles.header} modal-card-head`
     let moduleStyles = `${styles.moduleName}`
+    let deleteButton = `${styles.delete} icon fa fa-times-circle`;
+
     return(
       <div className="modal is-active">
         <div className="modal-background"></div>
         <div className="modal-card">
-          <header className="modal-card-head">
+          <header className={moduleHeader}>
             <p className="modal-card-title">Modules</p>
-            <button className="delete" onClick={this.props.onClose}></button>
+            <i className={deleteButton} onClick={this.props.onClose} aria-hidden="true"></i>
           </header>
           <section className="modal-card-body">
             {this.props.modules.map((module, key) => <div key={key} className={moduleStyles}><span>{module}</span> 
