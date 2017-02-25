@@ -8,9 +8,13 @@ import DefaultModule from '../components/DefaultModule/DefaultModule'
 
 var moduleList = {
   'List': List,
+  'NewsFeed': NewsFeed,
   'Hacker News': NewsFeed,
   'Weather': WeatherDetails,
+  'WeatherDetails': WeatherDetails,
+  'StickyNotes': StickyNotes,
   'Sticky Note': StickyNotes,
+  'LatLong': LatLong,
   'Clock': LatLong
 };
 
