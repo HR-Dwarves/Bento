@@ -1,24 +1,37 @@
 .signup {
-  display: flex;
+  display: -webkit-box;    
+  display: -ms-flexbox;  
+  display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+  display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */  
   justify-content: center;
+  -webkit-justify-content: center;
   align-items: center;
+  -webkit-align-items: center;
   height: 100vh;
   flex-direction: column;
+  -webkit-flex-direction: column;
 }
 
 .signup > * {
   flex: 1 1 100%;
+  -webkit-flex: 1 1 100%;
   /*align-self: center;*/
 }
 
 .signupHeader {
   flex: 1 1 100%;
+  -webkit-flex: 1 1 100%;
   justify-content: flex-end;
+  -webkit-justify-content: flex-end;
 }
 
 .loginButtons {
-  display: flex;
+  display: -webkit-box;   /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+  display: -ms-flexbox;  /* TWEENER - IE 10 */
+  display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+  display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */  
   flex-direction: column;
+  -webkit-flex-direction: column;
   width: 50%;
 }
 
@@ -26,6 +39,7 @@
   max-height: 13em;
   max-width: 13em;
   align-self: auto;
+  -webkit-align-self: auto;
 }
 
 @media all and (max-width: 550px) {
@@ -36,9 +50,14 @@
 
 .loginButtons > * {
   flex: 1 1 100%;
+  -webkit-flex: 1 1 100%;
   margin: .2rem;
-  display: flex;
+  display: -webkit-box;   /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+  display: -ms-flexbox;  /* TWEENER - IE 10 */
+  display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+  display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */  
   align-items: center;
+  -webkit-align-items: center;
 }
 
 .loginIcon {
@@ -51,6 +70,7 @@
 
 .google {
   flex: 1 1 100%;
+  -webkit-flex: 1 1 100%;
   border: 1px solid #db3236;
   font-size: 1.5rem;
   font-weight: 700;
