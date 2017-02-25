@@ -1,5 +1,5 @@
-import * as ActionTypes from '../client/actions/actionTypes';
-import ClockReducer from '../client/reducers/clocks';
+// import * as ActionTypes from '../client/actions/actionTypes';
+import ClockReducer from '../../client/reducers/clocks';
 
 describe('Clocks Reducer', () => {
   it('should be a function', () => {
