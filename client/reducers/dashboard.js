@@ -1,7 +1,7 @@
 import actionTypes from '../actions/actionTypes';
 
 // Every function should have three steps: requested, rejected and fulfilled
-function dashboard(state = {}, action) {
+function dashboard(state = {}, action = '') {
   switch(action.type) {
     case actionTypes.GetDBRequested: {
       return Object.assign({}, state, {

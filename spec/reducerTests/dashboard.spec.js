@@ -1,5 +1,5 @@
-import * as ActionTypes from '../client/actions/actionTypes';
-import DashboardReducer from '../client/reducers/dashboard';
+// import * as ActionTypes from '../client/actions/actionTypes';
+import DashboardReducer from '../../client/reducers/dashboard';
 
 describe('Dashboard Reducer', () => {
   it('should be a function', () => {
