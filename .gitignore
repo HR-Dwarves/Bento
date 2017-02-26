@@ -38,4 +38,3 @@ bower_components/
 .flooignore
 
 ## API keys ##
-client/config/config.js
