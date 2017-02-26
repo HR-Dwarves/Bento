@@ -32,3 +32,7 @@
   transition: max-height .3s;
   overflow: hidden;
 }
+
+.newsButtons {
+  color: #B1D4C0;
+}

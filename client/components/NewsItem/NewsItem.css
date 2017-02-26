@@ -1,0 +1,11 @@
+.newsItem {
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 28px;
+}
+
+.newsLink {
+  color: #ff6600;
+}
