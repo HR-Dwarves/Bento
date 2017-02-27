@@ -159,7 +159,6 @@ class NewsFeed extends React.Component {
                   </select>
                 </span>
               </p>
-              Hacker News
             </div>
             <div className="card-header-icon">
               <span className="icon">
