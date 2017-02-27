@@ -18,6 +18,7 @@ class NewsFeed extends React.Component {
     this.updateButtons = this.updateButtons.bind(this);
     this.setLoadedToFalse = this.setLoadedToFalse.bind(this);
     this.removePosts = this.removePosts.bind(this);
+    this.handleNewsChange = this.handleNewsChange.bind(this);
     this.state = {
       posts: [],
       loaded: false
@@ -68,7 +69,6 @@ class NewsFeed extends React.Component {
     this.removePosts();
     this.updateButtons(e);
     this.getPosts(this, 'news/hacker-news/latest', this.props.db_key);
-    //this.getPosts(this, 'https://newsapi.org/v1/articles?source=hacker-news&sortBy=latest&apiKey=' + newsAPI.newsAPI, this.props.db_key);
     this.props.requestHnPosts();
   }
 
@@ -77,7 +77,6 @@ class NewsFeed extends React.Component {
     this.removePosts();
     this.updateButtons(e);
     this.getPosts(this, 'news/hacker-news/top', this.props.db_key);
-    //this.getPosts(this, 'https://newsapi.org/v1/articles?source=hacker-news&sortBy=top&apiKey=' + newsAPI.newsAPI, this.props.db_key);
     this.setLoadedToFalse();
     this.props.requestHnPosts();
   }
@@ -112,16 +111,28 @@ class NewsFeed extends React.Component {
     });
   }
 
+  handleNewsChange(e){
+    e.preventDefault();
+    const db_key = this.props.db_key;
+    let newsName = e.target.value;
+    this.removePosts();
+    this.setLoadedToFalse();
+    if(this.props.dashboard.modules[db_key].top) {
+      this.getPosts(this, 'news/'+ newsName + '/top' );
+    } else {
+      this.getPosts(this, 'news/'+ newsName + '/latest');
+    }
+  }
+
   componentWillMount(){
     const db_key = this.props.db_key
     this.removePosts();
     this.setLoadedToFalse();
     if(this.props.dashboard.modules[db_key].top){
+      this.removePosts();
       this.getPosts(this, 'news/hacker-news/top', db_key);
-      //this.getPosts(this,  'https://newsapi.org/v1/articles?source=hacker-news&sortBy=top&apiKey=' + newsAPI.newsAPI, db_key);
     } else {
       this.getPosts(this, 'news/hacker-news/latest', db_key);
-      //this.getPosts(this,  'https://newsapi.org/v1/articles?source=hacker-news&sortBy=latest&apiKey=' + newsAPI.newsAPI, db_key);
     }
   }
 
@@ -140,6 +151,14 @@ class NewsFeed extends React.Component {
         <div className="card">
           <header className="card-header">
             <div className="card-header-title">
+              <p className="control">
+                <span className="select">
+                  <select onChange={this.handleNewsChange}>
+                    <option value="hacker-news">Hacker News</option>
+                    <option value="associated-press">Associated Press</option>
+                  </select>
+                </span>
+              </p>
               Hacker News
             </div>
             <div className="card-header-icon">

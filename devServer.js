@@ -22,9 +22,6 @@ app.get('/news/:newsSource/:time', function(req, res) {
   .then(function(response) {
     //news API key
     var newsAPI = response.data['NEWS_API_KEY'];
-    console.log('this is the api key ' + newsAPI);
-    console.log('this is newsSource: '+ newsSource);
-    console.log('this is time: ' + time);
     var query =  'https://newsapi.org/v1/articles?source=' + newsSource + '&sortBy=' + time + '&apiKey=' + newsAPI;
     axios.get(query)
       .then(function(response) {
