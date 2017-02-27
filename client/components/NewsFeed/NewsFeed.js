@@ -19,7 +19,8 @@ class NewsFeed extends React.Component {
     this.setLoadedToFalse = this.setLoadedToFalse.bind(this);
     this.removePosts = this.removePosts.bind(this);
     this.state = {
-      posts: []
+      posts: [],
+      loaded: false
     };
   }
 
@@ -54,6 +55,9 @@ class NewsFeed extends React.Component {
       this.setState({
         posts: results
       });
+      this.setState({
+        loaded: true
+      })
       dbRef.once('value', snap => {
         let exists = snap.exists();
         if (exists) {
@@ -116,6 +120,9 @@ class NewsFeed extends React.Component {
   setLoadedToFalse(){
     const user = this.props.user.uid;
     const db_key = this.props.db_key
+    this.setState({
+      loaded: false
+    });
     database.ref(`users/${user}/modules/${db_key}`).update({
       loaded: false
     });
@@ -144,15 +151,23 @@ class NewsFeed extends React.Component {
   }
 
   render() {
-    let list = this.props.dashboard.modules[this.props.db_key].posts;
+    //let list = this.props.dashboard.modules[this.props.db_key].posts;
+    let list = this.state.posts;
     let cssClasses = `${styles.test}`;
     let spinner = `${styles.spinner}`;
     let newClasses = classnames('card-footer-item', `${styles.newsButtons}`, this.props.dashboard.modules[this.props.db_key].new ? cssClasses : '');
     let topClasses = classnames('card-footer-item', `${styles.newsButtons}`, this.props.dashboard.modules[this.props.db_key].new ? '' : cssClasses);
     let spinnerClasses = classnames('button is-loading', spinner);
-    let loaded = this.props.dashboard.modules[this.props.db_key].loaded;
+    //let loaded = this.props.dashboard.modules[this.props.db_key].loaded;
+    let loaded = this.state.loaded;
     let collapsed = this.props.collapsed.collapsed;
     let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
+    //if loaded
+      //if list.length !== 0
+        //map list
+      //empty array
+    //else 
+      //loaded
     return (
       <div className="">
         <div className="card">
@@ -168,7 +183,7 @@ class NewsFeed extends React.Component {
           </header>
           <div className={collapsedStyle}>
             <div className="card-content">
-              {loaded ? list ? list.map((item, key) => <NewsItem {...this.props}
+              {loaded ? list.length !== 0 ? list.map((item, key) => <NewsItem {...this.props}
                                             newsItem={item}
                                             key={key}/>) : [] : <a className={spinnerClasses}>Loading</a>}
             </div>
