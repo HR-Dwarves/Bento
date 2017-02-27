@@ -4,9 +4,9 @@ import Promise from 'bluebird';
 import classnames from 'classnames';
 import firebaseApp from '../../base'
 import styles from './NewsFeed.css';
+import newsAPI from './../../data/newsAPI';
 
 const database = firebaseApp.database();
-
 class NewsFeed extends React.Component {
   constructor(){
     super();
@@ -45,16 +45,9 @@ class NewsFeed extends React.Component {
     const user = this.props.user.uid;
 
     var postsArray = [];
-    for(var i = 0; i < 5; i++) {
-      postsArray.push(this.callHackerNewsApi(ids[i]));
-    }
-    Promise.all(postsArray)
-    .then((results) => {
-      this.props.getHnPosts(postsArray);
-      this.setState({
-        posts: results,
-        loaded: true
-      });
+    this.setState({
+      posts: ids,
+      loaded: true
     });
   }
 
@@ -74,7 +67,8 @@ class NewsFeed extends React.Component {
     e.preventDefault();
     this.removePosts();
     this.updateButtons(e);
-    this.getPosts(this, 'https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty', this.props.db_key);
+    this.getPosts(this, 'news/hacker-news/latest', this.props.db_key);
+    //this.getPosts(this, 'https://newsapi.org/v1/articles?source=hacker-news&sortBy=latest&apiKey=' + newsAPI.newsAPI, this.props.db_key);
     this.props.requestHnPosts();
   }
 
@@ -82,7 +76,8 @@ class NewsFeed extends React.Component {
     e.preventDefault();
     this.removePosts();
     this.updateButtons(e);
-    this.getPosts(this, 'https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty', this.props.db_key);
+    this.getPosts(this, 'news/hacker-news/top', this.props.db_key);
+    //this.getPosts(this, 'https://newsapi.org/v1/articles?source=hacker-news&sortBy=top&apiKey=' + newsAPI.newsAPI, this.props.db_key);
     this.setLoadedToFalse();
     this.props.requestHnPosts();
   }
@@ -122,9 +117,11 @@ class NewsFeed extends React.Component {
     this.removePosts();
     this.setLoadedToFalse();
     if(this.props.dashboard.modules[db_key].top){
-      this.getPosts(this,  'https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty', db_key);
+      this.getPosts(this, 'news/hacker-news/top', db_key);
+      //this.getPosts(this,  'https://newsapi.org/v1/articles?source=hacker-news&sortBy=top&apiKey=' + newsAPI.newsAPI, db_key);
     } else {
-      this.getPosts(this,  'https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty', db_key);
+      this.getPosts(this, 'news/hacker-news/latest', db_key);
+      //this.getPosts(this,  'https://newsapi.org/v1/articles?source=hacker-news&sortBy=latest&apiKey=' + newsAPI.newsAPI, db_key);
     }
   }
 
