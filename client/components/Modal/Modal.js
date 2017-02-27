@@ -41,13 +41,11 @@ class Modal extends React.Component {
     e.preventDefault();
     let user = this.props.user.uid;
     let dbRef = database.ref(`users/${user}/modules/`);
-    if(e.target.value === 'NewsFeed') {
+    if(e.target.value === 'Hacker News') {
       var newsFeedObj = {
         type: e.target.value,
         top: true,
-        new: false,
-        loaded: false,
-        newsItems: []
+        new: false
       };
       dbRef.push(newsFeedObj)
     } else {

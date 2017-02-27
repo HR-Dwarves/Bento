@@ -126,7 +126,6 @@ class NewsFeed extends React.Component {
     } else {
       this.getPosts(this,  'https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty', db_key);
     }
-
   }
 
   render() {
