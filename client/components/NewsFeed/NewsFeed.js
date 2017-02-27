@@ -114,9 +114,13 @@ class NewsFeed extends React.Component {
   handleNewsChange(e){
     e.preventDefault();
     const db_key = this.props.db_key;
+    const user = this.props.user.uid;
     let newsName = e.target.value;
     this.removePosts();
     this.setLoadedToFalse();
+    database.ref(`users/${user}/modules/${db_key}`).update({
+      newsSource: e.target.value
+    });
     if(this.props.dashboard.modules[db_key].top) {
       this.getPosts(this, 'news/'+ newsName + '/top' );
     } else {
@@ -125,14 +129,14 @@ class NewsFeed extends React.Component {
   }
 
   componentWillMount(){
-    const db_key = this.props.db_key
+    const db_key = this.props.db_key;
+    const newsSource = this.props.dashboard.modules[db_key]['newsSource'];
     this.removePosts();
     this.setLoadedToFalse();
     if(this.props.dashboard.modules[db_key].top){
-      this.removePosts();
-      this.getPosts(this, 'news/hacker-news/top', db_key);
+      this.getPosts(this, 'news/' + newsSource + '/top', db_key);
     } else {
-      this.getPosts(this, 'news/hacker-news/latest', db_key);
+      this.getPosts(this, 'news/' + newsSource + '/latest', db_key);
     }
   }
 
