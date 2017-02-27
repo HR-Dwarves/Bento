@@ -18,6 +18,9 @@ class NewsFeed extends React.Component {
     this.updateButtons = this.updateButtons.bind(this);
     this.setLoadedToFalse = this.setLoadedToFalse.bind(this);
     this.removePosts = this.removePosts.bind(this);
+    this.state = {
+      posts: []
+    };
   }
 
   getPosts(that, url, key){
@@ -47,7 +50,10 @@ class NewsFeed extends React.Component {
     Promise.all(postsArray)
     .then((results) => {
       this.props.getHnPosts(postsArray);
-      let dbRef = database.ref(`users/${user}/modules/${key}`)
+      let dbRef = database.ref(`users/${user}/modules/${key}`);
+      this.setState({
+        posts: results
+      });
       dbRef.once('value', snap => {
         let exists = snap.exists();
         if (exists) {
@@ -119,6 +125,9 @@ class NewsFeed extends React.Component {
     const user = this.props.user.uid;
     const db_key = this.props.db_key
     database.ref(`users/${user}/modules/${db_key}/posts`).remove();
+    this.setState({
+      posts: []
+    });
   }
 
   componentWillMount(){
@@ -144,7 +153,6 @@ class NewsFeed extends React.Component {
     let loaded = this.props.dashboard.modules[this.props.db_key].loaded;
     let collapsed = this.props.collapsed.collapsed;
     let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
-    console.log(collapsed);
     return (
       <div className="">
         <div className="card">
