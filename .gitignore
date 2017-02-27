@@ -39,3 +39,4 @@ bower_components/
 
 ## API keys ##
 /client/data/newsAPI.json
+/client/data/keys.json
