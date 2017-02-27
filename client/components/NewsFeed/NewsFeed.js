@@ -51,23 +51,11 @@ class NewsFeed extends React.Component {
     Promise.all(postsArray)
     .then((results) => {
       this.props.getHnPosts(postsArray);
-      let dbRef = database.ref(`users/${user}/modules/${key}`);
       this.setState({
-        posts: results
-      });
-      this.setState({
+        posts: results,
         loaded: true
-      })
-      dbRef.once('value', snap => {
-        let exists = snap.exists();
-        if (exists) {
-          dbRef.update({
-          loaded: true,
-          posts: results
-          });
-        }
       });
-    })
+    });
   }
 
   callHackerNewsApi(id, callback) {
@@ -118,27 +106,18 @@ class NewsFeed extends React.Component {
   }
 
   setLoadedToFalse(){
-    const user = this.props.user.uid;
-    const db_key = this.props.db_key
     this.setState({
-      loaded: false
-    });
-    database.ref(`users/${user}/modules/${db_key}`).update({
       loaded: false
     });
   }
 
   removePosts(){
-    const user = this.props.user.uid;
-    const db_key = this.props.db_key
-    database.ref(`users/${user}/modules/${db_key}/posts`).remove();
     this.setState({
       posts: []
     });
   }
 
   componentWillMount(){
-    const user = this.props.user.uid;
     const db_key = this.props.db_key
     this.removePosts();
     this.setLoadedToFalse();
@@ -151,23 +130,15 @@ class NewsFeed extends React.Component {
   }
 
   render() {
-    //let list = this.props.dashboard.modules[this.props.db_key].posts;
     let list = this.state.posts;
     let cssClasses = `${styles.test}`;
     let spinner = `${styles.spinner}`;
     let newClasses = classnames('card-footer-item', `${styles.newsButtons}`, this.props.dashboard.modules[this.props.db_key].new ? cssClasses : '');
     let topClasses = classnames('card-footer-item', `${styles.newsButtons}`, this.props.dashboard.modules[this.props.db_key].new ? '' : cssClasses);
     let spinnerClasses = classnames('button is-loading', spinner);
-    //let loaded = this.props.dashboard.modules[this.props.db_key].loaded;
     let loaded = this.state.loaded;
     let collapsed = this.props.collapsed.collapsed;
     let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
-    //if loaded
-      //if list.length !== 0
-        //map list
-      //empty array
-    //else 
-      //loaded
     return (
       <div className="">
         <div className="card">
