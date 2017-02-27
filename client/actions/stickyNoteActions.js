@@ -2,7 +2,7 @@ import ActionTypes from './actionTypes';
 import firebaseApp from '../base';
 const database = firebaseApp.database();
 
-function updateText(target, newStuff, db_key, user = 'testUser') {
+export function updateText(target, newStuff, db_key, user = 'testUser') {
   return dispatch => {
     // dispatch(updateTextRequestedAction());
     const stickyRef = database.ref(`users/${user}/modules/${db_key}/${target}`)
@@ -35,5 +35,3 @@ function updateTextFulfilledAction() {
     type: ActionTypes.UpdateStickyTextFulfilled
   };
 }
-
-export default updateText
