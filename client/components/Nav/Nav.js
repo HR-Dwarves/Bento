@@ -10,7 +10,10 @@ const database = firebaseApp.database();
 class Nav extends React.Component {
   constructor() {
     super();
-    this.state = {isModalOpen: false}
+    this.state = {
+      isModalOpen: false,
+      isFocusOpen: false
+    }
     this.handleSettingsButton = this.handleSettingsButton.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
@@ -25,6 +28,15 @@ class Nav extends React.Component {
   closeModal() {
     this.setState({
       isModalOpen: false
+    });
+  }
+
+  toggleFocus() {
+    var temp = !this.state.isFocusOpen
+    this.setState({
+      isFocusOpen: temp
+    }, () => {
+      console.log('isFocusOpen: ', this.state.isFocusOpen);
     });
   }
 
@@ -78,7 +90,7 @@ class Nav extends React.Component {
           <div className={pageTitleCSS}>dashboard</div>
         </Link>
         <div className={modalButtonStyle}>
-          <button style={displayButton} onClick={() => {console.log('make this render the focus component')}} className={logoutButtonStyle}>Focus</button>
+          <button style={displayButton} onClick={this.toggleFocus.bind(this)} className={logoutButtonStyle}>Focus</button>
           <button style={displayButton} onClick={this.handleSettingsButton} className="button is-dark modal-button">
             <i className="fa fa-plus" aria-hidden="true"></i>
           </button>
