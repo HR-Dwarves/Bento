@@ -2,7 +2,8 @@ import React from 'react';
 import firebaseApp from '../../base';
 import styles from './Dashboard.css';
 import Promise from 'bluebird';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group' // ES6
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import ReactGridLayout from 'react-grid-layout';
 
 
 // All modules now passed into ModuleWrapper
@@ -38,10 +39,10 @@ class Dashboard extends React.Component {
         database.ref(`users/${userId}`).on('value', (snapshot) => {
           // USE OTHER FUNCTION THAN GET DATABASE -- TOO SLOW
           let data = snapshot.val();
-          this.props.setDatabase(data);
           context.setState({
             databaseResponded: true
           })
+          this.props.setDatabase(data);
         });
       } else {
         console.error('NO USER');
@@ -101,7 +102,9 @@ class Dashboard extends React.Component {
           <div className={mainDashboardPanelCSS}>
             <ReactCSSTransitionGroup
                 // transitionName="module"
-                transitionName={{enter: "bounceInUp", leave: "bounceOutDown"}}
+                transitionName={{enter: "bounceInUp", 
+                leave: "bounceOutDown",
+                appear: "fadeInUp"}}
                 transitionEnterTimeout={1000}
                 transitionLeaveTimeout={1000}>
               {wrappers ? wrappers.map((wrapper, ind) => (
