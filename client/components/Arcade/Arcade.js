@@ -11,12 +11,11 @@ class Arcade extends React.Component {
     super(props);
 
     this.state = {
-      'currentGame': 'bubble bobble',
+      'currentGame': 'PACMAN',
       'games': {
         'PACMAN': 'http://www.classicgamesarcade.com/games/pacman.swf',
         'SPACE INVADERS': 'http://www.pizn.com/swf/1-space-invaders.swf',
-        'GALAGA': 'http://www.classicgamesarcade.com/games/galaga.swf',
-        'BUBBLE BOBBLE': 'http://www.classicgamesarcade.com/games/puzzle-bobble.swf'
+
       }
     }
   }
