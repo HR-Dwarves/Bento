@@ -19,7 +19,13 @@
     "type": "git",
     "url": "git+https://github.com/HR-Dwarves/Battleaxe.git"
   },
-  "author": "",
+  "author": "HR52-Dwarves",
+  "contributors": [
+    "Michael Tutt",
+    "Joey Laguna",
+    "Tony Lopes",
+    "Benson Ninh"
+  ],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/HR-Dwarves/Battleaxe/issues"

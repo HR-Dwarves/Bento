@@ -1,0 +1,23 @@
+.height {
+  max-height: 1200px;
+  -webkit-transition: max-height 0.3s; 
+  -moz-transition: max-height 0.3s; 
+  -ms-transition: max-height 0.3s; 
+  -o-transition: max-height 0.3s; 
+  transition: max-height .3s;
+  overflow: hidden;
+}
+
+.collapsedStyle {
+  max-height: 0;
+  -webkit-transition: max-height 0.3s; 
+  -moz-transition: max-height 0.3s; 
+  -ms-transition: max-height 0.3s; 
+  -o-transition: max-height 0.3s; 
+  transition: max-height .3s;
+  overflow: hidden;
+}
+
+.removeBorder {
+  border: none !important;
+}
