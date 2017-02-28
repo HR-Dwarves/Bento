@@ -136,6 +136,7 @@ class NewsFeed extends React.Component {
 
   render() {
     let list = this.state.posts;
+    list.length = 5;
     let selectedNewsSource = this.props.dashboard.modules[this.props.db_key].newsSource;
     let cssClasses = `${styles.test}`;
     let spinner = `${styles.spinner}`;
