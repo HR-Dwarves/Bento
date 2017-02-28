@@ -1,3 +1,8 @@
+.cardBody {
+  display: flex;
+  justify-content: center;
+}
+
 .height {
   max-height: 1200px;
   -webkit-transition: max-height 0.3s; 

@@ -42,6 +42,8 @@ class Arcade extends React.Component {
     let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
     let gameToRender = (this.state.currentGame).toUpperCase();
 
+    let contentStyle = `${styles.cardBody} 'card-content`
+
     return (
       <div className='card'>
         <header className='card-header'>
@@ -64,8 +66,10 @@ class Arcade extends React.Component {
           </div>
         </header>
         <div className={collapsedStyle}>
-          <div className='card-content'>
-            <embed className='arcade-game' key={gameToRender} src={this.state.games[gameToRender]} />
+          <div className={contentStyle}>
+            <div className='arcade-game'>
+              <embed key={gameToRender} src={this.state.games[gameToRender]} />
+            </div>
           </div>
         </div>
       </div>
