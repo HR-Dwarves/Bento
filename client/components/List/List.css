@@ -1,5 +1,10 @@
-.card {
+.listCard {
   color: red;
+  display: flex;
+}
+
+.listCard > * {
+  flex: 1 1 100%;
 }
 
 header {
