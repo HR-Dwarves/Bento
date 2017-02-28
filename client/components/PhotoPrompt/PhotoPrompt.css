@@ -17,3 +17,7 @@
   transition: max-height .3s;
   overflow: hidden;
 }
+
+.photoButton {
+  font-size: 4em;
+}

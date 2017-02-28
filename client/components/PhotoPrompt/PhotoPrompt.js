@@ -4,6 +4,8 @@ import firebaseApp from '../../base';
 import styles from './PhotoPrompt.css';
 import classnames from 'classnames';
 
+import PhotoEditor from '../PhotoEditor/PhotoEditor';
+
 
 const database = firebaseApp.database();
 
@@ -12,22 +14,23 @@ class PhotoPrompt extends React.Component {
     super(props);
 
     this.state = {
-      width: 320,    // We will scale the photo width to this
-      height: 0,     // This will be computed based on the input stream
+      width: null,    // We will scale the photo width to this
+      height: null,     // This will be computed based on the input stream
 
       // |streaming| indicates whether or not we're currently streaming
       // video from the camera. Obviously, we start at false.
-
       streaming: false,
 
+      track: null,
       // The various HTML elements we need to configure or control. These
       // will be set by the startup() function.
 
-      video: null,
-      canvas: null,
-      photo: null,
-      startbutton: null,
-      track: null
+      // video: null,
+      // canvas: null,
+      // photo: null,
+      cameraStreamSrc: null,
+      cameraIsActive: false,
+      photoSrc: null
     };
   }
 
@@ -36,106 +39,151 @@ class PhotoPrompt extends React.Component {
     // or make sure you can only have one (bc of #ids)
 
     // define all the elements we'll be using
-    this.setState({
-      video: document.getElementById('video'),
-      canvas: document.getElementById('canvas'),
-      photo: document.getElementById('photo'),
-      startbutton: document.getElementById('startbutton')
-    });
+    // this.setState({
+    //   // video: document.getElementById('video'),
+    //   // canvas: document.getElementById('canvas'),
+    //   photo: document.getElementById('photo'),
+    // });
   }
 
   componentWillUnmount() {
+    // make sure the video feed is off
     this.stopStream();
   }
 
   startupStream() {
 
+    this.setState({cameraIsActive: true});
+
     var context = this;
 
-    navigator.getMedia = ( navigator.getUserMedia ||
-                           navigator.webkitGetUserMedia ||
-                           navigator.mozGetUserMedia ||
-                           navigator.msGetUserMedia);
-
-    navigator.getMedia(
-      {
+    navigator.mediaDevices.getUserMedia({
         video: true,
         audio: false
-      },
-      function(stream) {
-
+      })
+      .then(function(stream) {
+        /* use the stream */
         context.setState({
           track: stream.getTracks()[0]
         });
+
+        console.log('stream', stream)
+        console.log('track', context.state.track);
 
         if (navigator.mozGetUserMedia) {
           video.mozSrcObject = stream;
         } else {
           var vendorURL = window.URL || window.webkitURL;
-          context.state.video.src = vendorURL.createObjectURL(stream);
-        }
-        context.state.video.play();
-      },
-      function(err) {
-        console.log("An error occured! " + err);
-      }
-    );
-
-    this.state.video.addEventListener('canplay', function(ev){
-      if (!context.streaming) {
-        context.setState({
-          height: context.state.video.videoHeight / (context.state.video.videoWidth/context.state.width)
-        })
-
-        // Firefox currently has a bug where the height can't be read from
-        // the video, so we will make assumptions if this happens.
-        if (isNaN(context.state.height)) {
-          constext.setState({
-            height: context.state.width / (4/3)
+          context.setState({
+            cameraStreamSrc: vendorURL.createObjectURL(stream)
           })
         }
+        context.cameraStream.play()
+      }).catch(function(err) {
+        /* handle the error */
+        console.log("An error occured! " + err);
+      });
 
-        context.state.video.setAttribute('width', context.state.width);
-        context.state.video.setAttribute('height', context.state.height);
-        context.state.canvas.setAttribute('width', context.state.width);
-        context.state.canvas.setAttribute('height', context.state.height);
 
+    // deprecated way
+    // navigator.getMedia = ( navigator.getUserMedia ||
+    //                        navigator.webkitGetUserMedia ||
+    //                        navigator.mozGetUserMedia ||
+    //                        navigator.msGetUserMedia);
+
+    // navigator.getMedia(
+    //   {
+    //     video: true,
+    //     audio: false
+    //   },
+    //   function(stream) {
+
+    //     context.setState({
+    //       track: stream.getTracks()[0]
+    //     });
+
+    //     if (navigator.mozGetUserMedia) {
+    //       video.mozSrcObject = stream;
+    //     } else {
+    //       var vendorURL = window.URL || window.webkitURL;
+    //       context.state.video.src = vendorURL.createObjectURL(stream);
+    //     }
+    //     context.state.video.play();
+    //   },
+    //   function(err) {
+    //     console.log("An error occured! " + err);
+    //   }
+    // );
+
+
+    this.cameraStream.addEventListener('canplay', function(ev){
+    // this.state.video.addEventListener('canplay', function(ev){
+      if (!context.streaming) {
+        // set height of video based on width
+        // context.setState({
+        //   height: context.cameraStream.videoHeight / (context.cameraStream.videoWidth/context.state.width)
+        // })
+
+        // // Firefox currently has a bug where the height can't be read from
+        // // the video, so we will make assumptions if this happens.
+        // if (isNaN(context.state.height)) {
+        //   constext.setState({
+        //     height: context.state.width / (4/3)
+        //   })
+        // }
         context.setState({
+          width: context.cameraStream.offsetWidth,
+          height: context.cameraStream.offsetHeight,
           streaming: true
         })
       }
     }, false);
 
-    this.state.startbutton.addEventListener('click', function(ev){
-      context.takepicture();
-      ev.preventDefault();
-    }, false);
+    // this.state.startbutton.addEventListener('click', function(ev){
+    //   context.takepicture();
+    //   ev.preventDefault();
+    // }, false);
 
     this.clearphoto();
   }
 
+  // takePhoto(ev) {
+  //   console.log('takePhoto')
+  //   this.takepicture();
+  //   ev.preventDefault();
+  // }
+
   stopStream() {
     this.state.track.stop();
+    this.setState({cameraIsActive: false})
   }
 
   clearphoto() {
-    var context = this.state.canvas.getContext('2d');
+    var context = this.canvas.getContext('2d');
     context.fillStyle = "#AAA";
-    context.fillRect(0, 0, this.state.canvas.width, this.state.canvas.height);
+    context.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-    var data = this.state.canvas.toDataURL('image/png');
-    this.state.photo.setAttribute('src', data);
+    var data = this.canvas.toDataURL('image/png');
+    this.setState({photoSrc: data})
+    // this.state.photo.setAttribute('src', data);
   }
 
-  takepicture() {
-    var context = canvas.getContext('2d');
-    if (this.state.width && this.state.height) {
-      this.state.canvas.width = this.state.width;
-      this.state.canvas.height = this.state.height;
-      context.drawImage(this.state.video, 0, 0, this.state.width, this.state.height);
+  takePicture() {
+    var context = this.canvas.getContext('2d');
 
-      var data = canvas.toDataURL('image/png');
-      this.state.photo.setAttribute('src', data);
+    // console.log('this.cameraStream', this.cameraStream);
+    // console.log('this.cameraStream.offsetWidth', this.cameraStream.offsetWidth);
+    // console.log('this.canvas', this.canvas);
+
+
+    if (this.state.width && this.state.height) {
+      this.canvas.width = this.state.width;
+      this.canvas.height = this.state.height;
+      context.drawImage(this.cameraStream, 0, 0, this.state.width, this.state.height);
+
+      var data = this.canvas.toDataURL('image/png');
+      this.setState({photoSrc: data});
+      // this.state.photo.setAttribute('src', data);
     } else {
       this.clearphoto();
     }
@@ -146,8 +194,10 @@ class PhotoPrompt extends React.Component {
     let collapsed = this.props.collapsed.collapsed;
     let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
 
+    let photoButton = `${styles.photoButton} icon`;
     return (
       <div className='card'>
+
         <header className="card-header">
           <p className="card-header-title">One Photo Every Day Challenge</p>
           <div className="card-header-icon">
@@ -164,15 +214,25 @@ class PhotoPrompt extends React.Component {
               <a className="button" onClick={this.stopStream.bind(this)}>Stop video stream</a>
 
               <div className="camera">
-                <video id="video">Video stream not available.</video>
-                <button id="startbutton">Take photo</button>
+                <video
+                  ref={vid => this.cameraStream = vid}
+                  src={this.state.cameraStreamSrc}>Video stream not available.
+                </video>
+
+                {this.state.cameraIsActive &&
+                  <div className={photoButton} ><i
+                    onClick={this.takePicture.bind(this)}
+                    className='fa fa-bullseye'
+                    aria-hidden='true'>
+                  </i></div>
+                }
               </div>
 
-              <canvas id="canvas">
-              </canvas>
+              <canvas ref={can => this.canvas = can}></canvas>
 
               <div className="output">
-                <img id="photo" alt="The screen capture will appear in this box." />
+                {/*<img id="photo" alt="The screen capture will appear in this box." />*/}
+                <PhotoEditor src={this.state.photoSrc}/>
               </div>
 
             </div>
