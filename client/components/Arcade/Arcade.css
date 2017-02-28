@@ -1,6 +1,6 @@
 .cardBody {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
 }
 
 .height {
@@ -25,4 +25,8 @@
 
 .removeBorder {
   border: none !important;
+}
+
+embed {
+  padding-top: .5em;
 }
