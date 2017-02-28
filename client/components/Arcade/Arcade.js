@@ -43,15 +43,16 @@ class Arcade extends React.Component {
     return (
       <div className='card'>
         <header className='card-header'>
-          <p className='card-header-title'>Arcade</p>
-          <span className='select'>
-            <select value={gameToRender} onChange={this.handleGameChange}>
-              <option value='PACMAN'>Pac-Man</option>
-              <option value='SPACE INVADERS'>Space Invaders</option>
-              <option value='GALAGA'>Galaga</option>
-              <option value='BUBBLE BOBBLE'>Bubble Bobble</option>
-            </select>
-          </span>
+          <p className='card-header-title'>
+            <span className='select'>
+              <select value={gameToRender} onChange={this.handleGameChange} className={styles.removeBorder}>
+                <option value='PACMAN'>Pac-Man</option>
+                <option value='SPACE INVADERS'>Space Invaders</option>
+                <option value='GALAGA'>Galaga</option>
+                <option value='BUBBLE BOBBLE'>Bubble Bobble</option>
+              </select>
+            </span>
+          </p>
           <div className='card-header-icon'>
             <span className='icon'>
               <i onClick={this.props.handleCollapseFunction} className='fa fa-gamepad' aria-hidden='true'></i>
