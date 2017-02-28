@@ -2,11 +2,14 @@ import React from 'react';
 import firebaseApp from '../../base';
 import styles from './Dashboard.css';
 import Promise from 'bluebird';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group' // ES6
+
 
 // All modules now passed into ModuleWrapper
 import DefaultModule from '../DefaultModule/DefaultModule';
 import ModuleWrapper from '../ModuleWrapper/ModuleWrapper';
 const database = firebaseApp.database();
+
 
 
 class Dashboard extends React.Component {
@@ -51,6 +54,8 @@ class Dashboard extends React.Component {
     if ("geolocation" in navigator) {
       this.props.getGeolocation();
     }
+
+    // this.hide();
   }
 
   handleSettingsButton() {
@@ -84,9 +89,9 @@ class Dashboard extends React.Component {
       }
     }
 
-    let mainDashboardPanelCSS = `${styles.mainDashboardPanel}`;
-    let componentStyle = `${styles.component}`;
     let dashContainer = `${styles.dashContainer}`;
+    let mainDashboardPanelCSS = `${styles.mainDashboardPanel}`;
+    let componentStyle = `${styles.component} animated`;
     let defaultModule = <div className={componentStyle}><DefaultModule key={'abcd'}/></div>;
     let loader = `${styles.loader}`;
 
@@ -94,9 +99,17 @@ class Dashboard extends React.Component {
       return (
         <div className={dashContainer}>
           <div className={mainDashboardPanelCSS}>
-              {wrappers ? wrappers.map((wrapper, ind) => (<div className={componentStyle} key={ind}>
-                                           {wrapper}
-                                           </div>)) : defaultModule }
+            <ReactCSSTransitionGroup
+                // transitionName="module"
+                transitionName={{enter: "bounceInUp", leave: "bounceOutDown"}}
+                transitionEnterTimeout={1000}
+                transitionLeaveTimeout={1000}>
+              {wrappers ? wrappers.map((wrapper, ind) => (
+                <div className={componentStyle} key={ind}>
+                    {wrapper}
+                </div>
+                )) : defaultModule }
+            </ReactCSSTransitionGroup>
           </div>
         </div>
       )
