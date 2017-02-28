@@ -56,6 +56,7 @@ class Focus extends React.Component {
                 <input className={styles.focusInput}
                         type='text'
                         maxLength='40'
+                        onBlur={this.handleInputFocus.bind(this)}
                       />
               </span>
             </div>
