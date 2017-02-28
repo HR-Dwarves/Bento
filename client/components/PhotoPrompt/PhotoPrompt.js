@@ -26,24 +26,31 @@ class PhotoPrompt extends React.Component {
       video: null,
       canvas: null,
       photo: null,
-      startbutton: null
+      startbutton: null,
+      track: null
     };
   }
 
   componentDidMount() {
-    this.startupPhoto();
+    // adjust this. Will fail when there are more than one instance of this module
+    // or make sure you can only have one (bc of #ids)
+
+    // define all the elements we'll be using
+    this.setState({
+      video: document.getElementById('video'),
+      canvas: document.getElementById('canvas'),
+      photo: document.getElementById('photo'),
+      startbutton: document.getElementById('startbutton')
+    });
   }
 
-  startupPhoto() {
+  componentWillUnmount() {
+    this.stopStream();
+  }
+
+  startupStream() {
 
     var context = this;
-
-    // adjust this. Will fail when there are more than one instance of this module
-    // or make sure you can only have one
-    this.state.video = document.getElementById('video');
-    this.state.canvas = document.getElementById('canvas');
-    this.state.photo = document.getElementById('photo');
-    this.state.startbutton = document.getElementById('startbutton');
 
     navigator.getMedia = ( navigator.getUserMedia ||
                            navigator.webkitGetUserMedia ||
@@ -56,6 +63,11 @@ class PhotoPrompt extends React.Component {
         audio: false
       },
       function(stream) {
+
+        context.setState({
+          track: stream.getTracks()[0]
+        });
+
         if (navigator.mozGetUserMedia) {
           video.mozSrcObject = stream;
         } else {
@@ -71,20 +83,26 @@ class PhotoPrompt extends React.Component {
 
     this.state.video.addEventListener('canplay', function(ev){
       if (!context.streaming) {
-        context.state.height = context.state.video.videoHeight / (context.state.video.videoWidth/context.state.width);
+        context.setState({
+          height: context.state.video.videoHeight / (context.state.video.videoWidth/context.state.width)
+        })
 
         // Firefox currently has a bug where the height can't be read from
         // the video, so we will make assumptions if this happens.
-
         if (isNaN(context.state.height)) {
-          context.state.height = context.state.width / (4/3);
+          constext.setState({
+            height: context.state.width / (4/3)
+          })
         }
 
         context.state.video.setAttribute('width', context.state.width);
         context.state.video.setAttribute('height', context.state.height);
         context.state.canvas.setAttribute('width', context.state.width);
         context.state.canvas.setAttribute('height', context.state.height);
-        context.state.streaming = true;
+
+        context.setState({
+          streaming: true
+        })
       }
     }, false);
 
@@ -94,6 +112,10 @@ class PhotoPrompt extends React.Component {
     }, false);
 
     this.clearphoto();
+  }
+
+  stopStream() {
+    this.state.track.stop();
   }
 
   clearphoto() {
@@ -136,6 +158,10 @@ class PhotoPrompt extends React.Component {
         <div className={collapsedStyle}>
           <div className="card-content">
             <div className="media-content">
+
+              <a className="button" onClick={this.startupStream.bind(this)}>Take a photo</a>
+              <a className="button">Import a photo</a>
+              <a className="button" onClick={this.stopStream.bind(this)}>Stop video stream</a>
 
               <div className="camera">
                 <video id="video">Video stream not available.</video>
