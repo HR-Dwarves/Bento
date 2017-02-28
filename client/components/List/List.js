@@ -74,7 +74,7 @@ class List extends React.Component {
         }
     }
 
-    let cssClasses = `${styles.card}`;
+    let cssClasses = `${styles.listCard}`;
     let deleteButton = `${styles.delete} delete`
     let formStyle = `${styles.listForm} control`
     let listButton = `${styles.listButton} button is-small is-light`
