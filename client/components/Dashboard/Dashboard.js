@@ -3,7 +3,7 @@ import firebaseApp from '../../base';
 import styles from './Dashboard.css';
 import Promise from 'bluebird';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import ReactGridLayout from 'react-grid-layout';
+import ReactGrid from '../ReactGrid/ReactGrid';
 
 
 // All modules now passed into ModuleWrapper
@@ -100,19 +100,7 @@ class Dashboard extends React.Component {
       return (
         <div className={dashContainer}>
           <div className={mainDashboardPanelCSS}>
-            <ReactCSSTransitionGroup
-                // transitionName="module"
-                transitionName={{enter: "bounceInUp", 
-                leave: "bounceOutDown",
-                appear: "fadeInUp"}}
-                transitionEnterTimeout={1000}
-                transitionLeaveTimeout={1000}>
-              {wrappers ? wrappers.map((wrapper, ind) => (
-                <div className={componentStyle} key={ind}>
-                    {wrapper}
-                </div>
-                )) : defaultModule }
-            </ReactCSSTransitionGroup>
+                <ReactGrid {...this.props}/>
           </div>
         </div>
       )
@@ -128,3 +116,20 @@ class Dashboard extends React.Component {
 }
 
 export default Dashboard;
+
+
+
+// {wrappers ? wrappers.map((wrapper, ind) => (
+//   <div className={componentStyle} key={ind}>
+//       {wrapper}
+//   </div>
+//   )) : defaultModule }
+
+// <ReactCSSTransitionGroup
+//     transitionName="module"
+//     transitionName={{enter: "bounceInUp", 
+//     leave: "bounceOutDown",
+//     appear: "fadeInUp"}}
+//     transitionEnterTimeout={1000}
+//     transitionLeaveTimeout={1000}>
+//     </ReactCSSTransitionGroup>
