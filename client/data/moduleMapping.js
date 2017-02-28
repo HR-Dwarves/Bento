@@ -6,6 +6,7 @@ import Modal from '../components/Modal/Modal';
 import LatLong from '../components/LatLong/LatLong';
 import Arcade from '../components/Arcade/Arcade';
 import DefaultModule from '../components/DefaultModule/DefaultModule';
+import PhotoPrompt from '../components/PhotoPrompt/PhotoPrompt';
 
 var moduleList = {
   'List': List,
@@ -18,6 +19,7 @@ var moduleList = {
   'LatLong': LatLong,
   'Clock': LatLong,
   'Arcade': Arcade,
+  'One Photo Per Day': PhotoPrompt
 };
 
 export default moduleList;
