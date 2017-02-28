@@ -34,7 +34,7 @@ class ModuleWrapper extends React.Component {
     let component = moduleMapping[type];
     // let deleteButton = `${styles.delete} delete`;
     let deleteButton = `${styles.delete} icon fa fa-times-circle`;
-    let wrapperStyle = `${styles.wrapper}`;
+    let wrapperStyle = `${styles.wrapper} grid-item`;
 
     return (
       <div className={wrapperStyle}>
