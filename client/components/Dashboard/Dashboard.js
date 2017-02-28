@@ -72,28 +72,28 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    let dashboard = this.props.dashboard;
-    let modules, wrappers;
+    // let dashboard = this.props.dashboard;
+    // let modules, wrappers;
 
-    if (dashboard) {
-      modules = dashboard.modules
-      if (modules) {
-        wrappers = Object.keys(modules).map((moduleKey) => {
-          var additionalProps = {
-            key: moduleKey,
-            db_key: moduleKey,
-            type: modules[moduleKey].type
-          }
-          var newProps = Object.assign({}, this.props, additionalProps)
-          return React.createElement(ModuleWrapper, newProps);
-        });
-      }
-    }
+    // if (dashboard) {
+    //   modules = dashboard.modules
+    //   if (modules) {
+    //     wrappers = Object.keys(modules).map((moduleKey) => {
+    //       var additionalProps = {
+    //         key: moduleKey,
+    //         db_key: moduleKey,
+    //         type: modules[moduleKey].type
+    //       }
+    //       var newProps = Object.assign({}, this.props, additionalProps)
+    //       return React.createElement(ModuleWrapper, newProps);
+    //     });
+    //   }
+    // }
 
     let dashContainer = `${styles.dashContainer}`;
     let mainDashboardPanelCSS = `${styles.mainDashboardPanel}`;
-    let componentStyle = `${styles.component} animated`;
-    let defaultModule = <div className={componentStyle}><DefaultModule key={'abcd'}/></div>;
+    // let componentStyle = `${styles.component} animated`;
+    // let defaultModule = <div className={componentStyle}><DefaultModule key={'abcd'}/></div>;
     let loader = `${styles.loader}`;
 
     if (this.state.databaseResponded) {
