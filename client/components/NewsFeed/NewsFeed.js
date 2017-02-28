@@ -4,7 +4,7 @@ import Promise from 'bluebird';
 import classnames from 'classnames';
 import firebaseApp from '../../base'
 import styles from './NewsFeed.css';
-import newsAPI from './../../data/newsAPI';
+import newsSourceMap from './NewsSourceMap';
 
 const database = firebaseApp.database();
 class NewsFeed extends React.Component {
@@ -12,7 +12,6 @@ class NewsFeed extends React.Component {
     super();
     this.getPosts = this.getPosts.bind(this);
     this.getPostContent = this.getPostContent.bind(this);
-    this.callHackerNewsApi = Promise.promisify(this.callHackerNewsApi, {context: this});
     this.updateNew = this.updateNew.bind(this);
     this.updateTop = this.updateTop.bind(this);
     this.updateButtons = this.updateButtons.bind(this);
@@ -49,17 +48,6 @@ class NewsFeed extends React.Component {
     this.setState({
       posts: ids,
       loaded: true
-    });
-  }
-
-  callHackerNewsApi(id, callback) {
-    $.ajax({
-      url: 'https://hacker-news.firebaseio.com/v0/item/' + id + '.json?print=pretty',
-      type: 'GET',
-      dataType: 'json',
-      success: function(res) {
-        callback(null, res);
-      }
     });
   }
 
@@ -121,10 +109,12 @@ class NewsFeed extends React.Component {
     database.ref(`users/${user}/modules/${db_key}`).update({
       newsSource: e.target.value
     });
-    if(this.props.dashboard.modules[db_key].top) {
-      this.getPosts(this, 'news/'+ newsName + '/top' );
-    } else {
-      this.getPosts(this, 'news/'+ newsName + '/latest');
+    if(e.target.value !== 'none'){
+      if(this.props.dashboard.modules[db_key].top) {
+        this.getPosts(this, 'news/'+ newsName + '/top' );
+      } else {
+        this.getPosts(this, 'news/'+ newsName + '/latest');
+      }
     }
   }
 
@@ -158,11 +148,14 @@ class NewsFeed extends React.Component {
               <p className="control">
                 <span className="select">
                   <select onChange={this.handleNewsChange}>
+                    <option value="none">Change news source</option>
                     <option value="hacker-news">Hacker News</option>
                     <option value="associated-press">Associated Press</option>
+                    <option value="business-insider">Business Insider</option>
                   </select>
                 </span>
               </p>
+              {newsSourceMap[this.props.dashboard.modules[this.props.db_key].newsSource]}
             </div>
             <div className="card-header-icon">
               <span className="icon">
