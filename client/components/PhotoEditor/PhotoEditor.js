@@ -13,7 +13,9 @@ class PhotoEditor extends React.Component {
   render() {
     // let cssClasses = `${styles.card} column`; // just for reference for form.
     return (
-      <img src={this.props.src} />
+      <div>
+        <img src={this.props.src} />
+      </div>
     )
   }
 }

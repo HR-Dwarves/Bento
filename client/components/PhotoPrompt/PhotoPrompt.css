@@ -18,6 +18,15 @@
   overflow: hidden;
 }
 
-.photoButton {
+/*.previewerCanvas {
+  display: none;
+}*/
+
+.photoButtonContainer {
   font-size: 4em;
+  width: 100%;
+}
+
+.photoButton:hover {
+  cursor: pointer;
 }
