@@ -52,19 +52,23 @@ class NewsFeed extends React.Component {
   }
 
   updateNew(e){
+    const db_key = this.props.db_key;
+    const newsSource = this.props.dashboard.modules[db_key].newsSource;
     this.setLoadedToFalse();
     e.preventDefault();
     this.removePosts();
     this.updateButtons(e);
-    this.getPosts(this, 'news/hacker-news/latest', this.props.db_key);
+    this.getPosts(this, 'news/' + newsSource + '/latest', this.props.db_key);
     this.props.requestHnPosts();
   }
 
   updateTop(e){
+    const db_key = this.props.db_key;
+    const newsSource = this.props.dashboard.modules[db_key].newsSource;
     e.preventDefault();
     this.removePosts();
     this.updateButtons(e);
-    this.getPosts(this, 'news/hacker-news/top', this.props.db_key);
+    this.getPosts(this, 'news/' + newsSource + '/top', this.props.db_key);
     this.setLoadedToFalse();
     this.props.requestHnPosts();
   }
