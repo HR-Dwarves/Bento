@@ -152,6 +152,8 @@ class NewsFeed extends React.Component {
                     <option value="hacker-news">Hacker News</option>
                     <option value="associated-press">Associated Press</option>
                     <option value="business-insider">Business Insider</option>
+                    <option value="buzzfeed">Buzzfeed</option>
+                    <option value="time">Time</option>
                   </select>
                 </span>
               </p>
