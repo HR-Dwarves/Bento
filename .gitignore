@@ -38,3 +38,4 @@ bower_components/
 .flooignore
 
 ## API keys ##
+/client/data/newsAPI.json

@@ -45,7 +45,8 @@ class Modal extends React.Component {
       var newsFeedObj = {
         type: e.target.value,
         top: true,
-        new: false
+        new: false,
+        newsSource: 'hacker-news'
       };
       dbRef.push(newsFeedObj)
     } else {
