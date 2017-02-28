@@ -5,6 +5,7 @@ import classnames from 'classnames';
 import firebaseApp from '../../base'
 import styles from './NewsFeed.css';
 import newsSourceMap from './NewsSourceMap';
+import axios from 'axios';
 
 const database = firebaseApp.database();
 class NewsFeed extends React.Component {
@@ -27,17 +28,14 @@ class NewsFeed extends React.Component {
   getPosts(that, url, key){
     let feed = url;
     let itemIdArray = [];
-    $.ajax({
-      url: feed,
-      type: 'GET',
-      dataType: 'json', // added data type
-      success: function(res) {
-        that.getPostContent(res, key);
-      },
-      error: function(err) {
-        console.log('got an err');
-        console.log(err);
-      }
+    axios.get(feed)
+    .then(function(response) {
+      console.log(response);
+      that.getPostContent(response.data, key);
+    })
+    .catch(function(error) {
+      console.log('got an error:');
+      console.log(error);
     });
   }
 
