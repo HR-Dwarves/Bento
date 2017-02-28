@@ -132,10 +132,12 @@ class NewsFeed extends React.Component {
 
   render() {
     let list = this.state.posts;
+    let selectedNewsSource = this.props.dashboard.modules[this.props.db_key].newsSource;
     let cssClasses = `${styles.test}`;
     let spinner = `${styles.spinner}`;
     let newClasses = classnames('card-footer-item', `${styles.newsButtons}`, this.props.dashboard.modules[this.props.db_key].new ? cssClasses : '');
     let topClasses = classnames('card-footer-item', `${styles.newsButtons}`, this.props.dashboard.modules[this.props.db_key].new ? '' : cssClasses);
+    let newsFeedTitle = classnames(`control ${styles.removeBorder}`)
     let spinnerClasses = classnames('button is-loading', spinner);
     let loaded = this.state.loaded;
     let collapsed = this.props.collapsed.collapsed;
@@ -145,9 +147,9 @@ class NewsFeed extends React.Component {
         <div className="card">
           <header className="card-header">
             <div className="card-header-title">
-              <p className="control">
+              <p className='control'>
                 <span className="select">
-                  <select onChange={this.handleNewsChange}>
+                  <select value={selectedNewsSource} onChange={this.handleNewsChange} className={`${styles.removeBorder}`}>
                     <option value="none">Change news source</option>
                     <option value="hacker-news">Hacker News</option>
                     <option value="associated-press">Associated Press</option>
@@ -157,7 +159,6 @@ class NewsFeed extends React.Component {
                   </select>
                 </span>
               </p>
-              {newsSourceMap[this.props.dashboard.modules[this.props.db_key].newsSource]}
             </div>
             <div className="card-header-icon">
               <span className="icon">
