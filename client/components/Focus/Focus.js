@@ -10,6 +10,18 @@ class Focus extends React.Component {
     super(props);
   }
 
+  handleInputFocus(event) {
+    const db_key = this.props.db_key;
+    const user = this.props.user.uid;
+    const target = 'focusBody';
+    const db_ref = database.ref(`users/${user}/modules/${db_key}/${target}`);
+    let newText = event.target.value;
+
+    db_ref.set(newText);
+
+    console.log('YOUR NEW FOCUS IS: ', newText);
+  }
+
   render() {
     let dashboard = this.props.dashboard;
     let db_key = this.props.db_key;
