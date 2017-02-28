@@ -78,6 +78,7 @@ class Nav extends React.Component {
           <div className={pageTitleCSS}>dashboard</div>
         </Link>
         <div className={modalButtonStyle}>
+          <button style={displayButton} onClick={() => {console.log('make this render the focus component')}} className={logoutButtonStyle}>Focus</button>
           <button style={displayButton} onClick={this.handleSettingsButton} className="button is-dark modal-button">
             <i className="fa fa-plus" aria-hidden="true"></i>
           </button>
