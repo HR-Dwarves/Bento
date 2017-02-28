@@ -1,0 +1,43 @@
+.focusStyle {
+  display: flex;
+  justify-content: center;
+}
+
+.focusContent {
+  display: flex;
+  justify-content: center;
+}
+
+.focusInput {
+  display: block;
+  margin: 0px auto;
+  border: 0;
+  background: 0;
+  border-bottom: 3px solid black;
+  text-align: center;
+  width: 90%;
+}
+
+.height {
+  max-height: 1200px;
+  -webkit-transition: max-height 0.3s; 
+  -moz-transition: max-height 0.3s; 
+  -ms-transition: max-height 0.3s; 
+  -o-transition: max-height 0.3s; 
+  transition: max-height .3s;
+  overflow: hidden;
+}
+
+.collapsedStyle {
+  max-height: 0;
+  -webkit-transition: max-height 0.3s; 
+  -moz-transition: max-height 0.3s; 
+  -ms-transition: max-height 0.3s; 
+  -o-transition: max-height 0.3s; 
+  transition: max-height .3s;
+  overflow: hidden;
+}
+
+input:focus {
+  outline: none;
+}
