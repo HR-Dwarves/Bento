@@ -160,6 +160,11 @@ class NewsFeed extends React.Component {
                     <option value="business-insider">Business Insider</option>
                     <option value="buzzfeed">Buzzfeed</option>
                     <option value="time">Time</option>
+                    <option value="the-economist">The Economist</option>
+                    <option value="techradar">TechRadar</option>
+                    <option value="techcrunch">TechCrunch</option>
+                    <option value="newsweek">Newsweek</option>
+                    <option value="fortune">Fortune</option>
                   </select>
                 </span>
               </p>
