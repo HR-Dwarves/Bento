@@ -19,9 +19,23 @@ class Arcade extends React.Component {
         'BUBBLE BOBBLE': 'http://www.classicgamesarcade.com/games/puzzle-bobble.swf'
       }
     }
+
+    this.handleGameChange = this.handleGameChange.bind(this);
+  }
+
+  handleGameChange(e) {
+    e.preventDefault();
+    console.log('CHANGE GAME');
+    const db_key = this.props.db_key;
+    const gameSource = this.props.dashboard.modules[db_key]['game'];
+
+    this.setState({
+      'currentGame': e.target.value
+    });
   }
 
   render() {
+    let context = this;
     let collapsed = this.props.collapsed.collapsed;
     let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
     let gameToRender = (this.state.currentGame).toUpperCase();
@@ -37,13 +51,22 @@ class Arcade extends React.Component {
           </div>
         </header>
         <div className={collapsedStyle}>
-          <div className='card-content'>
-            <embed src={this.state.games[gameToRender]} />
-          </div>
+          TEST
         </div>
       </div>
     );
   }
 };
+          // <span className='select'>
+          //   <select value={gameToRender} onChange={this.handleGameChange}>
+          //     <option value='PACMAN'>Pac-Man</option>
+          //     <option value='SPACE INVADERS'>Space Invaders</option>
+          //     <option value='GALAGA'>Galaga</option>
+          //     <option value='BUBBLE BOBBLE'>Bubble Bobble</option>
+          //   </select>
+          // </span>
 
+          // <div className='card-content'>
+          //   <embed className='arcade-game' key={gameToRender} src={this.state.games[gameToRender]} />
+          // </div>
 export default Arcade;
