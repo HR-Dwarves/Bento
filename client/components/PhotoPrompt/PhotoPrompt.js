@@ -5,6 +5,7 @@ import styles from './PhotoPrompt.css';
 import classnames from 'classnames';
 
 import PhotoEditor from '../PhotoEditor/PhotoEditor';
+import PhotoDisplayer from '../PhotoDisplayer/PhotoDisplayer';
 
 
 const storageBucket = firebaseApp.storage();
@@ -63,7 +64,7 @@ class PhotoPrompt extends React.Component {
   render() {
     let photos = this.props.dashboard.modules[this.props.db_key].photos;
 
-    console.log('photos', photos);
+    console.log(photos);
 
     let collapsed = this.props.collapsed.collapsed;
     let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
@@ -118,6 +119,15 @@ class PhotoPrompt extends React.Component {
                   Make it today's photo
                 </a>
               }
+
+              {photos &&
+                Object.keys(photos).map((key, index) => {
+                // console.log('photo', photo)
+                return <PhotoDisplayer
+                        key={index}
+                        src={photos[key].downloadUrl}
+                        title={photos[key].name} />
+              })}
 
             </div>
           </div>
