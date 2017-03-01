@@ -139,6 +139,10 @@ class NewsFeed extends React.Component {
     let selectedNewsSource = this.props.dashboard.modules[this.props.db_key].newsSource;
     let cssClasses = `${styles.test}`;
     let spinner = `${styles.spinner}`;
+    let newsfeedStyles = `${styles.newsfeed} card`;
+    let headerStyles = `${styles.header} card-header`;
+    let footerStyles = `${styles.footer} card-footer`;
+    let contentStyles = `${styles.content} card-content`;
     let newClasses = classnames('card-footer-item', `${styles.newsButtons}`, this.props.dashboard.modules[this.props.db_key].new ? cssClasses : '');
     let topClasses = classnames('card-footer-item', `${styles.newsButtons}`, this.props.dashboard.modules[this.props.db_key].new ? '' : cssClasses);
     let newsFeedTitle = classnames(`control ${styles.removeBorder}`)
@@ -147,9 +151,8 @@ class NewsFeed extends React.Component {
     let collapsed = this.props.collapsed.collapsed;
     let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
     return (
-      <div className="">
-        <div className="card">
-          <header className="card-header">
+        <div className={newsfeedStyles}>
+          <header className={headerStyles}>
             <div className="card-header-title">
               <p className='control'>
                 <span className="select">
@@ -170,20 +173,17 @@ class NewsFeed extends React.Component {
               </span>
             </div>
           </header>
-          <div className={collapsedStyle}>
-            <div className="card-content">
+            <div className={contentStyles}>
               {loaded ? list.length !== 0 ? list.map((item, key) => <NewsItem {...this.props}
                                             newsItem={item}
                                             key={key}/>) : [] : <a className={spinnerClasses}>Loading</a>}
             </div>
-            <footer className="card-footer">
+            <footer className={footerStyles}>
               <a value="New" className={newClasses} onClick={this.updateNew}>New</a>
               <a value="Top" className={topClasses} onClick={this.updateTop}>Top</a>
             </footer>
           </div>
-        </div>
-      </div>
-    )
+      )
   }
 };
 
