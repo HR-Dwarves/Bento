@@ -74,18 +74,20 @@ class List extends React.Component {
         }
     }
 
-    let cssClasses = `${styles.card}`;
+
+    let cssClasses = `${styles.listCard} card`;
+    let headerStyle = `${styles.header} card-header`
     let deleteButton = `${styles.delete} delete`
     let formStyle = `${styles.listForm} control`
     let listButton = `${styles.listButton} button is-small is-light`
+    let listItems = `${styles.listItems} card-content`
 
     let collapsed = this.props.collapsed.collapsed;
     let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
 
     return (
-      <div className={cssClasses}>
-        <div className='card'>
-          <header className="card-header">
+        <div className={cssClasses}>
+          <header className={headerStyle}>
             <p className="card-header-title">List</p>
             <span href="" className="card-header-icon">
               <span className="icon">
@@ -104,17 +106,16 @@ class List extends React.Component {
                 <button className={listButton} type="sumbit">Add</button>
               </form>
             </div>
-            <div className='card-content'>
+            <div className={listItems}>
               <div className='media-content'>
                 {items ? keys.map((key, ind) => <ListItem {...this.props} 
-                                                                       key={key}
-                                                                       itemKey={key}
-                                                                       listItem={items[key]}/>) : []}
+                                                 key={key}
+                                                 itemKey={key}
+                                                 listItem={items[key]}/>) : []}
               </div>
             </div>
           </div>
         </div>
-      </div>
     )
   }
 };

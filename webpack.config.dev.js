@@ -30,5 +30,10 @@ module.exports = {
         loader: 'style-loader!css-loader?modules&localIdentName=[name]---[local]---[hash:base64:5]'
       }
     ]
+  },
+  resolve: {
+    extensions: ['.webpack.js', '.web.js', '.js', '.jsx'],
+    alias: {'react-grid-layout': path.join(__dirname, '/index-dev.js')}
   }
 };
+

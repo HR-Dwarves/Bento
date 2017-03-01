@@ -1,6 +1,30 @@
+.newsfeed {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  flex: 0 0 auto;
+}
+
+.footer {
+  flex: 0 0 auto;
+}
+
+.content {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+.content > * {
+  flex: 1 0 auto;
+}
+
 .newsToggles {
-  display: inline-flex;
-  margin-right: 25px;
+  /*display: inline-flex;*/
+  /*margin-right: 25px;*/
 }
 
 .test {
@@ -10,8 +34,7 @@
 
 .spinner {
   position: inherit;
-  border: 0px;
-  height: 150px;
+  border: none;
 }
 
 .height {
