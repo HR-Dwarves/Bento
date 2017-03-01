@@ -7,6 +7,8 @@ import classnames from 'classnames';
 import PhotoEditor from '../PhotoEditor/PhotoEditor';
 
 
+const storageBucket = firebaseApp.storage();
+
 const database = firebaseApp.database();
 
 class PhotoPrompt extends React.Component {
@@ -14,6 +16,7 @@ class PhotoPrompt extends React.Component {
     super(props);
 
     this.state = {
+      photoName: null,
       photoSrc: null,
       inputButton: null
     };
@@ -21,20 +24,34 @@ class PhotoPrompt extends React.Component {
 
   changeHandler(ev) {
 
+    console.log('changeHandler')
+
     var fReader = new FileReader();
     fReader.readAsDataURL(ev.target.files[0]);
 
+
     var context = this;
+    var photoName = ev.target.files[0].name;
+
     fReader.onloadend = function(event){
+
       context.setState({
+        photoName: photoName,
         photoSrc: event.target.result
       })
     }
   }
 
   buttonClick(ev) {
-    console.log('this.inputButton', this.inputButton)
+    // console.log('this.inputButton', this.inputButton)
     this.inputButton.click();
+  }
+
+  submitPhoto(ev) {
+    // console.log(this.state.photoName);
+    const user = this.props.user.uid;
+    this.props.addPhotoForPhotoPrompt(this.inputButton.files[0], this.props.db_key, user);
+    // console.log(this.inputButton.files[0]);
   }
 
   render() {
@@ -71,7 +88,12 @@ class PhotoPrompt extends React.Component {
                 <span className={photoButtonContainer}>
                   <i className={photoButton}></i>
                 </span>
-                <span>Take Photo/Choose File</span>
+                {this.state.photoSrc === null &&
+                  <span>Take Photo/Choose File</span>
+                }
+                {this.state.photoSrc !== null &&
+                  <span>Take/Choose New</span>
+                }
               </a>
               <input
                 ref={src => this.inputButton = src}
@@ -80,6 +102,13 @@ class PhotoPrompt extends React.Component {
                 onChange={this.changeHandler.bind(this)}
                 className={styles.hideInput}
               />
+
+              {this.state.photoSrc !== null &&
+
+                <a className='button' onClick={this.submitPhoto.bind(this)}>
+                  Make it today's photo
+                </a>
+              }
 
             </div>
           </div>
