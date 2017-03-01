@@ -4,10 +4,14 @@
 
 .layout {
   position: relative;
-  border: 1px solid goldenrod;
+  /*border: 1px solid goldenrod;*/
   /*clear: both;*/
 
   /*display: flex;*/
+}
+
+.layout > * {
+  position: absolute;
 }
 
 .component {
