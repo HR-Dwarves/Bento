@@ -14,13 +14,13 @@ class PhotoDisplayer extends React.Component {
 
   render() {
     // let cssClasses = `${styles.card} column`; // just for reference for form.
+    let newdate = new Date(this.props.date).toDateString();
 
-    console.log(this.props.src)
-    console.log(this.props.name)
     return (
       <div>
         <img src={this.props.src} />
         <p className={styles.dontBreakOut}>{this.props.title}</p>
+        <p>{newdate}</p>
       </div>
     )
   }

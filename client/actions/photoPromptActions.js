@@ -5,6 +5,7 @@
 
 import ActionTypes from './actionTypes';
 import firebaseApp from '../base';
+import firebase from 'firebase';
 const database = firebaseApp.database();
 const storage = firebaseApp.storage();
 
@@ -66,7 +67,8 @@ export function addPhotoForPhotoPrompt(photoFile, db_key, user = 'testUser') {
         var newPhotoRef = photoPromptRef.push();
         newPhotoRef.set({
           name: photoFile.name,
-          downloadUrl: imagePath
+          downloadUrl: imagePath,
+          date: firebase.database.ServerValue.TIMESTAMP
         })
       })
       .then((snap) => {

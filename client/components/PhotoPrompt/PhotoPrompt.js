@@ -30,9 +30,9 @@ class PhotoPrompt extends React.Component {
     // get saved photos from db
     this.props.getPhotosForPhotoPrompt(this.props.db_key, user);
 
-    database.ref(`users/${user}/modules/${this.props.db_key}`).on('value', () => {
-      this.props.getPhotosForPhotoPrompt(this.props.db_key, user);
-    });
+    // database.ref(`users/${user}/modules/${this.props.db_key}`).on('value', () => {
+    //   this.props.getPhotosForPhotoPrompt(this.props.db_key, user);
+    // });
   }
 
   changeHandler(ev) {
@@ -63,8 +63,6 @@ class PhotoPrompt extends React.Component {
 
   render() {
     let photos = this.props.dashboard.modules[this.props.db_key].photos;
-
-    console.log(photos);
 
     let collapsed = this.props.collapsed.collapsed;
     let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
@@ -126,7 +124,8 @@ class PhotoPrompt extends React.Component {
                 return <PhotoDisplayer
                         key={index}
                         src={photos[key].downloadUrl}
-                        title={photos[key].name} />
+                        title={photos[key].name}
+                        date={photos[key].date} />
               })}
 
             </div>
