@@ -8,40 +8,40 @@ import firebaseApp from '../base';
 const database = firebaseApp.database();
 const storage = firebaseApp.storage();
 
-// export function getClocks(db_key, user = 'testUser') {
-//   return dispatch => {
+export function getPhotosForPhotoPrompt(db_key, user = 'testUser') {
+  return dispatch => {
 
-//     dispatch(getClocksRequestedAction());
+    dispatch(getPhotosForPhotoPromptRequestedAction());
 
-//     return database.ref(`users/${user}/modules/${db_key}`).once('value', snap => {
-//       const clocks = snap.val();
-//       dispatch(getClocksFulfilledAction(clocks))
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//       dispatch(getClocksRejectedAction());
-//     });
-//   }
-// }
+    return database.ref(`users/${user}/modules/${db_key}`).once('value', snap => {
+      const photos = snap.val();
+      dispatch(getPhotosForPhotoPromptFulfilledAction(photos))
+    })
+    .catch((error) => {
+      console.log(error);
+      dispatch(getPhotosForPhotoPromptRejectedAction());
+    });
+  }
+}
 
-// function getClocksRequestedAction() {
-//   return {
-//     type: ActionTypes.GetClocksRequested
-//   };
-// }
+function getPhotosForPhotoPromptRequestedAction() {
+  return {
+    type: ActionTypes.GetPhotosForPhotoPromptRequested
+  };
+}
 
-// function getClocksRejectedAction() {
-//   return {
-//     type: ActionTypes.GetClocksRejected
-//   }
-// }
+function getPhotosForPhotoPromptRejectedAction() {
+  return {
+    type: ActionTypes.GetPhotosForPhotoPromptRejected
+  }
+}
 
-// function getClocksFulfilledAction(clocks) {
-//   return {
-//     type: ActionTypes.GetClocksFulfilled,
-//     clocks
-//   };
-// }
+function getPhotosForPhotoPromptFulfilledAction(photos) {
+  return {
+    type: ActionTypes.GetPhotosForPhotoPromptFulfilled,
+    photos
+  };
+}
 
 
 export function addPhotoForPhotoPrompt(photoFile, db_key, user = 'testUser') {
@@ -91,8 +91,9 @@ function addPhotoForPhotoPromptRejectedAction() {
   }
 }
 
-function addPhotoForPhotoPromptFulfilledAction() {
+function addPhotoForPhotoPromptFulfilledAction(newPhotos) {
   return {
-    type: ActionTypes.AddPhotoForPhotoPromptFulfilled
+    type: ActionTypes.AddPhotoForPhotoPromptFulfilled,
+    newPhotos
   };
 }

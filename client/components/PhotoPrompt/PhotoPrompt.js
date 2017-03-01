@@ -22,13 +22,22 @@ class PhotoPrompt extends React.Component {
     };
   }
 
-  changeHandler(ev) {
+  componentDidMount() {
+    var context = this;
+    const user = this.props.user.uid;
 
-    console.log('changeHandler')
+    // get saved photos from db
+    this.props.getPhotosForPhotoPrompt(this.props.db_key, user);
+
+    database.ref(`users/${user}/modules/${this.props.db_key}`).on('value', () => {
+      this.props.getPhotosForPhotoPrompt(this.props.db_key, user);
+    });
+  }
+
+  changeHandler(ev) {
 
     var fReader = new FileReader();
     fReader.readAsDataURL(ev.target.files[0]);
-
 
     var context = this;
     var photoName = ev.target.files[0].name;
@@ -43,18 +52,19 @@ class PhotoPrompt extends React.Component {
   }
 
   buttonClick(ev) {
-    // console.log('this.inputButton', this.inputButton)
     this.inputButton.click();
   }
 
   submitPhoto(ev) {
-    // console.log(this.state.photoName);
     const user = this.props.user.uid;
     this.props.addPhotoForPhotoPrompt(this.inputButton.files[0], this.props.db_key, user);
-    // console.log(this.inputButton.files[0]);
   }
 
   render() {
+    let photos = this.props.dashboard.modules[this.props.db_key].photos;
+
+    console.log('photos', photos);
+
     let collapsed = this.props.collapsed.collapsed;
     let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
 
@@ -104,7 +114,6 @@ class PhotoPrompt extends React.Component {
               />
 
               {this.state.photoSrc !== null &&
-
                 <a className='button' onClick={this.submitPhoto.bind(this)}>
                   Make it today's photo
                 </a>
