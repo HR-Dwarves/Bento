@@ -23,10 +23,14 @@
 }*/
 
 .photoButtonContainer {
-  font-size: 4em;
-  width: 100%;
+  font-size: 2em;
+  /*margin-right: 15px;*/
 }
 
-.photoButton:hover {
-  cursor: pointer;
+.photoButton {
+  font-size: 2em;
+}
+
+.hideInput {
+  display: none;
 }

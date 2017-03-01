@@ -14,7 +14,8 @@ class PhotoPrompt extends React.Component {
     super(props);
 
     this.state = {
-      photoSrc: null
+      photoSrc: null,
+      inputButton: null
     };
   }
 
@@ -29,6 +30,11 @@ class PhotoPrompt extends React.Component {
         photoSrc: event.target.result
       })
     }
+  }
+
+  buttonClick(ev) {
+    console.log('this.inputButton', this.inputButton)
+    this.inputButton.click();
   }
 
   render() {
@@ -61,7 +67,19 @@ class PhotoPrompt extends React.Component {
 
               <PhotoEditor src={this.state.photoSrc}/>
 
-              <input type="file" accept="image/*" id='inputFile' onChange={this.changeHandler.bind(this)}/>
+              <a className='button' onClick={this.buttonClick.bind(this)}>
+                <span className={photoButtonContainer}>
+                  <i className={photoButton}></i>
+                </span>
+                <span>Take Photo/Choose File</span>
+              </a>
+              <input
+                ref={src => this.inputButton = src}
+                type="file"
+                accept="image/*"
+                onChange={this.changeHandler.bind(this)}
+                className={styles.hideInput}
+              />
 
             </div>
           </div>
