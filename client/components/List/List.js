@@ -75,6 +75,7 @@ class List extends React.Component {
     }
 
     let cssClasses = `${styles.listCard}`;
+    let headerStyle = `${styles.header} card-header`
     let deleteButton = `${styles.delete} delete`
     let formStyle = `${styles.listForm} control`
     let listButton = `${styles.listButton} button is-small is-light`
@@ -83,9 +84,8 @@ class List extends React.Component {
     let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
 
     return (
-      <div className={cssClasses}>
         <div className='card'>
-          <header className="card-header">
+          <header className={headerStyle}>
             <p className="card-header-title">List</p>
             <span href="" className="card-header-icon">
               <span className="icon">
@@ -114,7 +114,6 @@ class List extends React.Component {
             </div>
           </div>
         </div>
-      </div>
     )
   }
 };

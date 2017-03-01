@@ -7,12 +7,8 @@
   flex: 1 1 100%;
 }
 
-header {
-  /*position: absolute;*/
-}
-
-header > * {
-  /*position: relative;*/
+.header {
+  flex: 0 1 auto;
 }
 
 .listForm {
