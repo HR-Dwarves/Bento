@@ -4,20 +4,20 @@ import Promise from 'bluebird';
 import classnames from 'classnames';
 import firebaseApp from '../../base'
 import styles from './NewsFeed.css';
+import newsSourceMap from './NewsSourceMap';
 
 const database = firebaseApp.database();
-
 class NewsFeed extends React.Component {
   constructor(){
     super();
     this.getPosts = this.getPosts.bind(this);
     this.getPostContent = this.getPostContent.bind(this);
-    this.callHackerNewsApi = Promise.promisify(this.callHackerNewsApi, {context: this});
     this.updateNew = this.updateNew.bind(this);
     this.updateTop = this.updateTop.bind(this);
     this.updateButtons = this.updateButtons.bind(this);
     this.setLoadedToFalse = this.setLoadedToFalse.bind(this);
     this.removePosts = this.removePosts.bind(this);
+    this.handleNewsChange = this.handleNewsChange.bind(this);
     this.state = {
       posts: [],
       loaded: false
@@ -45,44 +45,30 @@ class NewsFeed extends React.Component {
     const user = this.props.user.uid;
 
     var postsArray = [];
-    for(var i = 0; i < 5; i++) {
-      postsArray.push(this.callHackerNewsApi(ids[i]));
-    }
-    Promise.all(postsArray)
-    .then((results) => {
-      this.props.getHnPosts(postsArray);
-      this.setState({
-        posts: results,
-        loaded: true
-      });
-    });
-  }
-
-  callHackerNewsApi(id, callback) {
-    $.ajax({
-      url: 'https://hacker-news.firebaseio.com/v0/item/' + id + '.json?print=pretty',
-      type: 'GET',
-      dataType: 'json',
-      success: function(res) {
-        callback(null, res);
-      }
+    this.setState({
+      posts: ids,
+      loaded: true
     });
   }
 
   updateNew(e){
+    const db_key = this.props.db_key;
+    const newsSource = this.props.dashboard.modules[db_key].newsSource;
     this.setLoadedToFalse();
     e.preventDefault();
     this.removePosts();
     this.updateButtons(e);
-    this.getPosts(this, 'https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty', this.props.db_key);
+    this.getPosts(this, 'news/' + newsSource + '/latest', this.props.db_key);
     this.props.requestHnPosts();
   }
 
   updateTop(e){
+    const db_key = this.props.db_key;
+    const newsSource = this.props.dashboard.modules[db_key].newsSource;
     e.preventDefault();
     this.removePosts();
     this.updateButtons(e);
-    this.getPosts(this, 'https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty', this.props.db_key);
+    this.getPosts(this, 'news/' + newsSource + '/top', this.props.db_key);
     this.setLoadedToFalse();
     this.props.requestHnPosts();
   }
@@ -117,23 +103,45 @@ class NewsFeed extends React.Component {
     });
   }
 
+  handleNewsChange(e){
+    e.preventDefault();
+    const db_key = this.props.db_key;
+    const user = this.props.user.uid;
+    let newsName = e.target.value;
+    this.removePosts();
+    this.setLoadedToFalse();
+    database.ref(`users/${user}/modules/${db_key}`).update({
+      newsSource: e.target.value
+    });
+    if(e.target.value !== 'none'){
+      if(this.props.dashboard.modules[db_key].top) {
+        this.getPosts(this, 'news/'+ newsName + '/top' );
+      } else {
+        this.getPosts(this, 'news/'+ newsName + '/latest');
+      }
+    }
+  }
+
   componentWillMount(){
-    const db_key = this.props.db_key
+    const db_key = this.props.db_key;
+    const newsSource = this.props.dashboard.modules[db_key]['newsSource'];
     this.removePosts();
     this.setLoadedToFalse();
     if(this.props.dashboard.modules[db_key].top){
-      this.getPosts(this,  'https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty', db_key);
+      this.getPosts(this, 'news/' + newsSource + '/top', db_key);
     } else {
-      this.getPosts(this,  'https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty', db_key);
+      this.getPosts(this, 'news/' + newsSource + '/latest', db_key);
     }
   }
 
   render() {
     let list = this.state.posts;
+    let selectedNewsSource = this.props.dashboard.modules[this.props.db_key].newsSource;
     let cssClasses = `${styles.test}`;
     let spinner = `${styles.spinner}`;
     let newClasses = classnames('card-footer-item', `${styles.newsButtons}`, this.props.dashboard.modules[this.props.db_key].new ? cssClasses : '');
     let topClasses = classnames('card-footer-item', `${styles.newsButtons}`, this.props.dashboard.modules[this.props.db_key].new ? '' : cssClasses);
+    let newsFeedTitle = classnames(`control ${styles.removeBorder}`)
     let spinnerClasses = classnames('button is-loading', spinner);
     let loaded = this.state.loaded;
     let collapsed = this.props.collapsed.collapsed;
@@ -143,7 +151,18 @@ class NewsFeed extends React.Component {
         <div className="card">
           <header className="card-header">
             <div className="card-header-title">
-              Hacker News
+              <p className='control'>
+                <span className="select">
+                  <select value={selectedNewsSource} onChange={this.handleNewsChange} className={`${styles.removeBorder}`}>
+                    <option value="none">Change news source</option>
+                    <option value="hacker-news">Hacker News</option>
+                    <option value="associated-press">Associated Press</option>
+                    <option value="business-insider">Business Insider</option>
+                    <option value="buzzfeed">Buzzfeed</option>
+                    <option value="time">Time</option>
+                  </select>
+                </span>
+              </p>
             </div>
             <div className="card-header-icon">
               <span className="icon">

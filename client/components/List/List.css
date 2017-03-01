@@ -1,18 +1,16 @@
 .listCard {
-  color: red;
-  display: flex;
+
+  /*color: red;*/
+  /*display: flex;*/
+  /*overflow: auto;*/
 }
 
 .listCard > * {
-  flex: 1 1 100%;
+  /*flex: 1 1 100%;*/
 }
 
-header {
-  /*position: absolute;*/
-}
-
-header > * {
-  /*position: relative;*/
+.header {
+  flex: 0 0 auto;
 }
 
 .listForm {
@@ -27,6 +25,10 @@ header > * {
   margin-left: 1em;
 }
 
+.listItems {
+  overflow-y: auto;
+}
+
 .height {
   max-height: 1200px;
   -webkit-transition: max-height 0.3s; 
@@ -34,7 +36,8 @@ header > * {
   -ms-transition: max-height 0.3s; 
   -o-transition: max-height 0.3s; 
   transition: max-height .3s;
-  overflow: hidden;
+  /*overflow: hidden;*/
+  overflow-y: scroll;
 }
 
 .collapsedStyle {
