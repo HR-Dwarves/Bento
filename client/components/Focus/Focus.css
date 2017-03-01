@@ -1,6 +1,21 @@
-.cardBody {
+.focusStyle {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+}
+
+.focusContent {
+  display: flex;
+  justify-content: center;
+}
+
+.focusInput {
+  display: block;
+  margin: 0px auto;
+  border: 0;
+  background: 0;
+  border-bottom: 3px solid black;
+  text-align: center;
+  width: 90%;
 }
 
 .height {
@@ -23,10 +38,6 @@
   overflow: hidden;
 }
 
-.removeBorder {
-  border: none !important;
-}
-
-embed {
-  padding-top: .5em;
+input:focus {
+  outline: none;
 }
