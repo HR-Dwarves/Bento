@@ -8,31 +8,28 @@ const database = firebaseApp.database();
 import DefaultModule from '../DefaultModule/DefaultModule';
 import ModuleWrapper from '../ModuleWrapper/ModuleWrapper';
 
-import styles from './ReactGrid.css'
-var height = 2;
-// import 
+import styles from './ReactGrid.css';
+import gridStyles from '../../../node_modules/react-grid-layout/css/styles.css';
+import resizableStyles from '../../../node_modules/react-resizable/css/styles.css';
+
+var datagrid = {x: 0, y: 0, w: 3, h: 1};
+
 
 class ReactGrid extends React.PureComponent {
   constructor() {
     super();
     this.state = {
-      layouts: {
-        lg: [{i: 'a', x: 0, y: 0, w: 1, h: height},
-             {i: 'b', x: 1, y: 0, w: 1, h: height},
-             {i: 'c', x: 2, y: 0, w: 1, h: height}],
-        md: [{i: 'a', x: 0, y: 0, w: 1, h: height},
-             {i: 'b', x: 1, y: 0, w: 1, h: height},
-             {i: 'c', x: 0, y: 0, w: 1, h: height}],
-        sm: [{i: 'a', x: 0, y: 0, w: 1, h: height},
-             {i: 'b', x: 0, y: 0, w: 1, h: height},
-             {i: 'c', x: 0, y: 0, w: 1, h: height}],
-        xs: [{i: 'a', x: 0, y: 0, w: 1, h: height},
-             {i: 'b', x: 0, y: 0, w: 1, h: height},
-             {i: 'c', x: 0, y: 0, w: 1, h: height}],    
-      }
+      layouts: {},
+      currentBreakpoint: 'lg',
+      mounted: false
     }
+    this.onBreakpointChange = this.onBreakpointChange.bind(this);
+    this.generateLayout = this.generateLayout.bind(this);
   }
 
+  componentDidMount() {
+     this.setState({mounted: true});
+   }
   // Returns initial state from local storage
   getInitialState() {
     return {
@@ -58,6 +55,21 @@ class ReactGrid extends React.PureComponent {
     }
   }
 
+  onBreakpointChange(breakpoint) {
+    this.setState({
+      currentBreakpoint: breakpoint
+    });
+  };
+
+  onLayoutChange(layout, layouts) {
+    this.setState({
+      layout: layout
+    })
+  }
+
+  generateLayout(key) {
+    return {"x": key, "y": 0, "w": 3, "h": 3};
+  }
 
   render() {
     let dashboard = this.props.dashboard;
@@ -66,13 +78,21 @@ class ReactGrid extends React.PureComponent {
     if (dashboard) {
       modules = dashboard.modules
       if (modules) {
-        wrappers = Object.keys(modules).map((moduleKey) => {
+        wrappers = Object.keys(modules).map((moduleKey, ind, array) => {
           var additionalProps = {
             key: moduleKey,
             db_key: moduleKey,
             type: modules[moduleKey].type
           }
-          var newProps = Object.assign({}, this.props, additionalProps)
+          var gridProps = {
+            i: ind.toString(),
+            x: ind * 2, 
+            y: 0, 
+            w: 3, 
+            h: 3, 
+            add: ind === (array.length - 1).toString()
+          };
+          var newProps = Object.assign({}, this.props, additionalProps, gridProps)
           return React.createElement(ModuleWrapper, newProps);
         });
       }
@@ -87,15 +107,14 @@ class ReactGrid extends React.PureComponent {
       <ResponsiveReactGridLayout 
       {...this.props}
       ref='rrgl'
-      className={styles.layout} 
-      layouts={this.state.layouts} 
+      className={layoutStyle} 
+      // layouts={this.state.layouts} 
       breakpoints={{lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0}}
+      measureBeforeMount={false}
+      onBreakpointChange={this.onBreakpointChange}
+      useCSSTransforms={this.state.mounted}
       >
-      {wrappers ? wrappers.map((wrapper, ind) => (
-        <div className={componentStyle} key={ind}>
-            {wrapper}
-        </div>
-        )) : defaultModule }
+      {wrappers ? wrappers : defaultModule }
       </ResponsiveReactGridLayout>
     )
   }
@@ -103,10 +122,11 @@ class ReactGrid extends React.PureComponent {
 
 ReactGrid.defaultProps = {
   className: "layout",
-  cols: {lg: 3, md: 2, sm: 1, xs: 1, xxs: 1},
-  rowHeight: 150,
+  cols: {lg: 12, md: 9, sm: 6, xs: 3, xxs: 3},
   autoSize: true,
+  rowHeight: 100,
   isResizable: true,
+  isDraggable: true,
   margin: [20, 20],
   verticalCompact: true,
   useCSSTransforms: true,
@@ -116,3 +136,12 @@ ReactGrid.defaultProps = {
 }
 
 export default ReactGrid;
+
+// {wrappers ? wrappers.map((wrapper, ind) => (
+//   <div 
+//   key={ind} 
+//   data-grid={this.generateLayout(ind)}
+//   >
+//       {wrapper}
+//   </div>
+//   )) : defaultModule }

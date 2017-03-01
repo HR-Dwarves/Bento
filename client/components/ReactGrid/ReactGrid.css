@@ -3,17 +3,28 @@
 }
 
 .layout {
+  position: relative;
   border: 1px solid goldenrod;
+  /*clear: both;*/
+
+  /*display: flex;*/
 }
 
 .component {
   display: inline-block;
   /*border: 1px solid goldenrod;*/
-  margin: 0 1em;
-  width: calc(100% - 2em);
-  padding-bottom: .4em
+  /*margin: 0 auto;*/
+  /*width: calc(100% - 2em);*/
+  padding-bottom: .4em;
+  /*clear: both;*/
+  height: 100%;
+  /*min-height: 30em;*/
+}
+
+.component > * {
+  height: 100%;
 }
 
 .component:last-child {
-  padding-bottom: 2em;
+  /*padding-bottom: 2em;*/
 }
