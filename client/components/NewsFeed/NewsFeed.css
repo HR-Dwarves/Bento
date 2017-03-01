@@ -11,6 +11,7 @@
 .spinner {
   position: inherit;
   border: 0px;
+  height: 150px;
 }
 
 .height {
