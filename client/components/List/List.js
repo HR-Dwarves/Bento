@@ -74,12 +74,9 @@ class List extends React.Component {
         }
     }
 
-<<<<<<< HEAD
-    let cssClasses = `${styles.listCard}`;
-=======
+
     let cssClasses = `${styles.listCard} card`;
     let headerStyle = `${styles.header} card-header`
->>>>>>> mason
     let deleteButton = `${styles.delete} delete`
     let formStyle = `${styles.listForm} control`
     let listButton = `${styles.listButton} button is-small is-light`

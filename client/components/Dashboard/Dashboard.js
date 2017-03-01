@@ -2,12 +2,9 @@ import React from 'react';
 import firebaseApp from '../../base';
 import styles from './Dashboard.css';
 import Promise from 'bluebird';
-<<<<<<< HEAD
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group' // ES6
-=======
+
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import ReactGrid from '../ReactGrid/ReactGrid';
->>>>>>> mason
 
 
 // All modules now passed into ModuleWrapper
@@ -96,34 +93,16 @@ class Dashboard extends React.Component {
 
     let dashContainer = `${styles.dashContainer}`;
     let mainDashboardPanelCSS = `${styles.mainDashboardPanel}`;
-<<<<<<< HEAD
-    let componentStyle = `${styles.component} animated`;
-    let defaultModule = <div className={componentStyle}><DefaultModule key={'abcd'}/></div>;
-=======
+
     // let componentStyle = `${styles.component} animated`;
     // let defaultModule = <div className={componentStyle}><DefaultModule key={'abcd'}/></div>;
->>>>>>> mason
     let loader = `${styles.loader}`;
 
     if (this.state.databaseResponded) {
       return (
         <div className={dashContainer}>
           <div className={mainDashboardPanelCSS}>
-<<<<<<< HEAD
-            <ReactCSSTransitionGroup
-                // transitionName="module"
-                transitionName={{enter: "bounceInUp", leave: "bounceOutDown"}}
-                transitionEnterTimeout={1000}
-                transitionLeaveTimeout={1000}>
-              {wrappers ? wrappers.map((wrapper, ind) => (
-                <div className={componentStyle} key={ind}>
-                    {wrapper}
-                </div>
-                )) : defaultModule }
-            </ReactCSSTransitionGroup>
-=======
             <ReactGrid {...this.props}/>
->>>>>>> mason
           </div>
         </div>
       )
