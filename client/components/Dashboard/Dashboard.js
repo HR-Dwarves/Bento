@@ -3,10 +3,15 @@ import firebaseApp from '../../base';
 import styles from './Dashboard.css';
 import Promise from 'bluebird';
 
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import ReactGrid from '../ReactGrid/ReactGrid';
+
+
 // All modules now passed into ModuleWrapper
 import DefaultModule from '../DefaultModule/DefaultModule';
 import ModuleWrapper from '../ModuleWrapper/ModuleWrapper';
 const database = firebaseApp.database();
+
 
 
 class Dashboard extends React.Component {
@@ -35,10 +40,10 @@ class Dashboard extends React.Component {
         database.ref(`users/${userId}`).on('value', (snapshot) => {
           // USE OTHER FUNCTION THAN GET DATABASE -- TOO SLOW
           let data = snapshot.val();
-          this.props.setDatabase(data);
           context.setState({
             databaseResponded: true
           })
+          this.props.setDatabase(data);
         });
       } else {
         console.error('NO USER');
@@ -51,6 +56,8 @@ class Dashboard extends React.Component {
     if ("geolocation" in navigator) {
       this.props.getGeolocation();
     }
+
+    // this.hide();
   }
 
   handleSettingsButton() {
@@ -66,37 +73,36 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    let dashboard = this.props.dashboard;
-    let modules, wrappers;
+    // let dashboard = this.props.dashboard;
+    // let modules, wrappers;
 
-    if (dashboard) {
-      modules = dashboard.modules
-      if (modules) {
-        wrappers = Object.keys(modules).map((moduleKey) => {
-          var additionalProps = {
-            key: moduleKey,
-            db_key: moduleKey,
-            type: modules[moduleKey].type
-          }
-          var newProps = Object.assign({}, this.props, additionalProps)
-          return React.createElement(ModuleWrapper, newProps);
-        });
-      }
-    }
+    // if (dashboard) {
+    //   modules = dashboard.modules
+    //   if (modules) {
+    //     wrappers = Object.keys(modules).map((moduleKey) => {
+    //       var additionalProps = {
+    //         key: moduleKey,
+    //         db_key: moduleKey,
+    //         type: modules[moduleKey].type
+    //       }
+    //       var newProps = Object.assign({}, this.props, additionalProps)
+    //       return React.createElement(ModuleWrapper, newProps);
+    //     });
+    //   }
+    // }
 
-    let mainDashboardPanelCSS = `${styles.mainDashboardPanel}`;
-    let componentStyle = `${styles.component}`;
     let dashContainer = `${styles.dashContainer}`;
-    let defaultModule = <div className={componentStyle}><DefaultModule key={'abcd'}/></div>;
+    let mainDashboardPanelCSS = `${styles.mainDashboardPanel}`;
+
+    // let componentStyle = `${styles.component} animated`;
+    // let defaultModule = <div className={componentStyle}><DefaultModule key={'abcd'}/></div>;
     let loader = `${styles.loader}`;
 
     if (this.state.databaseResponded) {
       return (
         <div className={dashContainer}>
           <div className={mainDashboardPanelCSS}>
-              {wrappers ? wrappers.map((wrapper, ind) => (<div className={componentStyle} key={ind}>
-                                           {wrapper}
-                                           </div>)) : defaultModule }
+            <ReactGrid {...this.props}/>
           </div>
         </div>
       )
@@ -112,3 +118,20 @@ class Dashboard extends React.Component {
 }
 
 export default Dashboard;
+
+
+
+// {wrappers ? wrappers.map((wrapper, ind) => (
+//   <div className={componentStyle} key={ind}>
+//       {wrapper}
+//   </div>
+//   )) : defaultModule }
+
+// <ReactCSSTransitionGroup
+//     transitionName="module"
+//     transitionName={{enter: "bounceInUp", 
+//     leave: "bounceOutDown",
+//     appear: "fadeInUp"}}
+//     transitionEnterTimeout={1000}
+//     transitionLeaveTimeout={1000}>
+//     </ReactCSSTransitionGroup>

@@ -1,8 +1,43 @@
-.delete {
+.wrapper {
+  /*display: inline-flex;*/
   position: relative;
-  top: 12px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  align-content: stretch;
+  height: 100%;
+  /*flex: 1 1 100%;*/
+}
+
+.wrapper > * {
+  /*display: flex;*/
+  flex: 1 1 auto;
+  /*height: 100%;*/
+}
+
+.module {
+  display: flex;
+  align-items: stretch;
+  height: 100%
+}
+
+.module > * {
+  /*display: flex;*/
+  flex: 1 1 auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-content: stretch;
+  align-items: stretch;
+}
+
+
+.delete {
+  position: absolute;
+  top: -10px;
   left: -10px;
-  z-index: 2;
+  z-index: 5;
   flex: 0 0 0%;
   display: block;
   font-size: 1.5rem;
@@ -12,13 +47,3 @@
   border-radius: 1200px;
 }
 
-.wrapper {
-  /*display: inline-flex;*/
-  /*position: absolute;*/
-  flex: 1 1 100%;
-}
-
-.wrapper > * {
-  /*display: flex;*/
-  flex: 1 1 100%;
-}

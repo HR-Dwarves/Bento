@@ -33,14 +33,18 @@ class ModuleWrapper extends React.Component {
     let handleCollapseFunction = this.handleCollapse.bind(this);
     let component = moduleMapping[type];
     // let deleteButton = `${styles.delete} delete`;
+    let wrapperStyle = `${styles.wrapper} grid-item`;
+    let moduleStyle = `${styles.module}`;
     let deleteButton = `${styles.delete} icon fa fa-times-circle`;
-    let wrapperStyle = `${styles.wrapper}`;
+
 
     return (
-      <div className={wrapperStyle}>
-          <i className={deleteButton} onClick={this.handleDelete} aria-hidden="true"></i>
-        {React.createElement(component, {...this.props, collapsed, handleCollapseFunction})}
-      </div>
+        <div className={wrapperStyle}>
+            <i className={deleteButton} onClick={this.handleDelete} aria-hidden="true"></i>
+            <div className={moduleStyle}>
+              {React.createElement(component, {...this.props, collapsed, handleCollapseFunction})}
+            </div>
+        </div>
     )
   }
 }

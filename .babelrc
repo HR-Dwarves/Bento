@@ -14,7 +14,9 @@
             "transform": "react-transform-catch-errors",
             "imports": ["react", "redbox-react"]
           }]
-        }]
+        }],
+        ["transform-react-inline-elements"],
+        ["transform-react-inline-elements"]
       ]
     },
     "production": {
