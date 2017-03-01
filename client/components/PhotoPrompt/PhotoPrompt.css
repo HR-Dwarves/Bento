@@ -17,3 +17,20 @@
   transition: max-height .3s;
   overflow: hidden;
 }
+
+/*.previewerCanvas {
+  display: none;
+}*/
+
+.photoButtonContainer {
+  font-size: 2em;
+  /*margin-right: 15px;*/
+}
+
+.photoButton {
+  font-size: 2em;
+}
+
+.hideInput {
+  display: none;
+}
