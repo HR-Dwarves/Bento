@@ -25,22 +25,29 @@ class Arcade extends React.Component {
     this.handleGameChange = this.handleGameChange.bind(this);
   }
 
-  handleGameChange(e) {
-    e.preventDefault();
-    console.log('CHANGE GAME');
+  handleGameChange(event) {
+    event.preventDefault();
     const db_key = this.props.db_key;
-    const gameSource = this.props.dashboard.modules[db_key]['game'];
+    const user = this.props.user.uid;
+    const target = 'name';
+    const db_ref = database.ref(`users/${user}/modules/${db_key}/${target}`);
+    let newGame = event.target.value;
+
+    db_ref.set(newGame);
 
     this.setState({
-      'currentGame': e.target.value
+      'currentGame': newGame
     });
   }
 
   render() {
-    let context = this;
+    let dashboard = this.props.dashboard;
+    let db_key = this.props.db_key;
+    let game = dashboard.modules[db_key];
+
     let collapsed = this.props.collapsed.collapsed;
     let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
-    let gameToRender = (this.state.currentGame).toUpperCase();
+    let gameToRender = game.name || this.state.currentGame;
 
     let contentStyle = `${styles.cardBody} 'card-content`
 
@@ -68,7 +75,7 @@ class Arcade extends React.Component {
         <div className={collapsedStyle}>
           <div className={contentStyle}>
             <div className='arcade-game'>
-              <embed className={styles.embeddedGame} key={gameToRender} src={this.state.games[gameToRender]}/>
+              <embed className={styles.embeddedGame} key={this.state.currentGame} src={this.state.games[gameToRender]}/>
             </div>
           </div>
         </div>
