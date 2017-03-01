@@ -38,12 +38,12 @@ class ModuleWrapper extends React.Component {
     let deleteButton = `${styles.delete} icon fa fa-times-circle`;
 
     return (
-      <div className={wrapperStyle}>
-          <i className={deleteButton} onClick={this.handleDelete} aria-hidden="true"></i>
-          <div className={moduleStyle}>
-            {React.createElement(component, {...this.props, collapsed, handleCollapseFunction})}
-          </div>
-      </div>
+        <div className={wrapperStyle}>
+            <i className={deleteButton} onClick={this.handleDelete} aria-hidden="true"></i>
+            <div className={moduleStyle}>
+              {React.createElement(component, {...this.props, collapsed, handleCollapseFunction})}
+            </div>
+        </div>
     )
   }
 }
