@@ -47,7 +47,15 @@ const actionTypes = {
 
   GetGeolocationRequested: 'GET_GEOLOCATION_REQUESTED',
   GetGeolocationRejected: 'GET_GEOLOCATION_REJECTED',
-  GetGeolocationFulfilled: 'GET_GEOLOCATION_FULFILLED'
+  GetGeolocationFulfilled: 'GET_GEOLOCATION_FULFILLED',
+
+  AddPhotoForPhotoPromptRequested: 'ADD_PHOTO_FOR_PHOTO_PROMPT_REQUESTED',
+  AddPhotoForPhotoPromptRejected: 'ADD_PHOTO_FOR_PHOTO_PROMPT_REJECTED',
+  AddPhotoForPhotoPromptFulfilled: 'ADD_PHOTO_FOR_PHOTO_PROMPT_FULFILLED',
+
+  GetPhotosForPhotoPromptRequested: 'GET_PHOTOS_FOR_PHOTO_PROMPT_REQUESTED',
+  GetPhotosForPhotoPromptRejected: 'GET_PHOTOS_FOR_PHOTO_PROMPT_REJECTED',
+  GetPhotosForPhotoPromptFulfilled: 'GET_PHOTOS_FOR_PHOTO_PROMPT_FULFILLED'
 
 };
 
