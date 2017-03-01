@@ -5,6 +5,7 @@
 
 .header {
   flex: 0 0 auto;
+  height: 42px;
 }
 
 .footer {
