@@ -68,7 +68,7 @@ class Arcade extends React.Component {
         <div className={collapsedStyle}>
           <div className={contentStyle}>
             <div className='arcade-game'>
-              <embed key={gameToRender} src={this.state.games[gameToRender]} />
+              <embed className={styles.embeddedGame} key={gameToRender} src={this.state.games[gameToRender]}/>
             </div>
           </div>
         </div>
