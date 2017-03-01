@@ -15,6 +15,7 @@ body {
   background: -webkit-linear-gradient(to left, #ECE9E6 , #FFFFFF); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to left, #ECE9E6 , #FFFFFF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   margin: 0;
+  
 }
 
 div, button, input, textarea, option, nav, span, p, form, select {
@@ -48,25 +49,26 @@ input {
 /*Masonry*/
 .mainDashboardPanel {
   border: 1px solid red;
-  padding-bottom: 45px;
-  padding-top: 6em; 
+  /*padding-bottom: 45px;*/
+  /*padding-top: 6em; */
   /*column-count: 2;*/
   /*column-gap: 0;*/
-  margin: 0 auto;
+  margin: 100px auto;
   width: 95%;
+  height: 80%;
 }
  
 /*ITEM*/
 .component {
-  display: inline-block;
-  /*border: 1px solid goldenrod;*/
+ /* display: inline-block;
+  border: 1px solid goldenrod;
   margin: 0 1em;
   width: calc(100% - 2em);
-  padding-bottom: .4em
+  padding-bottom: .4em*/
 }
 
 .component:last-child {
-  padding-bottom: 2em;
+  /*padding-bottom: 2em;*/
 }
 
 .component > * {
@@ -81,16 +83,16 @@ input {
   }
 
   .component {
-    /*height: auto;*/
+    /*height: auto;
     /*width: calc(33.333% - 20px);*/
     /*width: 35em;*/
   }
 }
-
+*/
 /*Desktop CSS*/
 @media all and (max-width: 1100px) {
   .mainDashboardPanel {
-    overflow-y: scroll;
+    /*overflow-y: scroll;*/
 
   }
 
@@ -103,13 +105,13 @@ input {
 /*Mobile CSS*/
 @media all and (max-width: 550px) {
   .mainDashboardPanel {
-    display: flex;
+    /*display: flex;
     height: 100vh;
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: flex-start;
     align-items: stretch;
-    overflow-y: scroll;
+    overflow-y: scroll;*/
 
   }
 
@@ -120,14 +122,14 @@ input {
 
 @media all and (max-width: 600px) {
   .mainDashboardPanel {
-    height: 100vh;
+    /*height: 100vh;
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: flex-start;
     align-items: stretch;
     overflow-y: scroll;
     column-count: 1;
-    margin: 0 auto;
+    margin: 0 auto;*/
 
   }
 
@@ -137,9 +139,9 @@ input {
 }
 
 .loader {
-  max-height: 13em;
+  /*max-height: 13em;
   max-width: 13em;
-  align-self: auto;
+  align-self: auto;*/
 }
 
 /*Transition*/

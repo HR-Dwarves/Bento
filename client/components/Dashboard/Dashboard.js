@@ -100,7 +100,7 @@ class Dashboard extends React.Component {
       return (
         <div className={dashContainer}>
           <div className={mainDashboardPanelCSS}>
-                <ReactGrid {...this.props}/>
+            <ReactGrid {...this.props}/>
           </div>
         </div>
       )
