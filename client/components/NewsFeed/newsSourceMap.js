@@ -3,7 +3,12 @@ let newsSourceMap = {
   'associated-press': 'Associated Press',
   'business-insider' : 'Business Insider',
   'buzzfeed': 'Buzzfeed',
-  'time': 'Time'
+  'time': 'Time',
+  'the-economist': 'The Economist',
+  'techradar': 'TechRadar',
+  'techcrunch': 'TechCrunch',
+  'newsweek': 'Newsweek',
+  'fortune': 'Fortune'
 };
 
 export default newsSourceMap;

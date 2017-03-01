@@ -5,6 +5,7 @@ import classnames from 'classnames';
 import firebaseApp from '../../base'
 import styles from './NewsFeed.css';
 import newsSourceMap from './NewsSourceMap';
+import axios from 'axios';
 
 const database = firebaseApp.database();
 class NewsFeed extends React.Component {
@@ -26,18 +27,14 @@ class NewsFeed extends React.Component {
 
   getPosts(that, url, key){
     let feed = url;
-    let itemIdArray = [];
-    $.ajax({
-      url: feed,
-      type: 'GET',
-      dataType: 'json', // added data type
-      success: function(res) {
-        that.getPostContent(res, key);
-      },
-      error: function(err) {
-        console.log('got an err');
-        console.log(err);
-      }
+    axios.get(feed)
+    .then(function(response) {
+      console.log(response);
+      that.getPostContent(response.data, key);
+    })
+    .catch(function(error) {
+      console.log('got an error:');
+      console.log(error);
     });
   }
 
@@ -136,6 +133,7 @@ class NewsFeed extends React.Component {
 
   render() {
     let list = this.state.posts;
+    list.length = 5;
     let selectedNewsSource = this.props.dashboard.modules[this.props.db_key].newsSource;
     let cssClasses = `${styles.test}`;
     let spinner = `${styles.spinner}`;
@@ -163,6 +161,11 @@ class NewsFeed extends React.Component {
                     <option value="business-insider">Business Insider</option>
                     <option value="buzzfeed">Buzzfeed</option>
                     <option value="time">Time</option>
+                    <option value="the-economist">The Economist</option>
+                    <option value="techradar">TechRadar</option>
+                    <option value="techcrunch">TechCrunch</option>
+                    <option value="newsweek">Newsweek</option>
+                    <option value="fortune">Fortune</option>
                   </select>
                 </span>
               </p>
