@@ -47,27 +47,6 @@ class Focus extends React.Component {
     this.refs.test.value="";
   }
 
-  renderItems(){
-    let animateStyle;
-    if(this.state.clicked) {
-      animateStyle = `animated slideOutRight ${styles.activeFocus}`
-    } else {
-      animateStyle = `${styles.activeFocus}`
-    }
-    let focusContentStyle = `${animateStyle}`;
-    let iconStyle = `fa fa-square-o ${styles.centerBox}`
-
-    return (
-    this.state.focus[0] !== '' ? 
-      <div className={styles.centerFocus}>
-        <span className={focusContentStyle}>
-          <span className={focusContentStyle}> {this.state.focus}</span>
-          <span><i onClick={this.handleDeleteFocus} className={iconStyle} aria-hidden="true"></i></span>
-        </span>
-      </div>: ''
-    );
-  }
-
   componentDidMount(){
     let that = this;
     const db_key = this.props.db_key;
@@ -92,17 +71,19 @@ class Focus extends React.Component {
     let collapsed = this.props.collapsed.collapsed;
     let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
     let hasCurrentFocus = classnames(this.state.focus[0] === '' ? `${styles.focusContent}` : `${styles.hasCurrentFocus}`);
-    let animateStyle;
-    if(this.state.clicked) {
-      animateStyle = `animated slideOutRight ${styles.activeFocus}`
-    } else {
-      animateStyle = `${styles.activeFocus}`
-    }
-    let focusContentStyle = `${animateStyle}`;
     let iconStyle = `fa fa-square-o ${styles.centerBox}`
+
+    let completed = this.state.clicked;
+    let style;
+    if (completed) {
+      style = {"textDecoration": "line-through"}
+    } else {
+      style = {"textDecoration": ""}
+    }
+
     if(this.state.focus[0] !== '') {
       var items = this.state.focus.map((item, i) => (
-        <div className='animated' key={item}>
+        <div className='animated' key={item} style={style}>
           <div className={styles.centerFocus}>
             {item} <span><i onClick={this.handleDeleteFocus} className={iconStyle} aria-hidden="true"></i></span>
           </div>
