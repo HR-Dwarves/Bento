@@ -4,6 +4,8 @@
 
 import ActionTypes from './actionTypes';
 import config from '../config/config'
+import axios from 'axios';
+
 import firebaseApp from '../base';
 const database = firebaseApp.database();
 
@@ -102,19 +104,33 @@ export function getGeolocation() {
 
       let query = `/geolocation/${lat},${long}`
 
-      $.get(query, function(data) {
-        // console.log(data)
+      axios.get(query)
+      .then((response) => {
+        let data = response.data;
         let geoStateAdditions = {
           latitude: lat,
           longitude: long,
           currentCity: data
         }
-
         dispatch(getGeolocationFulfilledAction(geoStateAdditions))
       })
-      .fail(function(error) {
-        console.log( error );
+      .catch((error) => {
+        console.error(error);
       })
+
+      // $.get(query, function(data) {
+      //   // console.log(data)
+      //   let geoStateAdditions = {
+      //     latitude: lat,
+      //     longitude: long,
+      //     currentCity: data
+      //   }
+
+      //   dispatch(getGeolocationFulfilledAction(geoStateAdditions))
+      // })
+      // .fail(function(error) {
+      //   console.log( error );
+      // })
     }, error => {
       console.log(error);
       dispatch(getGeolocationRejectedAction());
