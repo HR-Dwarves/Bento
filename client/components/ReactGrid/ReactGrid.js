@@ -53,7 +53,7 @@ class ReactGrid extends React.PureComponent {
 
   render() {
     let dashboard = this.props.dashboard;
-    let modules, wrappers, gridProps, gridItems;
+    let modules, wrappers, newGridProps, gridItems;
 
     if (dashboard) {
       modules = dashboard.modules
@@ -73,7 +73,7 @@ class ReactGrid extends React.PureComponent {
         });
 
         gridItems = wrappers.map((wrapper, ind, arr) => {
-          gridProps = {
+          newGridProps = {
             x: ind * 3, 
             y: 0, 
             w: 3, 
@@ -82,7 +82,7 @@ class ReactGrid extends React.PureComponent {
             minH: 2
           };
           console.log('LAYOUTSZZZZ', this.state.layouts);
-          return (<div key={moduleKeys[ind]} data-grid={gridProps}>{wrapper}</div>);
+          return (<div key={moduleKeys[ind]} data-grid={newGridProps}>{wrapper}</div>);
         })
       }
     }
