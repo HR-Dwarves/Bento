@@ -34,3 +34,7 @@
 .hideInput {
   display: none;
 }
+
+.enterPhotoButton {
+  margin-bottom: 10px;
+}

@@ -55,7 +55,11 @@ const actionTypes = {
 
   GetPhotosForPhotoPromptRequested: 'GET_PHOTOS_FOR_PHOTO_PROMPT_REQUESTED',
   GetPhotosForPhotoPromptRejected: 'GET_PHOTOS_FOR_PHOTO_PROMPT_REJECTED',
-  GetPhotosForPhotoPromptFulfilled: 'GET_PHOTOS_FOR_PHOTO_PROMPT_FULFILLED'
+  GetPhotosForPhotoPromptFulfilled: 'GET_PHOTOS_FOR_PHOTO_PROMPT_FULFILLED',
+
+  DeletePhotoFromPhotoPromptRequested: 'DELETE_PHOTO_FROM_PHOTO_PROMPT_REQUESTED',
+  DeletePhotoFromPhotoPromptRejected: 'DELETE_PHOTO_FROM_PHOTO_PROMPT_REJECTED',
+  DeletePhotoFromPhotoPromptFulfilled: 'DELETE_PHOTO_FROM_PHOTO_PROMPT_FULFILLED'
 
 };
 
