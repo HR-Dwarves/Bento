@@ -18,9 +18,11 @@ class PhotoDisplayer extends React.Component {
 
     return (
       <div>
+        <div className='is-primary'>
+          {newdate}
+        </div>
         <img src={this.props.src} />
         <p className={styles.dontBreakOut}>{this.props.title}</p>
-        <p>{newdate}</p>
       </div>
     )
   }

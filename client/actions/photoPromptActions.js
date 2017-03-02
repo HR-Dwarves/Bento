@@ -45,7 +45,7 @@ function getPhotosForPhotoPromptFulfilledAction(photos) {
 }
 
 
-export function addPhotoForPhotoPrompt(photoFile, db_key, user = 'testUser') {
+export function addPhotoForPhotoPrompt(photoFile, db_key, user = 'testUser', cb) {
   return dispatch => {
     dispatch(addPhotoForPhotoPromptRequestedAction());
 
@@ -72,7 +72,8 @@ export function addPhotoForPhotoPrompt(photoFile, db_key, user = 'testUser') {
         })
       })
       .then((snap) => {
-        dispatch(addPhotoForPhotoPromptFulfilledAction())
+        cb();
+        dispatch(addPhotoForPhotoPromptFulfilledAction());
       })
       .catch((error) => {
         console.log(error);
