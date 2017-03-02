@@ -87,7 +87,7 @@ class Nav extends React.Component {
           </figure>
         </div>
         <Link to="/">
-          <div className={pageTitleCSS}>dashboard</div>
+          <div className={pageTitleCSS}>bento</div>
         </Link>
         <div className={modalButtonStyle}>
           <button style={displayButton} onClick={this.toggleFocus.bind(this)} className={logoutButtonStyle}>Focus</button>
@@ -100,7 +100,5 @@ class Nav extends React.Component {
     )
   }
 }
-
-// <span className={usernameStyle}>{displayName}</span>
 
 export default Nav;
