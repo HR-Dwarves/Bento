@@ -5,6 +5,7 @@
 
 import ActionTypes from './actionTypes';
 import firebaseApp from '../base';
+import firebase from 'firebase';
 const database = firebaseApp.database();
 const storage = firebaseApp.storage();
 
@@ -44,7 +45,7 @@ function getPhotosForPhotoPromptFulfilledAction(photos) {
 }
 
 
-export function addPhotoForPhotoPrompt(photoFile, db_key, user = 'testUser') {
+export function addPhotoForPhotoPrompt(photoFile, db_key, user = 'testUser', cb) {
   return dispatch => {
     dispatch(addPhotoForPhotoPromptRequestedAction());
 
@@ -66,11 +67,13 @@ export function addPhotoForPhotoPrompt(photoFile, db_key, user = 'testUser') {
         var newPhotoRef = photoPromptRef.push();
         newPhotoRef.set({
           name: photoFile.name,
-          downloadUrl: imagePath
+          downloadUrl: imagePath,
+          date: firebase.database.ServerValue.TIMESTAMP
         })
       })
       .then((snap) => {
-        dispatch(addPhotoForPhotoPromptFulfilledAction())
+        cb();
+        dispatch(addPhotoForPhotoPromptFulfilledAction());
       })
       .catch((error) => {
         console.log(error);
@@ -95,5 +98,51 @@ function addPhotoForPhotoPromptFulfilledAction(newPhotos) {
   return {
     type: ActionTypes.AddPhotoForPhotoPromptFulfilled,
     newPhotos
+  };
+}
+
+
+export function deletePhotoFromPhotoPrompt(itemKey, db_key, user = 'testUser', cb) {
+  return dispatch => {
+    dispatch(deletePhotoFromPhotoPromptRequestedAction());
+    const itemRef = database.ref(`users/${user}/modules/${db_key}/photos/${itemKey}`);
+
+    // get the image file name
+    itemRef.once('value')
+    .then(snap => {
+      var photoName = snap.val().name
+      var storageRef = storage.ref();
+
+      var path = '/photoPrompt/images/';
+      var finalStorageRef = storageRef.child(path + photoName);
+      finalStorageRef.delete();
+    })
+    .then(itemRef.remove())
+    .then(() => {
+      cb();
+      dispatch(deletePhotoFromPhotoPromptFulfilledAction());
+    })
+    .catch((error) => {
+      console.log(error);
+      dispatch(deletePhotoFromPhotoPromptRejectedAction());
+    });
+  }
+}
+
+function deletePhotoFromPhotoPromptRequestedAction() {
+  return {
+    type: ActionTypes.DeletePhotoFromPhotoPromptRequested
+  };
+}
+
+function deletePhotoFromPhotoPromptRejectedAction() {
+  return {
+    type: ActionTypes.DeletePhotoFromPhotoPromptRejected
+  }
+}
+
+function deletePhotoFromPhotoPromptFulfilledAction(newItem) {
+  return {
+    type: ActionTypes.DeletePhotoFromPhotoPromptFulfilled
   };
 }

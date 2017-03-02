@@ -12,48 +12,28 @@ import styles from './ReactGrid.css';
 import gridStyles from '../../../node_modules/react-grid-layout/css/styles.css';
 import resizableStyles from '../../../node_modules/react-resizable/css/styles.css';
 
-// var datagrid = {x: 0, y: 0, w: 3, h: 1};
-
+const originalLayouts = getFromLS('layouts') || {};
 
 class ReactGrid extends React.PureComponent {
   constructor() {
     super();
     this.state = {
-      layouts: {},
+      layouts: JSON.parse(JSON.stringify(originalLayouts)),
       breakpoint: 'lg',
       cols: 12,
       mounted: false
     }
     this.onBreakpointChange = this.onBreakpointChange.bind(this);
-    this.generateLayout = this.generateLayout.bind(this);
+    this.onLayoutChange = this.onLayoutChange.bind(this);
+  }
+
+  componentWillMount() {
+    this.setState({layouts: originalLayouts});
   }
 
   componentDidMount() {
     this.setState({mounted: true});
-  }
-  // Returns initial state from local storage
-  getInitialState() {
-    return {
-      layouts: JSON.parse(JSON.stringify(originalLayouts))
-    };
-  }
-
-  getFromLS(key) {
-    let ls = {};
-    if (global.localStorage) {
-      try {
-        ls = JSON.parse(global.localStorage.getItem('rgl-8')) || {};
-      } catch(e) {/*Ignore*/}
-    }
-    return ls[key];
-  }
-
-  saveToLS(key, value) {
-    if (global.localStorage) {
-      global.localStorage.setItem('rgl-8', JSON.stringify({
-        [key]: value
-      }));
-    }
+    console.log("OG LAYOUTZ", originalLayouts);
   }
 
   onBreakpointChange(breakpoint, columns) {
@@ -64,23 +44,22 @@ class ReactGrid extends React.PureComponent {
   };
 
   onLayoutChange(layout, layouts) {
-    this.setState({
-      layout: layout
-    });
-  }
-
-  generateLayout(key) {
-    return {"x": key, "y": 0, "w": 3, "h": 3};
+    saveToLS('layouts', layouts);
+    this.setState({layouts: layouts});
+    console.log('LAYOUT CHANGE SAVED');
+    console.log(layouts);
+    this.props.onLayoutChange(layout, layouts);
   }
 
   render() {
     let dashboard = this.props.dashboard;
-    let modules, wrappers, gridProps, gridItems;
+    let modules, wrappers, newGridProps, gridItems;
 
     if (dashboard) {
       modules = dashboard.modules
       if (modules) {
-        wrappers = Object.keys(modules).map((moduleKey, ind, array) => {
+        let moduleKeys = Object.keys(modules);
+        wrappers = moduleKeys.map((moduleKey, ind, array) => {
           
           var additionalProps = {
             key: moduleKey,
@@ -94,24 +73,23 @@ class ReactGrid extends React.PureComponent {
         });
 
         gridItems = wrappers.map((wrapper, ind, arr) => {
-          gridProps = {
-            i: ind.toString(),
+          newGridProps = {
             x: ind * 3, 
             y: 0, 
             w: 3, 
             h: 3,
             minW: 3,
-            add: ind === (arr.length - 1).toString()
+            minH: 2
           };
-
-          return (<div key={ind} data-grid={gridProps}>{wrapper}</div>);
+          console.log('LAYOUTSZZZZ', this.state.layouts);
+          return (<div key={moduleKeys[ind]} data-grid={newGridProps}>{wrapper}</div>);
         })
       }
     }
     let defaultModule = <div className={componentStyle}><DefaultModule key={'abcd'}/></div>;
 
     // layout is an array of objects, see the demo for more complete usage
-    var layoutStyle = `${styles.layout} layout ${gridStyles} ${resizableStyles}`;
+    var layoutStyle = `${styles.layout} layout`;
     let componentStyle = `${styles.component}`;
 
     return (
@@ -119,8 +97,10 @@ class ReactGrid extends React.PureComponent {
       {...this.props}
       ref='rrgl'
       className={layoutStyle} 
+      layouts={this.state.layouts}
       breakpoints={{lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0}}
       measureBeforeMount={false}
+      onLayoutChange={this.onLayoutChange}
       onBreakpointChange={this.onBreakpointChange}
       useCSSTransforms={this.state.mounted}
       >
@@ -131,22 +111,37 @@ class ReactGrid extends React.PureComponent {
 }
 
 ReactGrid.defaultProps = {
-  className: "layout",
   cols: {lg: 12, md: 9, sm: 6, xs: 3, xxs: 3},
-  autoSize: true,
   rowHeight: 100,
-  minH: 3,
-  isResizable: true,
-  isDraggable: true,
+  minH: 2,
+  minW: 3,
   margin: [20, 20],
-  verticalCompact: true,
   useCSSTransforms: true,
   onLayoutChange: function() {
-    return;
   },
 }
 
 export default ReactGrid;
+
+function getFromLS(key, user) {
+  let ls = {};
+  if (global.localStorage) {
+    try {
+      ls = JSON.parse(global.localStorage.getItem('dashboard')) || {};
+    } catch(e) {
+      console.error(e);
+    }
+  }
+  return ls[key];
+}
+
+function saveToLS(key, value) {
+  if (global.localStorage) {
+    global.localStorage.setItem('dashboard', JSON.stringify({
+      [key]: value
+    }));
+  }
+}
 
 // {wrappers ? wrappers.map((wrapper, ind) => (
 //   <div 
