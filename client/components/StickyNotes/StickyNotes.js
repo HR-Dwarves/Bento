@@ -38,39 +38,39 @@ class StickyNotes extends React.Component {
     let db_key = this.props.db_key;
     let note = dashboard.modules[db_key];
 
+    // Styles
+    let stickynoteStyles = `${styles.stickynote} card`;
+    let headerStyles = `${styles.header} card-header`;
+
     let collapsed = this.props.collapsed.collapsed;
     let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
 
     return(
-      <div className='stickynote'>
-          <div className='card'>
-            <header className='card-header'>
-              <input className='card-header-title sticky-header'
-                      type="text"
-                      maxLength='30' 
-                      onBlur={this.handleStickyHeaderEntry}
-                      placeholder="Enter whatever you like!"
-                      defaultValue={note.headerText}
-                      name="note.headerText"/>
-              <div className="card-header-icon">
-                <span className="icon">
-                  <i onClick={this.props.handleCollapseFunction} className="fa fa-sticky-note-o" aria-hidden="true"></i>
-                </span>
-              </div>
-            </header>
-            <div className={collapsedStyle}>
-              <div className='card-content'>
-                <textarea className='sticky-content' 
-                          maxLength='600' 
-                          rows='10' 
-                          onBlur={this.handleStickyBodyEntry}
-                          >
-                          {note.bodyText}
-                </textarea>
-              </div>
+        <div className={stickynoteStyles}>
+          <header className={headerStyles}>
+            <input className='card-header-title sticky-header'
+                    type="text"
+                    maxLength='30' 
+                    onBlur={this.handleStickyHeaderEntry}
+                    placeholder="Enter whatever you like!"
+                    defaultValue={note.headerText}
+                    name="note.headerText"/>
+            <div className="card-header-icon">
+              <span className="icon">
+                <i onClick={this.props.handleCollapseFunction} className="fa fa-sticky-note-o" aria-hidden="true"></i>
+              </span>
             </div>
+          </header>
+          <div className='card-content'>
+            <textarea className='sticky-content' 
+                      maxLength='600' 
+                      rows='10' 
+                      onBlur={this.handleStickyBodyEntry}
+                      >
+                      {note.bodyText}
+            </textarea>
           </div>
-      </div>
+        </div>
     )
   }
 }
