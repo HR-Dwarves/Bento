@@ -25,26 +25,16 @@ class ReactGrid extends React.PureComponent {
     }
     this.onBreakpointChange = this.onBreakpointChange.bind(this);
     this.onLayoutChange = this.onLayoutChange.bind(this);
-    this.generateLayout = this.generateLayout.bind(this);
   }
 
-  // componentWillMount() {
-  //   let user = this.props.user.uid
-  //   getFromLS()
-  // }
+  componentWillMount() {
+    this.setState({layouts: originalLayouts});
+  }
 
   componentDidMount() {
     this.setState({mounted: true});
     console.log("OG LAYOUTZ", originalLayouts);
   }
-  // Returns initial state from local storage
-  // getInitialState() {
-  //   return {
-  //     layouts: JSON.parse(JSON.stringify(originalLayouts))
-  //   };
-  // }
-
-  
 
   onBreakpointChange(breakpoint, columns) {
     this.setState({
@@ -55,13 +45,10 @@ class ReactGrid extends React.PureComponent {
 
   onLayoutChange(layout, layouts) {
     saveToLS('layouts', layouts);
-    this.setState({layouts});
+    this.setState({layouts: layouts});
     console.log('LAYOUT CHANGE SAVED');
-    // this.props.onLayoutChange(layout, layouts);
-  }
-
-  generateLayout(key) {
-    return {"x": key, "y": 0, "w": 3, "h": 3};
+    console.log(layouts);
+    this.props.onLayoutChange(layout, layouts);
   }
 
   render() {
@@ -87,24 +74,22 @@ class ReactGrid extends React.PureComponent {
 
         gridItems = wrappers.map((wrapper, ind, arr) => {
           gridProps = {
-            i: ind.toString(),
             x: ind * 3, 
             y: 0, 
             w: 3, 
             h: 3,
             minW: 3,
-            minH: 2,
-            add: ind === (arr.length - 1).toString()
+            minH: 2
           };
-
-          return (<div key={ind} data-grid={gridProps}>{wrapper}</div>);
+          console.log('LAYOUTSZZZZ', this.state.layouts);
+          return (<div key={moduleKeys[ind]} data-grid={gridProps}>{wrapper}</div>);
         })
       }
     }
     let defaultModule = <div className={componentStyle}><DefaultModule key={'abcd'}/></div>;
 
     // layout is an array of objects, see the demo for more complete usage
-    var layoutStyle = `${styles.layout} layout ${gridStyles} ${resizableStyles}`;
+    var layoutStyle = `${styles.layout} layout`;
     let componentStyle = `${styles.component}`;
 
     return (
@@ -126,18 +111,13 @@ class ReactGrid extends React.PureComponent {
 }
 
 ReactGrid.defaultProps = {
-  className: "layout",
   cols: {lg: 12, md: 9, sm: 6, xs: 3, xxs: 3},
-  autoSize: true,
   rowHeight: 100,
-  minH: 3,
-  isResizable: true,
-  isDraggable: true,
+  minH: 2,
+  minW: 3,
   margin: [20, 20],
-  verticalCompact: true,
   useCSSTransforms: true,
   onLayoutChange: function() {
-    return;
   },
 }
 
@@ -149,7 +129,7 @@ function getFromLS(key, user) {
     try {
       ls = JSON.parse(global.localStorage.getItem('dashboard')) || {};
     } catch(e) {
-    /*Ignore*/
+      console.error(e);
     }
   }
   return ls[key];
