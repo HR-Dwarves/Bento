@@ -176,16 +176,16 @@ class NewsFeed extends React.Component {
               </span>
             </div>
           </header>
-            <div className={contentStyles}>
-              {loaded ? list.length !== 0 ? list.map((item, key) => <NewsItem {...this.props}
-                                            newsItem={item}
-                                            key={key}/>) : [] : <a className={spinnerClasses}>Loading</a>}
-            </div>
-            <footer className={footerStyles}>
-              <a value="New" className={newClasses} onClick={this.updateNew}>New</a>
-              <a value="Top" className={topClasses} onClick={this.updateTop}>Top</a>
-            </footer>
+          <div className={contentStyles}>
+            {loaded ? list.length !== 0 ? list.map((item, key) => <NewsItem {...this.props}
+                                          newsItem={item}
+                                          key={key}/>) : [] : <a className={spinnerClasses}>Loading</a>}
           </div>
+          <footer className={footerStyles}>
+            <a value="New" className={newClasses} onClick={this.updateNew}>New</a>
+            <a value="Top" className={topClasses} onClick={this.updateTop}>Top</a>
+          </footer>
+        </div>
       )
   }
 };
