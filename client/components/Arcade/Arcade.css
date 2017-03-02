@@ -1,6 +1,21 @@
 .cardBody {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  flex-grow: 1;
+  height: 95%;
+  width: 100%;
+  background-color: blue;
+
+}
+
+.removeBorder {
+  border: none !important;
+}
+
+.embeddedGame {
+  display: flex;
+  justify-content: center;
+  padding: .5em;
 }
 
 .height {
@@ -10,7 +25,7 @@
   -ms-transition: max-height 0.3s; 
   -o-transition: max-height 0.3s; 
   transition: max-height .3s;
-  overflow: hidden;
+  overflow-y: auto;
 }
 
 .collapsedStyle {
@@ -21,14 +36,4 @@
   -o-transition: max-height 0.3s; 
   transition: max-height .3s;
   overflow: hidden;
-}
-
-.removeBorder {
-  border: none !important;
-}
-
-.embeddedGame {
-  padding-top: .5em;
-  height: 500px;
-  width: 400px;
 }
