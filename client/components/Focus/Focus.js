@@ -10,7 +10,7 @@ class Focus extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      focus: '',
+      focus: [''],
       clicked: false
     }
     this.handleDeleteFocus = this.handleDeleteFocus.bind(this)
@@ -22,11 +22,15 @@ class Focus extends React.Component {
     const target = 'focusBody';
     const db_ref = database.ref(`users/${user}/modules/${db_key}/${target}`);
     let newText = event.target.value;
+    var focusArray = [];
+    focusArray.push(event.target.value);
+    console.log(focusArray);
     this.setState({
-      focus: event.target.value,
+      focus: focusArray,
       clicked: false
     }); 
     db_ref.set(newText);
+    this.refs.test.value="";
   }
 
   handleDeleteFocus() {
@@ -38,9 +42,30 @@ class Focus extends React.Component {
     const target = 'focusBody';
     const db_ref = database.ref(`users/${user}/modules/${db_key}/${target}`);
     this.setState({
-      focus: ''
+      focus: ['']
     });
     this.refs.test.value="";
+  }
+
+  renderItems(){
+    let animateStyle;
+    if(this.state.clicked) {
+      animateStyle = `animated slideOutRight ${styles.activeFocus}`
+    } else {
+      animateStyle = `${styles.activeFocus}`
+    }
+    let focusContentStyle = `${animateStyle}`;
+    let iconStyle = `fa fa-square-o ${styles.centerBox}`
+
+    return (
+    this.state.focus[0] !== '' ? 
+      <div className={styles.centerFocus}>
+        <span className={focusContentStyle}>
+          <span className={focusContentStyle}> {this.state.focus}</span>
+          <span><i onClick={this.handleDeleteFocus} className={iconStyle} aria-hidden="true"></i></span>
+        </span>
+      </div>: ''
+    );
   }
 
   componentDidMount(){
@@ -49,9 +74,12 @@ class Focus extends React.Component {
     const user = this.props.user.uid;
     const target = 'focusBody';
     const db_ref = database.ref(`users/${user}/modules/${db_key}/${target}`);
+    const focusArray = [];
     db_ref.once('value').then(function(snapshot) {
+      focusArray.push(snapshot.val());
+      console.log(focusArray);
       that.setState({
-        focus: snapshot.val()
+        focus: focusArray
       });
     });
   }
@@ -63,7 +91,7 @@ class Focus extends React.Component {
 
     let collapsed = this.props.collapsed.collapsed;
     let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
-    let hasCurrentFocus = classnames(this.state.focus && this.state.focus.length !==0 ? `${styles.hasCurrentFocus}` : `${styles.focusContent}`);
+    let hasCurrentFocus = classnames(this.state.focus[0] === '' ? `${styles.focusContent}` : `${styles.hasCurrentFocus}`);
     let animateStyle;
     if(this.state.clicked) {
       animateStyle = `animated slideOutRight ${styles.activeFocus}`
@@ -72,6 +100,15 @@ class Focus extends React.Component {
     }
     let focusContentStyle = `${animateStyle}`;
     let iconStyle = `fa fa-square-o ${styles.centerBox}`
+    if(this.state.focus[0] !== '') {
+      var items = this.state.focus.map((item, i) => (
+        <div className='animated' key={item}>
+          <div className={styles.centerFocus}>
+            {item} <span><i onClick={this.handleDeleteFocus} className={iconStyle} aria-hidden="true"></i></span>
+          </div>
+        </div>
+      ));
+    }
 
     return (
       <div className='focus'>
@@ -102,13 +139,13 @@ class Focus extends React.Component {
                       />
               </span>
               <div className="media-content">
-                {this.state.focus && this.state.focus.length !== 0 ? 
-                  <div className={styles.centerFocus}>
-                    <span className={focusContentStyle}>
-                      <span className={focusContentStyle}> {this.state.focus}</span>
-                      <span><i onClick={this.handleDeleteFocus} className={iconStyle} aria-hidden="true"></i></span>
-                    </span>
-                  </div>: ''}
+                <ReactCSSTransitionGroup 
+                  transitionName={{
+                    enter: 'slideInLeft',
+                    leave: 'slideOutRight'
+                  }}>
+                  {items}
+                </ReactCSSTransitionGroup>
               </div>
             </div>
           </div>
