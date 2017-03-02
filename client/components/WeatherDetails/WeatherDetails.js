@@ -4,6 +4,7 @@ import config from './../../config/config';
 import firebaseApp from '../../base';
 import classnames from 'classnames';
 import weatherConditions from './weatherConditions';
+import axios from 'axios';
 
 const database = firebaseApp.database();
 
@@ -35,24 +36,21 @@ class WeatherDetails extends React.Component {
   getWeatherData() {
     var context = this;
 
-    $.ajax({
-      method: 'GET',
-      url: `https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="${context.state.zipcode}")&format=json`,
-      dataType: 'json',
-      success: function(data) {
-        context.setState({
-          temperature: data.query.results.channel.item.condition.temp,
-          location: data.query.results.channel.location.city,
-          condition: data.query.results.channel.item.condition.text,
-          weatherIcon: data.query.results.channel.image.url,
-          code: data.query.results.channel.item.condition.code
-        });
-      },
-      error: function(err) {
-        console.log(err);
-        throw err;
-      }
-    });
+    axios.get(`https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="${context.state.zipcode}")&format=json`)
+    .then((response) => {
+      let data = response.data;
+      context.setState({
+        temperature: data.query.results.channel.item.condition.temp,
+        location: data.query.results.channel.location.city,
+        condition: data.query.results.channel.item.condition.text,
+        weatherIcon: data.query.results.channel.image.url,
+        code: data.query.results.channel.item.condition.code
+      });
+    })
+    .catch((error) => {
+      console.error('Weather API error');
+    })
+
   }
 
   componentDidMount() {
