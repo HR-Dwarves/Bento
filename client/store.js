@@ -19,10 +19,12 @@ const defaultState = {
   
 };
 
+
+// Add logger to applyMiddleware if you need to see state changes
 const store = createStore(
   rootReducer, 
   defaultState, 
-  applyMiddleware(thunk, logger)
+  applyMiddleware(thunk)
 );
 
 export const history = syncHistoryWithStore(browserHistory, store);
