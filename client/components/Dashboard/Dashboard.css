@@ -35,7 +35,7 @@ input {
 
 /*WRAPPER*/
 .dashContainer {
-  border: 1px solid blue;
+  /*border: 1px solid blue;*/
   margin: 0 auto;
   width: 100vw;
   height: 100vh;
@@ -47,7 +47,7 @@ input {
 }
 /*Masonry*/
 .mainDashboardPanel {
-  border: 1px solid red;
+  /*border: 1px solid red;*/
   /*padding-bottom: 45px;*/
   /*padding-top: 6em; */
   /*column-count: 2;*/
