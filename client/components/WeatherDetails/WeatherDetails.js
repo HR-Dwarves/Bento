@@ -91,50 +91,47 @@ class WeatherDetails extends React.Component {
 
   render() {
     let cssCard = `${styles.card} card`;
+    let cssHeader = `${styles.header} card-header`;
     let cssCardContent = `${styles.cardContent} card-content`;
 
     let collapsed = this.props.collapsed.collapsed;
     let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
     let weatherIcon = `${styles.weatherIcon} wi wi-yahoo-${this.state.code}`;
     return (
-      <div className=''>
-          <div className={cssCard}>
-            <header className='card-header'>
-              <p className='card-header-title'>Weather</p>
-              <div className={styles.searchIcon}><i className='fa fa-search' aria-hidden='true'></i></div>
-              <form action='submit'
-                    className={styles.weatherForm}
-                    onSubmit={e => this.handleSubmit(e)}
-                    ref={input => this.zipForm = input}
-                    >
-                <input className={styles.weatherInput} 
-                        type='text' 
-                        ref={input => this.searchInput = input}
-                        placeholder=' Enter location'
-                        />               
-              </form>
-              <div className="card-header-icon">
-                <span className="icon">
-                  <i onClick={this.props.handleCollapseFunction} className='fa fa-cloud' aria-hidden='true'></i>
-                </span>
-              </div>
-            </header>
-            <div className={collapsedStyle}>
-              <div className={cssCardContent}>
-                <div>
-                  <p className={styles.location}>{this.state.location}</p>
-                  <p className={styles.condition}>{this.state.condition}</p>
-                </div>
-                <div>
-                  <i className={weatherIcon}></i>
-                  <p className={styles.temperature}> 
-                    {this.state.temperature}ºF
-                  </p>
-                </div>
-              </div>
+        <div className={cssCard}>
+          <header className={cssHeader}>
+            <p className='card-header-title'>Weather</p>
+            <div className={styles.searchIcon}><i className='fa fa-search' aria-hidden='true'></i></div>
+            <form action='submit'
+              className={styles.weatherForm}
+              onSubmit={e => this.handleSubmit(e)}
+              ref={input => this.zipForm = input}
+              >
+              <input className={styles.weatherInput} 
+                type='text' 
+                ref={input => this.searchInput = input}
+                placeholder=' Enter location'
+                />               
+            </form>
+            <div className="card-header-icon">
+              <span className="icon">
+                <i onClick={this.props.handleCollapseFunction} className='fa fa-cloud' aria-hidden='true'></i>
+              </span>
+            </div>
+          </header>
+          <div className={cssCardContent}>
+            <div>
+              <p className={styles.location}>{this.state.location}</p>
+              <p className={styles.condition}>{this.state.condition}</p>
+            </div>
+            <div>
+              <i className={weatherIcon}></i>
+              <p className={styles.temperature}> 
+                {this.state.temperature}ºF
+              </p>
             </div>
           </div>
-      </div>
+        </div>
     )
   }
 }
