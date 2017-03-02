@@ -5,6 +5,8 @@ import authProviders from '../../authProviders';
 
 const database = firebaseApp.database();
 
+import Loading from '../Loading/Loading';
+
 class Signup extends React.Component {
   constructor() {
     super();
@@ -122,7 +124,7 @@ class Signup extends React.Component {
     } else {
       return (
         <nav className={styles.signup}>
-          <img className={loader} src="https://firebasestorage.googleapis.com/v0/b/dashboardapp-3d3c7.appspot.com/o/rolling.gif?alt=media&token=85a30250-6288-4ec9-89a9-60e6a06071f7" alt=""/>
+          <Loading />
         </nav>
       );
     }
