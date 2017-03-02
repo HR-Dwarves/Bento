@@ -10,6 +10,8 @@ import ReactGrid from '../ReactGrid/ReactGrid';
 // All modules now passed into ModuleWrapper
 import DefaultModule from '../DefaultModule/DefaultModule';
 import ModuleWrapper from '../ModuleWrapper/ModuleWrapper';
+import Loading from '../Loading/Loading';
+
 const database = firebaseApp.database();
 
 
@@ -73,30 +75,8 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    // let dashboard = this.props.dashboard;
-    // let modules, wrappers;
-
-    // if (dashboard) {
-    //   modules = dashboard.modules
-    //   if (modules) {
-    //     wrappers = Object.keys(modules).map((moduleKey) => {
-    //       var additionalProps = {
-    //         key: moduleKey,
-    //         db_key: moduleKey,
-    //         type: modules[moduleKey].type
-    //       }
-    //       var newProps = Object.assign({}, this.props, additionalProps)
-    //       return React.createElement(ModuleWrapper, newProps);
-    //     });
-    //   }
-    // }
-
     let dashContainer = `${styles.dashContainer}`;
     let mainDashboardPanelCSS = `${styles.mainDashboardPanel}`;
-
-    // let componentStyle = `${styles.component} animated`;
-    // let defaultModule = <div className={componentStyle}><DefaultModule key={'abcd'}/></div>;
-    let loader = `${styles.loader}`;
 
     if (this.state.databaseResponded) {
       return (
@@ -109,7 +89,9 @@ class Dashboard extends React.Component {
     } else {
       return (
         <div className={dashContainer}>
-          <img className={loader} src="https://firebasestorage.googleapis.com/v0/b/dashboardapp-3d3c7.appspot.com/o/rolling.gif?alt=media&token=85a30250-6288-4ec9-89a9-60e6a06071f7" alt=""/>
+          <div className={mainDashboardPanelCSS}>
+            <Loading />
+          </div>
         </div>
       )
     }
