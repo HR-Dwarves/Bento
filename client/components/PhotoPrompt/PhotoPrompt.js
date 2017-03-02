@@ -1,6 +1,6 @@
 import React from 'react';
 import config from './../../config/config';
-import firebaseApp from '../../base';
+// import firebaseApp from '../../base';
 import styles from './PhotoPrompt.css';
 import classnames from 'classnames';
 import moment from 'moment';
@@ -9,8 +9,8 @@ import PhotoEditor from '../PhotoEditor/PhotoEditor';
 import PhotoDisplayer from '../PhotoDisplayer/PhotoDisplayer';
 
 
-const storageBucket = firebaseApp.storage();
-const database = firebaseApp.database();
+// const storageBucket = firebaseApp.storage();
+// const database = firebaseApp.database();
 
 class PhotoPrompt extends React.Component {
   constructor(props) {
@@ -20,12 +20,14 @@ class PhotoPrompt extends React.Component {
       photoName: null,
       photoSrc: null,
       inputButton: null,
-      todaysPhotoIsTaken: false
+      todaysPhotoIsTaken: false,
+      chooseButtonCss: 'button'
     };
   }
 
   componentDidMount() {
-    let context = this;
+    // console.log(this.props)
+
     let user = this.props.user.uid;
 
     // get saved photos from db
@@ -33,13 +35,6 @@ class PhotoPrompt extends React.Component {
 
     // compare dates to see if today's shot has been taken
     this.checkTodaysPhotoIsTaken();
-
-    // console.log(moment().format('MMMM Do YYYY') === moment(1488408616320).format('MMMM Do YYYY'))
-    // console.log(moment(1488408616320).format('MMMM Do YYYY'));
-
-    // database.ref(`users/${user}/modules/${this.props.db_key}`).on('value', () => {
-    //   this.props.getPhotosForPhotoPrompt(this.props.db_key, user);
-    // });
   }
 
   checkTodaysPhotoIsTaken() {
@@ -48,7 +43,7 @@ class PhotoPrompt extends React.Component {
 
     photos = this.props.dashboard.modules[this.props.db_key].photos;
     if (photos) {
-      lastPhotoDate = photos[Object.keys(photos)[0]].date;
+      lastPhotoDate = photos[Object.keys(photos)[Object.keys(photos).length - 1]].date;
     }
 
     if (lastPhotoDate && (moment().format('MMMM Do YYYY') === moment(lastPhotoDate).format('MMMM Do YYYY'))) {
@@ -56,6 +51,16 @@ class PhotoPrompt extends React.Component {
         todaysPhotoIsTaken: true
       })
     }
+  }
+
+  deletePhoto(key, ev) {
+    const user = this.props.user.uid;
+    var context = this;
+    this.props.deletePhotoFromPhotoPrompt(key, this.props.db_key, user, () => {
+      context.setState({
+        todaysPhotoIsTaken: false
+      })
+    });
   }
 
   changeHandler(ev) {
@@ -80,12 +85,17 @@ class PhotoPrompt extends React.Component {
   }
 
   submitPhoto(ev) {
+    this.setState({
+      chooseButtonCss: 'button is-loading'
+    })
+
     const user = this.props.user.uid;
     var context = this;
     this.props.addPhotoForPhotoPrompt(this.inputButton.files[0], this.props.db_key, user, () => {
       context.setState({
         photoSrc: null,
-        todaysPhotoIsTaken: true
+        todaysPhotoIsTaken: true,
+        chooseButtonCss: 'button'
       });
     });
   }
@@ -98,9 +108,6 @@ class PhotoPrompt extends React.Component {
 
     let photoButtonContainer = `${styles.photoButtonContainer} icon`;
     let photoButton = `${styles.photoButton} fa fa-bullseye`;
-
-    // console.log('this.state.photoSrc', this.state.photoSrc);
-
 
     return (
       <div className='card'>
@@ -144,7 +151,7 @@ class PhotoPrompt extends React.Component {
               }
 
               {this.state.photoSrc !== null &&
-                <a className='button' onClick={this.submitPhoto.bind(this)}>
+                <a className={this.state.chooseButtonCss} onClick={this.submitPhoto.bind(this)}>
                   Make it today's photo
                 </a>
               }
@@ -154,13 +161,15 @@ class PhotoPrompt extends React.Component {
               }
 
               {photos &&
-                Object.keys(photos).map((key, index) => {
+                Object.keys(photos).reverse().map((key, index) => {
                 // console.log('photo', photo)
                 return <PhotoDisplayer
                         key={index}
                         src={photos[key].downloadUrl}
                         title={photos[key].name}
-                        date={photos[key].date} />
+                        date={photos[key].date}
+                        photoId={key}
+                        deletePhoto={this.deletePhoto.bind(this, key)} />
               })}
 
             </div>

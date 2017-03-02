@@ -100,3 +100,49 @@ function addPhotoForPhotoPromptFulfilledAction(newPhotos) {
     newPhotos
   };
 }
+
+
+export function deletePhotoFromPhotoPrompt(itemKey, db_key, user = 'testUser', cb) {
+  return dispatch => {
+    dispatch(deletePhotoFromPhotoPromptRequestedAction());
+    const itemRef = database.ref(`users/${user}/modules/${db_key}/photos/${itemKey}`);
+
+    // get the image file name
+    itemRef.once('value')
+    .then(snap => {
+      var photoName = snap.val().name
+      var storageRef = storage.ref();
+
+      var path = '/photoPrompt/images/';
+      var finalStorageRef = storageRef.child(path + photoName);
+      finalStorageRef.delete();
+    })
+    .then(itemRef.remove())
+    .then(() => {
+      cb();
+      dispatch(deletePhotoFromPhotoPromptFulfilledAction());
+    })
+    .catch((error) => {
+      console.log(error);
+      dispatch(deletePhotoFromPhotoPromptRejectedAction());
+    });
+  }
+}
+
+function deletePhotoFromPhotoPromptRequestedAction() {
+  return {
+    type: ActionTypes.DeletePhotoFromPhotoPromptRequested
+  };
+}
+
+function deletePhotoFromPhotoPromptRejectedAction() {
+  return {
+    type: ActionTypes.DeletePhotoFromPhotoPromptRejected
+  }
+}
+
+function deletePhotoFromPhotoPromptFulfilledAction(newItem) {
+  return {
+    type: ActionTypes.DeletePhotoFromPhotoPromptFulfilled
+  };
+}
