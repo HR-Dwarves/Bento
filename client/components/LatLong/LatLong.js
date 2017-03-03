@@ -81,16 +81,16 @@ class LatLong extends React.Component {
 
   render() {
     // let cssClasses = `${styles.card} column`; // just for reference for form.
+    let headerStyle = `${styles.header} card-header`
+    let contentStyles = `${styles.content} card-content`;
     let clocks = this.props.dashboard.modules[this.props.db_key].clocks;
-    let collapsed = this.props.collapsed.collapsed;
-    let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
 
     let selectStyles = `${styles.thisSelect} select`
 
     return (
       <div className='card'>
 
-        <header className="card-header">
+        <header className={headerStyle}>
           <p className="card-header-title">Time</p>
           <div className="card-header-icon">
             <span className="icon"><i onClick={this.props.handleCollapseFunction} className='fa fa-clock-o' aria-hidden='true'></i></span>
@@ -99,32 +99,29 @@ class LatLong extends React.Component {
           </div>
         </header>
 
-        <div className={collapsedStyle}>
-          <div className="card-content">
-            <div className="media-content">
-              {this.props.dashboard.currentCity &&
-                <h4 className='title is-4'>Current: {this.props.dashboard.currentCity}</h4>}
-                {clocks &&
-                  clocks.map((clock, index) => {
-                  return <Clock
-                          key={index}
-                          time={this.state.time}
-                          timeZone={clock}
-                          delete={this.removeClock.bind(this, clock)} />
-                })}
-              <form>
-                <p className="control">
-                  <span className={selectStyles}>
-                    <select onChange={this.addClock.bind(this)}>
-                      {this.state.timeZones.map((timeZone, index) => {
-                        return <option key={index}>{timeZone}</option>;
-                      })}
-                    </select>
-                  </span>
-                </p>
-              </form>
-
-            </div>
+        <div className={contentStyles}>
+          <div className="media-content">
+            {this.props.dashboard.currentCity &&
+              <h4 className='title is-4'>Current: {this.props.dashboard.currentCity}</h4>}
+              {clocks &&
+                clocks.map((clock, index) => {
+                return <Clock
+                        key={index}
+                        time={this.state.time}
+                        timeZone={clock}
+                        delete={this.removeClock.bind(this, clock)} />
+              })}
+            <form>
+              <p className="control">
+                <span className={selectStyles}>
+                  <select onChange={this.addClock.bind(this)}>
+                    {this.state.timeZones.map((timeZone, index) => {
+                      return <option key={index}>{timeZone}</option>;
+                    })}
+                  </select>
+                </span>
+              </p>
+            </form>
           </div>
         </div>
       </div>
