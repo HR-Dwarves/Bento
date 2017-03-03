@@ -13,7 +13,7 @@
   margin: 0px auto;
   border: 0;
   background: 0;
-  border-bottom: 3px solid black;
+  border-bottom: 1px solid black;
   text-align: center;
   width: 90%;
 }
@@ -40,4 +40,34 @@
 
 input:focus {
   outline: none;
+}
+
+.hasCurrentFocus {
+  display: none;
+}
+
+.activeFocus {
+  font-size: 30px;
+  text-align: center;
+}
+
+.focusGoal {
+  display: flex;
+}
+
+.centerFocus {
+  text-align: center;
+}
+
+.centerBox {
+  display: inline;
+}
+
+.delayStyle {
+  -webkit-animation-delay: 2s; /* Safari 4.0 - 8.0 */
+  animation-delay: .5s;
+}
+
+.complete {
+  text-decoration: line-through;
 }

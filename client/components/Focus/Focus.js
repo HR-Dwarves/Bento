@@ -2,12 +2,19 @@ import React from 'react';
 import firebaseApp from '../../base';
 import styles from './Focus.css';
 import classnames from 'classnames';
-
+import ListItem from './../ListItem/ListItem'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 const database = firebaseApp.database();
 
 class Focus extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      focus: [''],
+      clicked: false
+    }
+    this.handleDeleteFocus = this.handleDeleteFocus.bind(this);
+    this.removeFocus = this.removeFocus.bind(this);
   }
 
   handleInputFocus(event) {
@@ -16,10 +23,51 @@ class Focus extends React.Component {
     const target = 'focusBody';
     const db_ref = database.ref(`users/${user}/modules/${db_key}/${target}`);
     let newText = event.target.value;
-
+    var focusArray = [];
+    focusArray.push(event.target.value);
+    this.setState({
+      focus: focusArray,
+      clicked: false
+    }); 
     db_ref.set(newText);
+    this.refs.test.value="";
+  }
 
-    console.log('YOUR NEW FOCUS IS: ', newText);
+  handleDeleteFocus() {
+    this.setState({
+      clicked: true
+    });
+    this.removeFocus();
+    
+  }
+
+  removeFocus() {
+    const db_key = this.props.db_key;
+    const user = this.props.user.uid;
+    const target = 'focusBody';
+    const db_ref = database.ref(`users/${user}/modules/${db_key}/${target}`);
+    this.setState({
+      focus: ['']
+    });
+    this.refs.test.value="";
+  }
+
+  componentDidMount(){
+    let that = this;
+    const db_key = this.props.db_key;
+    const user = this.props.user.uid;
+    const target = 'focusBody';
+    const db_ref = database.ref(`users/${user}/modules/${db_key}/${target}`);
+    const focusArray = [];
+    db_ref.once('value').then(function(snapshot) {
+      focusArray.push(snapshot.val());
+      if(focusArray[0] === null) {
+        focusArray[0] = '';
+      }
+      that.setState({
+        focus: focusArray
+      });
+    });
   }
 
   render() {
@@ -29,15 +77,35 @@ class Focus extends React.Component {
 
     let collapsed = this.props.collapsed.collapsed;
     let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
+    let hasCurrentFocus = classnames(this.state.focus[0] === '' ? `${styles.focusContent}` : `${styles.hasCurrentFocus}`);
+    let iconStyle = `fa fa-square-o ${styles.centerBox}`
 
-    let focusContentStyle = `${styles.focusStyle} 'card-content`;
+
+    let completed = this.state.clicked;
+    let styleTemp;
+    if (completed) {
+      console.log('COMPLETED');
+      styleTemp = styles.complete;
+    } else {
+      styleTemp = ""
+    }
+
+    if(this.state.focus[0] !== '' || this.state.clicked) {
+      var items = this.state.focus.map((item, i) => (
+        <div className='animated' key={item}>
+          <div className={styles.centerFocus}>
+            <span onClick={this.handleDeleteFocus} className={styleTemp}>{item}</span>
+          </div>
+        </div>
+      ));
+    }
 
     return (
       <div className='focus'>
         <div className='card'>
           <header className='card-header'>
             <div className='card-header-title'>
-              <p>FOCUS</p>
+              <p>Daily Intent</p>
             </div>
             <div className="card-header-icon">
               <span className="icon">
@@ -49,17 +117,27 @@ class Focus extends React.Component {
             <div className='card-content'>
               <div className={styles.focusStyle}>
                 <div>
-                  <p>WHAT'S YOUR FOCUS?</p>
+                  <p>What is your intent for today?</p>
                 </div>
               </div>
-              <span className={styles.focusContent}>
-                <input className={styles.focusInput}
+              <span className={hasCurrentFocus}>
+                <input ref="test" className={styles.focusInput}
                         type='text'
                         maxLength='40'
                         defaultValue={focus.focusBody}
                         onBlur={this.handleInputFocus.bind(this)}
                       />
               </span>
+              <div className="media-content">
+                <ReactCSSTransitionGroup 
+                  transitionName={{
+                    enter: 'slideInLeft',
+                    leave: 'slideOutRight'
+                  }}
+                  transitionLeaveTimeout={1000}>
+                  {items}
+                </ReactCSSTransitionGroup>
+              </div>
             </div>
           </div>
         </div>
