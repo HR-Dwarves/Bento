@@ -1,15 +1,19 @@
 .cardBody {
-  display: flex;
-  justify-content: center;
-  flex-grow: 1;
-  height: 95%;
-  width: 100%;
-  background-color: blue;
-
+  display:flex;
+  justify-content: space-between;
+  text-align: center;
+  align-items: center;
+  height: 100%;
+  background-color: yellow;
 }
 
 .removeBorder {
   border: none !important;
+}
+
+.embedDiv {
+  height: 100%;
+  align-items: center;
 }
 
 .embeddedGame {
