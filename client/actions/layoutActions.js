@@ -15,7 +15,6 @@ export function getLayouts(user, key = 'layouts') {
         console.error(e);
       }
     }
-    // return ls[key];
     // Dispatch layouts pulled to state
     dispatch(getLayoutsAction(ls[key]));
   }
