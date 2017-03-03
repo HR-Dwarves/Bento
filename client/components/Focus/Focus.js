@@ -79,6 +79,7 @@ class Focus extends React.Component {
     let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
     let hasCurrentFocus = classnames(this.state.focus[0] === '' ? `${styles.focusContent}` : `${styles.hasCurrentFocus}`);
     let cardStyle = classnames(`card ${styles.maxHeight}`);
+
     let iconStyle = `fa fa-square-o ${styles.centerBox}`
 
 
