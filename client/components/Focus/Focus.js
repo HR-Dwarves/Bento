@@ -13,7 +13,8 @@ class Focus extends React.Component {
       focus: [''],
       clicked: false
     }
-    this.handleDeleteFocus = this.handleDeleteFocus.bind(this)
+    this.handleDeleteFocus = this.handleDeleteFocus.bind(this);
+    this.removeFocus = this.removeFocus.bind(this);
   }
 
   handleInputFocus(event) {
@@ -24,7 +25,6 @@ class Focus extends React.Component {
     let newText = event.target.value;
     var focusArray = [];
     focusArray.push(event.target.value);
-    console.log(focusArray);
     this.setState({
       focus: focusArray,
       clicked: false
@@ -37,6 +37,11 @@ class Focus extends React.Component {
     this.setState({
       clicked: true
     });
+    this.removeFocus();
+    
+  }
+
+  removeFocus() {
     const db_key = this.props.db_key;
     const user = this.props.user.uid;
     const target = 'focusBody';
@@ -56,7 +61,9 @@ class Focus extends React.Component {
     const focusArray = [];
     db_ref.once('value').then(function(snapshot) {
       focusArray.push(snapshot.val());
-      console.log(focusArray);
+      if(focusArray[0] === null) {
+        focusArray[0] = '';
+      }
       that.setState({
         focus: focusArray
       });
@@ -73,19 +80,21 @@ class Focus extends React.Component {
     let hasCurrentFocus = classnames(this.state.focus[0] === '' ? `${styles.focusContent}` : `${styles.hasCurrentFocus}`);
     let iconStyle = `fa fa-square-o ${styles.centerBox}`
 
+
     let completed = this.state.clicked;
-    let style;
+    let styleTemp;
     if (completed) {
-      style = {"textDecoration": "line-through"}
+      console.log('COMPLETED');
+      styleTemp = styles.complete;
     } else {
-      style = {"textDecoration": ""}
+      styleTemp = ""
     }
 
-    if(this.state.focus[0] !== '') {
+    if(this.state.focus[0] !== '' || this.state.clicked) {
       var items = this.state.focus.map((item, i) => (
-        <div className='animated' key={item} style={style}>
+        <div className='animated' key={item}>
           <div className={styles.centerFocus}>
-            {item} <span><i onClick={this.handleDeleteFocus} className={iconStyle} aria-hidden="true"></i></span>
+            <span onClick={this.handleDeleteFocus} className={styleTemp}>{item}</span>
           </div>
         </div>
       ));
@@ -124,7 +133,8 @@ class Focus extends React.Component {
                   transitionName={{
                     enter: 'slideInLeft',
                     leave: 'slideOutRight'
-                  }}>
+                  }}
+                  transitionLeaveTimeout={1000}>
                   {items}
                 </ReactCSSTransitionGroup>
               </div>

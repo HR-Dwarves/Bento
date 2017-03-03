@@ -62,3 +62,12 @@ input:focus {
 .centerBox {
   display: inline;
 }
+
+.delayStyle {
+  -webkit-animation-delay: 2s; /* Safari 4.0 - 8.0 */
+  animation-delay: .5s;
+}
+
+.complete {
+  text-decoration: line-through;
+}
