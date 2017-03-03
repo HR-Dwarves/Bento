@@ -103,8 +103,9 @@ class PhotoPrompt extends React.Component {
   render() {
     let photos = this.props.dashboard.modules[this.props.db_key].photos;
 
-    let collapsed = this.props.collapsed.collapsed;
-    let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
+    let headerStyle = `${styles.header} card-header`;
+    let contentStyles = `${styles.content} card-content`;
+
 
     let photoButtonContainer = `${styles.photoButtonContainer} icon`;
     let photoButton = `${styles.photoButton} fa fa-bullseye`;
@@ -112,7 +113,7 @@ class PhotoPrompt extends React.Component {
     return (
       <div className='card'>
 
-        <header className="card-header">
+        <header className={headerStyle}>
           <p className="card-header-title">One Photo Every Day Challenge</p>
           <div className="card-header-icon">
             <span className="icon">
@@ -125,54 +126,51 @@ class PhotoPrompt extends React.Component {
           </div>
         </header>
 
-        <div className={collapsedStyle}>
-          <div className="card-content">
-            <div className="media-content">
+        <div className={contentStyles}>
+          <div className="media-content">
 
-              {!this.state.todaysPhotoIsTaken &&
-                <div className={styles.enterPhotoButton}>
-                  <a className='button' onClick={this.buttonClick.bind(this)}>
-                    <span className={photoButtonContainer}>
-                      <i className={photoButton}></i>
-                    </span>
-                    {this.state.photoSrc === null
-                      ? <span>Take Photo/Choose File</span>
-                      : <span>Take/Choose New</span>
-                    }
-                  </a>
-                  <input
-                    ref={src => this.inputButton = src}
-                    type="file"
-                    accept="image/*"
-                    onChange={this.changeHandler.bind(this)}
-                    className={styles.hideInput}
-                  />
-                </div>
-              }
-
-              {this.state.photoSrc !== null &&
-                <a className={this.state.chooseButtonCss} onClick={this.submitPhoto.bind(this)}>
-                  Make it today's photo
+            {!this.state.todaysPhotoIsTaken &&
+              <div className={styles.enterPhotoButton}>
+                <a className='button' onClick={this.buttonClick.bind(this)}>
+                  <span className={photoButtonContainer}>
+                    <i className={photoButton}></i>
+                  </span>
+                  {this.state.photoSrc === null
+                    ? <span>Take Photo/Choose File</span>
+                    : <span>Take/Choose New</span>
+                  }
                 </a>
-              }
+                <input
+                  ref={src => this.inputButton = src}
+                  type="file"
+                  accept="image/*"
+                  onChange={this.changeHandler.bind(this)}
+                  className={styles.hideInput}
+                />
+              </div>
+            }
 
-              {this.state.photoSrc !== null &&
-                <PhotoEditor src={this.state.photoSrc}/>
-              }
+            {this.state.photoSrc !== null &&
+              <a className={this.state.chooseButtonCss} onClick={this.submitPhoto.bind(this)}>
+                Make it today's photo
+              </a>
+            }
 
-              {photos &&
-                Object.keys(photos).reverse().map((key, index) => {
-                // console.log('photo', photo)
-                return <PhotoDisplayer
-                        key={index}
-                        src={photos[key].downloadUrl}
-                        title={photos[key].name}
-                        date={photos[key].date}
-                        photoId={key}
-                        deletePhoto={this.deletePhoto.bind(this, key)} />
-              })}
+            {this.state.photoSrc !== null &&
+              <PhotoEditor src={this.state.photoSrc}/>
+            }
 
-            </div>
+            {photos &&
+              Object.keys(photos).reverse().map((key, index) => {
+              // console.log('photo', photo)
+              return <PhotoDisplayer
+                      key={index}
+                      src={photos[key].downloadUrl}
+                      title={photos[key].name}
+                      date={photos[key].date}
+                      photoId={key}
+                      deletePhoto={this.deletePhoto.bind(this, key)} />
+            })}
           </div>
         </div>
       </div>
