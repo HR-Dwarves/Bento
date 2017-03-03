@@ -15,15 +15,6 @@ function authentication(state = {}, action = '') {
         loggedIn: false
       };
     }
-    // case actionTypes.GetListFulfilled: {
-    //   const { items } = action.list;
-    //   const newState = Object.assign({}, state, {
-    //     inProgress: false,
-    //     success: 'Got invite.',
-    //     items
-    //   });
-    //   return newState;
-    // }
     default:
       return state;
   }

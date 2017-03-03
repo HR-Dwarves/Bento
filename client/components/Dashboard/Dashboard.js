@@ -40,8 +40,9 @@ class Dashboard extends React.Component {
         let userId = uid || 'testUser';
         context.props.authenticateUser(user);
         context.props.getDatabase(uid);
+        // GET LAYOUTS HERE
+        context.props.getLayouts(uid);
         database.ref(`users/${userId}`).on('value', (snapshot) => {
-          // USE OTHER FUNCTION THAN GET DATABASE -- TOO SLOW
           let data = snapshot.val();
           context.setState({
             databaseResponded: true
@@ -55,6 +56,8 @@ class Dashboard extends React.Component {
 
       }
     })
+
+    // this.props.getLayouts();
     // ask user for geocoordinates
     if ("geolocation" in navigator) {
       this.props.getGeolocation();
@@ -84,7 +87,7 @@ class Dashboard extends React.Component {
       return (
         <div className={dashContainer}>
           <div className={mainDashboardPanelCSS}>
-            <ReactGrid {...this.props} layouts={layouts}/>
+            <ReactGrid {...this.props} />
           </div>
         </div>
       )
