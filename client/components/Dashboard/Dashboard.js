@@ -14,8 +14,6 @@ import Loading from '../Loading/Loading';
 
 const database = firebaseApp.database();
 
-// const originalLayouts = getFromLS('layouts') || {};
-
 
 class Dashboard extends React.Component {
   constructor() {
@@ -56,14 +54,10 @@ class Dashboard extends React.Component {
 
       }
     })
-
-    // this.props.getLayouts();
     // ask user for geocoordinates
     if ("geolocation" in navigator) {
       this.props.getGeolocation();
     }
-
-    // this.hide();
   }
 
   handleSettingsButton() {
