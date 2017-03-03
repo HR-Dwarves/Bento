@@ -69,15 +69,16 @@ class ReactGrid extends React.PureComponent {
   };
 
   onLayoutChange(layout, layouts) {
+    let user = this.props.user.uid;
     let currentBreakpoint = this.state.breakpoint;
     // let newLayouts = Object.assign({}, layouts, {currentBreakpoint: layout})
     let newLayouts = Object.assign({}, layouts);
-    newLayouts[currentBreakpoint] = layout;
+    // newLayouts[currentBreakpoint] = layout;
 
+    this.props.updateLayouts(user, newLayouts);
+    // saveToLS('layouts', newLayouts);
 
-    saveToLS('layouts', newLayouts);
-
-    this.setState({newLayouts});
+    // this.setState({newLayouts});
     // console.log('LAYOUT CHANGE SAVED');
     // console.log(layouts);
     // console.log(layout); // THIS
