@@ -72,12 +72,10 @@ class Arcade extends React.Component {
             </span>
           </div>
         </header>
-        <div className={collapsedStyle}>
-          <div className={contentStyle}>
-            <object className={styles.embeddedGame} height='95%'>
-              <embed key={this.state.currentGame} src={this.state.games[gameToRender]} />
-            </object>
-          </div>
+        <div className={contentStyle}>
+          <span>
+            <embed key={this.state.currentGame} src={this.state.games[gameToRender]} scale='exactfit'/>
+          </span>
         </div>
       </div>
     );
