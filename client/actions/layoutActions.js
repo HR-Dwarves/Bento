@@ -6,7 +6,7 @@ const database = firebaseApp.database();
 export function getLayouts(user, key = 'layouts') {
   return dispatch => {
     // Pull layouts from local storage
-    console.log('GET LAYOUTS FIRED');
+    // console.log('GET LAYOUTS FIRED');
     let ls = {};
     if (global.localStorage) {
       try {
@@ -23,6 +23,7 @@ export function getLayouts(user, key = 'layouts') {
 
 export function updateLayouts(user, layouts, key = 'layouts') {
   return dispatch => {
+    // console.log('UPDATE LAYOUTS FIRED');
     // Save layouts to local storage
     if (global.localStorage) {
       global.localStorage.setItem('rgl-8', JSON.stringify({
