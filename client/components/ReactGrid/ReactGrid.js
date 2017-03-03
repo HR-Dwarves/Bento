@@ -10,8 +10,8 @@ import DefaultModule from '../DefaultModule/DefaultModule';
 import ModuleWrapper from '../ModuleWrapper/ModuleWrapper';
 
 import styles from './ReactGrid.css';
-import gridStyles from '../../../node_modules/react-grid-layout/css/styles.css';
-import resizableStyles from '../../../node_modules/react-resizable/css/styles.css';
+// import gridStyles from '../../../node_modules/react-grid-layout/css/styles.css';
+// import resizableStyles from '../../../node_modules/react-resizable/css/styles.css';
 
 const originalLayouts = getFromLS('layouts') || {};
 const breakpoints = {lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0};
@@ -20,7 +20,7 @@ class ReactGrid extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      layouts: JSON.parse(JSON.stringify(originalLayouts)),
+      // layouts: JSON.parse(JSON.stringify(originalLayouts)),
       // layouts: props.layouts,
       mounted: false,
       cols: undefined,
@@ -88,7 +88,7 @@ class ReactGrid extends React.PureComponent {
   render() {
     let dashboard = this.props.dashboard;
     let modules, wrappers, defaultGridProps, gridItems;
-    console.log(this.state.layouts);
+    // console.log(this.state.layouts);
 
     if (dashboard) {
       modules = dashboard.modules
@@ -118,15 +118,15 @@ class ReactGrid extends React.PureComponent {
           };
           let currentBreakpoint = this.state.breakpoint;
           let currentLayout = this.state.layouts[currentBreakpoint];
-          console.log('LAYOUTS', this.state.layouts);
-          console.log('CURRENT BREAKPOINT', currentBreakpoint);
-          console.log('CURRENT LAYOUT', currentLayout);
+          // console.log('LAYOUTS', this.state.layouts);
+          // console.log('CURRENT BREAKPOINT', currentBreakpoint);
+          // console.log('CURRENT LAYOUT', currentLayout);
           let currentKey = moduleKeys[ind];
           // // console.log('LAYOUTSZZZZ', this.state.layouts);
           let currentGridItem = currentLayout.filter((item) => {
             return item.i === currentKey;
           });
-          console.log(`CURRENT GRID ITEM: `, currentGridItem[0]);
+          // console.log(`CURRENT GRID ITEM: `, currentGridItem[0]);
           let newGridProps = Object.assign({}, defaultGridProps, currentGridItem[0]);
           // console.log('NEW GRID PROPS', newGridProps);
           return <div key={currentKey} data-grid={newGridProps}>{wrapper}</div>;
@@ -144,7 +144,7 @@ class ReactGrid extends React.PureComponent {
         {...this.props}
         ref='rrgl'
         className={layoutStyle} 
-        layouts={this.state.layouts}
+        // layouts={this.state.layouts}
         breakpoints={breakpoints}
         measureBeforeMount={false}
         onLayoutChange={this.onLayoutChange}
