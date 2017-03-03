@@ -13,10 +13,11 @@ class Arcade extends React.Component {
     this.state = {
       'currentGame': 'PACMAN',
       'games': {
-        'PACMAN': 'http://www.classicgamesarcade.com/games/pacman.swf',
-        'SPACE INVADERS': 'http://www.pizn.com/swf/1-space-invaders.swf',
-        'GALAGA': 'http://www.classicgamesarcade.com/games/galaga.swf',
         'BUBBLE BOBBLE': 'http://www.classicgamesarcade.com/games/puzzle-bobble.swf',
+        'GALAGA': 'http://www.classicgamesarcade.com/games/galaga.swf',
+        'PACMAN': 'http://www.classicgamesarcade.com/games/pacman.swf',
+        'RAIDENX': 'http://www.classicgamesarcade.com/games/raidenx.swf',
+        'SPACE INVADERS': 'http://www.pizn.com/swf/1-space-invaders.swf',
         'TRON': 'http://www.classicgamesarcade.com/games/tron.swf',
         'TETRIS': 'http://www.classicgamesarcade.com/games/flash-tetris.swf',
       }
@@ -25,24 +26,31 @@ class Arcade extends React.Component {
     this.handleGameChange = this.handleGameChange.bind(this);
   }
 
-  handleGameChange(e) {
-    e.preventDefault();
-    console.log('CHANGE GAME');
+  handleGameChange(event) {
+    event.preventDefault();
     const db_key = this.props.db_key;
-    const gameSource = this.props.dashboard.modules[db_key]['game'];
+    const user = this.props.user.uid;
+    const target = 'name';
+    const db_ref = database.ref(`users/${user}/modules/${db_key}/${target}`);
+    let newGame = event.target.value;
+
+    db_ref.set(newGame);
 
     this.setState({
-      'currentGame': e.target.value
+      'currentGame': newGame
     });
   }
 
   render() {
-    let context = this;
+    let dashboard = this.props.dashboard;
+    let db_key = this.props.db_key;
+    let game = dashboard.modules[db_key];
+
     let collapsed = this.props.collapsed.collapsed;
     let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
-    let gameToRender = (this.state.currentGame).toUpperCase();
+    let gameToRender = game.name || this.state.currentGame;
 
-    let contentStyle = `${styles.cardBody} 'card-content`
+    let contentStyle = `${styles.cardBody} 'card-content`;
 
     return (
       <div className='card'>
@@ -50,10 +58,11 @@ class Arcade extends React.Component {
           <p className='card-header-title'>
             <span className='select'>
               <select value={gameToRender} onChange={this.handleGameChange} className={styles.removeBorder}>
-                <option value='PACMAN'>Pac-Man</option>
-                <option value='SPACE INVADERS'>Space Invaders</option>
-                <option value='GALAGA'>Galaga</option>
                 <option value='BUBBLE BOBBLE'>Bubble Bobble</option>
+                <option value='GALAGA'>Galaga</option>
+                <option value='PACMAN'>Pac-Man</option>
+                <option value='RAIDENX'>Raiden X</option>
+                <option value='SPACE INVADERS'>Space Invaders</option>
                 <option value='TRON'>Tron</option>
                 <option value='TETRIS'>Tetris</option>
               </select>
@@ -65,12 +74,8 @@ class Arcade extends React.Component {
             </span>
           </div>
         </header>
-        <div className={collapsedStyle}>
-          <div className={contentStyle}>
-            <div className='arcade-game'>
-              <embed key={gameToRender} src={this.state.games[gameToRender]} />
-            </div>
-          </div>
+        <div className={contentStyle}>
+            <embed className={styles.embeddedGame} key={this.state.currentGame} src={this.state.games[gameToRender]} wmode='window'/>
         </div>
       </div>
     );
