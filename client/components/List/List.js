@@ -91,11 +91,11 @@ class List extends React.Component {
             <p className="card-header-title">List</p>
             <span href="" className="card-header-icon">
               <span className="icon">
-                <i onClick={this.props.handleCollapseFunction} className="fa fa-th-list" aria-hidden="true"></i>
+                <i className="fa fa-th-list" aria-hidden="true"></i>
               </span>
             </span>
           </header>
-          <div className={collapsedStyle}>
+          <div>
             <div className="card-content">
               <form action="submit"
                     className={formStyle}
