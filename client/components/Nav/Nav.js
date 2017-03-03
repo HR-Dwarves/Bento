@@ -90,7 +90,6 @@ class Nav extends React.Component {
           <div className={pageTitleCSS}>bento</div>
         </Link>
         <div className={modalButtonStyle}>
-          <button style={displayButton} onClick={this.toggleFocus.bind(this)} className={logoutButtonStyle}>Focus</button>
           <button style={displayButton} onClick={this.handleSettingsButton} className="button is-dark modal-button">
             <i className="fa fa-plus" aria-hidden="true"></i>
           </button>
@@ -102,3 +101,6 @@ class Nav extends React.Component {
 }
 
 export default Nav;
+
+// <button style={displayButton} onClick={this.toggleFocus.bind(this)} className={logoutButtonStyle}>Focus</button>
+
