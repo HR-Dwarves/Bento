@@ -1,6 +1,7 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actionCreators from '../actions/actionCreators';
+import * as layoutActionCreators from '../actions/layoutActions';
 import * as listActionCreators from '../actions/listActions';
 import * as stickyNoteActionCreators from '../actions/stickyNoteActions'
 import * as clocksActionCreators from '../actions/clocksActions';
@@ -14,6 +15,7 @@ const database = firebaseApp.database();
 
 var bundledActionCreators = Object.assign({},
                                           actionCreators,
+                                          layoutActionCreators,
                                           listActionCreators,
                                           clocksActionCreators,
                                           stickyNoteActionCreators,
@@ -25,7 +27,8 @@ var bundledActionCreators = Object.assign({},
 function mapStateToProps(state) {
   return {
     dashboard: state.dashboard,
-    user: state.authentication
+    user: state.authentication,
+    layouts: state.layouts
   }
 }
 
