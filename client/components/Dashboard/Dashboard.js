@@ -14,6 +14,7 @@ import Loading from '../Loading/Loading';
 
 const database = firebaseApp.database();
 
+// const originalLayouts = getFromLS('layouts') || {};
 
 
 class Dashboard extends React.Component {
@@ -77,12 +78,13 @@ class Dashboard extends React.Component {
   render() {
     let dashContainer = `${styles.dashContainer}`;
     let mainDashboardPanelCSS = `${styles.mainDashboardPanel}`;
+    let layouts = getFromLS('layouts');
 
     if (this.state.databaseResponded) {
       return (
         <div className={dashContainer}>
           <div className={mainDashboardPanelCSS}>
-            <ReactGrid {...this.props}/>
+            <ReactGrid {...this.props} layouts={layouts}/>
           </div>
         </div>
       )
@@ -101,7 +103,17 @@ class Dashboard extends React.Component {
 
 export default Dashboard;
 
-
+function getFromLS(key) {
+  let ls = {};
+  if (global.localStorage) {
+    try {
+      ls = JSON.parse(global.localStorage.getItem('rgl-8')) || {};
+    } catch(e) {
+      console.error(e);
+    }
+  }
+  return ls[key];
+}
 
 // {wrappers ? wrappers.map((wrapper, ind) => (
 //   <div className={componentStyle} key={ind}>
