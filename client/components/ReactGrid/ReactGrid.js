@@ -71,8 +71,9 @@ class ReactGrid extends React.PureComponent {
   render() {
     let dashboard = this.props.dashboard;
     let modules, wrappers, defaultGridProps, gridItems;
-
-    if (dashboard) {
+    let layout = this.state.layouts[this.state.breakpoint];
+    console.log(layout);
+    if (dashboard && layout) {
       modules = dashboard.modules
       if (modules) {
         let moduleKeys = Object.keys(modules);

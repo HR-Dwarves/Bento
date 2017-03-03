@@ -75,7 +75,7 @@ class Dashboard extends React.Component {
   render() {
     let dashContainer = `${styles.dashContainer}`;
     let mainDashboardPanelCSS = `${styles.mainDashboardPanel}`;
-    let layouts = getFromLS('layouts');
+    // let layouts = getFromLS('layouts');
 
     if (this.state.databaseResponded) {
       return (
