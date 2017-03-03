@@ -4,11 +4,9 @@ import styles from './Loading.css';
 class Loading extends React.Component {
   render() {
 
-    let loadingStyle = `${styles.loading}`
+    let loadingStyle = `${styles.loader}`
     return (
-      <div className={loadingStyle}>
-        
-      </div>      
+      <div className={loadingStyle}>Loading...</div>      
     )
   }
 }

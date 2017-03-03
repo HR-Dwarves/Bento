@@ -45,13 +45,9 @@ input {
 .dashContainer > * {
 
 }
+
 /*Masonry*/
 .mainDashboardPanel {
-  /*border: 1px solid red;*/
-  /*padding-bottom: 45px;*/
-  /*padding-top: 6em; */
-  /*column-count: 2;*/
-  /*column-gap: 0;*/
   margin: 100px auto;
   width: 95%;
   height: 80%;
@@ -59,19 +55,15 @@ input {
  
 /*ITEM*/
 .component {
- /* display: inline-block;
-  border: 1px solid goldenrod;
-  margin: 0 1em;
-  width: calc(100% - 2em);
-  padding-bottom: .4em*/
+
 }
 
 .component:last-child {
-  /*padding-bottom: 2em;*/
+
 }
 
 .component > * {
-  /*flex: 1 1 100%;*/
+
 }
 
 
@@ -82,12 +74,10 @@ input {
   }
 
   .component {
-    /*height: auto;
-    /*width: calc(33.333% - 20px);*/
-    /*width: 35em;*/
+
   }
 }
-*/
+
 /*Desktop CSS*/
 @media all and (max-width: 1100px) {
   .mainDashboardPanel {
@@ -104,13 +94,6 @@ input {
 @media all and (max-width: 550px) {
   .mainDashboardPanel {
 
-    /*height: 100vh;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    align-items: stretch;
-    overflow-y: scroll;*/
-
   }
 
   .component {
@@ -120,6 +103,7 @@ input {
 
 @media all and (max-width: 600px) {
   .mainDashboardPanel {
+  
   }
 
   .component {
@@ -131,4 +115,3 @@ input {
 
 }
 
-/*Transition*/

@@ -142,12 +142,3 @@ function saveToLS(key, value) {
     }));
   }
 }
-
-// {wrappers ? wrappers.map((wrapper, ind) => (
-//   <div 
-//   key={ind} 
-//   data-grid={this.generateLayout(ind)}
-//   >
-//       {wrapper}
-//   </div>
-//   )) : defaultModule }
