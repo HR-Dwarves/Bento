@@ -71,3 +71,7 @@ input:focus {
 .complete {
   text-decoration: line-through;
 }
+
+.maxHeight {
+  height: 100%;
+}

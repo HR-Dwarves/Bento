@@ -78,6 +78,7 @@ class Focus extends React.Component {
     let collapsed = this.props.collapsed.collapsed;
     let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
     let hasCurrentFocus = classnames(this.state.focus[0] === '' ? `${styles.focusContent}` : `${styles.hasCurrentFocus}`);
+    let cardStyle = classnames(`card ${styles.maxHeight}`);
     let iconStyle = `fa fa-square-o ${styles.centerBox}`
 
 
@@ -99,10 +100,10 @@ class Focus extends React.Component {
         </div>
       ));
     }
-
+//
     return (
       <div className='focus'>
-        <div className='card'>
+        <div className={cardStyle}>
           <header className='card-header'>
             <div className='card-header-title'>
               <p>Daily Intent</p>
