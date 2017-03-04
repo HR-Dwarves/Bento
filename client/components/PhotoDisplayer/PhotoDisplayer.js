@@ -16,7 +16,6 @@ class PhotoDisplayer extends React.Component {
 
   dateIsToday() {
     if (moment().format('MMMM Do YYYY') === moment(this.props.date).format('MMMM Do YYYY')) {
-      console.log('true')
       return true;
     } else {
       return false;
