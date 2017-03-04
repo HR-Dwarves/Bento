@@ -14,12 +14,31 @@
   line-height: 1.5em;
 }
 
+.footer {
+  flex: 0 0 auto;
+}
+
+.listContent {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+.listContent > * {
+  flex: 1 0 auto;
+}
+
+.listFormContainer {
+  flex: 0 1 auto;
+}
+
 .listForm {
   display: flex;
 }
 
 .listForm > * {
-  /*flex: 1 1 100%;*/
+  flex: 0 1 auto;
 }
 
 .listButton {
@@ -30,24 +49,6 @@
   overflow-y: auto;
 }
 
-.height {
-  max-height: 1200px;
-  -webkit-transition: max-height 0.3s; 
-  -moz-transition: max-height 0.3s; 
-  -ms-transition: max-height 0.3s; 
-  -o-transition: max-height 0.3s; 
-  transition: max-height .3s;
-  /*overflow: hidden;*/
-  overflow-y: scroll;
+.footerButtons {
+  align-self: flex-end;
 }
-
-.collapsedStyle {
-  max-height: 0;
-  -webkit-transition: max-height 0.3s; 
-  -moz-transition: max-height 0.3s; 
-  -ms-transition: max-height 0.3s; 
-  -o-transition: max-height 0.3s; 
-  transition: max-height .3s;
-  overflow: hidden;
-}
-
