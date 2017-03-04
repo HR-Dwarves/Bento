@@ -18,10 +18,6 @@
   overflow: hidden;
 }
 
-/*.previewerCanvas {
-  display: none;
-}*/
-
 .header {
   flex: 0 0 auto;
   line-height: 1.5em;
@@ -29,7 +25,6 @@
 
 .photoButtonContainer {
   font-size: 2em;
-  /*margin-right: 15px;*/
 }
 
 .photoButton {
@@ -49,7 +44,6 @@
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
-  /*padding-top: 0;*/
 }
 
 .content > * {
@@ -65,15 +59,7 @@
 }
 
 .streakBar {
-  /*background-color: rgb(1,209,178);*/
   padding: 5px 10.5px;
   color: rgb(1,209,178);
   justify-content: flex-end;
-  /*word-break: normal;*/
-  /*padding-left: 10.5px;*/
-  /*padding-right: 10.5px;*/
 }
-
-/*.title {
-  word-break: normal !important;
-}*/

@@ -19,7 +19,9 @@ class PhotoPrompt extends React.Component {
       todaysPhotoIsTaken: false,
       chooseButtonCss: 'button',
       inputIsTooBig: false,
-      streak: 0
+      streak: 0,
+      quote: quotes[0],
+      showQuote: true
     };
   }
 
@@ -33,7 +35,7 @@ class PhotoPrompt extends React.Component {
 
     // compare dates to see if today's shot has been taken
     this.checkTodaysPhotoIsTaken();
-    console.log('quotes', quotes)
+    this.pickQuote();
   }
 
   checkTodaysPhotoIsTaken() {
@@ -141,6 +143,19 @@ class PhotoPrompt extends React.Component {
     }
   }
 
+  pickQuote() {
+    length = quotes.length;
+    // http://stackoverflow.com/questions/1527803/
+    // generating-random-whole-numbers-in-javascript-in-a-specific-range
+    // Math.floor(Math.random() * (max - min +1)) + min
+    var thisQuote = Math.floor(Math.random() * (length - 0 + 1));
+    this.setState({quote: quotes[thisQuote]})
+  }
+
+  hideQuote() {
+    this.setState({showQuote: false});
+  }
+
   render() {
     let photos = this.props.dashboard.modules[this.props.db_key].photos;
     let iconStyle = `${this.state.todaysPhotoIsTaken ? styles.iconGreen : styles.iconRed} icon`;
@@ -171,6 +186,18 @@ class PhotoPrompt extends React.Component {
         <div className={`${styles.content} card-content`}>
 
           <div className="media-content">
+
+            {/* QUOTE */}
+            {this.state.showQuote &&
+              <article className="message">
+                <div className="message-body">
+                  <a className="delete is-pulled-right"
+                    onClick={this.hideQuote.bind(this)}></a>
+                  <p>{this.state.quote.quote}</p>
+                  <p><em>&mdash;{this.state.quote.author}</em></p>
+                </div>
+              </article>
+            }
 
             {/* TAKE A PHOTO BUTTON */}
             {!this.state.todaysPhotoIsTaken &&
