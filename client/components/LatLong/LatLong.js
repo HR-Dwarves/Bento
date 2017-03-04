@@ -94,9 +94,9 @@ class LatLong extends React.Component {
         <header className={headerStyle}>
           <p className="card-header-title">Time</p>
           <div className="card-header-icon">
-            <span className="icon"><i onClick={this.props.handleCollapseFunction} className='fa fa-clock-o' aria-hidden='true'></i></span>
+            <span className="icon"><i className='fa fa-clock-o' aria-hidden='true'></i></span>
             {this.props.dashboard.currentCity &&
-              <span className="icon"><i onClick={this.props.handleCollapseFunction} className='fa fa-map-marker' aria-hidden='true'></i></span>}
+              <span className="icon"><i className='fa fa-map-marker' aria-hidden='true'></i></span>}
           </div>
         </header>
 

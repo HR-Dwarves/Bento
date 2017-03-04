@@ -11,7 +11,7 @@ import DefaultModule from '../components/DefaultModule/DefaultModule'
 
 var moduleList = {
   'List': List,
-  'Hacker News': NewsFeed,
+  'Newsfeed': NewsFeed,
   'Weather': WeatherDetails,
   'Sticky Note': StickyNotes,
   'Clock': LatLong,

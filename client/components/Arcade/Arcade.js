@@ -72,7 +72,7 @@ class Arcade extends React.Component {
           </p>
           <div className='card-header-icon'>
             <span className='icon'>
-              <i onClick={this.props.handleCollapseFunction} className='fa fa-gamepad' aria-hidden='true'></i>
+              <i className='fa fa-gamepad' aria-hidden='true'></i>
             </span>
           </div>
         </header>

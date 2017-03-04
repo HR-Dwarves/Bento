@@ -120,7 +120,7 @@ class Focus extends React.Component {
             </div>
             <div className="card-header-icon">
               <span className="icon">
-                <i onClick={this.props.handleCollapseFunction} className="fa fa-crosshairs" aria-hidden="true"></i>
+                <i className="fa fa-crosshairs" aria-hidden="true"></i>
               </span>
             </div>
           </header>

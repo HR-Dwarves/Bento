@@ -57,7 +57,7 @@ class StickyNotes extends React.Component {
                     name="note.headerText"/>
             <div className="card-header-icon">
               <span className="icon">
-                <i onClick={this.props.handleCollapseFunction} className="fa fa-sticky-note-o" aria-hidden="true"></i>
+                <i className="fa fa-sticky-note-o" aria-hidden="true"></i>
               </span>
             </div>
           </header>
