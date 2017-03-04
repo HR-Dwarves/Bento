@@ -107,6 +107,24 @@ class PhotoPrompt extends React.Component {
     let yesterday = moment().subtract(1, 'days').format('MMMM Do YYYY');
     let mostRecent;
 
+    let checkDatesForStreak = () => {
+      for (var i = allPhotoDates.length - 1; i >= 0; i--) {
+        if (i === 0) {
+          return;
+        } else {
+          var thisPhotoDate = moment(allPhotoDates[i]);
+          var previousPhotoDate = moment(allPhotoDates[i - 1]);
+
+          if (previousPhotoDate.format('MMMM Do YYYY')
+            === thisPhotoDate.subtract(1, 'days').format('MMMM Do YYYY')) {
+            streakCounter++;
+          } else {
+            return;
+          }
+        }
+      }
+    }
+
     allPhotoDates = allPhotoDates.map((key, index, array) => {
       return photos[key].date;
     })
@@ -116,24 +134,6 @@ class PhotoPrompt extends React.Component {
     // first check if the most recent is yesterday, otherwise aint no streak.
     if (mostRecent === yesterday || mostRecent === today) {
       var streakCounter = 1;
-
-      function checkDatesForStreak() {
-        for (var i = allPhotoDates.length - 1; i >= 0; i--) {
-          if (i === 0) {
-            return;
-          } else {
-            var thisPhotoDate = moment(allPhotoDates[i]);
-            var previousPhotoDate = moment(allPhotoDates[i - 1]);
-
-            if (previousPhotoDate.format('MMMM Do YYYY')
-              === thisPhotoDate.subtract(1, 'days').format('MMMM Do YYYY')) {
-              streakCounter++;
-            } else {
-              return;
-            }
-          }
-        }
-      }
       checkDatesForStreak();
       this.setState({streak: streakCounter})
     }
@@ -148,6 +148,12 @@ class PhotoPrompt extends React.Component {
 
         <header className={`${styles.header} card-header`}>
           <p className="card-header-title">One Photo Every Day Challenge</p>
+          {/* STREAK */}
+          {this.state.streak > 0 &&
+            <p className={`${styles.streakBar} card-header-title`}>
+              Streak:&nbsp;{this.state.streak}
+            </p>
+          }
           <div className="card-header-icon">
             <span className={iconStyle}>
               <i
@@ -158,12 +164,7 @@ class PhotoPrompt extends React.Component {
           </div>
         </header>
 
-        {/* FACTOR OUT THIS PULL FROM THE REDUX STATE, DELETE IT ON THE DB */}
-        {this.state.streak > 0 &&
-          <div className={`${styles.streakBar} title is-4`}>
-            Streak: {this.state.streak}
-          </div>
-        }
+
 
         <div className={`${styles.content} card-content`}>
 

@@ -65,20 +65,6 @@ export function addPhotoForPhotoPrompt(photoFile, db_key, user = 'testUser', cb)
   return dispatch => {
     dispatch(addPhotoForPhotoPromptRequestedAction());
 
-    // ping to see if a streak exists
-
-    // if not, make one as 1
-
-
-    // actually handle this in get photos. get photos represents a login
-    // if so, check if the latest photo posted was yesterday
-
-    // if it was, add one to the streak
-
-    // if it wasn't
-
-    // Create a root reference
-    // upload file
     var storageRef = storage.ref();
 
     var path = '/photoPrompt/images/';
