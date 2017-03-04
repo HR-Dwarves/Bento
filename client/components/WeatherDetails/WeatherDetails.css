@@ -10,7 +10,7 @@
 
 .cardContent {
   display:flex;
-  justify-content: space-around;
+  justify-content: space-between;
   text-align: center;
   align-items: center;
   overflow-y: scroll;
