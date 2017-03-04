@@ -121,6 +121,7 @@ class NewsFeed extends React.Component {
 
   handlePostCountChange(e) {
     e.preventDefault();
+    console.log(e.target.value);
     const db_key = this.props.db_key;
     const user = this.props.user.uid;
     const newsSource = this.props.dashboard.modules[db_key].newsSource;
@@ -175,6 +176,15 @@ class NewsFeed extends React.Component {
     let loaded = this.state.loaded;
     let collapsed = this.props.collapsed.collapsed;
     let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
+    let fiveButtonStyle = ''
+    let moreButtonStyle = ''
+    if(this.state.numberOfPosts === '5') {
+      fiveButtonStyle = `${styles.postButton} button is-primary is-focused`;
+      moreButtonStyle = `${styles.postButton} button is-focused`;
+    } else {
+      moreButtonStyle = `${styles.postButton} button is-primary is-focused`;
+      fiveButtonStyle = `${styles.postButton} button is-focused`;
+    }
     return (
         <div className={newsfeedStyles}>
           <header className={headerStyles}>
@@ -188,12 +198,8 @@ class NewsFeed extends React.Component {
               </p>
             </div>
             <div className="card-header-icon">
-              <p>Number of posts</p>
-              <select value={selectedPostCount} onChange={this.handlePostCountChange}>
-                <option value='5'>5</option>
-                <option value='10'>10</option>
-                <option value='15'>15</option>
-              </select>
+              <button value='5' className={fiveButtonStyle} onClick={this.handlePostCountChange}>5</button>
+              <button value='10'className={moreButtonStyle} onClick={this.handlePostCountChange}>More!</button>
               <span className="icon">
                 <i className="fa fa-newspaper-o" aria-hidden="true"></i>
               </span>
