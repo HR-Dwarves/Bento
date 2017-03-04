@@ -45,6 +45,7 @@ class ListItem extends React.Component {
     } else {
       cardStyle = {"display": ""};
     }
+    let hiddenStyle = {"display": "none"};
 
     let listItemCSS = `${styles.listItem} control level animated`;
     let spanIconCSS = `${styles.icon} is-pulled-right level`;
@@ -54,10 +55,10 @@ class ListItem extends React.Component {
           {item.text}
         </span>
         <span className={spanIconCSS}>
-          <span className="icon is-small" onClick={() => this.handleCheckClick(itemKey)}>
+          <span style={this.props.editing ? hiddenStyle : {}} className="icon is-small" onClick={() => this.handleCheckClick(itemKey)}>
             {checked}
           </span>
-          <span className="icon is-small">
+          <span style={this.props.editing ? {} : hiddenStyle} className="icon is-small">
             <i onClick={() => this.handleDelete(itemKey)} 
                className="fa fa-times level" aria-hidden="true"></i>
           </span>
