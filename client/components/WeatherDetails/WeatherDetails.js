@@ -113,7 +113,7 @@ class WeatherDetails extends React.Component {
             </form>
             <div className="card-header-icon">
               <span className="icon">
-                <i onClick={this.props.handleCollapseFunction} className='fa fa-cloud' aria-hidden='true'></i>
+                <i className='fa fa-cloud' aria-hidden='true'></i>
               </span>
             </div>
           </header>

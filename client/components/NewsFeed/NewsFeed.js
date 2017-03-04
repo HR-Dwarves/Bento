@@ -29,7 +29,6 @@ class NewsFeed extends React.Component {
     let feed = url;
     axios.get(feed)
     .then(function(response) {
-      console.log(response);
       that.getPostContent(response.data, key);
     })
     .catch(function(error) {
