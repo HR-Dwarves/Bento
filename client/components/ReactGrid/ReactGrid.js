@@ -48,7 +48,7 @@ class ReactGrid extends React.PureComponent {
     var cols = this.props.cols[breakpoint];
     var LSlayouts = getFromLS('layouts');
     var layouts = Object.assign({xxs:[], xs: [], sm: [], md: [], lg:[]}, LSlayouts);
-    console.log(node.offsetWidth);
+    // console.log(node.offsetWidth);
     this.setState({breakpoint, layouts, cols});
 
   }
@@ -75,7 +75,7 @@ class ReactGrid extends React.PureComponent {
     let layouts = this.state.layouts;
     if (layouts) {
       let layout = this.state.layouts[this.state.breakpoint];
-      console.log(layout);
+      // console.log(layout);
       if (dashboard && layout) {
         modules = dashboard.modules
         if (modules) {
