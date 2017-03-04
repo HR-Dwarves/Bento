@@ -174,6 +174,12 @@ class NewsFeed extends React.Component {
     let list = this.state.posts;
     let selectedNewsSource = this.props.dashboard.modules[this.props.db_key].newsSource;
     let selectedPostCount = this.props.dashboard.modules[this.props.db_key].numberOfPosts;
+<<<<<<< HEAD
+=======
+    // if (list) {
+    //   list.length = this.state.numberOfPosts;
+    // } 
+>>>>>>> Hide newsfeed array length temporarily
     let cssClasses = `${styles.test}`;
     let spinner = `${styles.spinner}`;
     let newsfeedStyles = `${styles.newsfeed} card`;
