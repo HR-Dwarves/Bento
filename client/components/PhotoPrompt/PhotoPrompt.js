@@ -35,6 +35,7 @@ class PhotoPrompt extends React.Component {
 
     // compare dates to see if today's shot has been taken
     this.checkTodaysPhotoIsTaken();
+    console.log('this.state.todaysPhotoIsTaken', this.state.todaysPhotoIsTaken)
   }
 
   checkTodaysPhotoIsTaken() {
@@ -105,6 +106,8 @@ class PhotoPrompt extends React.Component {
 
     let headerStyle = `${styles.header} card-header`;
     let contentStyles = `${styles.content} card-content`;
+    // let iconStyle = `${styles.iconRed} icon`;
+    let iconStyle = `${this.state.todaysPhotoIsTaken ? styles.iconGreen : styles.iconRed} icon`;
 
 
     let photoButtonContainer = `${styles.photoButtonContainer} icon`;
@@ -116,7 +119,7 @@ class PhotoPrompt extends React.Component {
         <header className={headerStyle}>
           <p className="card-header-title">One Photo Every Day Challenge</p>
           <div className="card-header-icon">
-            <span className="icon">
+            <span className={iconStyle}>
               <i
                 onClick={this.props.handleCollapseFunction}
                 className='fa fa-camera'

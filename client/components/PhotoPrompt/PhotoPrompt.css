@@ -54,3 +54,11 @@
 .content > * {
   flex: 1 0 auto;
 }
+
+.iconGreen {
+  color: rgb(1,209,178);
+}
+
+.iconRed {
+  color: rgb(255, 56, 96);
+}
