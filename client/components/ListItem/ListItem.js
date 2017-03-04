@@ -35,14 +35,21 @@ class ListItem extends React.Component {
 
     let style;
     if (completed) {
-      style = {"textDecoration": "line-through"}
+      style = {"textDecoration": "line-through"};
     } else {
-      style = {"textDecoration": ""}
+      style = {"textDecoration": ""};
     }
-    let listItemCSS = `${styles.listItem} control level`
+    let cardStyle;
+    if (this.props.hideArchived && completed) {
+      cardStyle = {"display": "none"};
+    } else {
+      cardStyle = {"display": ""};
+    }
+
+    let listItemCSS = `${styles.listItem} control level animated`;
     let spanIconCSS = `${styles.icon} is-pulled-right level`;
     return (
-      <div className={listItemCSS}>
+      <div className={listItemCSS} style={cardStyle}>
         <span style={style}>
           {item.text}
         </span>
