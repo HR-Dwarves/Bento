@@ -17,7 +17,8 @@ class PhotoPrompt extends React.Component {
       inputButton: null,
       todaysPhotoIsTaken: false,
       chooseButtonCss: 'button',
-      inputIsTooBig: false
+      inputIsTooBig: false,
+      streak: 0
     };
   }
 
@@ -25,6 +26,9 @@ class PhotoPrompt extends React.Component {
     let user = this.props.user.uid;
     // get saved photos from db
     this.props.getPhotosForPhotoPrompt(this.props.db_key, user);
+
+    // check streak
+    this.checkStreak();
 
     // compare dates to see if today's shot has been taken
     this.checkTodaysPhotoIsTaken();
@@ -49,6 +53,7 @@ class PhotoPrompt extends React.Component {
     var context = this;
     this.props.deletePhotoFromPhotoPrompt(key, this.props.db_key, user, () => {
       context.setState({todaysPhotoIsTaken: false})
+      this.checkStreak();
     });
   }
 
@@ -91,7 +96,47 @@ class PhotoPrompt extends React.Component {
         todaysPhotoIsTaken: true,
         chooseButtonCss: 'button'
       });
+      this.checkStreak();
     });
+  }
+
+  checkStreak() {
+    let photos = this.props.dashboard.modules[this.props.db_key].photos;
+    let allPhotoDates = Object.keys(photos);
+    let today = moment().format('MMMM Do YYYY');
+    let yesterday = moment().subtract(1, 'days').format('MMMM Do YYYY');
+    let mostRecent;
+
+    allPhotoDates = allPhotoDates.map((key, index, array) => {
+      return photos[key].date;
+    })
+
+    mostRecent = moment(allPhotoDates[allPhotoDates.length - 1]).format('MMMM Do YYYY')
+
+    // first check if the most recent is yesterday, otherwise aint no streak.
+    if (mostRecent === yesterday || mostRecent === today) {
+      var streakCounter = 1;
+
+      function checkDatesForStreak() {
+        for (var i = allPhotoDates.length - 1; i >= 0; i--) {
+          if (i === 0) {
+            return;
+          } else {
+            var thisPhotoDate = moment(allPhotoDates[i]);
+            var previousPhotoDate = moment(allPhotoDates[i - 1]);
+
+            if (previousPhotoDate.format('MMMM Do YYYY')
+              === thisPhotoDate.subtract(1, 'days').format('MMMM Do YYYY')) {
+              streakCounter++;
+            } else {
+              return;
+            }
+          }
+        }
+      }
+      checkDatesForStreak();
+      this.setState({streak: streakCounter})
+    }
   }
 
   render() {
@@ -113,9 +158,10 @@ class PhotoPrompt extends React.Component {
           </div>
         </header>
 
-        {this.props.dashboard.modules[this.props.db_key].streak &&
-          <div className={`${styles.streakBar} title is-4`}>Streak:
-            {this.props.dashboard.modules[this.props.db_key].streak}
+        {/* FACTOR OUT THIS PULL FROM THE REDUX STATE, DELETE IT ON THE DB */}
+        {this.state.streak > 0 &&
+          <div className={`${styles.streakBar} title is-4`}>
+            Streak: {this.state.streak}
           </div>
         }
 
@@ -165,7 +211,6 @@ class PhotoPrompt extends React.Component {
             {/* ALL PHOTOS */}
             {photos &&
               Object.keys(photos).reverse().map((key, index) => {
-              // console.log('photo', photo)
               return <PhotoDisplayer
                       key={index}
                       src={photos[key].downloadUrl}

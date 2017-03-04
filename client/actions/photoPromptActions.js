@@ -24,11 +24,11 @@ export function getPhotosForPhotoPrompt(db_key, user = 'testUser') {
       // console.log('streak', this.props.dashboard.modules[this.props.db_key].streak)
 
       // let photos = this.props.dashboard.modules[this.props.db_key].photos;
-      let allPhotoDates = Object.keys(photos)
+      // let allPhotoDates = Object.keys(photos)
 
-      allPhotoDates = allPhotoDates.map((key, index, array) => {
-        return photos[key].date;
-      })
+      // allPhotoDates = allPhotoDates.map((key, index, array) => {
+      //   return photos[key].date;
+      // })
 
       // if not delete the streak
 
