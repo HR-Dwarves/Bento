@@ -33,8 +33,17 @@
   flex: 1 0 auto;
 }
 
+.listContent:first-child {
+  padding-bottom: 0;
+}
+
+.listContent:last-child {
+  padding-top: 0;
+}
+
 .listFormContainer {
   flex: 0 1 auto;
+  padding-bottom: .2em;
 }
 
 .listForm {
@@ -51,6 +60,7 @@
 
 .listItems {
   overflow-y: auto;
+  padding-top: .2em;
 }
 
 .footerButtons {
