@@ -4,7 +4,7 @@ import Promise from 'bluebird';
 import classnames from 'classnames';
 import firebaseApp from '../../base'
 import styles from './NewsFeed.css';
-import newsSourceMap from './NewsSourceMap';
+import newsSourceMap from './newsSourceMap';
 import axios from 'axios';
 
 const database = firebaseApp.database();
