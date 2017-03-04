@@ -64,10 +64,6 @@ const actionTypes = {
   DeletePhotoFromPhotoPromptRejected: 'DELETE_PHOTO_FROM_PHOTO_PROMPT_REJECTED',
   DeletePhotoFromPhotoPromptFulfilled: 'DELETE_PHOTO_FROM_PHOTO_PROMPT_FULFILLED',
 
-  GetWeatherDataRequested: 'GET_WEATHER_DATA_REQUESTED',
-  GetWeatherDataRejected: 'GET_WEATHER_DATA_REJECTED',
-  GetWeatherDataFulfilled: 'GET_WEATHER_DATA_FULFILLED',
-
 };
 
 export default actionTypes;
