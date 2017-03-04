@@ -62,3 +62,11 @@
 .iconRed {
   color: rgb(255, 56, 96);
 }
+
+.streakBar {
+  background-color: rgb(1,209,178);
+  padding: 5px 10.5px;
+  color: white;
+  /*padding-left: 10.5px;*/
+  /*padding-right: 10.5px;*/
+}

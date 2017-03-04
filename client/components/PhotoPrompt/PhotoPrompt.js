@@ -35,7 +35,17 @@ class PhotoPrompt extends React.Component {
 
     // compare dates to see if today's shot has been taken
     this.checkTodaysPhotoIsTaken();
-    console.log('this.state.todaysPhotoIsTaken', this.state.todaysPhotoIsTaken)
+
+    // streak
+    console.log('streak', this.props.dashboard.modules[this.props.db_key].streak)
+
+    let photos = this.props.dashboard.modules[this.props.db_key].photos;
+    let allPhotoDates = Object.keys(photos)
+
+    allPhotoDates = allPhotoDates.map((key, index, array) => {
+      return photos[key].date;
+    })
+
   }
 
   checkTodaysPhotoIsTaken() {
@@ -110,6 +120,7 @@ class PhotoPrompt extends React.Component {
     let iconStyle = `${this.state.todaysPhotoIsTaken ? styles.iconGreen : styles.iconRed} icon`;
 
 
+    let streakBar = `${styles.streakBar} title is-4`;
     let photoButtonContainer = `${styles.photoButtonContainer} icon`;
     let photoButton = `${styles.photoButton} fa fa-bullseye`;
 
@@ -129,7 +140,14 @@ class PhotoPrompt extends React.Component {
           </div>
         </header>
 
+        {this.props.dashboard.modules[this.props.db_key].streak &&
+          <div className={streakBar}>Streak:
+            {this.props.dashboard.modules[this.props.db_key].streak}
+          </div>
+        }
+
         <div className={contentStyles}>
+
           <div className="media-content">
 
             {!this.state.todaysPhotoIsTaken &&
