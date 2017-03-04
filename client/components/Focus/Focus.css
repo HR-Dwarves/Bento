@@ -64,8 +64,8 @@ input:focus {
 }
 
 .delayStyle {
-  -webkit-animation-delay: 2s; /* Safari 4.0 - 8.0 */
-  animation-delay: .5s;
+  /*-webkit-animation-delay: 2s; /* Safari 4.0 - 8.0 */
+  /*animation-delay: .5s;*/
 }
 
 .complete {
@@ -74,4 +74,20 @@ input:focus {
 
 .maxHeight {
   height: 100%;
+}
+
+.noHeight {
+  height: 0;
+}
+
+.focusItem {
+  font-size: 20px;
+}
+
+.formStyle {
+  border: 1px solid #eee;
+}
+
+.inputStyle {
+  width: 100%;
 }

@@ -11,34 +11,44 @@ class Focus extends React.Component {
     super(props);
     this.state = {
       focus: [''],
+      tempFocus: '',
       clicked: false
     }
     this.handleDeleteFocus = this.handleDeleteFocus.bind(this);
     this.removeFocus = this.removeFocus.bind(this);
-  }
-
-  handleInputFocus(event) {
-    const db_key = this.props.db_key;
-    const user = this.props.user.uid;
-    const target = 'focusBody';
-    const db_ref = database.ref(`users/${user}/modules/${db_key}/${target}`);
-    let newText = event.target.value;
-    var focusArray = [];
-    focusArray.push(event.target.value);
-    this.setState({
-      focus: focusArray,
-      clicked: false
-    }); 
-    db_ref.set(newText);
-    this.refs.test.value="";
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleDeleteFocus() {
     this.setState({
       clicked: true
     });
-    this.removeFocus();
-    
+    this.removeFocus(); 
+  }
+
+  handleChange(e){
+    this.setState({
+      tempFocus: e.target.value
+    })
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    let focusArray = [];
+    focusArray.push(this.state.tempFocus);
+    this.setState({
+      focus: focusArray
+    });
+    let newValue = this.state.focus[0];
+    const db_key = this.props.db_key;
+    const user = this.props.user.uid;
+    const target = 'focusBody';
+    const db_ref = database.ref(`users/${user}/modules/${db_key}/${target}`);
+    db_ref.set(this.state.tempFocus);
+    this.setState({
+      tempFocus: ''
+    })
   }
 
   removeFocus() {
@@ -47,9 +57,9 @@ class Focus extends React.Component {
     const target = 'focusBody';
     const db_ref = database.ref(`users/${user}/modules/${db_key}/${target}`);
     this.setState({
-      focus: ['']
+      focus: [''],
+      clicked: false
     });
-    this.refs.test.value="";
   }
 
   componentDidMount(){
@@ -82,20 +92,20 @@ class Focus extends React.Component {
     let iconStyle = `fa fa-square-o ${styles.centerBox}`
 
 
-    let completed = this.state.clicked;
-    let styleTemp;
-    if (completed) {
-      console.log('COMPLETED');
-      styleTemp = styles.complete;
+    let empty = this.state.focus;
+    let goalStyle;
+    if(empty[0] === '') {
+      goalStyle = `${styles.noHeight}`;
     } else {
-      styleTemp = ""
+      goalStyle = 'media-content';
     }
+    let styleTemp;
 
     if(this.state.focus[0] !== '' || this.state.clicked) {
       var items = this.state.focus.map((item, i) => (
         <div className='animated' key={item}>
           <div className={styles.centerFocus}>
-            <span onClick={this.handleDeleteFocus} className={styleTemp}>{item}</span>
+            <div onClick={this.handleDeleteFocus} className={styles.focusItem}>{item}</div>
           </div>
         </div>
       ));
@@ -121,24 +131,19 @@ class Focus extends React.Component {
                   <p>What is your intent for today?</p>
                 </div>
               </div>
-              <span className={hasCurrentFocus}>
-                <input ref="test" className={styles.focusInput}
-                        type='text'
-                        maxLength='40'
-                        defaultValue={focus.focusBody}
-                        onBlur={this.handleInputFocus.bind(this)}
-                      />
+              <span>
+                <form ref={(input) => this.listForm = input} onSubmit={this.handleSubmit} className={styles.formStyle}>
+                  <input type="text" value={this.state.tempFocus} onChange={this.handleChange} className={styles.inputStyle}></input>
+                </form>
               </span>
-              <div className="media-content">
                 <ReactCSSTransitionGroup 
                   transitionName={{
-                    enter: 'slideInLeft',
-                    leave: 'slideOutRight'
-                  }}
-                  transitionLeaveTimeout={1000}>
+                    enter: 'fadeIn',
+                    leave: 'fadeOut'
+                  }}>
                   {items}
                 </ReactCSSTransitionGroup>
-              </div>
+              
             </div>
           </div>
         </div>
