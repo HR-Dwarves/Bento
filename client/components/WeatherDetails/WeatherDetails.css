@@ -10,9 +10,10 @@
 
 .cardContent {
   display:flex;
-  justify-content: space-between;
+  justify-content: space-around;
   text-align: center;
   align-items: center;
+  overflow-y: scroll;
 }
 
 .details {
@@ -93,6 +94,9 @@ header > * {
   flex: 0 0 0%;
 }
 
+p {
+  font-family: 'Lato', serif;
+}
 .height {
   max-height: 1200px;
   -webkit-transition: max-height 0.3s; 
@@ -111,4 +115,35 @@ header > * {
   -o-transition: max-height 0.3s; 
   transition: max-height .3s;
   overflow: hidden;
+}
+
+.forecastDetails {
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 0.5em;
+}
+
+.forecastDetail {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-basis: 0;
+  text-align: center;
+}
+
+.forecastTemp {
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.forecastDate {
+  font-size: .7em;
+}
+
+.forecastDay {
+  font-size: 1em;
+}
+
+.content {
+  overflow-y: scroll;
 }
