@@ -92,7 +92,7 @@ class WeatherDetails extends React.Component {
   render() {
     let cssCard = `${styles.card} card`;
     let cssHeader = `${styles.header} card-header`;
-    let cssCardContent = `${styles.cardContent} card-content`;
+    let cssCardContent = `${styles.content} card-content`;
 
     let collapsed = this.props.collapsed.collapsed;
     let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
@@ -122,7 +122,7 @@ class WeatherDetails extends React.Component {
               </span>
             </div>
           </header>
-          <div className={styles.content}>
+          <div className={cssCardContent}>
             <div className={styles.cardContent}>
               <div>
                 <p className={styles.location}>{this.state.location}</p>
