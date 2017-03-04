@@ -1,16 +1,11 @@
 import React from 'react';
 import config from './../../config/config';
-// import firebaseApp from '../../base';
 import styles from './PhotoPrompt.css';
 import classnames from 'classnames';
 import moment from 'moment';
 
 import PhotoEditor from '../PhotoEditor/PhotoEditor';
 import PhotoDisplayer from '../PhotoDisplayer/PhotoDisplayer';
-
-
-// const storageBucket = firebaseApp.storage();
-// const database = firebaseApp.database();
 
 class PhotoPrompt extends React.Component {
   constructor(props) {
@@ -21,31 +16,18 @@ class PhotoPrompt extends React.Component {
       photoSrc: null,
       inputButton: null,
       todaysPhotoIsTaken: false,
-      chooseButtonCss: 'button'
+      chooseButtonCss: 'button',
+      inputIsTooBig: false
     };
   }
 
   componentDidMount() {
-    // console.log(this.props)
-
     let user = this.props.user.uid;
-
     // get saved photos from db
     this.props.getPhotosForPhotoPrompt(this.props.db_key, user);
 
     // compare dates to see if today's shot has been taken
     this.checkTodaysPhotoIsTaken();
-
-    // streak
-    console.log('streak', this.props.dashboard.modules[this.props.db_key].streak)
-
-    let photos = this.props.dashboard.modules[this.props.db_key].photos;
-    let allPhotoDates = Object.keys(photos)
-
-    allPhotoDates = allPhotoDates.map((key, index, array) => {
-      return photos[key].date;
-    })
-
   }
 
   checkTodaysPhotoIsTaken() {
@@ -58,9 +40,7 @@ class PhotoPrompt extends React.Component {
     }
 
     if (lastPhotoDate && (moment().format('MMMM Do YYYY') === moment(lastPhotoDate).format('MMMM Do YYYY'))) {
-      this.setState({
-        todaysPhotoIsTaken: true
-      })
+      this.setState({todaysPhotoIsTaken: true})
     }
   }
 
@@ -68,26 +48,31 @@ class PhotoPrompt extends React.Component {
     const user = this.props.user.uid;
     var context = this;
     this.props.deletePhotoFromPhotoPrompt(key, this.props.db_key, user, () => {
-      context.setState({
-        todaysPhotoIsTaken: false
-      })
+      context.setState({todaysPhotoIsTaken: false})
     });
   }
 
   changeHandler(ev) {
+    // check file size
+    if (ev.target.files[0].size > 3000000) {
+      ev.target.value = "";
+      this.setState({inputIsTooBig: true})
+    } else {
 
-    var fReader = new FileReader();
-    fReader.readAsDataURL(ev.target.files[0]);
+      this.setState({inputIsTooBig: false})
+      var fReader = new FileReader();
+      fReader.readAsDataURL(ev.target.files[0]);
 
-    var context = this;
-    var photoName = ev.target.files[0].name;
+      var context = this;
+      var photoName = ev.target.files[0].name;
 
-    fReader.onloadend = function(event){
+      fReader.onloadend = function(event){
 
-      context.setState({
-        photoName: photoName,
-        photoSrc: event.target.result
-      })
+        context.setState({
+          photoName: photoName,
+          photoSrc: event.target.result
+        })
+      }
     }
   }
 
@@ -96,9 +81,7 @@ class PhotoPrompt extends React.Component {
   }
 
   submitPhoto(ev) {
-    this.setState({
-      chooseButtonCss: 'button is-loading'
-    })
+    this.setState({chooseButtonCss: 'button is-loading'})
 
     const user = this.props.user.uid;
     var context = this;
@@ -113,21 +96,12 @@ class PhotoPrompt extends React.Component {
 
   render() {
     let photos = this.props.dashboard.modules[this.props.db_key].photos;
-
-    let headerStyle = `${styles.header} card-header`;
-    let contentStyles = `${styles.content} card-content`;
-    // let iconStyle = `${styles.iconRed} icon`;
     let iconStyle = `${this.state.todaysPhotoIsTaken ? styles.iconGreen : styles.iconRed} icon`;
-
-
-    let streakBar = `${styles.streakBar} title is-4`;
-    let photoButtonContainer = `${styles.photoButtonContainer} icon`;
-    let photoButton = `${styles.photoButton} fa fa-bullseye`;
 
     return (
       <div className='card'>
 
-        <header className={headerStyle}>
+        <header className={`${styles.header} card-header`}>
           <p className="card-header-title">One Photo Every Day Challenge</p>
           <div className="card-header-icon">
             <span className={iconStyle}>
@@ -141,26 +115,29 @@ class PhotoPrompt extends React.Component {
         </header>
 
         {this.props.dashboard.modules[this.props.db_key].streak &&
-          <div className={streakBar}>Streak:
+          <div className={`${styles.streakBar} title is-4`}>Streak:
             {this.props.dashboard.modules[this.props.db_key].streak}
           </div>
         }
 
-        <div className={contentStyles}>
+        <div className={`${styles.content} card-content`}>
 
           <div className="media-content">
 
+            {/* TAKE A PHOTO BUTTON */}
             {!this.state.todaysPhotoIsTaken &&
               <div className={styles.enterPhotoButton}>
+                {/* VISUAL BUTTON */}
                 <a className='button' onClick={this.buttonClick.bind(this)}>
-                  <span className={photoButtonContainer}>
-                    <i className={photoButton}></i>
+                  <span className={`${styles.photoButtonContainer} icon`}>
+                    <i className={`${styles.photoButton} fa fa-bullseye`}></i>
                   </span>
                   {this.state.photoSrc === null
                     ? <span>Take Photo/Choose File</span>
                     : <span>Take/Choose New</span>
                   }
                 </a>
+              {/* ACTUAL BUTTON */}
                 <input
                   ref={src => this.inputButton = src}
                   type="file"
@@ -170,17 +147,23 @@ class PhotoPrompt extends React.Component {
                 />
               </div>
             }
+            {this.state.inputIsTooBig === true &&
+              <p className="is-small">less than 5mb please</p>
+            }
 
+            {/* ACCEPT PHOTO BUTTON */}
             {this.state.photoSrc !== null &&
               <a className={this.state.chooseButtonCss} onClick={this.submitPhoto.bind(this)}>
                 Make it today's photo
               </a>
             }
 
+            {/* CURRENT PHOTO VIEWER. COULD BE AN EDITOR... */}
             {this.state.photoSrc !== null &&
               <PhotoEditor src={this.state.photoSrc}/>
             }
 
+            {/* ALL PHOTOS */}
             {photos &&
               Object.keys(photos).reverse().map((key, index) => {
               // console.log('photo', photo)
