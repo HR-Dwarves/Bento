@@ -172,7 +172,7 @@ class NewsFeed extends React.Component {
             </div>
             <div className="card-header-icon">
               <span className="icon">
-                <i onClick={this.props.handleCollapseFunction} className="fa fa-hacker-news" aria-hidden="true"></i>
+                <i className="fa fa-newspaper-o" aria-hidden="true"></i>
               </span>
             </div>
           </header>
