@@ -1,15 +1,22 @@
 import React from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+
 import firebaseApp from '../../base';
-import ListItem from '../ListItem/ListItem'
+import ListItem from '../ListItem/ListItem';
+import styles from './List.css';
 import classnames from 'classnames';
-import styles from './List.css'
 
 const database = firebaseApp.database();
 
 class List extends React.Component {
   constructor() {
     super();
-
+    this.state = {
+      editing: false,
+      hideArchived: false
+    }
+    this.toggleArchive = this.toggleArchive.bind(this);
+    this.toggleEdit = this.toggleEdit.bind(this);
   }
 
   componentDidMount() {
@@ -59,6 +66,20 @@ class List extends React.Component {
     this.props.deleteModule(db_key, user);
   }
 
+  toggleArchive() {
+    let newState = !this.state.hideArchived;
+    this.setState({
+      hideArchived: newState
+    })
+  }
+
+  toggleEdit() {
+    let newState = !this.state.editing;
+    this.setState({
+      editing: newState
+    })
+  }
+
   render() {
     let dashboard = this.props.dashboard;
     let db_key = this.props.db_key;
@@ -76,14 +97,22 @@ class List extends React.Component {
 
 
     let cssClasses = `${styles.listCard} card`;
-    let headerStyle = `${styles.header} card-header`
-    let deleteButton = `${styles.delete} delete`
-    let formStyle = `${styles.listForm} control`
-    let listButton = `${styles.listButton} button is-small is-light`
-    let listItems = `${styles.listItems} card-content`
-
+    let headerStyle = `${styles.header} card-header`;
+    let footerStyle = `${styles.footer} card-footer`;
+    let deleteButton = `${styles.delete} delete`;
+    let listFormContainerStyles = `${styles.listFormContainer} card-content`;
+    let formStyle = `${styles.listForm} control`;
+    let listContent = `${styles.listContent}`
+    let listButton = `${styles.listButton} button is-small is-light`;
+    let listItems = `${styles.listItems} card-content`;
+    let footerButtonStyles = `${styles.footerButtons} card-footer-item`;
+    let animateCSSClass = 'animated';
     let collapsed = this.props.collapsed.collapsed;
     let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
+
+    // if (this.state) {
+    //   let archiveStyle = this.state.hideArchived ? {"display": "none"} : {"display": ""};
+    // }
 
     return (
         <div className={cssClasses}>
@@ -91,12 +120,12 @@ class List extends React.Component {
             <p className="card-header-title">List</p>
             <span href="" className="card-header-icon">
               <span className="icon">
-                <i className="fa fa-th-list" aria-hidden="true"></i>
+                <i className="fa fa-list-ul" aria-hidden="true"></i>
               </span>
             </span>
           </header>
-          <div>
-            <div className="card-content">
+          <div className={listContent}>
+            <div className={listFormContainerStyles}>
               <form action="submit"
                     className={formStyle}
                     onSubmit={(e) => this.handleSubmit(e)}
@@ -108,13 +137,39 @@ class List extends React.Component {
             </div>
             <div className={listItems}>
               <div className='media-content'>
-                {items ? keys.map((key, ind) => <ListItem {...this.props} 
-                                                 key={key}
-                                                 itemKey={key}
-                                                 listItem={items[key]}/>) : []}
+                <ReactCSSTransitionGroup
+                transitionName="module"
+                transitionName={{enter: "fadeIn", 
+                leave: "fadeOut",
+                appear: "fadeIn"}}
+                transitionEnterTimeout={1000}
+                transitionLeaveTimeout={1000}>
+                  {items ? keys.map((key, ind) => {
+                    // let completed = items[key].completed;
+                    // let archiveStyle;
+                    // if (completed) {
+                    //   archiveStyle = this.state.hideArchived ? {"display": "none"} : {"display": ""};
+                    // } else {
+                    //   archiveStyle = '';
+                    // }
+
+                    return (<ListItem {...this.props} 
+                           key={key}
+                           itemKey={key}
+                           className={animateCSSClass}
+                           hideArchived={this.state.hideArchived}
+                           editing={this.state.editing}
+                           listItem={items[key]
+                           }/>)
+                   }) : []}
+                </ReactCSSTransitionGroup>
               </div>
             </div>
           </div>
+          <footer className={footerStyle}>
+            <a value="archive" className={footerButtonStyles} onClick={this.toggleArchive}>Archive</a>
+            <a value="edit" className={footerButtonStyles} onClick={this.toggleEdit}>Edit</a>
+          </footer>
         </div>
     )
   }
