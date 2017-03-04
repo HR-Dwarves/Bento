@@ -128,14 +128,14 @@ class Focus extends React.Component {
             <div className='card-content'>
               <div className={styles.focusStyle}>
                 <div>
-                  <p>What is your intent for today?</p>
+                  <p>What is your intent for today?<br/><br/></p>
                 </div>
               </div>
-              <span>
-                <form ref={(input) => this.listForm = input} onSubmit={this.handleSubmit} className={styles.formStyle}>
-                  <input type="text" value={this.state.tempFocus} onChange={this.handleChange} className={styles.inputStyle}></input>
+              <div className={styles.formDiv}>
+                <form className={styles.formStyle} ref={(input) => this.listForm = input} onSubmit={this.handleSubmit} className={styles.formStyle}>
+                  <input className={styles.focusInput} type="text" value={this.state.tempFocus} onChange={this.handleChange} className={styles.inputStyle}></input>
                 </form>
-              </span>
+              </div>
                 <ReactCSSTransitionGroup 
                   transitionName={{
                     enter: 'fadeIn',

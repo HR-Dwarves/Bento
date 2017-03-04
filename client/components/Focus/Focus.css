@@ -8,16 +8,6 @@
   justify-content: center;
 }
 
-.focusInput {
-  display: block;
-  margin: 0px auto;
-  border: 0;
-  background: 0;
-  border-bottom: 1px solid black;
-  text-align: center;
-  width: 90%;
-}
-
 .height {
   max-height: 1200px;
   -webkit-transition: max-height 0.3s; 
@@ -40,6 +30,15 @@
 
 input:focus {
   outline: none;
+}
+
+input {
+  display: block;
+  margin: 0px auto;
+  border: 0;
+  background: 0;
+  border-bottom: 2px solid black;
+  text-align: center;
 }
 
 .hasCurrentFocus {
@@ -85,7 +84,14 @@ input:focus {
 }
 
 .formStyle {
-  border: 1px solid #eee;
+  /*border: 1px solid #eee;*/
+  border: 0;
+  width: 90%;
+}
+
+.formDiv {
+  display: flex;
+  justify-content: center;
 }
 
 .inputStyle {
