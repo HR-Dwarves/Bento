@@ -21,6 +21,12 @@
   padding: 1em;
 }
 
+.header {
+  flex: 0 0 auto;
+  height: 42px;
+  line-height: 1.5em;
+}
+
 .height {
   max-height: 1200px;
   -webkit-transition: max-height 0.3s; 

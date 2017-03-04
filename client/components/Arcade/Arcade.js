@@ -50,11 +50,13 @@ class Arcade extends React.Component {
     let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
     let gameToRender = game.name || this.state.currentGame;
 
-    let contentStyle = `${styles.cardBody} 'card-content`;
+
+    let contentStyle = `${styles.cardBody} 'card-content`
+    let headerStyles = `${styles.header} card-header`;
 
     return (
       <div className='card'>
-        <header className='card-header'>
+        <header className={headerStyles}>
           <p className='card-header-title'>
             <span className='select'>
               <select value={gameToRender} onChange={this.handleGameChange} className={styles.removeBorder}>
