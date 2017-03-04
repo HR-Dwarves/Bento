@@ -16,6 +16,22 @@ export function getPhotosForPhotoPrompt(db_key, user = 'testUser') {
 
     return database.ref(`users/${user}/modules/${db_key}`).once('value', snap => {
       const photos = snap.val();
+
+      // if there's a streak
+      // check if latest photo posted was today or yesterday
+      // streak (from what I had in PhotoPrompt.js
+
+      // console.log('streak', this.props.dashboard.modules[this.props.db_key].streak)
+
+      // let photos = this.props.dashboard.modules[this.props.db_key].photos;
+      let allPhotoDates = Object.keys(photos)
+
+      allPhotoDates = allPhotoDates.map((key, index, array) => {
+        return photos[key].date;
+      })
+
+      // if not delete the streak
+
       dispatch(getPhotosForPhotoPromptFulfilledAction(photos))
     })
     .catch((error) => {
@@ -48,6 +64,18 @@ function getPhotosForPhotoPromptFulfilledAction(photos) {
 export function addPhotoForPhotoPrompt(photoFile, db_key, user = 'testUser', cb) {
   return dispatch => {
     dispatch(addPhotoForPhotoPromptRequestedAction());
+
+    // ping to see if a streak exists
+
+    // if not, make one as 1
+
+
+    // actually handle this in get photos. get photos represents a login
+    // if so, check if the latest photo posted was yesterday
+
+    // if it was, add one to the streak
+
+    // if it wasn't
 
     // Create a root reference
     // upload file

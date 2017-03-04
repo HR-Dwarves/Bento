@@ -106,7 +106,6 @@ class PhotoPrompt extends React.Component {
           <div className="card-header-icon">
             <span className={iconStyle}>
               <i
-                onClick={this.props.handleCollapseFunction}
                 className='fa fa-camera'
                 aria-hidden='true'>
               </i>
