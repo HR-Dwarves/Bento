@@ -86,6 +86,7 @@ class LatLong extends React.Component {
     let clocks = this.props.dashboard.modules[this.props.db_key].clocks;
 
     let selectStyles = `${styles.thisSelect} select`
+    let headerStyles = `${styles.header} card-header`;
 
     return (
       <div className='card'>
