@@ -163,12 +163,12 @@ class List extends React.Component {
             <a value="archive" className={footerButtonStyles} 
             style={this.state.hideArchived ? highlightColor : {}} 
             onClick={this.toggleArchive}>
-              Archive
+              {this.state.hideArchived ? 'Show Completed' : 'Hide Completed'}
             </a>
             <a value="edit" className={footerButtonStyles} 
             style={this.state.editing ? highlightColor : {}} 
             onClick={this.toggleEdit}>
-              Edit
+              {this.state.editing ? 'Done Editing' : 'Edit List'}
             </a>
           </footer>
         </div>
