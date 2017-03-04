@@ -19,6 +19,7 @@ class NewsFeed extends React.Component {
     this.setLoadedToFalse = this.setLoadedToFalse.bind(this);
     this.removePosts = this.removePosts.bind(this);
     this.handleNewsChange = this.handleNewsChange.bind(this);
+    this.handlePostCountChange = this.handlePostCountChange.bind(this);
     this.state = {
       posts: [],
       loaded: false,
@@ -118,6 +119,25 @@ class NewsFeed extends React.Component {
     }
   }
 
+  handlePostCountChange(e) {
+    e.preventDefault();
+    const db_key = this.props.db_key;
+    const user = this.props.user.uid;
+    const newsSource = this.props.dashboard.modules[db_key].newsSource;
+    database.ref(`users/${user}/modules/${db_key}`).update({
+      numberOfPosts: e.target.value
+    });
+    this.setState({
+      numberOfPosts: e.target.value
+    });
+    this.setLoadedToFalse();
+    if(this.props.dashboard.modules[db_key].top){
+      this.getPosts(this, 'news/' + newsSource + '/top', db_key);
+    } else {
+      this.getPosts(this, 'news/' + newsSource + '/latest', db_key);
+    }
+  }
+
   componentWillMount(){
     const db_key = this.props.db_key;
     const user = this.props.user.uid;
@@ -139,8 +159,9 @@ class NewsFeed extends React.Component {
 
   render() {
     let list = this.state.posts;
-    list.length = this.state.numberOfPosts;
     let selectedNewsSource = this.props.dashboard.modules[this.props.db_key].newsSource;
+    let selectedPostCount = this.props.dashboard.modules[this.props.db_key].numberOfPosts;
+    list.length = this.state.numberOfPosts;
     let cssClasses = `${styles.test}`;
     let spinner = `${styles.spinner}`;
     let newsfeedStyles = `${styles.newsfeed} card`;
@@ -167,6 +188,12 @@ class NewsFeed extends React.Component {
               </p>
             </div>
             <div className="card-header-icon">
+              <p>Number of posts</p>
+              <select value={selectedPostCount} onChange={this.handlePostCountChange}>
+                <option value='5'>5</option>
+                <option value='10'>10</option>
+                <option value='15'>15</option>
+              </select>
               <span className="icon">
                 <i className="fa fa-newspaper-o" aria-hidden="true"></i>
               </span>
