@@ -109,7 +109,7 @@ class List extends React.Component {
     let animateCSSClass = 'animated';
     let collapsed = this.props.collapsed.collapsed;
     let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
-
+    let highlightColor = {"backgroundColor": "#EBEBEB"};
     // if (this.state) {
     //   let archiveStyle = this.state.hideArchived ? {"display": "none"} : {"display": ""};
     // }
@@ -142,17 +142,10 @@ class List extends React.Component {
                 transitionName={{enter: "fadeIn", 
                 leave: "fadeOut",
                 appear: "fadeIn"}}
-                transitionEnterTimeout={1000}
-                transitionLeaveTimeout={1000}>
+                transitionEnterTimeout={700}
+                transitionLeaveTimeout={700}>
                   {items ? keys.map((key, ind) => {
-                    // let completed = items[key].completed;
-                    // let archiveStyle;
-                    // if (completed) {
-                    //   archiveStyle = this.state.hideArchived ? {"display": "none"} : {"display": ""};
-                    // } else {
-                    //   archiveStyle = '';
-                    // }
-
+                    if (this.state.hideArchived && items[key].completed) return;
                     return (<ListItem {...this.props} 
                            key={key}
                            itemKey={key}
@@ -167,8 +160,16 @@ class List extends React.Component {
             </div>
           </div>
           <footer className={footerStyle}>
-            <a value="archive" className={footerButtonStyles} onClick={this.toggleArchive}>Archive</a>
-            <a value="edit" className={footerButtonStyles} onClick={this.toggleEdit}>Edit</a>
+            <a value="archive" className={footerButtonStyles} 
+            style={this.state.hideArchived ? highlightColor : {}} 
+            onClick={this.toggleArchive}>
+              Archive
+            </a>
+            <a value="edit" className={footerButtonStyles} 
+            style={this.state.editing ? highlightColor : {}} 
+            onClick={this.toggleEdit}>
+              Edit
+            </a>
           </footer>
         </div>
     )
