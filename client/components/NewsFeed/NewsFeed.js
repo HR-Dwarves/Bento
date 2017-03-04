@@ -4,7 +4,7 @@ import Promise from 'bluebird';
 import classnames from 'classnames';
 import firebaseApp from '../../base'
 import styles from './NewsFeed.css';
-import newsSourceMap from './NewsSourceMap';
+import newsSource from './../../data/NewsSource.js';
 import axios from 'axios';
 
 const database = firebaseApp.database();
@@ -21,7 +21,8 @@ class NewsFeed extends React.Component {
     this.handleNewsChange = this.handleNewsChange.bind(this);
     this.state = {
       posts: [],
-      loaded: false
+      loaded: false,
+      numberOfPosts: ''
     };
   }
 
@@ -39,7 +40,6 @@ class NewsFeed extends React.Component {
 
   getPostContent(ids, key) {
     const user = this.props.user.uid;
-
     var postsArray = [];
     this.setState({
       posts: ids,
@@ -120,7 +120,14 @@ class NewsFeed extends React.Component {
 
   componentWillMount(){
     const db_key = this.props.db_key;
+    const user = this.props.user.uid;
     const newsSource = this.props.dashboard.modules[db_key]['newsSource'];
+    const that = this;
+    database.ref(`users/${user}/modules/${db_key}`).once('value').then(function(snapshot) {
+      that.setState({
+        numberOfPosts: snapshot.val().numberOfPosts
+      });
+    });
     this.removePosts();
     this.setLoadedToFalse();
     if(this.props.dashboard.modules[db_key].top){
@@ -132,7 +139,7 @@ class NewsFeed extends React.Component {
 
   render() {
     let list = this.state.posts;
-    list.length = 5;
+    list.length = this.state.numberOfPosts;
     let selectedNewsSource = this.props.dashboard.modules[this.props.db_key].newsSource;
     let cssClasses = `${styles.test}`;
     let spinner = `${styles.spinner}`;
@@ -154,17 +161,7 @@ class NewsFeed extends React.Component {
               <p className='control'>
                 <span className="select">
                   <select value={selectedNewsSource} onChange={this.handleNewsChange} className={`${styles.removeBorder}`}>
-                    <option value="none">Change news source</option>
-                    <option value="hacker-news">Hacker News</option>
-                    <option value="associated-press">Associated Press</option>
-                    <option value="business-insider">Business Insider</option>
-                    <option value="buzzfeed">Buzzfeed</option>
-                    <option value="time">Time</option>
-                    <option value="the-economist">The Economist</option>
-                    <option value="techradar">TechRadar</option>
-                    <option value="techcrunch">TechCrunch</option>
-                    <option value="newsweek">Newsweek</option>
-                    <option value="fortune">Fortune</option>
+                    {newsSource.map((item, key) => <option value={Object.keys(item)[0]}>{Object.values(item)[0]}</option>)}
                   </select>
                 </span>
               </p>
