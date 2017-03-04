@@ -3,6 +3,7 @@ import config from './../../config/config';
 import styles from './PhotoPrompt.css';
 import classnames from 'classnames';
 import moment from 'moment';
+import quotes from './PhotoQuotes'
 
 import PhotoEditor from '../PhotoEditor/PhotoEditor';
 import PhotoDisplayer from '../PhotoDisplayer/PhotoDisplayer';
@@ -32,6 +33,7 @@ class PhotoPrompt extends React.Component {
 
     // compare dates to see if today's shot has been taken
     this.checkTodaysPhotoIsTaken();
+    console.log('quotes', quotes)
   }
 
   checkTodaysPhotoIsTaken() {
