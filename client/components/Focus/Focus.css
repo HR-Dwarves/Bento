@@ -32,7 +32,7 @@ input:focus {
   outline: none;
 }
 
-input {
+.inputStyle {
   display: block;
   margin: 0px auto;
   border: 0;
