@@ -66,3 +66,7 @@
 .removeBorder {
   border: none !important;
 } 
+
+.postButton {
+  margin-right: 5px;
+}

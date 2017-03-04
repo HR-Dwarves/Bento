@@ -4,7 +4,7 @@ import Promise from 'bluebird';
 import classnames from 'classnames';
 import firebaseApp from '../../base'
 import styles from './NewsFeed.css';
-import newsSourceMap from './newsSourceMap';
+import newsSource from './../../data/NewsSource.js';
 import axios from 'axios';
 
 const database = firebaseApp.database();
@@ -19,9 +19,11 @@ class NewsFeed extends React.Component {
     this.setLoadedToFalse = this.setLoadedToFalse.bind(this);
     this.removePosts = this.removePosts.bind(this);
     this.handleNewsChange = this.handleNewsChange.bind(this);
+    this.handlePostCountChange = this.handlePostCountChange.bind(this);
     this.state = {
       posts: [],
-      loaded: false
+      loaded: false,
+      numberOfPosts: ''
     };
   }
 
@@ -39,7 +41,6 @@ class NewsFeed extends React.Component {
 
   getPostContent(ids, key) {
     const user = this.props.user.uid;
-
     var postsArray = [];
     this.setState({
       posts: ids,
@@ -118,9 +119,36 @@ class NewsFeed extends React.Component {
     }
   }
 
+  handlePostCountChange(e) {
+    e.preventDefault();
+    console.log(e.target.value);
+    const db_key = this.props.db_key;
+    const user = this.props.user.uid;
+    const newsSource = this.props.dashboard.modules[db_key].newsSource;
+    database.ref(`users/${user}/modules/${db_key}`).update({
+      numberOfPosts: e.target.value
+    });
+    this.setState({
+      numberOfPosts: e.target.value
+    });
+    this.setLoadedToFalse();
+    if(this.props.dashboard.modules[db_key].top){
+      this.getPosts(this, 'news/' + newsSource + '/top', db_key);
+    } else {
+      this.getPosts(this, 'news/' + newsSource + '/latest', db_key);
+    }
+  }
+
   componentWillMount(){
     const db_key = this.props.db_key;
+    const user = this.props.user.uid;
     const newsSource = this.props.dashboard.modules[db_key]['newsSource'];
+    const that = this;
+    database.ref(`users/${user}/modules/${db_key}`).once('value').then(function(snapshot) {
+      that.setState({
+        numberOfPosts: snapshot.val().numberOfPosts
+      });
+    });
     this.removePosts();
     this.setLoadedToFalse();
     if(this.props.dashboard.modules[db_key].top){
@@ -132,8 +160,9 @@ class NewsFeed extends React.Component {
 
   render() {
     let list = this.state.posts;
-    list.length = 5;
     let selectedNewsSource = this.props.dashboard.modules[this.props.db_key].newsSource;
+    let selectedPostCount = this.props.dashboard.modules[this.props.db_key].numberOfPosts;
+    list.length = this.state.numberOfPosts;
     let cssClasses = `${styles.test}`;
     let spinner = `${styles.spinner}`;
     let newsfeedStyles = `${styles.newsfeed} card`;
@@ -147,6 +176,15 @@ class NewsFeed extends React.Component {
     let loaded = this.state.loaded;
     let collapsed = this.props.collapsed.collapsed;
     let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
+    let fiveButtonStyle = ''
+    let moreButtonStyle = ''
+    if(this.state.numberOfPosts === '5') {
+      fiveButtonStyle = `${styles.postButton} button is-primary is-focused`;
+      moreButtonStyle = `${styles.postButton} button is-focused`;
+    } else {
+      moreButtonStyle = `${styles.postButton} button is-primary is-focused`;
+      fiveButtonStyle = `${styles.postButton} button is-focused`;
+    }
     return (
         <div className={newsfeedStyles}>
           <header className={headerStyles}>
@@ -154,22 +192,14 @@ class NewsFeed extends React.Component {
               <p className='control'>
                 <span className="select">
                   <select value={selectedNewsSource} onChange={this.handleNewsChange} className={`${styles.removeBorder}`}>
-                    <option value="none">Change news source</option>
-                    <option value="hacker-news">Hacker News</option>
-                    <option value="associated-press">Associated Press</option>
-                    <option value="business-insider">Business Insider</option>
-                    <option value="buzzfeed">Buzzfeed</option>
-                    <option value="time">Time</option>
-                    <option value="the-economist">The Economist</option>
-                    <option value="techradar">TechRadar</option>
-                    <option value="techcrunch">TechCrunch</option>
-                    <option value="newsweek">Newsweek</option>
-                    <option value="fortune">Fortune</option>
+                    {newsSource.map((item, key) => <option value={Object.keys(item)[0]}>{Object.values(item)[0]}</option>)}
                   </select>
                 </span>
               </p>
             </div>
             <div className="card-header-icon">
+              <button value='5' className={fiveButtonStyle} onClick={this.handlePostCountChange}>5</button>
+              <button value='10'className={moreButtonStyle} onClick={this.handlePostCountChange}>More!</button>
               <span className="icon">
                 <i className="fa fa-newspaper-o" aria-hidden="true"></i>
               </span>
