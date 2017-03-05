@@ -62,7 +62,7 @@ const actionTypes = {
 
   DeletePhotoFromPhotoPromptRequested: 'DELETE_PHOTO_FROM_PHOTO_PROMPT_REQUESTED',
   DeletePhotoFromPhotoPromptRejected: 'DELETE_PHOTO_FROM_PHOTO_PROMPT_REJECTED',
-  DeletePhotoFromPhotoPromptFulfilled: 'DELETE_PHOTO_FROM_PHOTO_PROMPT_FULFILLED'
+  DeletePhotoFromPhotoPromptFulfilled: 'DELETE_PHOTO_FROM_PHOTO_PROMPT_FULFILLED',
 
 };
 

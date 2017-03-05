@@ -25,7 +25,8 @@ class WeatherDetails extends React.Component {
       condition: null,
       weatherIcon: null,
       zipcode: context.weatherModule.zip || 94105,
-      code: null
+      code: null,
+      forecast: null,
     }
 
     this.weatherAPIkey = config.openWeatherMapAPIKey;
@@ -44,7 +45,8 @@ class WeatherDetails extends React.Component {
         location: data.query.results.channel.location.city,
         condition: data.query.results.channel.item.condition.text,
         weatherIcon: data.query.results.channel.image.url,
-        code: data.query.results.channel.item.condition.code
+        code: data.query.results.channel.item.condition.code,
+        forecast: data.query.results.channel.item.forecast
       });
     })
     .catch((error) => {
@@ -90,11 +92,17 @@ class WeatherDetails extends React.Component {
   render() {
     let cssCard = `${styles.card} card`;
     let cssHeader = `${styles.header} card-header`;
-    let cssCardContent = `${styles.cardContent} card-content`;
+    let cssCardContent = `${styles.content} card-content`;
 
     let collapsed = this.props.collapsed.collapsed;
     let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
     let weatherIcon = `${styles.weatherIcon} wi wi-yahoo-${this.state.code}`;
+    let forecastIcon = function(code) {
+      return `${styles.forecastTemp} wi wi-yahoo-${code}`;
+    }
+
+    let forecast = this.state.forecast;
+
     return (
         <div className={cssCard}>
           <header className={cssHeader}>
@@ -118,15 +126,31 @@ class WeatherDetails extends React.Component {
             </div>
           </header>
           <div className={cssCardContent}>
-            <div>
-              <p className={styles.location}>{this.state.location}</p>
-              <p className={styles.condition}>{this.state.condition}</p>
+            <div className={styles.cardContent}>
+              <div>
+                <p className={styles.location}>{this.state.location}</p>
+                <p className={styles.condition}>{this.state.condition}</p>
+              </div>
+              <div>
+                <i className={weatherIcon}></i>
+                <p className={styles.temperature}> 
+                  {this.state.temperature}ºF
+                </p>
+              </div>
             </div>
-            <div>
-              <i className={weatherIcon}></i>
-              <p className={styles.temperature}> 
-                {this.state.temperature}ºF
-              </p>
+            <div className={styles.forecastDetails}>
+              {forecast ? forecast.map((details, index) => {
+                                  if (index < 5) {
+                                    return (
+                                      <div className={styles.forecastDetail}>
+                                        <p className={styles.forecastDay}>{details.day}</p>
+                                        <p className={styles.forecastDate}>{details.date.substring(3, 6)} {details.date.substring(0, 2)}</p>
+                                        <p className={forecastIcon(details.code)}>{Math.floor((parseInt(details.high) + parseInt(details.low))/ 2)}º</p>
+                                        <p className={styles.forecastDate}>{details.text}</p>
+                                      </div>
+                                    );
+                                  }
+                                }) : []}
             </div>
           </div>
         </div>
