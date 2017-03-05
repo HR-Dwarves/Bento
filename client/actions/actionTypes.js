@@ -29,6 +29,10 @@ const actionTypes = {
   ToggleListStatusRejected: 'TOGGLE_LIST_STATUS_REJECTED',
   ToggleListStatusFulfilled: 'TOGGLE_LIST_STATUS_FULFILLED',
 
+  ChangeListNameRequested: 'CHANGE_LIST_STATUS_REQUESTED',
+  ChangeListNameRejected: 'CHANGE_LIST_STATUS_REJECTED',
+  ChangeListNameFulfilled: 'CHANGE_LIST_STATUS_FULFILLED',
+
   GetLayouts: 'GET_LAYOUTS',
   UpdateLayouts: 'UPDATE_LAYOUTS',
 
