@@ -23,7 +23,7 @@ class NewsFeed extends React.Component {
     this.state = {
       posts: [],
       loaded: false,
-      numberOfPosts: ''
+      numberOfPosts: '5'
     };
   }
 
@@ -162,7 +162,6 @@ class NewsFeed extends React.Component {
     let list = this.state.posts;
     let selectedNewsSource = this.props.dashboard.modules[this.props.db_key].newsSource;
     let selectedPostCount = this.props.dashboard.modules[this.props.db_key].numberOfPosts;
-    list.length = this.state.numberOfPosts;
     let cssClasses = `${styles.test}`;
     let spinner = `${styles.spinner}`;
     let newsfeedStyles = `${styles.newsfeed} card`;
@@ -185,6 +184,13 @@ class NewsFeed extends React.Component {
       moreButtonStyle = `${styles.postButton} button is-primary is-focused`;
       fiveButtonStyle = `${styles.postButton} button is-focused`;
     }
+
+    //render x amount of posts
+    let posts = [];
+    let postArray = this.state.posts;
+    for(var i = 0; i < this.state.numberOfPosts; i++) {
+      posts.push(this.state.posts[i]);
+    }
     return (
         <div className={newsfeedStyles}>
           <header className={headerStyles}>
@@ -206,9 +212,11 @@ class NewsFeed extends React.Component {
             </div>
           </header>
           <div className={contentStyles}>
-            {loaded ? list.length !== 0 ? list.map((item, key) => <NewsItem {...this.props}
+
+            {loaded ? list.length !== 0 ? posts.map((item, key) => <NewsItem {...this.props}
                                           newsItem={item}
                                           key={key}/>) : [] : <a className={spinnerClasses}>Loading</a>}
+ 
           </div>
           <footer className={footerStyles}>
             <a value="New" className={newClasses} onClick={this.updateNew}>New</a>
