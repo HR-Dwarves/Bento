@@ -1,0 +1,28 @@
+.header {
+  flex: 0 0 auto;
+  line-height: 1.5em;
+  height: 42px;
+}
+
+.listCard {
+
+}
+
+.listCard > * {
+
+}
+
+.footer {
+  flex: 0 0 auto;
+}
+
+.listContent {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+.listContent > * {
+  flex: 1 0 auto;
+}
