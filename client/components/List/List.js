@@ -142,76 +142,76 @@ class List extends React.Component {
     // <p className="card-header-title">List</p>
 
     return (
-        <div className={cssClasses}>
-          <header className={headerStyle}>
-            <form action="submit"
-                   className='card-header-title'
-                   onSubmit={(e) => this.handleNameSubmit(e)}
-                   onBlur={(e) => this.handleBlur(e)}
-                   ref={(input) => this.listNameForm = input}
-                   >
-              <input className='card-header-title sticky-header'
-                       type="text"
-                       maxLength='30' 
-                       ref={(input) => this.listNameFormInput = input}
-                       placeholder="Name Your List"
-                       defaultValue={list.listName || ''}
-                       name="listname"/>
-            </form>
-           <span href="" className="card-header-icon">
-              <span className="icon">
-                <i className="fa fa-list-ul" aria-hidden="true"></i>
-              </span>
+      <div className={cssClasses}>
+        <header className={headerStyle}>
+          <form action="submit"
+                 className='card-header-title'
+                 onSubmit={(e) => this.handleNameSubmit(e)}
+                 onBlur={(e) => this.handleBlur(e)}
+                 ref={(input) => this.listNameForm = input}
+                 >
+            <input className='card-header-title sticky-header'
+                     type="text"
+                     maxLength='30' 
+                     ref={(input) => this.listNameFormInput = input}
+                     placeholder="Name Your List"
+                     defaultValue={list.listName || ''}
+                     name="listname"/>
+          </form>
+         <span href="" className="card-header-icon">
+            <span className="icon">
+              <i className="fa fa-list-ul" aria-hidden="true"></i>
             </span>
-          </header>
-          <div className={listContent}>
-            <div className={listFormContainerStyles}>
-              <form action="submit"
-                    className={formStyle}
-                    onSubmit={(e) => this.handleSubmit(e)}
-                    ref={(input) => this.listForm = input}
-                    >
-                <input className="input is-small" type="text" ref={(input) => this.formInput = input}/>
-                <button className={listButton} type="sumbit">Add</button>
-              </form>
-            </div>
-            <div className={listItems}>
-              <div className='media-content'>
-                <ReactCSSTransitionGroup
-                transitionName="module"
-                transitionName={{enter: "fadeIn", 
-                leave: "fadeOut",
-                appear: "fadeIn"}}
-                transitionEnterTimeout={700}
-                transitionLeaveTimeout={700}>
-                  {items ? keys.map((key, ind) => {
-                    if (this.state.hideArchived && items[key].completed) return;
-                    return (<ListItem {...this.props} 
-                           key={key}
-                           itemKey={key}
-                           className={animateCSSClass}
-                           hideArchived={this.state.hideArchived}
-                           editing={this.state.editing}
-                           listItem={items[key]
-                           }/>)
-                   }) : []}
-                </ReactCSSTransitionGroup>
-              </div>
+          </span>
+        </header>
+        <div className={listContent}>
+          <div className={listFormContainerStyles}>
+            <form action="submit"
+                  className={formStyle}
+                  onSubmit={(e) => this.handleSubmit(e)}
+                  ref={(input) => this.listForm = input}
+                  >
+              <input className="input is-small" type="text" ref={(input) => this.formInput = input}/>
+              <button className={listButton} type="sumbit">Add</button>
+            </form>
+          </div>
+          <div className={listItems}>
+            <div className='media-content'>
+              <ReactCSSTransitionGroup
+              transitionName="module"
+              transitionName={{enter: "fadeIn", 
+              leave: "fadeOut",
+              appear: "fadeIn"}}
+              transitionEnterTimeout={700}
+              transitionLeaveTimeout={700}>
+                {items ? keys.map((key, ind) => {
+                  if (this.state.hideArchived && items[key].completed) return;
+                  return (<ListItem {...this.props} 
+                         key={key}
+                         itemKey={key}
+                         className={animateCSSClass}
+                         hideArchived={this.state.hideArchived}
+                         editing={this.state.editing}
+                         listItem={items[key]
+                         }/>)
+                 }) : []}
+              </ReactCSSTransitionGroup>
             </div>
           </div>
-          <footer className={footerStyle}>
-            <a value="archive" className={footerButtonStyles} 
-            style={this.state.hideArchived ? highlightColor : {}} 
-            onClick={this.toggleArchive}>
-              {this.state.hideArchived ? 'Show Completed' : 'Hide Completed'}
-            </a>
-            <a value="edit" className={footerButtonStyles} 
-            style={this.state.editing ? highlightColor : {}} 
-            onClick={this.toggleEdit}>
-              {this.state.editing ? 'Done Editing' : 'Edit List'}
-            </a>
-          </footer>
         </div>
+        <footer className={footerStyle}>
+          <a value="archive" className={footerButtonStyles} 
+          style={this.state.hideArchived ? highlightColor : {}} 
+          onClick={this.toggleArchive}>
+            {this.state.hideArchived ? 'Show Completed' : 'Hide Completed'}
+          </a>
+          <a value="edit" className={footerButtonStyles} 
+          style={this.state.editing ? highlightColor : {}} 
+          onClick={this.toggleEdit}>
+            {this.state.editing ? 'Done Editing' : 'Edit List'}
+          </a>
+        </footer>
+      </div>
     )
   }
 };
