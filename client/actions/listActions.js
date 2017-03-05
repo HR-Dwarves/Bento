@@ -151,8 +151,9 @@ export function updateListOrder() {
 export function changeListName(newName, db_key, user = 'testUser') {
   return dispatch => {
     dispatch(changeListNameRequestedAction());
-    const listRef = database.ref(`users/${user}/modules/${db_key}`).child('listName');
-    console.log('Change List Name Action Called!')
+    const listRef = database.ref(`users/${user}/modules/${db_key}`)
+                    .child('listName');
+
     listRef.set(newName)
     .then((snap) => {
       dispatch(changeListNameFulfilledAction())
