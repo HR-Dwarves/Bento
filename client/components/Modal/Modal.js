@@ -47,11 +47,7 @@ class Modal extends React.Component {
         top: true,
         new: false,
         newsSource: 'hacker-news',
-<<<<<<< HEAD
         numberOfPosts: '5'
-=======
-        numberOfPosts: 5
->>>>>>> Refactor newsfeed dropdown to pull from external object
       };
       dbRef.push(newsFeedObj)
     } else {
