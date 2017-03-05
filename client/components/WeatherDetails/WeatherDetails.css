@@ -133,15 +133,28 @@ p {
 
 .forecastTemp {
   font-size: 1.5em;
+  padding-left: 0.1em;
   text-align: center;
 }
 
 .forecastDate {
-  font-size: .7em;
+  font-size: .85em;
 }
 
 .forecastDay {
   font-size: 1em;
+}
+
+.forecastIconStyle {
+  font-size: 2em;
+  padding-right: 0.1em;
+}
+
+.forecastIconTemp {
+  display: flex;
+  justify-content: center;
+  padding: 0.2em;
+  padding-top: 0.4em;
 }
 
 .content {

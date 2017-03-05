@@ -98,7 +98,7 @@ class WeatherDetails extends React.Component {
     let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
     let weatherIcon = `${styles.weatherIcon} wi wi-yahoo-${this.state.code}`;
     let forecastIcon = function(code) {
-      return `${styles.forecastTemp} wi wi-yahoo-${code}`;
+      return `${styles.forecastIconStyle} wi wi-yahoo-${code}`;
     }
 
     let forecast = this.state.forecast;
@@ -145,7 +145,10 @@ class WeatherDetails extends React.Component {
                                       <div className={styles.forecastDetail}>
                                         <p className={styles.forecastDay}>{details.day}</p>
                                         <p className={styles.forecastDate}>{details.date.substring(3, 6)} {details.date.substring(0, 2)}</p>
-                                        <p className={forecastIcon(details.code)}>{Math.floor((parseInt(details.high) + parseInt(details.low))/ 2)}º</p>
+                                        <div className={styles.forecastIconTemp}>
+                                          <i className={forecastIcon(details.code)}></i>
+                                          <p className={styles.forecastTemp}>{Math.floor((parseInt(details.high) + parseInt(details.low))/ 2)}º</p>
+                                        </div>
                                         <p className={styles.forecastDate}>{details.text}</p>
                                       </div>
                                     );
