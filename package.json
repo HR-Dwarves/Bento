@@ -57,6 +57,7 @@
     "firebase": "^3.6.10",
     "gcloud": "^0.37.0",
     "google-cloud": "^0.47.0",
+    "jsonp": "^0.2.1",
     "moment": "^2.17.1",
     "moment-timezone": "^0.5.11",
     "morgan": "^1.8.1",
