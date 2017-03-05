@@ -58,6 +58,33 @@ class List extends React.Component {
     })
   }
 
+  handleBlur(e) {
+    let formInput = this.listNameFormInput.value;
+    let db_key = this.props.db_key;
+    let user = this.props.user.uid;
+    if (formInput) {
+      let listObj = {
+        listName: formInput
+      }
+      this.props.changeListName(formInput, db_key, user);
+    }
+  }
+
+  handleNameSubmit(e) {
+    e.preventDefault();
+    console.log('Name submitted');
+    let formInput = this.listNameFormInput.value;
+    console.log(formInput);
+    let db_key = this.props.db_key;
+    let user = this.props.user.uid;
+    if (formInput) {
+      let listObj = {
+        listName: formInput
+      }
+      this.props.changeListName(formInput, db_key, user);
+    }
+  }
+
   handleDelete() {
     let db_key = this.props.db_key;
     let user = this.props.user.uid;
@@ -98,6 +125,7 @@ class List extends React.Component {
 
     let cssClasses = `${styles.listCard} card`;
     let headerStyle = `${styles.header} card-header`;
+    let headerTitleStyle = `${styles.headerTitle} card-footer`;
     let footerStyle = `${styles.footer} card-footer`;
     let deleteButton = `${styles.delete} delete`;
     let listFormContainerStyles = `${styles.listFormContainer} card-content`;
@@ -110,15 +138,27 @@ class List extends React.Component {
     let collapsed = this.props.collapsed.collapsed;
     let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
     let highlightColor = {"backgroundColor": "#EBEBEB"};
-    // if (this.state) {
-    //   let archiveStyle = this.state.hideArchived ? {"display": "none"} : {"display": ""};
-    // }
+
+    // <p className="card-header-title">List</p>
 
     return (
         <div className={cssClasses}>
           <header className={headerStyle}>
-            <p className="card-header-title">List</p>
-            <span href="" className="card-header-icon">
+            <form action="submit"
+                   className='card-header-title'
+                   onSubmit={(e) => this.handleNameSubmit(e)}
+                   onBlur={(e) => this.handleBlur(e)}
+                   ref={(input) => this.listNameForm = input}
+                   >
+              <input className='card-header-title sticky-header'
+                       type="text"
+                       maxLength='30' 
+                       ref={(input) => this.listNameFormInput = input}
+                       placeholder="Name Your List"
+                       defaultValue={list.listName || ''}
+                       name="listname"/>
+            </form>
+           <span href="" className="card-header-icon">
               <span className="icon">
                 <i className="fa fa-list-ul" aria-hidden="true"></i>
               </span>

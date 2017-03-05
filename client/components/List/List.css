@@ -9,6 +9,11 @@
 .header {
   flex: 0 0 auto;
   line-height: 1.5em;
+  height: 42px;
+}
+
+.headerTitle {
+  line-height: 1.5em;
 }
 
 .footer {
