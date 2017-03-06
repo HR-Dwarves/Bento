@@ -4,25 +4,31 @@
   height: 42px;
 }
 
-.listCard {
+.quoteCard {
 
 }
 
-.listCard > * {
+.quoteCard > * {
 
+}
+
+.quoteText {
+  /*font-size: 4vw;*/
+  font-size: 1.5em;
+  text-align: center;
 }
 
 .footer {
   flex: 0 0 auto;
 }
 
-.listContent {
+.quoteContent {
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
+  /*overflow-y: scroll;*/
 }
 
-.listContent > * {
+.quoteContent > * {
   flex: 1 0 auto;
 }
