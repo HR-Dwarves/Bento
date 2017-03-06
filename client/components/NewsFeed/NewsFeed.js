@@ -200,13 +200,30 @@ class NewsFeed extends React.Component {
     //render x amount of posts
     let posts = [];
     let postArray = this.state.posts;
+    //user selected 'More!'
     if(this.state.numberOfPosts !== '5') {
-      for(var i = 0; i < this.state.posts.length; i++) {
-        posts.push(this.state.posts[i]);
+      //checks if the current post count is less than 10
+      if(this.state.posts.length < this.state.numberOfPosts) {
+        for(var i = 0; i < this.state.posts.length; i++) {
+          posts.push(this.state.posts[i]);
+        }
+      } else {
+        //post count is equal to number of posts
+        for(var i = 0; i < this.state.numberOfPosts; i++) {
+          posts.push(this.state.posts[i]);
+        }
       }
     } else {
-      for(var i = 0; i < this.state.numberOfPosts; i++) {
-        posts.push(this.state.posts[i]);
+        //user selected 5 posts
+        if(this.state.posts.length >= this.state.numberOfPosts) {
+          for(var i = 0; i < this.state.numberOfPosts; i++) {
+            posts.push(this.state.posts[i]);
+          }
+        } else {
+          console.log('here');
+          for(var i = 0; i < this.state.posts.length; i++) {
+            posts.push(this.state.posts[i]);
+          }
       }
     }
     
