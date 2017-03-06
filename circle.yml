@@ -24,16 +24,42 @@ dependencies:
     # Retrieve our secrets from the CircleCI environment
     # - echo $CLIENT_SECRET | base64 --decode > ${HOME}/client-secret.json
     - echo $GCLOUD_SERVICE_KEY | base64 --decode --ignore-garbage > ${HOME}/gcloud-service-key.json
+
+    # - echo $GCLOUD_SERVICE_KEY | base64 --decode --ignore-garbage > $GOOGLE_APPLICATION_CREDENTIALS
+
+    # - cat ~/.bash_profile
+
+    # - echo $GCLOUD_SERVICE_KEY | base64 --decode --ignore-garbage > ${HOME}/gcloud-service-key.json
     # - sed  s/YOUR-API-KEY/$API_KEY/ api_key.py.sample > api_key.py
     # vendor our dependencies
     # - mkdir -p lib
     # - pip install -r requirements.txt -t lib
     # Make sure gcloud is up to date
-    - gcloud --quiet components update app
-    # authenticate gcloud
-    - gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
-    # Replace <your-project-id>
+    # - echo ${HOME}/gcloud-service-key.json
+
+    # - gcloud --quiet components update app
+
     - gcloud config set project $GCLOUD_PROJECT
+
+    - sudo /opt/google-cloud-sdk/bin/gcloud --quiet components update
+
+
+
+
+    # try another way of authenticating
+    # i think this is it
+    # but it seems to open a browser always
+    # - gcloud auth application-default login
+
+
+    # http://stackoverflow.com/questions/25066461/how-to-get-gcloud-auth-activate-service-account-persist
+    # - export CLOUDSDK_PYTHON_SITEPACKAGES=1
+
+    # authenticate gcloud
+    # - gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
+    # Replace <your-project-id>
+    # - gcloud config set project $GCLOUD_PROJECT
+
 
 # test:
   # override:
@@ -50,13 +76,24 @@ dependencies:
 
 deployment:
     staging:
-        branch: feat/deployment-test
+        branch: master
         commands:
         # deploy to AppEngine
         # - gcloud -q preview app deploy app.yaml --promote --version=1
-
         # https://circleci.com/docs/deploy-google-app-engine/
-        - gcloud -q app deploy app.yaml --promote --version=staging
+        # - sudo /opt/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
+
+
+        # and the last error was a billing account not set error
+        # - sudo /opt/google-cloud-sdk/bin/gcloud config set project $GCLOUD_PROJECT
+        - gcloud config set account manifest-virtue-159106@appspot.gserviceaccount.com
+
+        - gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
+
+        - gcloud config set project $GCLOUD_PROJECT
+
+        # - gcloud -q app deploy app.yaml --promote --version=staging
+        - gcloud -q app deploy app.yaml
         # Run our E2E Test
         # - python e2e_test.py
         # Run our E2E Test
