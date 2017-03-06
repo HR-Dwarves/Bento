@@ -10,6 +10,7 @@ import DefaultModule from '../DefaultModule/DefaultModule';
 import ModuleWrapper from '../ModuleWrapper/ModuleWrapper';
 
 import styles from './ReactGrid.css';
+import defaultGridProps from './defaultGridProps';
 
 const originalLayouts = getFromLS('layouts') || {};
 const breakpoints = {lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0};
@@ -71,7 +72,7 @@ class ReactGrid extends React.PureComponent {
 
   render() {
     let dashboard = this.props.dashboard;
-    let modules, wrappers, defaultGridProps, gridItems;
+    let modules, wrappers, defaultItemProps, gridItems;
     let layouts = this.state.layouts;
     if (layouts) {
       let layout = this.state.layouts[this.state.breakpoint];
@@ -80,27 +81,47 @@ class ReactGrid extends React.PureComponent {
         modules = dashboard.modules
         if (modules) {
           let moduleKeys = Object.keys(modules);
+
+          //Create wrappers for each module
           wrappers = moduleKeys.map((moduleKey, ind, array) => {
-            
-            var additionalProps = { key: moduleKey, db_key: moduleKey, type: modules[moduleKey].type};
+            let moduleType = modules[moduleKey].type;
+            console.log(moduleType);
+
+            var additionalProps = { key: moduleKey, db_key: moduleKey, type: moduleType};
             var newProps = Object.assign({}, this.props, additionalProps);
-            return React.createElement(ModuleWrapper, newProps);
-          });
-
-          gridItems = wrappers.map((wrapper, ind, arr) => {
-            defaultGridProps = { i: moduleKeys[ind], w: 3, h: 2, x: 0, y: Infinity, minW: 3, minH: 2 };
+            defaultItemProps = { i: moduleKeys[ind], w: 3, h: 2, x: 0, y: Infinity, minW: 3, minH: 2 };
+            let defaultModuleProps = defaultGridProps[moduleType];
             let currentBreakpoint = this.state.breakpoint;
-
             let currentLayout = this.state.layouts[currentBreakpoint];
             let currentKey = moduleKeys[ind];
 
+            // Filter saved grid props from current layout bu item ID
             let currentGridItem = currentLayout.filter((item) => {
               return item.i === currentKey;
             });
 
-            let newGridProps = Object.assign({}, defaultGridProps, currentGridItem[0]);
-            return <div key={currentKey} data-grid={newGridProps}>{wrapper}</div>;
-          })
+            let newGridProps = Object.assign({}, defaultItemProps, currentGridItem[0], defaultModuleProps);
+            return <div key={currentKey} data-grid={newGridProps}>{React.createElement(ModuleWrapper, newProps)}</div>;
+
+            // return React.createElement(ModuleWrapper, newProps);
+
+          });
+
+          // Set grid properties with saved layout information
+          // gridItems = wrappers.map((wrapper, ind, arr) => {
+          //   defaultItemProps = { i: moduleKeys[ind], w: 3, h: 2, x: 0, y: Infinity, minW: 3, minH: 2 };
+          //   let currentBreakpoint = this.state.breakpoint;
+          //   let currentLayout = this.state.layouts[currentBreakpoint];
+          //   let currentKey = moduleKeys[ind];
+
+          //   // Filter saved grid props from current layout bu item ID
+          //   let currentGridItem = currentLayout.filter((item) => {
+          //     return item.i === currentKey;
+          //   });
+
+          //   let newGridProps = Object.assign({}, defaultItemProps, currentGridItem[0]);
+          //   return <div key={currentKey} data-grid={newGridProps}>{wrapper}</div>;
+          // })
         }
       }
     }
@@ -122,7 +143,7 @@ class ReactGrid extends React.PureComponent {
         onBreakpointChange={this.onBreakpointChange}
         useCSSTransforms={this.state.mounted}
         >
-          {gridItems ? gridItems : defaultModule }
+          {wrappers ? wrappers : defaultModule }
         </ResponsiveReactGridLayout>
       );
     } else {
