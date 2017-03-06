@@ -24,7 +24,7 @@ class Quote extends React.Component {
     
     var context = this;
     var quotes = LS.getFromLS('quotes')
-    console.log('Quotes object', quotes.value);
+    // console.log('Quotes object', quotes.value);
 
     if (Object.keys(quotes.value).length < 1) {
       console.log('LS Quotes not available');
