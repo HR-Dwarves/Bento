@@ -18,7 +18,6 @@ class StickyNotes extends React.Component {
     const db_key = this.props.db_key;
     const user = this.props.user.uid;
     const target = 'headerText';
-    // const db_ref = database.ref(`/${user}/modules/${db_key}/${target}`);
     let newText = event.target.value;    
     this.props.updateText(target, newText, db_key, user);
   }
@@ -27,7 +26,6 @@ class StickyNotes extends React.Component {
     const db_key = this.props.db_key;
     const user = this.props.user.uid;
     const target = 'bodyText';
-    // const db_ref = database.ref(`/${user}/modules/${db_key}/${target}`);
     let newText = event.target.value;
     this.props.updateText(target, newText, db_key, user);
   }
