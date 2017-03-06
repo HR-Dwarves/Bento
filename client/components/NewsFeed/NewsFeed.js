@@ -4,7 +4,7 @@ import Promise from 'bluebird';
 import classnames from 'classnames';
 import firebaseApp from '../../base'
 import styles from './NewsFeed.css';
-import newsSource from './../../data/NewsSource.js';
+import newsSource from './../../data/newsSource.js';
 import axios from 'axios';
 
 const database = firebaseApp.database();
@@ -216,7 +216,7 @@ class NewsFeed extends React.Component {
             {loaded ? list.length !== 0 ? posts.map((item, key) => <NewsItem {...this.props}
                                           newsItem={item}
                                           key={key}/>) : [] : <a className={spinnerClasses}>Loading</a>}
- 
+
           </div>
           <footer className={footerStyles}>
             <a value="New" className={newClasses} onClick={this.updateNew}>New</a>
