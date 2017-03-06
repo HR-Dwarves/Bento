@@ -66,8 +66,8 @@ class StickyNotes extends React.Component {
                       maxLength='600' 
                       rows='10' 
                       onBlur={this.handleStickyBodyEntry}
+                      defaultValue={note.bodyText}
                       >
-                      {note.bodyText}
             </textarea>
           </div>
         </div>
