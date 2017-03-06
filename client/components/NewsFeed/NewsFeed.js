@@ -188,9 +188,16 @@ class NewsFeed extends React.Component {
     //render x amount of posts
     let posts = [];
     let postArray = this.state.posts;
-    for(var i = 0; i < this.state.numberOfPosts; i++) {
-      posts.push(this.state.posts[i]);
+    if(this.state.numberOfPosts !== '5') {
+      for(var i = 0; i < this.state.posts.length; i++) {
+        posts.push(this.state.posts[i]);
+      }
+    } else {
+      for(var i = 0; i < this.state.numberOfPosts; i++) {
+        posts.push(this.state.posts[i]);
+      }
     }
+    
     return (
         <div className={newsfeedStyles}>
           <header className={headerStyles}>
