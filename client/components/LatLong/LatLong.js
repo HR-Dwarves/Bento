@@ -99,7 +99,6 @@ class LatLong extends React.Component {
                 clocks.map((clock, index) => {
                 return <Clock
                         key={index}
-                        time={this.state.time}
                         timeZone={clock}
                         delete={this.removeClock.bind(this, clock)} />
               })}
