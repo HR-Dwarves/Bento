@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import styles from './Quote.css';
 import * as LS from '../../util/localStorageUtil';
+import Loading from '../Loading/Loading';
+
 
 class Quote extends React.Component {
   constructor() {
@@ -26,7 +28,7 @@ class Quote extends React.Component {
     var quotes = LS.getFromLS('quotes')
     // console.log('Quotes object', quotes.value);
 
-    if (Object.keys(quotes.value).length < 1) {
+    if (!quotes.value) {
       console.log('LS Quotes not available');
       axios.get('https://firebasestorage.googleapis.com/v0/b/dashboardapp-3d3c7.appspot.com/o/Quotes.json?alt=media&token=ac034d18-b70a-4fa3-ad9b-55fae3c70487')
       .then(function(response) {
@@ -65,31 +67,53 @@ class Quote extends React.Component {
   render() {
     let cssClasses = `${styles.quoteCard} card`;
     let headerStyle = `${styles.header} card-header`;
-    let listContent = `${styles.quoteContent} card-content`
+    let quoteContent = `${styles.quoteContent} card-content`
     let footerStyle = `${styles.footer} card-footer`;
     let quoteTextStyle = `${styles.quoteText}`;
+    // let quoteTextStyle = `${styles.quoteText}`;
+    let loadingStyle = `${styles.loading}`;
 
 
-    return (
-      <div className={cssClasses}>
-        <header className={headerStyle}>
-          <div className="card-header-title">
-            Quote of the Day
-          </div>
-          <span href="" className="card-header-icon">
-            <span className="icon">
-              <i className="fa fa-lightbulb-o" aria-hidden="true"></i>
+    if (this.state.quoteReceived) {
+      return (
+        <div className={cssClasses}>
+          <header className={headerStyle}>
+            <div className="card-header-title">
+              Quote of the Day
+            </div>
+            <span href="" className="card-header-icon">
+              <span className="icon">
+                <i className="fa fa-lightbulb-o" aria-hidden="true"></i>
+              </span>
             </span>
-          </span>
-        </header>
-        <div className={listContent}>
-          <span className={quoteTextStyle}>{this.state.quote.quoteText}</span>
+          </header>
+          <div className={quoteContent}>
+            <span className={quoteTextStyle}>"{this.state.quote.quoteText}"</span>
+          </div>
+          <footer className={footerStyle}>
+            <span className='card-footer-item'>{this.state.quote.quoteAuthor}</span>
+          </footer>
         </div>
-        <footer className={footerStyle}>
-          <span className='card-footer-item'>{this.state.quote.quoteAuthor}</span>
-        </footer>
-      </div>
-    )
+      )
+    } else {
+      return (
+        <div className={cssClasses}>
+          <header className={headerStyle}>
+            <div className="card-header-title">
+              Quote of the Day
+            </div>
+            <span href="" className="card-header-icon">
+              <span className="icon">
+                <i className="fa fa-lightbulb-o" aria-hidden="true"></i>
+              </span>
+            </span>
+          </header>
+          <div className={loadingStyle}>
+            <Loading />
+          </div>
+        </div>
+      )
+    }
   }
 }
 
