@@ -62,7 +62,7 @@ class WeatherDetails extends React.Component {
 
   componentDidMount() {
     this.getWeatherData();
-
+    
     this.weatherInterval = setInterval(() => {
       this.getWeatherData();
     }, 30 * 60000); // time interval of 30 minutes: 30 * 60000
