@@ -1,6 +1,5 @@
 import React from 'react';
 import Draggable from 'react-draggable';
-import config from './../../config/config';
 import firebaseApp from '../../base';
 import classnames from 'classnames';
 import weatherConditions from './weatherConditions';
@@ -33,10 +32,12 @@ class WeatherDetails extends React.Component {
 
     this.getWeatherData = this.getWeatherData.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.clearInterval = this.clearInterval.bind(this);
   }
 
   getWeatherData() {
     var context = this;
+    console.log('grabbing weather');
 
     axios.get(`https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="${context.state.zipcode}")&format=json`)
     .then((response) => {
@@ -56,18 +57,20 @@ class WeatherDetails extends React.Component {
 
   }
 
+  clearInterval() {
+    window.clearInterval(this.weatherInterval);
+  }
+
   componentDidMount() {
-    // var context = this;
     this.getWeatherData();
 
     this.weatherInterval = setInterval(() => {
-      console.log('grabbing weather');
       this.getWeatherData();
-    }, 1800000); // time interval of 30 minutes
+    }, 30 * 60000); // time interval of 30 minutes: 30 * 60000
   }
 
   componentWillUnmount() {
-    window.clearInterval(this.weatherInterval);
+    this.clearInterval();
   }
 
   handleSubmit(e) {
@@ -83,12 +86,12 @@ class WeatherDetails extends React.Component {
     this.setState({
       zipcode: zipcode
     }, () => {
+      this.clearInterval();
       this.getWeatherData();
 
-      setInterval(() => {
-        console.log('grabbing weather');
+      this.weatherInterval = setInterval(() => {
         this.getWeatherData();
-      }, 1800000);
+      }, 30 * 60000);
 
       this.zipForm.reset();
     });
