@@ -91,15 +91,15 @@ class Focus extends React.Component {
     let cardStyle = classnames(`card ${styles.maxHeight}`);
     let iconStyle = `fa fa-square-o ${styles.centerBox}`
 
-
     let empty = this.state.focus;
     let goalStyle;
+    let styleTemp;
+
     if(empty[0] === '') {
       goalStyle = `${styles.noHeight}`;
     } else {
       goalStyle = 'media-content';
     }
-    let styleTemp;
 
     if(this.state.focus[0] !== '' || this.state.clicked) {
       var items = this.state.focus.map((item, i) => (
@@ -110,7 +110,7 @@ class Focus extends React.Component {
         </div>
       ));
     }
-//
+
     return (
       <div className='focus'>
         <div className={cardStyle}>
@@ -143,7 +143,6 @@ class Focus extends React.Component {
                   }}>
                   {items}
                 </ReactCSSTransitionGroup>
-              
             </div>
           </div>
         </div>
