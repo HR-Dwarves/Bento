@@ -37,7 +37,6 @@ class WeatherDetails extends React.Component {
 
   getWeatherData() {
     var context = this;
-    console.log('grabbing weather');
 
     axios.get(`https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="${context.state.zipcode}")&format=json`)
     .then((response) => {
@@ -168,9 +167,5 @@ class WeatherDetails extends React.Component {
     )
   }
 }
-        // <Draggable bounds='body'>
-        // </Draggable>
 
 export default WeatherDetails;
-
-// <img src={this.state.weatherIcon} className={styles.image}/>
