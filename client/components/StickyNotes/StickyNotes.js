@@ -1,6 +1,5 @@
 import React from 'react';
 import firebaseApp from '../../base';
-import Draggable from 'react-draggable';
 import styles from './StickyNotes.css';
 import classnames from 'classnames';
 
