@@ -29,7 +29,8 @@ class WeatherDetails extends React.Component {
       forecast: null,
     }
 
-    this.weatherAPIkey = config.openWeatherMapAPIKey;
+    this.weatherInterval = null;
+
     this.getWeatherData = this.getWeatherData.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -59,10 +60,14 @@ class WeatherDetails extends React.Component {
     // var context = this;
     this.getWeatherData();
 
-    setInterval(() => {
+    this.weatherInterval = setInterval(() => {
       console.log('grabbing weather');
       this.getWeatherData();
     }, 1800000); // time interval of 30 minutes
+  }
+
+  componentWillUnmount() {
+    window.clearInterval(this.weatherInterval);
   }
 
   handleSubmit(e) {
