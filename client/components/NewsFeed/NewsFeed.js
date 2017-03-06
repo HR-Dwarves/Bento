@@ -121,7 +121,6 @@ class NewsFeed extends React.Component {
 
   handlePostCountChange(e) {
     e.preventDefault();
-    console.log(e.target.value);
     const db_key = this.props.db_key;
     const user = this.props.user.uid;
     const newsSource = this.props.dashboard.modules[db_key].newsSource;
@@ -140,10 +139,23 @@ class NewsFeed extends React.Component {
   }
 
   componentWillMount(){
+    
     const db_key = this.props.db_key;
     const user = this.props.user.uid;
     const newsSource = this.props.dashboard.modules[db_key]['newsSource'];
     const that = this;
+
+    //check if numberOfPosts exists in DB
+    database.ref(`users/${user}/modules/${db_key}/numberOfPosts`).once('value').then(function(snapshot) {
+      let test = snapshot.val();
+      if(!test){
+        console.log('not fuond ');
+        database.ref(`users/${user}/modules/${db_key}`).update({
+          numberOfPosts: '5'
+        });
+      }
+    });
+
     database.ref(`users/${user}/modules/${db_key}`).once('value').then(function(snapshot) {
       that.setState({
         numberOfPosts: snapshot.val().numberOfPosts
