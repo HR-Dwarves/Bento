@@ -13,7 +13,7 @@ class Clock extends React.Component {
 
   render() {
 
-    let converted = moment.tz(this.props.time, this.props.timeZone);
+    let converted = moment.tz(this.props.timeZone);
 
     let convertedDate = converted.format("ddd, MMM Do")
     let convertedTime = converted.format("h:mm a");

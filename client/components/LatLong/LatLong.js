@@ -14,7 +14,6 @@ class LatLong extends React.Component {
     super(props);
     this.state = {
       time: null,
-      city: null,
       timeZones: moment.tz.names()
     };
     this.pollForTime;
@@ -33,9 +32,6 @@ class LatLong extends React.Component {
   componentDidMount() {
     var context = this;
     const user = this.props.user.uid;
-    // TIME
-    // TODO: make ntp time api
-    // $.get('/myApiEndpointForNTP', function(data) {};
 
     var setTime = function() {
       var now = new Date();
@@ -50,14 +46,9 @@ class LatLong extends React.Component {
 
     // get saved clocks from db
     this.props.getClocks(this.props.db_key, user);
-
-    database.ref(`users/${user}/modules/${this.props.db_key}`).on('value', () => {
-      this.props.getClocks(this.props.db_key, user);
-    });
   }
 
   addClock(e) {
-    // todo, make this not be a guess
     let timeZone = e ? e.target.value : moment.tz.guess()
     const user = this.props.user.uid;
 
@@ -80,7 +71,6 @@ class LatLong extends React.Component {
   }
 
   render() {
-    // let cssClasses = `${styles.card} column`; // just for reference for form.
     let headerStyle = `${styles.header} card-header`
     let contentStyles = `${styles.content} card-content`;
     let clocks = this.props.dashboard.modules[this.props.db_key].clocks;
@@ -108,7 +98,6 @@ class LatLong extends React.Component {
                 clocks.map((clock, index) => {
                 return <Clock
                         key={index}
-                        time={this.state.time}
                         timeZone={clock}
                         delete={this.removeClock.bind(this, clock)} />
               })}
