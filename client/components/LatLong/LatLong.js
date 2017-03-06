@@ -14,7 +14,6 @@ class LatLong extends React.Component {
     super(props);
     this.state = {
       time: null,
-      // city: null,
       timeZones: moment.tz.names()
     };
     this.pollForTime;
