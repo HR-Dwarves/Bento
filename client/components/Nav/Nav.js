@@ -82,9 +82,7 @@ class Nav extends React.Component {
       <div className={mainNavPanelCSS}>
         <div className={userInfoStyle} >
           <button style={displayButton} onClick={this.handleLogout} className={logoutButtonStyle}>Logout</button>
-          <figure style={displayButton} className={userWrapperStyle}>
-            <img className={styles.userImg} src={this.props.user.photoURL} />
-          </figure>
+          <div></div>
         </div>
         <Link to="/">
           <div className={pageTitleCSS}>bento</div>
@@ -103,4 +101,6 @@ class Nav extends React.Component {
 export default Nav;
 
 // <button style={displayButton} onClick={this.toggleFocus.bind(this)} className={logoutButtonStyle}>Focus</button>
-
+// <figure style={displayButton} className={userWrapperStyle}>
+//   <img className={styles.userImg} src={this.props.user.photoURL} />
+// </figure>

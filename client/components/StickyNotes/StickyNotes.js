@@ -1,6 +1,5 @@
 import React from 'react';
 import firebaseApp from '../../base';
-import Draggable from 'react-draggable';
 import styles from './StickyNotes.css';
 import classnames from 'classnames';
 
@@ -66,15 +65,13 @@ class StickyNotes extends React.Component {
                       maxLength='600' 
                       rows='10' 
                       onBlur={this.handleStickyBodyEntry}
+                      defaultValue={note.bodyText}
                       >
-                      {note.bodyText}
             </textarea>
           </div>
         </div>
     )
   }
 }
-        // <Draggable bounds='body' cancel='.card-content'>
-        // </Draggable>
 
 export default StickyNotes;

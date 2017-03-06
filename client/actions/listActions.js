@@ -147,3 +147,38 @@ export function updateListOrder() {
     
   }
 }
+
+export function changeListName(newName, db_key, user = 'testUser') {
+  return dispatch => {
+    dispatch(changeListNameRequestedAction());
+    const listRef = database.ref(`users/${user}/modules/${db_key}`)
+                    .child('listName');
+
+    listRef.set(newName)
+    .then((snap) => {
+      dispatch(changeListNameFulfilledAction())
+    })
+    .catch((error) => {
+      console.log(error);
+      dispatch(changeListNameRejectedAction());
+    });
+  }
+}
+
+function changeListNameRequestedAction() {
+  return {
+    type: ActionTypes.ChangeListNameRequested
+  };
+}
+
+function changeListNameRejectedAction() {
+  return {
+    type: ActionTypes.ChangeListNameRejected
+  }
+}
+
+function changeListNameFulfilledAction() {
+  return {
+    type: ActionTypes.ChangeListNameFulfilled,
+  };
+}

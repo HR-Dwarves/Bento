@@ -8,7 +8,6 @@ class ListItem extends React.Component {
 
   handleDelete(itemKey) {
     const db_key = this.props.db_key
-    console.log(itemKey);
     let user = this.props.user.uid;
     this.props.deleteFromList(itemKey, db_key, user);
   }
@@ -35,22 +34,30 @@ class ListItem extends React.Component {
 
     let style;
     if (completed) {
-      style = {"textDecoration": "line-through"}
+      style = {"textDecoration": "line-through"};
     } else {
-      style = {"textDecoration": ""}
+      style = {"textDecoration": ""};
     }
-    let listItemCSS = `${styles.listItem} control level`
+    let cardStyle;
+    if (this.props.hideArchived && completed) {
+      cardStyle = {"display": "none"};
+    } else {
+      cardStyle = {"display": ""};
+    }
+    let hiddenStyle = {"display": "none"};
+
+    let listItemCSS = `${styles.listItem} control level animated`;
     let spanIconCSS = `${styles.icon} is-pulled-right level`;
     return (
-      <div className={listItemCSS}>
+      <div className={listItemCSS} style={cardStyle}>
         <span style={style}>
           {item.text}
         </span>
         <span className={spanIconCSS}>
-          <span className="icon is-small" onClick={() => this.handleCheckClick(itemKey)}>
+          <span style={this.props.editing ? hiddenStyle : {}} className="icon is-small" onClick={() => this.handleCheckClick(itemKey)}>
             {checked}
           </span>
-          <span className="icon is-small">
+          <span style={this.props.editing ? {} : hiddenStyle} className="icon is-small">
             <i onClick={() => this.handleDelete(itemKey)} 
                className="fa fa-times level" aria-hidden="true"></i>
           </span>
