@@ -126,6 +126,7 @@ class List extends React.Component {
     let cssClasses = `${styles.listCard} card`;
     let headerStyle = `${styles.header} card-header`;
     let headerTitleStyle = `${styles.headerTitle} card-footer`;
+    let nameInputStyle = `${styles.nameInput}`;
     let footerStyle = `${styles.footer} card-footer`;
     let deleteButton = `${styles.delete} delete`;
     let listFormContainerStyles = `${styles.listFormContainer} card-content`;
@@ -156,6 +157,7 @@ class List extends React.Component {
                      ref={(input) => this.listNameFormInput = input}
                      placeholder="Name Your List"
                      defaultValue={list.listName || ''}
+                     className={nameInputStyle}
                      name="listname"/>
           </form>
          <span href="" className="card-header-icon">
@@ -203,12 +205,12 @@ class List extends React.Component {
           <a value="archive" className={footerButtonStyles} 
           style={this.state.hideArchived ? highlightColor : {}} 
           onClick={this.toggleArchive}>
-            {this.state.hideArchived ? 'Show Completed' : 'Hide Completed'}
+            {this.state.hideArchived ? 'Show' : 'Hide'}
           </a>
           <a value="edit" className={footerButtonStyles} 
           style={this.state.editing ? highlightColor : {}} 
           onClick={this.toggleEdit}>
-            {this.state.editing ? 'Done Editing' : 'Edit List'}
+            {this.state.editing ? 'Edit' : 'Edit'}
           </a>
         </footer>
       </div>
