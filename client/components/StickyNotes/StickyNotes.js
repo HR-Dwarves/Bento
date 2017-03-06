@@ -74,7 +74,5 @@ class StickyNotes extends React.Component {
     )
   }
 }
-        // <Draggable bounds='body' cancel='.card-content'>
-        // </Draggable>
 
 export default StickyNotes;
