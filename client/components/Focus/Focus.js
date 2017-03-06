@@ -110,7 +110,6 @@ class Focus extends React.Component {
         </div>
       ));
     }
-//
     return (
       <div className='focus'>
         <div className={cardStyle}>
