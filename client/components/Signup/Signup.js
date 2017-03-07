@@ -81,7 +81,6 @@ class Signup extends React.Component {
       return (
         <nav className={styles.signup}>
           <div className={styles.signupHeader}>
-            <span>SIGNUP</span>
           </div>
           <div className={styles.loginButtons}>
             <button className={googleStyle} onClick={() => this.authenticate('google')}>
