@@ -134,7 +134,7 @@ class ReactGrid extends React.PureComponent {
 }
 
 ReactGrid.defaultProps = {
-  cols: {lg: 12, md: 9, sm: 6, xs: 3, xxs: 3},
+  cols: {lg: 12, md: 9, sm: 6, xs: 3, xxs: 1},
   rowHeight: 100,
   margin: [20, 20],
 }
