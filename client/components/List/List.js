@@ -88,7 +88,6 @@ class List extends React.Component {
   handleDelete() {
     let db_key = this.props.db_key;
     let user = this.props.user.uid;
-    // let user = this.props.user.uid;
 
     this.props.deleteModule(db_key, user);
   }
@@ -122,7 +121,6 @@ class List extends React.Component {
         }
     }
 
-
     let cssClasses = `${styles.listCard} card`;
     let headerStyle = `${styles.header} card-header`;
     let headerTitleStyle = `${styles.headerTitle} card-footer`;
@@ -139,8 +137,6 @@ class List extends React.Component {
     let collapsed = this.props.collapsed.collapsed;
     let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
     let highlightColor = {"backgroundColor": "#EBEBEB"};
-
-    // <p className="card-header-title">List</p>
 
     return (
       <div className={cssClasses}>
