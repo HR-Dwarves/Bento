@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import * as actionCreators from '../actions/actionCreators';
 import * as layoutActionCreators from '../actions/layoutActions';
 import * as listActionCreators from '../actions/listActions';
+import * as notificationActionCreators from '../actions/notificationActions';
 import * as stickyNoteActionCreators from '../actions/stickyNoteActions'
 import * as clocksActionCreators from '../actions/clocksActions';
 import * as hackerNewsActionCreators from '../actions/hackerNewsActions';
@@ -17,6 +18,7 @@ var bundledActionCreators = Object.assign({},
                                           actionCreators,
                                           layoutActionCreators,
                                           listActionCreators,
+                                          notificationActionCreators,
                                           clocksActionCreators,
                                           stickyNoteActionCreators,
                                           hackerNewsActionCreators,
@@ -28,7 +30,8 @@ function mapStateToProps(state) {
   return {
     dashboard: state.dashboard,
     user: state.authentication,
-    layouts: state.layouts
+    layouts: state.layouts,
+    notification: state.notification
   }
 }
 
