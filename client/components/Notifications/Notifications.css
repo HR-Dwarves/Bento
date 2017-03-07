@@ -1,0 +1,10 @@
+.notifications {
+  position: absolute;
+  z-index: 999;
+  right: 2em;
+}
+
+.notification {
+  border: 1px solid #2f2f2f;
+
+}

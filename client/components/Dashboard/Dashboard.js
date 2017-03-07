@@ -9,7 +9,9 @@ import ReactGrid from '../ReactGrid/ReactGrid';
 // All modules now passed into ModuleWrapper
 import DefaultModule from '../DefaultModule/DefaultModule';
 import ModuleWrapper from '../ModuleWrapper/ModuleWrapper';
+import Nav from '../Nav/Nav';
 import Loading from '../Loading/Loading';
+import Notifications from '../Notifications/Notifications';
 
 const database = firebaseApp.database();
 
@@ -79,7 +81,9 @@ class Dashboard extends React.Component {
     if (this.state.databaseResponded) {
       return (
         <div className={dashContainer}>
+          <Nav {...this.props}/>
           <div className={mainDashboardPanelCSS}>
+            <Notifications />
             <ReactGrid {...this.props} />
           </div>
         </div>

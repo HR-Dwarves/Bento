@@ -80,7 +80,7 @@ class Focus extends React.Component {
       if(focusArray[0] === null) {
         focusArray[0] = '';
       }
-      that.setState({
+      context.setState({
         focus: focusArray
       });
     });

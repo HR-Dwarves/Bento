@@ -13,6 +13,9 @@ const actionTypes = {
   AuthenticateUser: 'AUTHENTICATE_USER',
   LogoutUser: 'LOGOUT_USER',
 
+  AddNotification: 'ADD_NOTIFICATION',
+  RemoveNotification: 'REMOVE_NOTIFICATION',
+
   GetListRequested: 'GET_LIST_REQUESTED',
   GetListRejected: 'GET_LIST_REJECTED',
   GetListFulfilled: 'GET_LIST_FULFILLED',
