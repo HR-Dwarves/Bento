@@ -226,7 +226,7 @@ class NewsFeed extends React.Component {
               <p className='control'>
                 <span className="select">
                   <select value={selectedNewsSource} onChange={this.handleNewsChange} className={`${styles.removeBorder}`}>
-                    {newsSource.map((item, key) => <option value={Object.keys(item)[0]}>{Object.values(item)[0]}</option>)}
+                    {newsSource.map((item, key) => <option value={Object.keys(item)[0]}>{item[Object.keys(item)[0]]}</option>)}
                   </select>
                 </span>
               </p>
