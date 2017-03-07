@@ -149,7 +149,6 @@ class NewsFeed extends React.Component {
     database.ref(`users/${user}/modules/${db_key}/numberOfPosts`).once('value').then(function(snapshot) {
       let test = snapshot.val();
       if(!test){
-        console.log('not fuond ');
         database.ref(`users/${user}/modules/${db_key}`).update({
           numberOfPosts: '5'
         });
@@ -173,20 +172,14 @@ class NewsFeed extends React.Component {
   render() {
     let list = this.state.posts;
     let selectedNewsSource = this.props.dashboard.modules[this.props.db_key].newsSource;
-    let selectedPostCount = this.props.dashboard.modules[this.props.db_key].numberOfPosts;
-    let cssClasses = `${styles.test}`;
-    let spinner = `${styles.spinner}`;
     let newsfeedStyles = `${styles.newsfeed} card`;
     let headerStyles = `${styles.header} card-header`;
     let footerStyles = `${styles.footer} card-footer`;
     let contentStyles = `${styles.content} card-content`;
-    let newClasses = classnames('card-footer-item', `${styles.newsButtons}`, this.props.dashboard.modules[this.props.db_key].new ? cssClasses : '');
-    let topClasses = classnames('card-footer-item', `${styles.newsButtons}`, this.props.dashboard.modules[this.props.db_key].new ? '' : cssClasses);
-    let newsFeedTitle = classnames(`control ${styles.removeBorder}`)
-    let spinnerClasses = classnames('button is-loading', spinner);
+    let newClasses = classnames('card-footer-item', `${styles.newsButtons}`, this.props.dashboard.modules[this.props.db_key].new ? `${styles.test}` : '');
+    let topClasses = classnames('card-footer-item', `${styles.newsButtons}`, this.props.dashboard.modules[this.props.db_key].new ? '' : `${styles.test}`);
+    let spinnerClasses = classnames('button is-loading', `${styles.spinner}`);
     let loaded = this.state.loaded;
-    let collapsed = this.props.collapsed.collapsed;
-    let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
     let fiveButtonStyle = ''
     let moreButtonStyle = ''
     if(this.state.numberOfPosts === '5') {
@@ -220,7 +213,6 @@ class NewsFeed extends React.Component {
             posts.push(this.state.posts[i]);
           }
         } else {
-          console.log('here');
           for(var i = 0; i < this.state.posts.length; i++) {
             posts.push(this.state.posts[i]);
           }
@@ -234,7 +226,7 @@ class NewsFeed extends React.Component {
               <p className='control'>
                 <span className="select">
                   <select value={selectedNewsSource} onChange={this.handleNewsChange} className={`${styles.removeBorder}`}>
-                    {newsSource.map((item, key) => <option value={Object.keys(item)[0]}>{Object.values(item)[0]}</option>)}
+                    {newsSource.map((item, key) => <option value={Object.keys(item)[0]}>{item[Object.keys(item)[0]]}</option>)}
                   </select>
                 </span>
               </p>
@@ -248,11 +240,9 @@ class NewsFeed extends React.Component {
             </div>
           </header>
           <div className={contentStyles}>
-
             {loaded ? list.length !== 0 ? posts.map((item, key) => <NewsItem {...this.props}
                                           newsItem={item}
                                           key={key}/>) : [] : <a className={spinnerClasses}>Loading</a>}
-
           </div>
           <footer className={footerStyles}>
             <a value="New" className={newClasses} onClick={this.updateNew}>New</a>

@@ -115,7 +115,6 @@ class Focus extends React.Component {
         </div>
       ));
     }
-
     return (
       <div className='focus'>
         <div className={cardStyle}>
@@ -138,7 +137,7 @@ class Focus extends React.Component {
               </div>
               <div className={styles.formDiv}>
                 <form className={styles.formStyle} ref={(input) => this.listForm = input} onSubmit={this.handleSubmit} className={styles.formStyle}>
-                  <input className={styles.inputStyle} type="text" value={this.state.tempFocus} onChange={this.handleChange} className={styles.inputStyle}></input>
+                  <input className={styles.inputStyle} type="text"  maxLength='30' value={this.state.tempFocus} onChange={this.handleChange} className={styles.inputStyle}></input>
                 </form>
               </div>
                 <ReactCSSTransitionGroup 
