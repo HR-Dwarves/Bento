@@ -3,6 +3,7 @@ import config from './../../config/config';
 import styles from './PhotoPrompt.css';
 import classnames from 'classnames';
 import moment from 'moment';
+import loadImage from 'blueimp-load-image'
 import quotes from './PhotoQuotes'
 
 import PhotoEditor from '../PhotoEditor/PhotoEditor';
@@ -15,6 +16,7 @@ class PhotoPrompt extends React.Component {
     this.state = {
       photoName: null,
       photoSrc: null,
+      photoRotation: null,
       inputButton: null,
       todaysPhotoIsTaken: false,
       chooseButtonCss: 'button',
@@ -63,25 +65,59 @@ class PhotoPrompt extends React.Component {
 
   changeHandler(ev) {
     // check file size
-    if (ev.target.files[0].size > 3000000) {
+    if (ev.target.files[0].size > 5000000) {
       ev.target.value = "";
       this.setState({inputIsTooBig: true})
     } else {
-
       this.setState({inputIsTooBig: false})
-      var fReader = new FileReader();
-      fReader.readAsDataURL(ev.target.files[0]);
+      //==========================
 
       var context = this;
       var photoName = ev.target.files[0].name;
 
-      fReader.onloadend = function(event){
+      console.log(photoName);
 
-        context.setState({
-          photoName: photoName,
-          photoSrc: event.target.result
-        })
-      }
+
+
+      loadImage(
+        ev.target.files[0],
+        function (img, meta) {
+            if(img.type === "error") {
+                console.log("Error loading image " + imageUrl);
+            } else {
+                console.log(meta)
+                console.log(img)
+                context.inputViewer.appendChild(img);
+                // context.setState({
+                //   photoName: photoName,
+                //   photoSrc: img
+                // })
+
+            }
+        },
+        {
+          meta: true,
+          orientation: true
+        }
+      )
+      //==========================
+
+      // var fReader = new FileReader();
+      // fReader.readAsDataURL(ev.target.files[0]);
+
+      // var context = this;
+      // var photoName = ev.target.files[0].name;
+
+      // fReader.onloadend = function(event){
+
+      //   context.setState({
+      //     photoName: photoName,
+      //     photoSrc: event.target.result
+      //   })
+      // }
+
+
+
     }
   }
 
@@ -181,8 +217,6 @@ class PhotoPrompt extends React.Component {
           </div>
         </header>
 
-
-
         <div className={`${styles.content} card-content`}>
 
           <div className="media-content">
@@ -233,10 +267,17 @@ class PhotoPrompt extends React.Component {
               </a>
             }
 
-            {/* CURRENT PHOTO VIEWER. COULD BE AN EDITOR... */}
+            <div
+              className={styles.inputViewer}
+              ref={inputViewer => this.inputViewer = inputViewer}>
+            </div>
+
+            {/* CURRENT PHOTO VIEWER. COULD BE AN EDITOR...
             {this.state.photoSrc !== null &&
-              <PhotoEditor src={this.state.photoSrc}/>
-            }
+              <PhotoEditor
+                src={this.state.photoSrc}
+                rotation={this.state.photoRotation}/>
+            }*/}
 
             {/* ALL PHOTOS */}
             {photos &&
