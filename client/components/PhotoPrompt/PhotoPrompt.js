@@ -1,12 +1,12 @@
 import React from 'react';
-import config from './../../config/config';
+// import config from './../../config/config';
 import styles from './PhotoPrompt.css';
 import classnames from 'classnames';
 import moment from 'moment';
 import loadImage from 'blueimp-load-image'
 import quotes from './PhotoQuotes'
 
-import PhotoEditor from '../PhotoEditor/PhotoEditor';
+// import PhotoEditor from '../PhotoEditor/PhotoEditor';
 import PhotoDisplayer from '../PhotoDisplayer/PhotoDisplayer';
 
 class PhotoPrompt extends React.Component {
@@ -15,8 +15,8 @@ class PhotoPrompt extends React.Component {
 
     this.state = {
       photoName: null,
-      photoSrc: null,
-      photoRotation: null,
+      // photoSrc: null,
+      // photoRotation: null,
       inputButton: null,
       todaysPhotoIsTaken: false,
       chooseButtonCss: 'button',
@@ -70,54 +70,33 @@ class PhotoPrompt extends React.Component {
       this.setState({inputIsTooBig: true})
     } else {
       this.setState({inputIsTooBig: false})
-      //==========================
 
       var context = this;
-      var photoName = ev.target.files[0].name;
 
-      console.log(photoName);
-
+      var photoName = ev.target.files[0].name
 
 
       loadImage(
         ev.target.files[0],
         function (img, meta) {
-            if(img.type === "error") {
-                console.log("Error loading image " + imageUrl);
-            } else {
-                console.log(meta)
-                console.log(img)
-                context.inputViewer.appendChild(img);
-                // context.setState({
-                //   photoName: photoName,
-                //   photoSrc: img
-                // })
+          if(img.type === "error") {
+              console.log("Error loading image " + imageUrl);
+          } else {
 
+            if (context.inputViewer.hasChildNodes()) {
+              context.inputViewer.replaceChild(img, context.inputViewer.firstChild);
+            } else {
+              context.inputViewer.appendChild(img);
             }
+
+            context.setState({photoName: photoName})
+          }
         },
         {
           meta: true,
           orientation: true
         }
       )
-      //==========================
-
-      // var fReader = new FileReader();
-      // fReader.readAsDataURL(ev.target.files[0]);
-
-      // var context = this;
-      // var photoName = ev.target.files[0].name;
-
-      // fReader.onloadend = function(event){
-
-      //   context.setState({
-      //     photoName: photoName,
-      //     photoSrc: event.target.result
-      //   })
-      // }
-
-
-
     }
   }
 
@@ -131,8 +110,11 @@ class PhotoPrompt extends React.Component {
     const user = this.props.user.uid;
     var context = this;
     this.props.addPhotoForPhotoPrompt(this.inputButton.files[0], this.props.db_key, user, () => {
+      // console.log('context.inputViewer.firstChild', context.inputViewer.firstChild);
+      context.inputViewer.removeChild(context.inputViewer.firstChild);
       context.setState({
-        photoSrc: null,
+        // photoSrc: null,
+        photoName: null,
         todaysPhotoIsTaken: true,
         chooseButtonCss: 'button'
       });
@@ -241,7 +223,7 @@ class PhotoPrompt extends React.Component {
                   <span className={`${styles.photoButtonContainer} icon`}>
                     <i className={`${styles.photoButton} fa fa-bullseye`}></i>
                   </span>
-                  {this.state.photoSrc === null
+                  {this.state.photoName === null
                     ? <span>Take Photo/Choose File</span>
                     : <span>Take/Choose New</span>
                   }
@@ -261,23 +243,17 @@ class PhotoPrompt extends React.Component {
             }
 
             {/* ACCEPT PHOTO BUTTON */}
-            {this.state.photoSrc !== null &&
+            {this.state.photoName !== null &&
               <a className={this.state.chooseButtonCss} onClick={this.submitPhoto.bind(this)}>
                 Make it today's photo
               </a>
             }
 
+            {/* CURRENT PHOTO VIEWER*/}
             <div
               className={styles.inputViewer}
               ref={inputViewer => this.inputViewer = inputViewer}>
             </div>
-
-            {/* CURRENT PHOTO VIEWER. COULD BE AN EDITOR...
-            {this.state.photoSrc !== null &&
-              <PhotoEditor
-                src={this.state.photoSrc}
-                rotation={this.state.photoRotation}/>
-            }*/}
 
             {/* ALL PHOTOS */}
             {photos &&
