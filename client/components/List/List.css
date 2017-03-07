@@ -1,17 +1,57 @@
 .listCard {
 
-  /*color: red;*/
-  /*display: flex;*/
-  /*overflow: auto;*/
 }
 
 .listCard > * {
-  /*flex: 1 1 100%;*/
+
 }
 
 .header {
   flex: 0 0 auto;
   line-height: 1.5em;
+  height: 42px;
+}
+
+.headerTitle {
+  line-height: 1.5em;
+  flex: 0 1 auto;
+  width: 100%;
+}
+
+.nameInput {
+  width: 100%;
+}
+
+.footer {
+  flex: 0 0 auto;
+}
+
+.footerButtons {
+  color: #2f2f2f;
+}
+
+.listContent {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+.listContent > * {
+  flex: 1 0 auto;
+}
+
+.listContent:first-child {
+  padding-bottom: 0;
+}
+
+.listContent:last-child {
+  padding-top: 0;
+}
+
+.listFormContainer {
+  flex: 0 1 auto;
+  padding-bottom: .2em;
 }
 
 .listForm {
@@ -19,7 +59,7 @@
 }
 
 .listForm > * {
-  /*flex: 1 1 100%;*/
+  flex: 0 1 auto;
 }
 
 .listButton {
@@ -28,26 +68,9 @@
 
 .listItems {
   overflow-y: auto;
+  padding-top: .2em;
 }
 
-.height {
-  max-height: 1200px;
-  -webkit-transition: max-height 0.3s; 
-  -moz-transition: max-height 0.3s; 
-  -ms-transition: max-height 0.3s; 
-  -o-transition: max-height 0.3s; 
-  transition: max-height .3s;
-  /*overflow: hidden;*/
-  overflow-y: scroll;
+.footerButtons {
+  align-self: flex-end;
 }
-
-.collapsedStyle {
-  max-height: 0;
-  -webkit-transition: max-height 0.3s; 
-  -moz-transition: max-height 0.3s; 
-  -ms-transition: max-height 0.3s; 
-  -o-transition: max-height 0.3s; 
-  transition: max-height .3s;
-  overflow: hidden;
-}
-

@@ -15,8 +15,10 @@ export function getLayouts(user, key = 'layouts') {
         console.error(e);
       }
     }
+
+    let layouts = Object.assign({xxs:[], xs: [], sm: [], md: [], lg:[]}, ls[key]);
     // Dispatch layouts pulled to state
-    dispatch(getLayoutsAction(ls[key]));
+    dispatch(getLayoutsAction(layouts));
   }
 }
 

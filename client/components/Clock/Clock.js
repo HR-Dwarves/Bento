@@ -3,17 +3,13 @@ import moment from 'moment'
 
 import styles from './Clock.css';
 
-
 class Clock extends React.Component {
   constructor() {
     super();
-
-
   }
 
   render() {
-
-    let converted = moment.tz(this.props.time, this.props.timeZone);
+    let converted = moment.tz(this.props.timeZone);
 
     let convertedDate = converted.format("ddd, MMM Do")
     let convertedTime = converted.format("h:mm a");
@@ -33,7 +29,6 @@ class Clock extends React.Component {
       </div>
     )
   };
-
 }
 
 export default Clock;

@@ -3,7 +3,6 @@ import firebaseApp from '../../base';
 import styles from './Dashboard.css';
 import Promise from 'bluebird';
 
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import ReactGrid from '../ReactGrid/ReactGrid';
 
 
@@ -112,17 +111,3 @@ function getFromLS(key) {
   return ls[key];
 }
 
-// {wrappers ? wrappers.map((wrapper, ind) => (
-//   <div className={componentStyle} key={ind}>
-//       {wrapper}
-//   </div>
-//   )) : defaultModule }
-
-// <ReactCSSTransitionGroup
-//     transitionName="module"
-//     transitionName={{enter: "bounceInUp", 
-//     leave: "bounceOutDown",
-//     appear: "fadeInUp"}}
-//     transitionEnterTimeout={1000}
-//     transitionLeaveTimeout={1000}>
-//     </ReactCSSTransitionGroup>

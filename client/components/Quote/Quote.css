@@ -1,0 +1,51 @@
+.header {
+  flex: 0 0 auto;
+  line-height: 1.5em;
+  height: 42px;
+}
+
+.quoteCard {
+
+}
+
+.quoteCard > * {
+
+}
+
+.quoteText {
+  /*font-size: 4vw;*/
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.footer {
+  flex: 0 0 auto;
+}
+
+.quoteContent {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  /*overflow-y: scroll;*/
+}
+
+.quoteContent > * {
+  flex: 1 0 auto;
+}
+
+.loading {
+  font-size: 1em;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  flex-direction: column;
+  vertical-align: middle;
+  height: 100%;
+}
+
+.loading > * {
+  font-size: 1em;
+  margin: auto;
+  flex: 1 1 auto;
+}

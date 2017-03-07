@@ -14,6 +14,10 @@ class Focus extends React.Component {
       tempFocus: '',
       clicked: false
     }
+
+    this.db_key = this.props.db_key;
+    this.user = this.props.user.uid;
+
     this.handleDeleteFocus = this.handleDeleteFocus.bind(this);
     this.removeFocus = this.removeFocus.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -36,15 +40,18 @@ class Focus extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     let focusArray = [];
+
     focusArray.push(this.state.tempFocus);
+    
     this.setState({
       focus: focusArray
     });
+
+    let context = this;
     let newValue = this.state.focus[0];
-    const db_key = this.props.db_key;
-    const user = this.props.user.uid;
     const target = 'focusBody';
-    const db_ref = database.ref(`users/${user}/modules/${db_key}/${target}`);
+    const db_ref = database.ref(`users/${context.user}/modules/${context.db_key}/${target}`);
+    
     db_ref.set(this.state.tempFocus);
     this.setState({
       tempFocus: ''
@@ -52,10 +59,10 @@ class Focus extends React.Component {
   }
 
   removeFocus() {
-    const db_key = this.props.db_key;
-    const user = this.props.user.uid;
+    let context = this;
     const target = 'focusBody';
-    const db_ref = database.ref(`users/${user}/modules/${db_key}/${target}`);
+    const db_ref = database.ref(`users/${context.user}/modules/${context.db_key}/${target}`);
+    
     this.setState({
       focus: [''],
       clicked: false
@@ -63,12 +70,11 @@ class Focus extends React.Component {
   }
 
   componentDidMount(){
-    let that = this;
-    const db_key = this.props.db_key;
-    const user = this.props.user.uid;
+    let context = this;
     const target = 'focusBody';
-    const db_ref = database.ref(`users/${user}/modules/${db_key}/${target}`);
+    const db_ref = database.ref(`users/${context.user}/modules/${context.db_key}/${target}`);
     const focusArray = [];
+    
     db_ref.once('value').then(function(snapshot) {
       focusArray.push(snapshot.val());
       if(focusArray[0] === null) {
@@ -82,7 +88,7 @@ class Focus extends React.Component {
 
   render() {
     let dashboard = this.props.dashboard;
-    let db_key = this.props.db_key;
+    let db_key = this.db_key;
     let focus = dashboard.modules[db_key];
 
     let collapsed = this.props.collapsed.collapsed;
@@ -91,15 +97,14 @@ class Focus extends React.Component {
     let cardStyle = classnames(`card ${styles.maxHeight}`);
     let iconStyle = `fa fa-square-o ${styles.centerBox}`
 
-
     let empty = this.state.focus;
-    let goalStyle;
+    let goalStyle, styleTemp;
+
     if(empty[0] === '') {
       goalStyle = `${styles.noHeight}`;
     } else {
       goalStyle = 'media-content';
     }
-    let styleTemp;
 
     if(this.state.focus[0] !== '' || this.state.clicked) {
       var items = this.state.focus.map((item, i) => (
@@ -142,7 +147,6 @@ class Focus extends React.Component {
                   }}>
                   {items}
                 </ReactCSSTransitionGroup>
-              
             </div>
           </div>
         </div>

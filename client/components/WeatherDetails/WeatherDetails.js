@@ -1,6 +1,5 @@
 import React from 'react';
 import Draggable from 'react-draggable';
-import config from './../../config/config';
 import firebaseApp from '../../base';
 import classnames from 'classnames';
 import weatherConditions from './weatherConditions';
@@ -29,9 +28,11 @@ class WeatherDetails extends React.Component {
       forecast: null,
     }
 
-    this.weatherAPIkey = config.openWeatherMapAPIKey;
+    this.weatherInterval = null;
+
     this.getWeatherData = this.getWeatherData.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.clearInterval = this.clearInterval.bind(this);
   }
 
   getWeatherData() {
@@ -55,14 +56,20 @@ class WeatherDetails extends React.Component {
 
   }
 
-  componentDidMount() {
-    // var context = this;
-    this.getWeatherData();
+  clearInterval() {
+    window.clearInterval(this.weatherInterval);
+  }
 
-    setInterval(() => {
-      console.log('grabbing weather');
+  componentDidMount() {
+    this.getWeatherData();
+    
+    this.weatherInterval = setInterval(() => {
       this.getWeatherData();
-    }, 1800000); // time interval of 30 minutes
+    }, 30 * 60000); // time interval of 30 minutes: 30 * 60000
+  }
+
+  componentWillUnmount() {
+    this.clearInterval();
   }
 
   handleSubmit(e) {
@@ -78,12 +85,12 @@ class WeatherDetails extends React.Component {
     this.setState({
       zipcode: zipcode
     }, () => {
+      this.clearInterval();
       this.getWeatherData();
 
-      setInterval(() => {
-        console.log('grabbing weather');
+      this.weatherInterval = setInterval(() => {
         this.getWeatherData();
-      }, 1800000);
+      }, 30 * 60000);
 
       this.zipForm.reset();
     });
@@ -160,9 +167,5 @@ class WeatherDetails extends React.Component {
     )
   }
 }
-        // <Draggable bounds='body'>
-        // </Draggable>
 
 export default WeatherDetails;
-
-// <img src={this.state.weatherIcon} className={styles.image}/>
