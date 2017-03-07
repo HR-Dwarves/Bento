@@ -26,7 +26,7 @@ class WeatherDetails extends React.Component {
       zipcode: context.weatherModule.zip || 94105,
       code: null,
       forecast: null,
-    }
+    };
 
     this.weatherInterval = null;
 
@@ -106,7 +106,7 @@ class WeatherDetails extends React.Component {
     let weatherIcon = `${styles.weatherIcon} wi wi-yahoo-${this.state.code}`;
     let forecastIcon = function(code) {
       return `${styles.forecastIconStyle} wi wi-yahoo-${code}`;
-    }
+    };
 
     let forecast = this.state.forecast;
 
