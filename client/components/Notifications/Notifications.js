@@ -37,7 +37,8 @@ class Notifications extends React.Component {
         transitionEnterTimeout={700}
         transitionLeaveTimeout={700}>
           {notifications ? notifications.map((item, index) => {
-            return <NotificationItem key={JSON.stringify(item)} index={index} {...item} removeNotification={this.props.removeNotification}/>
+            let key = JSON.stringify(item);
+            return <NotificationItem key={key} index={index} {...item} removeNotification={this.props.removeNotification}/>
           }) : []}
         </ReactCSSTransitionGroup>
       </div>
@@ -66,11 +67,6 @@ class NotificationItem extends React.Component {
         }.bind(this, index), timeout);
       }
     }
-  }
-
-  componentWillUnmount() {
-    // Remove interval?
-    // Not needed since setTimeout only runs once
   }
 
   handleDismiss() {
