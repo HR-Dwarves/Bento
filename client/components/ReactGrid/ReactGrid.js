@@ -106,13 +106,13 @@ class ReactGrid extends React.PureComponent {
         }
       }
     }
-    let defaultModule = <div className={componentStyle}><DefaultModule key={'abcd'}/></div>;
+    let defaultModule = <div className={componentStyle}><DefaultModule {...this.props} key={'abcd'}/></div>;
 
     // layout is an array of objects, see the demo for more complete usage
     var layoutStyle = `${styles.layout} layout`;
     let componentStyle = `${styles.component}`;
 
-    if (this.state.breakpoint) {
+    if (this.state.breakpoint && this.props.dashboard.modules) {
       return (
         <ResponsiveReactGridLayout 
         {...this.props}
