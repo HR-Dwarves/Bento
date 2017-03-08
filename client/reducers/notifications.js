@@ -2,7 +2,7 @@ import actionTypes from '../actions/actionTypes';
 
 const initialState = {
   items: [
-    {text: 'Welcome to Bento!', dismiss: true, type: 'Other', timeout: 5000},
+    // {text: 'Welcome to Bento!', dismiss: true, type: 'Other', timeout: 5000},
   ],
   types: {
     'List': false,
@@ -18,17 +18,30 @@ const initialState = {
 function notifications(state = initialState, action = '') {
   switch(action.type) {
     case actionTypes.AddNotification: {
-      let { message } = action;
+      let { newMessage } = action;
       let newState =  Object.assign({}, state);
-      // console.log(message)
-      let {types} = newState;
+      // console.log(message);
+      console.log('NEW MESSAGE');
+      console.log(JSON.stringify(newMessage));
 
-      if (message) {
-        let type = message.type;
-        newState.items.push(message);
-        types[type] = true;
+      console.log('New State BEFORE');
+      console.log(JSON.stringify(newState));
+      let { types, items } = newState;
+      let newItems = items.slice();
+      // Slice items array and mutate copy
+      if (newMessage) {
+        let moduleType = newMessage.moduleType;
+        const timestamp = Date.now().toString();
+        newMessage['timestamp'] = timestamp;
+        newItems.push(newMessage);
+        if (moduleType in types) {
+          types[moduleType] = true;
+        }
+        newState.items = newItems;
       }
 
+      console.log('New State AFTER');
+      console.log(JSON.stringify(newState));
       return newState;
     }
     case actionTypes.RemoveNotification: {
@@ -36,10 +49,10 @@ function notifications(state = initialState, action = '') {
       var newState = Object.assign({}, state);
       var { items } = newState;
       var removedItem = items[index];
-      var type = removedItem.type;
+      var moduleType = removedItem.moduleType;
 
       let { types } = newState;
-      types[type] = false;
+      types[moduleType] = false;
 
 
       // console.log(index);
