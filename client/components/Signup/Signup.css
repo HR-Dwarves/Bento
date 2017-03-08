@@ -32,6 +32,7 @@
   display: -webkit-flex; */
   display: flex;           
   flex-direction: column;
+  text-align: center;
   /*-webkit-flex-direction: column;*/
   width: 50%;
 }
@@ -58,6 +59,7 @@
   /*display: -webkit-flex; */
   display: flex;  
   align-items: center;
+  text-align: center;
   /*-webkit-align-items: center;*/
 }
 
@@ -67,6 +69,7 @@
 
 .buttonText {
   vertical-align: middle;
+  text-align: center;   
 }
 
 .google {
