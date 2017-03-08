@@ -8,7 +8,7 @@
 .notification {
   border: 1px solid #2f2f2f;
   width: 30em;
-  height: 10em;
+  min-height: 10em;
 }
 
 @media all and (max-width: 550px) {
@@ -29,4 +29,8 @@
   /*display: inline-block;*/
   background-color: white;
   border-radius: 1200px;
+}
+
+.text > * {
+  line-height: 1.5em;
 }

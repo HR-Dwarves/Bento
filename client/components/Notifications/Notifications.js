@@ -78,11 +78,12 @@ class NotificationItem extends React.Component {
   render() {
     let notificationStyle = `${styles.notification} notification animated box`;
     let dismissStyle = `${styles.dismiss} icon fa fa-times-circle`;
+    let textStyle = `${styles.text} content`;
 
     return (
       <div className={notificationStyle}>
         <i className={dismissStyle} onClick={this.handleDismiss} aria-hidden="true"></i>
-        <div>
+        <div className={textStyle}>
           {this.props.text.split('\n').map((sent) => <p>{sent}</p>)}
         </div>
       </div>
