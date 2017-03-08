@@ -82,9 +82,9 @@ class NotificationItem extends React.Component {
     return (
       <div className={notificationStyle}>
         <i className={dismissStyle} onClick={this.handleDismiss} aria-hidden="true"></i>
-        <span>
-          {this.props.text}
-        </span>
+        <div>
+          {this.props.text.split('\n').map((sent) => <p>{sent}</p>)}
+        </div>
       </div>
     )
   }
