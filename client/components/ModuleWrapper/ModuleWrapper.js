@@ -10,21 +10,29 @@ const database = firebaseApp.database();
 class ModuleWrapper extends React.Component {
   constructor() {
     super();
-    this.state = {collapsed: false}
+    this.state = {
+      collapsed: false,
+      mouseOver: false
+    }
     this.handleCollapse = this.handleCollapse.bind(this);
     this.handleDelete = _.debounce(this.handleDelete.bind(this), 300, true);
+    this.handleMouseMovements = this.handleMouseMovements.bind(this);
+    this.handleHelp = this.handleHelp.bind(this);
   }
 
   componentDidMount() {
     let type;
     if (this.props) {
       type = this.props.type;
+
       // console.log('MODULE TYPE', type);
       let notifications = this.props.notifications.items;
-      let exists = _.find(notifications, function(item) {
-        // console.log(item);
-        return item['type'] === type;
-      });
+      let exists = this.props.notifications.types[type];
+      //CHANGE THIS
+      // let exists = _.find(notifications, function(item) {
+      //   // console.log(item);
+      //   return item['type'] === type;
+      // });
 
       // console.log(exists);
       // console.log(!!!exists);
@@ -50,6 +58,24 @@ class ModuleWrapper extends React.Component {
     });
   }
 
+  handleHelp() {
+    console.log('Help function called');
+    let type = this.props.type;
+    let exists = this.props.notifications.types[type];
+    console.log(exists);
+    let notification = defaultNotifications[type];
+    if (!exists) {
+      this.props.addNotification(notification);
+    }
+  }
+
+  handleMouseMovements() {
+    console.log('Mouse movement observed!');
+    this.setState({
+      mouseOver: !this.state.mouseOver
+    })
+  }
+
   render() {
     let type = this.props.type;
     let collapsed = this.state;
@@ -59,14 +85,16 @@ class ModuleWrapper extends React.Component {
     let wrapperStyle = `${styles.wrapper} grid-item`;
     let moduleStyle = `${styles.module}`;
     let deleteButton = `${styles.delete} icon fa fa-times-circle`;
+    let helpButton = `${styles.help} icon fa fa-question-circle-o`;
 
 
     return (
-        <div className={wrapperStyle}>
-            <i className={deleteButton} onClick={this.handleDelete} aria-hidden="true"></i>
-            <div className={moduleStyle}>
-              {React.createElement(component, {...this.props, collapsed, handleCollapseFunction})}
-            </div>
+        <div className={wrapperStyle} onMouseEnter={() => this.handleMouseMovements} onMouseLeave={() => this.handleMouseMovements}>
+          <i className={deleteButton} onClick={this.handleDelete} aria-hidden="true"></i>
+          <i className={helpButton} onClick={this.handleHelp} aria-hidden="true"></i>
+          <div className={moduleStyle}>
+            {React.createElement(component, {...this.props, collapsed, handleCollapseFunction})}
+          </div>
         </div>
     )
   }
