@@ -68,7 +68,13 @@ export function addPhotoForPhotoPrompt(photoFile, db_key, user = 'testUser', cb)
     var storageRef = storage.ref();
 
     var path = '/photoPrompt/images/';
-    var finalStorageRef = storageRef.child(path + photoFile.name);
+
+    // this keeps same named photos from overwriting each other
+    var date = new Date();
+    date = Math.floor(date.getTime() / 1000);
+    var photoFileName = date + photoFile.name;
+
+    var finalStorageRef = storageRef.child(path + photoFileName);
 
     finalStorageRef.put(photoFile)
       .then(function(snapshot) {
