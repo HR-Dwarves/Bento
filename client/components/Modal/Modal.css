@@ -31,9 +31,14 @@
   left: inherit;
   top: 8em;
   bottom: initial;
-  margin: 0;
 }
 
 .modalCard {
   width: 25em !important; 
+  margin: 0;
+}
+
+.modalCardBody {
+  border: 1px solid #cacaca;
+  border-top: none;
 }

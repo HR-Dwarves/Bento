@@ -4,6 +4,7 @@ import styles from './Nav.css'
 import Modal from './../Modal/Modal';
 import ModuleList from './../../data/moduleList';
 import firebaseApp from '../../base';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group' // ES6
 
 const database = firebaseApp.database();
 
@@ -78,6 +79,7 @@ class Nav extends React.Component {
       displayname = '';
     }
 
+
     return(
       <div className={mainNavPanelCSS}>
         <div className={userInfoStyle} >
@@ -91,7 +93,16 @@ class Nav extends React.Component {
           <button style={displayButton} onClick={this.handleSettingsButton} className="button is-dark modal-button">
             <i className="fa fa-plus" aria-hidden="true"></i>
           </button>
-          <Modal {...this.props} isOpen={this.state.isModalOpen} onClose={this.closeModal} modules={modulesArray}></Modal>
+          <ReactCSSTransitionGroup 
+            transitionName={ {
+              enter: 'bounceInRight',
+              leave: 'bounceOutRight',
+              appear: 'fadeIn'
+            }}>
+            {this.state.isModalOpen ? [1].map((key, ind) => {
+              return <Modal {...this.props} key={ind} isOpen={this.state.isModalOpen} onClose={this.closeModal} modules={modulesArray}></Modal>
+            }) : []}
+          </ReactCSSTransitionGroup>
         </div>
       </div>
     )
