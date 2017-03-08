@@ -47,10 +47,7 @@ class Arcade extends React.Component {
     let db_key = this.props.db_key;
     let game = dashboard.modules[db_key];
 
-    let collapsed = this.props.collapsed.collapsed;
-    let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
     let gameToRender = game.name || this.state.currentGame;
-
 
     let contentStyle = `${styles.cardBody} 'card-content`
     let headerStyles = `${styles.header} card-header`;

@@ -91,8 +91,6 @@ class Focus extends React.Component {
     let db_key = this.db_key;
     let focus = dashboard.modules[db_key];
 
-    let collapsed = this.props.collapsed.collapsed;
-    let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
     let hasCurrentFocus = classnames(this.state.focus[0] === '' ? `${styles.focusContent}` : `${styles.hasCurrentFocus}`);
     let cardStyle = classnames(`card ${styles.maxHeight}`);
     let iconStyle = `fa fa-square-o ${styles.centerBox}`
@@ -128,26 +126,24 @@ class Focus extends React.Component {
               </span>
             </div>
           </header>
-          <div className={collapsedStyle}>
-            <div className='card-content'>
-              <div className={styles.focusStyle}>
-                <div>
-                  <p>What is your intent for today?<br/><br/></p>
-                </div>
+          <div className='card-content'>
+            <div className={styles.focusStyle}>
+              <div>
+                <p>What is your intent for today?<br/><br/></p>
               </div>
-              <div className={styles.formDiv}>
-                <form className={styles.formStyle} ref={(input) => this.listForm = input} onSubmit={this.handleSubmit} className={styles.formStyle}>
-                  <input className={styles.inputStyle} type="text"  maxLength='30' value={this.state.tempFocus} onChange={this.handleChange} className={styles.inputStyle}></input>
-                </form>
-              </div>
-                <ReactCSSTransitionGroup 
-                  transitionName={{
-                    enter: 'fadeIn',
-                    leave: 'fadeOut'
-                  }}>
-                  {items}
-                </ReactCSSTransitionGroup>
             </div>
+            <div className={styles.formDiv}>
+              <form className={styles.formStyle} ref={(input) => this.listForm = input} onSubmit={this.handleSubmit} className={styles.formStyle}>
+                <input className={styles.inputStyle} type="text"  maxLength='30' value={this.state.tempFocus} onChange={this.handleChange} className={styles.inputStyle}></input>
+              </form>
+            </div>
+              <ReactCSSTransitionGroup 
+                transitionName={{
+                  enter: 'fadeIn',
+                  leave: 'fadeOut'
+                }}>
+                {items}
+              </ReactCSSTransitionGroup>
           </div>
         </div>
       </div>
