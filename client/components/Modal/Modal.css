@@ -36,9 +36,10 @@
 .modalCard {
   width: 25em !important; 
   margin: 0;
+  margin-right: 2em;
 }
+
 
 .modalCardBody {
   border: 1px solid #cacaca;
-  border-top: none;
 }
