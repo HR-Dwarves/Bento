@@ -12,8 +12,7 @@ class Signup extends React.Component {
     super();
     this.state = {
       user: null,
-      authInProcess: false,
-      clicked: false
+      authInProcess: false
     }
     this.authenticate = this.authenticate.bind(this);
     this.logCurrentUser = this.logCurrentUser.bind(this);
@@ -90,13 +89,18 @@ class Signup extends React.Component {
     let facebookIconStyle = `${styles.loginIcon} fa fa-facebook`
     let twitterIconStyle = `${styles.loginIcon} fa fa-twitter`
     let getStartedButton = `${styles.getStartedButton} button is-outlined`
-    let loader = `${styles.loader}`;
+    let loader = `${styles.loader}`
+    let splash = `${styles.bentoMainSplash} column`
+    let aboutBento = `${styles.aboutBento} column`
+    let iconSection = `${styles.iconSection} column`
+    let iconStyle = `${styles.iconStyle} column`
 
 
     if (!this.state.authInProcess) {
       return (
-        <nav className={styles.signup}>
-          <section className={styles.bentoMainSplash}>
+        <div>
+        <div className='columns'>
+          <section className={splash}>
             <div className={styles.bentoMainSplashContent}>
               <h1 className={styles.splashHeader}>Bento</h1>
               <p className={styles.splashSubHeader}>Your own customizable productivity dashboard. Login below.</p>
@@ -134,36 +138,39 @@ class Signup extends React.Component {
                     <i className="fa fa-twitter" aria-hidden="true"></i>
                   </span>
                 </button>
+                </div>
               </div>
-            </div>
-          </section>
-          <div className={styles.aboutBento}>
+            </section>
+        </div>
+        <div className='columns'>
+          <div className={aboutBento}>
             <div className={styles.aboutText}>
               <h1 className={styles.aboutHeader}>What is Bento?</h1>
               <p className={styles.aboutSubHeader}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
             </div>
           </div>
-          <div className={styles.iconSection}>
-            <div className={styles.iconStyle}>
+        </div>
+        <div className='columns'>
+            <div className={iconStyle}>
               <img src='http://www.languagenut.com/assets/media/placeholders/250x250-circle.png'/>
               <h1>1</h1>
               <p>Login</p>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             </div>
-            <div className={styles.iconStyle}>
+            <div className={iconStyle}>
               <img src='http://www.languagenut.com/assets/media/placeholders/250x250-circle.png'/>
               <h1>2</h1>
               <p>Add modules</p>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             </div>
-            <div className={styles.iconStyle}>
+            <div className={iconStyle}>
               <img src='http://www.languagenut.com/assets/media/placeholders/250x250-circle.png'/>
               <h1>3</h1>
               <p>Customize it!</p>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             </div>
           </div>
-        </nav>
+        </div>
       );
     } else {
       return (
