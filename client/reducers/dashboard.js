@@ -60,27 +60,6 @@ function dashboard(state = {}, action = '') {
       });
       return newState;
     }
-    case actionTypes.GetGeolocationRequested: {
-      return Object.assign({}, state, {
-        inProgress: true,
-        error: '',
-        success: ''
-      });
-    }
-    case actionTypes.GetGeolocationRejected: {
-      return Object.assign({}, state, {
-        inProgress: false,
-        error: 'User not allowing geolocation.',
-      });
-    }
-    case actionTypes.GetGeolocationFulfilled: {
-      const geoStateAdditions = action.geoStateAdditions;
-      const newState = Object.assign({}, state, {
-        inProgress: false,
-        success: 'Latitude, Longitude, currentCity retrieved.',
-      }, geoStateAdditions);
-      return newState;
-    }
 
     default:
       return state;
