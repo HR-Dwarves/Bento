@@ -1,12 +1,10 @@
 import React from 'react';
-// import config from './../../config/config';
 import styles from './PhotoPrompt.css';
-import classnames from 'classnames';
+// import classnames from 'classnames';
 import moment from 'moment';
-import loadImage from 'blueimp-load-image'
-import quotes from './PhotoQuotes'
+import loadImage from 'blueimp-load-image';
+import quotes from './PhotoQuotes';
 
-// import PhotoEditor from '../PhotoEditor/PhotoEditor';
 import PhotoDisplayer from '../PhotoDisplayer/PhotoDisplayer';
 
 class PhotoPrompt extends React.Component {
@@ -72,9 +70,7 @@ class PhotoPrompt extends React.Component {
       this.setState({inputIsTooBig: false})
 
       var context = this;
-
       var photoName = ev.target.files[0].name
-
 
       loadImage(
         ev.target.files[0],

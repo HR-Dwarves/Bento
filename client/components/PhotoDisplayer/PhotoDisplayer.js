@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 import styles from './PhotoDisplayer.css';
 import moment from 'moment';
-
+import loadImage from 'blueimp-load-image';
 
 
 class PhotoDisplayer extends React.Component {
@@ -10,8 +10,41 @@ class PhotoDisplayer extends React.Component {
     super(props);
 
     this.state = {
-
+      canvasImg: false
     }
+  }
+
+  componentWillMount() {
+
+    var context = this;
+
+    loadImage(
+      this.props.src,
+      function (img, meta) {
+        if(img.type === "error") {
+            console.log("Error loading image " + imageUrl);
+        } else {
+
+          if (meta.exif) {
+            if (meta.exif.get('Orientation') > 1) {
+              context.setState({canvasImg: true});
+              context.canvasAttachPt.appendChild(img);
+            }
+          }
+        }
+      },
+      {
+        meta: true,
+        orientation: true
+      }
+    )
+  }
+
+  deleteThisPhoto() {
+    if (this.state.canvasImg) {
+      this.canvasAttachPt.removeChild(this.canvasAttachPt.firstChild);
+    }
+    this.props.deletePhoto(this.props.key)
   }
 
   dateIsToday() {
@@ -25,7 +58,6 @@ class PhotoDisplayer extends React.Component {
 
   render() {
     // let cssClasses = `${styles.card} column`; // just for reference for form.
-    // let newdate = new Date(this.props.date).toDateString();
     let newdate = moment(this.props.date).format('ddd, MMMM Do YYYY');
 
     return (
@@ -34,11 +66,19 @@ class PhotoDisplayer extends React.Component {
           <div className='is-pulled-left'>{newdate}</div>
           <div className='is-pulled-right'>
             {this.dateIsToday() &&
-              <a onClick={this.props.deletePhoto}>Change</a>
+              <a onClick={this.deleteThisPhoto.bind(this)}>Change</a>
             }
           </div>
         </div>
-        <img src={this.props.src} />
+
+        <div
+          className={styles.canvasAttachPt}
+          ref={canvasAttachPt => this.canvasAttachPt = canvasAttachPt}>
+        {this.state.canvasImg === false &&
+          <img src={this.props.src} />
+        }
+        </div>
+
         <p className={styles.dontBreakOut}>{this.props.title}</p>
       </div>
     )
