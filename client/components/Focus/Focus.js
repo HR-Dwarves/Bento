@@ -91,8 +91,6 @@ class Focus extends React.Component {
     let db_key = this.db_key;
     let focus = dashboard.modules[db_key];
 
-    let collapsed = this.props.collapsed.collapsed;
-    let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
     let hasCurrentFocus = classnames(this.state.focus[0] === '' ? `${styles.focusContent}` : `${styles.hasCurrentFocus}`);
     let cardStyle = classnames(`card ${styles.maxHeight}`);
     let iconStyle = `fa fa-square-o ${styles.centerBox}`
@@ -128,7 +126,6 @@ class Focus extends React.Component {
               </span>
             </div>
           </header>
-          <div className={collapsedStyle}>
             <div className='card-content'>
               <div className={styles.focusStyle}>
                 <div>
@@ -148,7 +145,6 @@ class Focus extends React.Component {
                   {items}
                 </ReactCSSTransitionGroup>
             </div>
-          </div>
         </div>
       </div>
     )
