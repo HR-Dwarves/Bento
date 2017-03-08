@@ -40,7 +40,7 @@ class ModuleWrapper extends React.Component {
         let newNotification = type ? defaultNotifications[type] : defaultNotifications['Default'];
         // console.log('New Notification');
         // console.log(newNotification);
-        this.props.addNotification(newNotification);
+        // this.props.addNotification(newNotification);
       }
     }
   }
@@ -63,9 +63,12 @@ class ModuleWrapper extends React.Component {
     let type = this.props.type;
     let exists = this.props.notifications.types[type];
     console.log(exists);
-    let notification = defaultNotifications[type];
+    let notification = defaultNotifications[type] ? defaultNotifications[type] : defaultNotifications['Default'];
     if (!exists) {
-      this.props.addNotification(notification);
+      // const timestamp = Date.now().toString();
+      // notification.timestamp = timestamp;
+      let newNotification = Object.assign({}, notification);
+      this.props.addNotification(newNotification);
     }
   }
 
