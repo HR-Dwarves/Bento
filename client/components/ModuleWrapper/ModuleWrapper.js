@@ -24,22 +24,11 @@ class ModuleWrapper extends React.Component {
     let type;
     if (this.props) {
       type = this.props.type;
-
-      // console.log('MODULE TYPE', type);
       let notifications = this.props.notifications.items;
       let exists = this.props.notifications.types[type];
-      //CHANGE THIS
-      // let exists = _.find(notifications, function(item) {
-      //   // console.log(item);
-      //   return item['type'] === type;
-      // });
 
-      // console.log(exists);
-      // console.log(!!!exists);
       if (!exists) {
         let newNotification = type ? defaultNotifications[type] : defaultNotifications['Default'];
-        // console.log('New Notification');
-        // console.log(newNotification);
         // this.props.addNotification(newNotification);
       }
     }
@@ -59,14 +48,10 @@ class ModuleWrapper extends React.Component {
   }
 
   handleHelp() {
-    console.log('Help function called');
     let type = this.props.type;
     let exists = this.props.notifications.types[type];
-    console.log(exists);
     let notification = defaultNotifications[type] ? defaultNotifications[type] : defaultNotifications['Default'];
     if (!exists) {
-      // const timestamp = Date.now().toString();
-      // notification.timestamp = timestamp;
       let newNotification = Object.assign({}, notification);
       this.props.addNotification(newNotification);
     }

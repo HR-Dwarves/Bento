@@ -21,11 +21,11 @@ function notifications(state = initialState, action = '') {
       let { newMessage } = action;
       let newState =  Object.assign({}, state);
       // console.log(message);
-      console.log('NEW MESSAGE');
-      console.log(JSON.stringify(newMessage));
+      // console.log('NEW MESSAGE');
+      // console.log(JSON.stringify(newMessage));
 
-      console.log('New State BEFORE');
-      console.log(JSON.stringify(newState));
+      // console.log('New State BEFORE');
+      // console.log(JSON.stringify(newState));
       let { types, items } = newState;
       let newItems = items.slice();
       // Slice items array and mutate copy
@@ -40,8 +40,8 @@ function notifications(state = initialState, action = '') {
         newState.items = newItems;
       }
 
-      console.log('New State AFTER');
-      console.log(JSON.stringify(newState));
+      // console.log('New State AFTER');
+      // console.log(JSON.stringify(newState));
       return newState;
     }
     case actionTypes.RemoveNotification: {
