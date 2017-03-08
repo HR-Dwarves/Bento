@@ -100,9 +100,6 @@ class WeatherDetails extends React.Component {
     let cssCard = `${styles.card} card`;
     let cssHeader = `${styles.header} card-header`;
     let cssCardContent = `${styles.content} card-content`;
-
-    let collapsed = this.props.collapsed.collapsed;
-    let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
     let weatherIcon = `${styles.weatherIcon} wi wi-yahoo-${this.state.code}`;
     let forecastIcon = function(code) {
       return `${styles.forecastIconStyle} wi wi-yahoo-${code}`;

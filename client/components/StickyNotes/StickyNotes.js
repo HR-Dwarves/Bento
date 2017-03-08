@@ -38,9 +38,7 @@ class StickyNotes extends React.Component {
     // Styles
     let stickynoteStyles = `${styles.stickynote} card`;
     let headerStyles = `${styles.header} card-header`;
-
-    let collapsed = this.props.collapsed.collapsed;
-    let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
+    let contentStyles = `${styles.content} card-content`;
 
     return(
         <div className={stickynoteStyles}>
@@ -57,7 +55,7 @@ class StickyNotes extends React.Component {
               </span>
             </div>
           </header>
-          <div className='card-content'>
+          <div className={contentStyles}>
             <textarea className='sticky-content' 
                       maxLength='600' 
                       rows='10' 

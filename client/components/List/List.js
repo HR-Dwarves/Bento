@@ -134,8 +134,6 @@ class List extends React.Component {
     let listItems = `${styles.listItems} card-content`;
     let footerButtonStyles = `${styles.footerButtons} card-footer-item`;
     let animateCSSClass = 'animated';
-    let collapsed = this.props.collapsed.collapsed;
-    let collapsedStyle = classnames(`${styles.height}`, collapsed ? `${styles.collapsedStyle}` : '');
     let highlightColor = {"backgroundColor": "#EBEBEB"};
 
     return (

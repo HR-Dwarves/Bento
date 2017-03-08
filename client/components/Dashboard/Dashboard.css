@@ -1,13 +1,3 @@
-/*font-family: 'Roboto', serif;*/
-/*font-family: 'Slabo 27px', serif;*/
-/*font-family: 'Roboto Condensed', serif;*/
-/*font-family: 'Roboto Slab', serif;*/
-/*font-family: 'Merriweather', serif;*/
-/*font-family: 'Lora', serif;*/
-/*font-family: 'Playfair Display', serif;*/
-/*font-family: 'Droid Serif', serif;*/
-/*font-family: 'Italiana', serif;*/
-/*font-family: serif;*/
 
 body {
   font-size: 12px;
@@ -15,22 +5,24 @@ body {
   background: -webkit-linear-gradient(to left, #ECE9E6 , #FFFFFF); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to left, #ECE9E6 , #FFFFFF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   margin: 0;
+  -webkit-font-smoothing: subpixel-antialiased;
 }
 
 div, button, input, textarea, option, nav, span, p, form, select {
-  /*font-family: 'El Messiri', serif;*/
-  /*font-family: 'Sansita', serif;*/
   font-family: 'Lato', Arial, Helvetica, serif;
   font-size: 1em;
-  font-weight: 900;
+  -webkit-font-smoothing: subpixel-antialiased;
+  /*font-weight: 700;*/
 }
 
 input, textarea {
   /*font-size: 1.2em;*/
+  -webkit-font-smoothing: subpixel-antialiased;
 }
 
 input {
   line-height: 1em;
+  -webkit-font-smoothing: subpixel-antialiased;
 }
 
 /*WRAPPER*/

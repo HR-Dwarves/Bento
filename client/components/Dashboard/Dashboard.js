@@ -4,14 +4,14 @@ import styles from './Dashboard.css';
 import Promise from 'bluebird';
 
 import ReactGrid from '../ReactGrid/ReactGrid';
-
-
 // All modules now passed into ModuleWrapper
 import DefaultModule from '../DefaultModule/DefaultModule';
 import ModuleWrapper from '../ModuleWrapper/ModuleWrapper';
 import Nav from '../Nav/Nav';
 import Loading from '../Loading/Loading';
 import Notifications from '../Notifications/Notifications';
+
+import defaultNotifications from '../../data/defaultNotifications';
 
 const database = firebaseApp.database();
 
@@ -69,7 +69,6 @@ class Dashboard extends React.Component {
   render() {
     let dashContainer = `${styles.dashContainer}`;
     let mainDashboardPanelCSS = `${styles.mainDashboardPanel}`;
-    // let layouts = getFromLS('layouts');
 
     if (this.state.databaseResponded) {
       return (
