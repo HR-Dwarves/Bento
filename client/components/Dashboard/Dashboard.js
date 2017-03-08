@@ -71,8 +71,6 @@ class Dashboard extends React.Component {
     let mainDashboardPanelCSS = `${styles.mainDashboardPanel}`;
 
     if (this.state.databaseResponded) {
-
-
       return (
         <div className={dashContainer}>
           <Nav {...this.props}/>

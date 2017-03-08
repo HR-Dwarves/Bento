@@ -2,7 +2,7 @@ import actionTypes from '../actions/actionTypes';
 
 const initialState = {
   items: [
-    // {text: 'Welcome to Bento!', dismiss: true, type: 'Other', timeout: 5000},
+    {text: 'Welcome to Bento!', dismiss: true, type: 'Other', timeout: 5000},
   ],
   types: {
     'List': false,
@@ -20,12 +20,7 @@ function notifications(state = initialState, action = '') {
     case actionTypes.AddNotification: {
       let { newMessage } = action;
       let newState =  Object.assign({}, state);
-      // console.log(message);
-      // console.log('NEW MESSAGE');
-      // console.log(JSON.stringify(newMessage));
 
-      // console.log('New State BEFORE');
-      // console.log(JSON.stringify(newState));
       let { types, items } = newState;
       let newItems = items.slice();
       // Slice items array and mutate copy
@@ -40,8 +35,6 @@ function notifications(state = initialState, action = '') {
         newState.items = newItems;
       }
 
-      // console.log('New State AFTER');
-      // console.log(JSON.stringify(newState));
       return newState;
     }
     case actionTypes.RemoveNotification: {
@@ -54,23 +47,10 @@ function notifications(state = initialState, action = '') {
       let { types } = newState;
       types[moduleType] = false;
 
-
-      // console.log(index);
-      // console.log(items);
-      // var before = items.slice(0, index);
-      // var after = items.slice(index + 1);
-      // console.log(before, after);
-      // var newItems = before.concat(after);
-
       newState.items = [
       ...newState.items.slice(0, index),
       ...newState.items.slice(index + 1)
       ];
-
-      // newState.items = newItems;
-      // console.log('REMOVING NOTIFICATION');
-      // console.log(newState);
-      // console.log(newState.items);
 
       return newState;
     }
