@@ -1,7 +1,7 @@
 .moduleName {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding-top: .2em;
   padding-bottom: .2em;
   font-size: 1.2em;
@@ -25,4 +25,15 @@
   /*display: inline-block;*/
   background-color: white;
   border-radius: 1200px;
+}
+
+.modalStyles {
+  left: inherit;
+  top: 8em;
+  bottom: initial;
+  margin: 0;
+}
+
+.modalCard {
+  width: 25em !important; 
 }
