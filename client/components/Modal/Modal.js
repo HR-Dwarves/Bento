@@ -80,16 +80,18 @@ class Modal extends React.Component {
     let moduleHeader = `${styles.header} modal-card-head`
     let moduleStyles = `${styles.moduleName}`
     let deleteButton = `${styles.delete} icon fa fa-times-circle`;
+    let activeModal = `${styles.modalStyles} modal is-active animated`;
+    let modalCard = `${styles.modalCard} modal-card`
+    let modalCardBody = `${styles.modalCardBody} modal-card-body`
 
     return(
-      <div className="modal is-active">
-        <div className="modal-background"></div>
-        <div className="modal-card">
+      <div className={activeModal}>
+        <div className={modalCard}>
           <header className={moduleHeader}>
             <p className="modal-card-title">Modules</p>
             <i className={deleteButton} onClick={this.props.onClose} aria-hidden="true"></i>
           </header>
-          <section className="modal-card-body">
+          <section className={modalCardBody}>
             {this.props.modules.map((module, key) => <div key={key} className={moduleStyles}><span>{module}</span> 
               <span className={moduleStyles}><span><button value={module} onClick={this.addModule} className='button is-dark'>Add</button></span></span></div>)}
           </section>

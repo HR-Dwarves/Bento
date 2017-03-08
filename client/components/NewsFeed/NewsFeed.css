@@ -29,9 +29,10 @@
   /*margin-right: 25px;*/
 }
 
-.test {
+.selectedButton {
   background-color: #EBEBEB;
   font-weight: 900;
+  box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.15);
 }
 
 .spinner {

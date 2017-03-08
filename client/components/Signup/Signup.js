@@ -16,6 +16,8 @@ class Signup extends React.Component {
     }
     this.authenticate = this.authenticate.bind(this);
     this.logCurrentUser = this.logCurrentUser.bind(this);
+    this.handleLoginModal = this.handleLoginModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
   authenticate(provider){
@@ -65,6 +67,18 @@ class Signup extends React.Component {
 
   }
 
+  handleLoginModal(){
+    this.setState({
+      clicked: !this.state.clicked
+    });
+  }
+
+  closeModal(){
+    this.setState({
+      clicked: false
+    });
+  }
+
   render() {
     let googleStyle = `${styles.google} button`
     let githubStyle = `${styles.github} button`
@@ -74,54 +88,89 @@ class Signup extends React.Component {
     let githubIconStyle = `${styles.loginIcon} fa fa-github`
     let facebookIconStyle = `${styles.loginIcon} fa fa-facebook`
     let twitterIconStyle = `${styles.loginIcon} fa fa-twitter`
-    let loader = `${styles.loader}`;
+    let getStartedButton = `${styles.getStartedButton} button is-outlined`
+    let loader = `${styles.loader}`
+    let splash = `${styles.bentoMainSplash} column`
+    let aboutBento = `${styles.aboutBento} column`
+    let iconSection = `${styles.iconSection} column`
+    let iconStyle = `${styles.iconStyle} column`
 
 
     if (!this.state.authInProcess) {
       return (
-        <nav className={styles.signup}>
-          <div className={styles.signupHeader}>
-            <span>
-              bento
-            </span>
+        <div>
+          <div className='columns'>
+            <section className={splash}>
+              <div className={styles.bentoMainSplashContent}>
+                <h1 className={styles.splashHeader}>Bento</h1>
+                <p className={styles.splashSubHeader}>Your own customizable productivity dashboard. Login below.</p>
+                <br/>
+                <div className={styles.loginButtons}>
+                  <button className={googleStyle} onClick={() => this.authenticate('google')}>
+                    <span className={styles.buttonText}>
+                      Google
+                    </span>
+                    <span className="icon">
+                      <i className={googleIconStyle} aria-hidden="true"></i>
+                    </span>
+                  </button>
+                  <button className={githubStyle} onClick={() => this.authenticate('github')}>
+                    <span className={styles.buttonText}>
+                      Github
+                    </span>
+                    <span className="icon">
+                      <i className="fa fa-github" aria-hidden="true"></i>
+                    </span>
+                  </button>
+                  <button className={facebookStyle} onClick={() => this.authenticate('facebook')}>
+                    <span className={styles.buttonText}>
+                      Facebook
+                    </span>
+                    <span className="icon">
+                      <i className="fa fa-facebook-official" aria-hidden="true"></i>
+                    </span>
+                  </button>
+                  <button className={twitterStyle} onClick={() => this.authenticate('twitter')}>
+                    <span className={styles.buttonText}>
+                      Twitter
+                    </span>
+                    <span className="icon">
+                      <i className="fa fa-twitter" aria-hidden="true"></i>
+                    </span>
+                  </button>
+                  </div>
+                </div>
+              </section>
           </div>
-          <div className={styles.loginButtons}>
-            <button className={googleStyle} onClick={() => this.authenticate('google')}>
-              <span className={styles.buttonText}>
-                Google
-              </span>
-              <span className="icon">
-                <i className={googleIconStyle} aria-hidden="true"></i>
-              </span>
-            </button>
-            <button className={githubStyle} onClick={() => this.authenticate('github')}>
-              <span className={styles.buttonText}>
-                Github
-              </span>
-              <span className="icon">
-                <i className="fa fa-github" aria-hidden="true"></i>
-              </span>
-            </button>
-            <button className={facebookStyle} onClick={() => this.authenticate('facebook')}>
-              <span className={styles.buttonText}>
-                Facebook
-              </span>
-              <span className="icon">
-                <i className="fa fa-facebook-official" aria-hidden="true"></i>
-              </span>
-            </button>
-            <button className={twitterStyle} onClick={() => this.authenticate('twitter')}>
-              <span className={styles.buttonText}>
-                Twitter
-              </span>
-              <span className="icon">
-                <i className="fa fa-twitter" aria-hidden="true"></i>
-              </span>
-            </button>
+          <div className='columns'>
+            <div className={aboutBento}>
+              <div className={styles.aboutText}>
+                <h1 className={styles.aboutHeader}>What is Bento?</h1>
+                <p className={styles.aboutSubHeader}>Bento is a fully customizable productivity dashboard that provides you with a dashboard that you cater to your needs.</p>
+              </div>
+            </div>
           </div>
-          <div>
-          </div>
-        </nav>
+          <div className='columns'>
+              <div className={iconStyle}>
+                <img src='http://www.languagenut.com/assets/media/placeholders/250x250-circle.png'/>
+                <h1>1</h1>
+                <p>Login</p>
+                <p>Login using your favorite social media account</p>
+              </div>
+              <div className={iconStyle}>
+                <img src='http://www.languagenut.com/assets/media/placeholders/250x250-circle.png'/>
+                <h1>2</h1>
+                <p>Add modules</p>
+                <p>Add as many modules as you like</p>
+              </div>
+              <div className={iconStyle}>
+                <img src='http://www.languagenut.com/assets/media/placeholders/250x250-circle.png'/>
+                <h1>3</h1>
+                <p>Customize it!</p>
+                <p>Drag and drop to customize your dashboard</p>
+              </div>
+            </div>
+        </div>
       );
     } else {
       return (

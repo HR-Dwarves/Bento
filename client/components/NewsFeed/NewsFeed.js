@@ -175,8 +175,8 @@ class NewsFeed extends React.Component {
     let headerStyles = `${styles.header} card-header`;
     let footerStyles = `${styles.footer} card-footer`;
     let contentStyles = `${styles.content} card-content`;
-    let newClasses = classnames('card-footer-item', `${styles.newsButtons}`, this.props.dashboard.modules[this.props.db_key].new ? `${styles.test}` : '');
-    let topClasses = classnames('card-footer-item', `${styles.newsButtons}`, this.props.dashboard.modules[this.props.db_key].new ? '' : `${styles.test}`);
+    let newClasses = classnames('card-footer-item', `${styles.newsButtons}`, this.props.dashboard.modules[this.props.db_key].new ? `${styles.selectedButton}` : '');
+    let topClasses = classnames('card-footer-item', `${styles.newsButtons}`, this.props.dashboard.modules[this.props.db_key].new ? '' : `${styles.selectedButton}`);
     let spinnerClasses = classnames('button is-loading', `${styles.spinner}`);
     let loaded = this.state.loaded;
     let fiveButtonStyle = ''
