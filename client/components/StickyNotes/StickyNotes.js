@@ -49,7 +49,6 @@ class StickyNotes extends React.Component {
                     type="text"
                     maxLength='30' 
                     onBlur={this.handleStickyHeaderEntry}
-                    placeholder="Enter whatever you like!"
                     defaultValue={note.headerText}
                     name="note.headerText"/>
             <div className="card-header-icon">

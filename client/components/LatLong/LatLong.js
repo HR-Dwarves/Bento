@@ -59,7 +59,7 @@ class LatLong extends React.Component {
     let currentClocks = this.props.dashboard.modules[this.props.db_key].clocks || [];
     let newClocksArray = Array.from(currentClocks);
 
-    newClocksArray.push(timeZone)
+    newClocksArray.push(timeZone);
     this.props.addToClocks(newClocksArray, this.props.db_key, user);
   }
 
@@ -71,36 +71,34 @@ class LatLong extends React.Component {
   }
 
   render() {
-    let headerStyle = `${styles.header} card-header`
+    let headerStyle = `${styles.header} card-header`;
     let contentStyles = `${styles.content} card-content`;
     let clocks = this.props.dashboard.modules[this.props.db_key].clocks;
 
-    let selectStyles = `${styles.thisSelect} select`
+    let selectStyles = `${styles.thisSelect} select`;
     let headerStyles = `${styles.header} card-header`;
 
     return (
       <div className='card'>
-
         <header className={headerStyle}>
           <p className="card-header-title">Time</p>
           <div className="card-header-icon">
             <span className="icon"><i className='fa fa-clock-o' aria-hidden='true'></i></span>
-            {this.props.dashboard.currentCity &&
-              <span className="icon"><i className='fa fa-map-marker' aria-hidden='true'></i></span>}
+            {
+              this.props.dashboard.currentCity &&
+                <span className="icon"><i className='fa fa-map-marker' aria-hidden='true'></i></span>
+            }
           </div>
         </header>
-
         <div className={contentStyles}>
           <div className="media-content">
-            {this.props.dashboard.currentCity &&
-              <h4 className='title is-4'>Current: {this.props.dashboard.currentCity}</h4>}
-              {clocks &&
-                clocks.map((clock, index) => {
-                return <Clock
-                        key={index}
-                        timeZone={clock}
-                        delete={this.removeClock.bind(this, clock)} />
-              })}
+            {clocks &&
+              clocks.map((clock, index) => {
+              return <Clock
+                      key={index}
+                      timeZone={clock}
+                      delete={this.removeClock.bind(this, clock)} />
+            })}
             <form>
               <p className="control">
                 <span className={selectStyles}>

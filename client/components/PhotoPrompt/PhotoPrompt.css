@@ -63,3 +63,7 @@
   color: rgb(1,209,178);
   justify-content: flex-end;
 }
+
+.inputViewer > * {
+  width: 100%;
+}

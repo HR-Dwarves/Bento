@@ -5,21 +5,22 @@ import classnames from 'classnames';
 const database = firebaseApp.database();
 
 import styles from './Arcade.css';
+import games from './listOfGames.js';
 
 class Arcade extends React.Component {
   constructor(props) {
     super(props);
-
+    
     this.state = {
       'currentGame': 'PACMAN',
       'games': {
-        'BUBBLE BOBBLE': 'http://www.classicgamesarcade.com/games/puzzle-bobble.swf',
-        'GALAGA': 'http://www.classicgamesarcade.com/games/galaga.swf',
-        'PACMAN': 'http://www.classicgamesarcade.com/games/pacman.swf',
-        'RAIDENX': 'http://www.classicgamesarcade.com/games/raidenx.swf',
-        'SPACE INVADERS': 'http://www.pizn.com/swf/1-space-invaders.swf',
-        'TRON': 'http://www.classicgamesarcade.com/games/tron.swf',
-        'TETRIS': 'http://www.classicgamesarcade.com/games/flash-tetris.swf',
+        'BUBBLE BOBBLE': games.BUBBLE_BOBBLE,
+        'GALAGA': games.GALAGA,
+        'PACMAN': games.PACMAN,
+        'RAIDENX': games.RAIDENX,
+        'SPACE INVADERS': games.SPACE_INVADERS,
+        'TRON': games.TRON,
+        'TETRIS': games.TETRIS,
       }
     }
 

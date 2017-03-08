@@ -26,43 +26,6 @@ app.get('/news/:newsSource/:time', function(req, res) {
   });
 });
 
-app.get('/geolocation/:latlong', function(req, res) {
-
-  var lat = req.params.latlong.split(',')[0];
-  var long = req.params.latlong.split(',')[1];
-
-  axios.get('https://firebasestorage.googleapis.com/v0/b/dashboardapp-3d3c7.appspot.com/o/keys.json?alt=media&token=940da7bd-c0a3-4dea-9320-b89c041bcd4b')
-  .then(function(response) {
-    // console.log(response.data['GOOGLE_MAPS_API_KEY']);
-    var googleApiKey = response.data['GOOGLE_MAPS_API_KEY'];
-
-    let queryBase = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=';
-    let query = `${queryBase}${lat},${long}&key=${googleApiKey}`;
-
-    axios.get(query)
-      .then(function(response) {
-        var city;
-        // using if statement to get rid of errors in console
-        // console.log(response);
-        if (response.data.results[0]) {
-          city = response.data.results[0].address_components.reduce(function(acc, item) {
-            if (item.types.includes('locality')) {
-              return acc = item.long_name;
-            } else {
-              return acc;
-            }
-          });
-        }
-        res.send(city);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  });
-
-});
-
-// hack for now
 app.get('/bundle.js', function(req, res) {
   res.sendFile(path.join(__dirname, './dist/bundle.js'));
 });

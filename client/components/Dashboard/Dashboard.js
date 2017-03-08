@@ -9,7 +9,9 @@ import ReactGrid from '../ReactGrid/ReactGrid';
 // All modules now passed into ModuleWrapper
 import DefaultModule from '../DefaultModule/DefaultModule';
 import ModuleWrapper from '../ModuleWrapper/ModuleWrapper';
+import Nav from '../Nav/Nav';
 import Loading from '../Loading/Loading';
+import Notifications from '../Notifications/Notifications';
 
 const database = firebaseApp.database();
 
@@ -18,7 +20,7 @@ class Dashboard extends React.Component {
   constructor() {
     super();
 
-    this.state = { 
+    this.state = {
       isModalOpen: false,
       databaseResponded: false
     }
@@ -33,7 +35,6 @@ class Dashboard extends React.Component {
     firebaseApp.auth().onAuthStateChanged((user) => {
       if (user) {
         let {displayName, uid, email, photoURL} = user;
-        // console.log('USER', user);
         let userId = uid || 'testUser';
         context.props.authenticateUser(user);
         context.props.getDatabase(uid);
@@ -49,14 +50,8 @@ class Dashboard extends React.Component {
       } else {
         console.error('NO USER');
         context.props.router.push('/signup');
-        // Remove user information from state
-
       }
     })
-    // ask user for geocoordinates
-    if ("geolocation" in navigator) {
-      this.props.getGeolocation();
-    }
   }
 
   handleSettingsButton() {
@@ -79,7 +74,9 @@ class Dashboard extends React.Component {
     if (this.state.databaseResponded) {
       return (
         <div className={dashContainer}>
+          <Nav {...this.props}/>
           <div className={mainDashboardPanelCSS}>
+            <Notifications {...this.props} />
             <ReactGrid {...this.props} />
           </div>
         </div>

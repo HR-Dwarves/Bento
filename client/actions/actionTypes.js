@@ -13,6 +13,9 @@ const actionTypes = {
   AuthenticateUser: 'AUTHENTICATE_USER',
   LogoutUser: 'LOGOUT_USER',
 
+  AddNotification: 'ADD_NOTIFICATION',
+  RemoveNotification: 'REMOVE_NOTIFICATION',
+
   GetListRequested: 'GET_LIST_REQUESTED',
   GetListRejected: 'GET_LIST_REJECTED',
   GetListFulfilled: 'GET_LIST_FULFILLED',
@@ -51,10 +54,6 @@ const actionTypes = {
   AddToClocksRequested: 'ADD_TO_CLOCKS_REQUESTED',
   AddToClocksRejected: 'ADD_TO_CLOCKS_REJECTED',
   AddToClocksFulfilled: 'ADD_TO_CLOCKS_FULFILLED',
-
-  GetGeolocationRequested: 'GET_GEOLOCATION_REQUESTED',
-  GetGeolocationRejected: 'GET_GEOLOCATION_REJECTED',
-  GetGeolocationFulfilled: 'GET_GEOLOCATION_FULFILLED',
 
   AddPhotoForPhotoPromptRequested: 'ADD_PHOTO_FOR_PHOTO_PROMPT_REQUESTED',
   AddPhotoForPhotoPromptRejected: 'ADD_PHOTO_FOR_PHOTO_PROMPT_REJECTED',

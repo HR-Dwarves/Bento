@@ -8,7 +8,6 @@ const Main = React.createClass({
   render() {
     return (
       <div>
-        <Nav {...this.props}/>
         {React.cloneElement({...this.props}.children, {...this.props})}
       </div>
     )

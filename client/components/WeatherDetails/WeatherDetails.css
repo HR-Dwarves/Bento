@@ -8,12 +8,21 @@
   flex: 0 0 auto;
 }
 
+.content {
+  /*border: 1px solid red;  */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .cardContent {
   display:flex;
   justify-content: space-between;
   text-align: center;
   align-items: center;
   overflow-y: scroll;
+  /*height: 100%;*/
 }
 
 .details {
@@ -96,25 +105,6 @@ header > * {
 
 p {
   font-family: 'Lato', serif;
-}
-.height {
-  max-height: 1200px;
-  -webkit-transition: max-height 0.3s; 
-  -moz-transition: max-height 0.3s; 
-  -ms-transition: max-height 0.3s; 
-  -o-transition: max-height 0.3s; 
-  transition: max-height .3s;
-  overflow: hidden;
-}
-
-.collapsedStyle {
-  max-height: 0;
-  -webkit-transition: max-height 0.3s; 
-  -moz-transition: max-height 0.3s; 
-  -ms-transition: max-height 0.3s; 
-  -o-transition: max-height 0.3s; 
-  transition: max-height .3s;
-  overflow: hidden;
 }
 
 .forecastDetails {
