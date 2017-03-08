@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './PhotoPrompt.css';
-// import classnames from 'classnames';
 import moment from 'moment';
 import loadImage from 'blueimp-load-image';
 import quotes from './PhotoQuotes';
@@ -13,8 +12,6 @@ class PhotoPrompt extends React.Component {
 
     this.state = {
       photoName: null,
-      // photoSrc: null,
-      // photoRotation: null,
       inputButton: null,
       todaysPhotoIsTaken: false,
       chooseButtonCss: 'button',
@@ -27,13 +24,8 @@ class PhotoPrompt extends React.Component {
 
   componentDidMount() {
     let user = this.props.user.uid;
-    // get saved photos from db
     this.props.getPhotosForPhotoPrompt(this.props.db_key, user);
-
-    // check streak
     this.checkStreak();
-
-    // compare dates to see if today's shot has been taken
     this.checkTodaysPhotoIsTaken();
     this.pickQuote();
   }
@@ -47,7 +39,8 @@ class PhotoPrompt extends React.Component {
       lastPhotoDate = photos[Object.keys(photos)[Object.keys(photos).length - 1]].date;
     }
 
-    if (lastPhotoDate && (moment().format('MMMM Do YYYY') === moment(lastPhotoDate).format('MMMM Do YYYY'))) {
+    if (lastPhotoDate && (moment().format('MMMM Do YYYY')
+      === moment(lastPhotoDate).format('MMMM Do YYYY'))) {
       this.setState({todaysPhotoIsTaken: true})
     }
   }
@@ -61,9 +54,8 @@ class PhotoPrompt extends React.Component {
     });
   }
 
-  changeHandler(ev) {
-    // check file size
-    if (ev.target.files[0].size > 5000000) {
+  imageSelectedChangeHandler(ev) {
+    if (ev.target.files[0].size > 10000000) {
       ev.target.value = "";
       this.setState({inputIsTooBig: true})
     } else {
@@ -106,10 +98,8 @@ class PhotoPrompt extends React.Component {
     const user = this.props.user.uid;
     var context = this;
     this.props.addPhotoForPhotoPrompt(this.inputButton.files[0], this.props.db_key, user, () => {
-      // console.log('context.inputViewer.firstChild', context.inputViewer.firstChild);
       context.inputViewer.removeChild(context.inputViewer.firstChild);
       context.setState({
-        // photoSrc: null,
         photoName: null,
         todaysPhotoIsTaken: true,
         chooseButtonCss: 'button'
@@ -119,8 +109,6 @@ class PhotoPrompt extends React.Component {
   }
 
   checkStreak() {
-
-    console.log('gets in checkstreak so what the...')
 
     let photos = this.props.dashboard.modules[this.props.db_key].photos;
     let allPhotoDates = Object.keys(photos);
@@ -152,9 +140,8 @@ class PhotoPrompt extends React.Component {
 
     mostRecent = moment(allPhotoDates[allPhotoDates.length - 1]).format('MMMM Do YYYY')
 
-    // first check if the most recent is yesterday, otherwise aint no streak.
+    // first check if the most recent is yesterday, otherwise no streak.
     if (mostRecent === yesterday || mostRecent === today) {
-      console.log('and it gets in here too right')
       var streakCounter = 1;
       checkDatesForStreak();
       this.setState({streak: streakCounter})
@@ -232,13 +219,13 @@ class PhotoPrompt extends React.Component {
                   ref={src => this.inputButton = src}
                   type="file"
                   accept="image/*"
-                  onChange={this.changeHandler.bind(this)}
+                  onChange={this.imageSelectedChangeHandler.bind(this)}
                   className={styles.hideInput}
                 />
               </div>
             }
             {this.state.inputIsTooBig === true &&
-              <p className="is-small">less than 5mb please</p>
+              <p className="is-small">less than 10mb please</p>
             }
 
             {/* ACCEPT PHOTO BUTTON */}
