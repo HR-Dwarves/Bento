@@ -119,6 +119,9 @@ class PhotoPrompt extends React.Component {
   }
 
   checkStreak() {
+
+    console.log('gets in checkstreak so what the...')
+
     let photos = this.props.dashboard.modules[this.props.db_key].photos;
     let allPhotoDates = Object.keys(photos);
     let today = moment().format('MMMM Do YYYY');
@@ -151,9 +154,12 @@ class PhotoPrompt extends React.Component {
 
     // first check if the most recent is yesterday, otherwise aint no streak.
     if (mostRecent === yesterday || mostRecent === today) {
+      console.log('and it gets in here too right')
       var streakCounter = 1;
       checkDatesForStreak();
       this.setState({streak: streakCounter})
+    } else {
+      this.setState({streak: 0})
     }
   }
 
