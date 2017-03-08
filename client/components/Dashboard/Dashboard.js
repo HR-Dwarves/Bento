@@ -83,7 +83,7 @@ class Dashboard extends React.Component {
         <div className={dashContainer}>
           <Nav {...this.props}/>
           <div className={mainDashboardPanelCSS}>
-            <Notifications />
+            <Notifications {...this.props} />
             <ReactGrid {...this.props} />
           </div>
         </div>

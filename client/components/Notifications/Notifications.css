@@ -6,5 +6,26 @@
 
 .notification {
   border: 1px solid #2f2f2f;
+  width: 30em;
+  height: 10em;
+}
 
+@media all and (max-width: 550px) {
+  .notification {
+    width: calc(100vw - 4em);
+  }
+}
+
+.dismiss {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  z-index: 5;
+  flex: 0 0 0%;
+  display: block;
+  font-size: 1.5rem;
+  cursor: pointer;
+  /*display: inline-block;*/
+  background-color: white;
+  border-radius: 1200px;
 }

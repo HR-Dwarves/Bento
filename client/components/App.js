@@ -31,7 +31,7 @@ function mapStateToProps(state) {
     dashboard: state.dashboard,
     user: state.authentication,
     layouts: state.layouts,
-    notification: state.notification
+    notifications: state.notifications
   }
 }
 

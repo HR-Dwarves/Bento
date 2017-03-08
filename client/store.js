@@ -7,16 +7,13 @@ import createLogger from 'redux-logger';
 // import the root reducer
 import rootReducer from './reducers/index';
 
-// Import test data if applicable
-import testInfo from './data/testInfo';
-
 const logger = createLogger();
 
 // create an object for the default data
   // default state must match reducer (?)
 
 const defaultState = {
-  
+
 };
 
 

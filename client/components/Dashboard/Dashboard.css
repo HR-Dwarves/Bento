@@ -20,7 +20,7 @@ body {
 div, button, input, textarea, option, nav, span, p, form, select {
   /*font-family: 'El Messiri', serif;*/
   /*font-family: 'Sansita', serif;*/
-  font-family: 'Lato', serif;
+  font-family: 'Lato', Arial, Helvetica, serif;
   font-size: 1em;
   font-weight: 900;
 }
