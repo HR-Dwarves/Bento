@@ -1,5 +1,4 @@
 .signup {
-<<<<<<< HEAD
   display: -webkit-box;    
   display: -ms-flexbox;  
   display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
@@ -32,6 +31,10 @@
 
 .splashHeader {
   font-size: 4.75em;
+  font-family: 'Italiana', serif;
+  font-weight: 600;
+  color: black;
+  letter-spacing: .2em;
 }
 
 .splashSubHeader {
@@ -84,18 +87,14 @@
 }
 
 .loginButtons {
-<<<<<<< HEAD
   display: -webkit-box;   /* OLD - iOS 6-, Safari 3.1-6, BB7 */
   width: auto;
-=======
   /*display: -webkit-box; 
   display: -ms-flexbox;  
   display: -webkit-flex; */
   display: flex;           
   flex-direction: column;
   /*-webkit-flex-direction: column;*/
-  width: 50%;
->>>>>>> 622f079800cd68bd15ed0c425df4481352094598
 }
 
 .loader {
