@@ -110,8 +110,8 @@ class PhotoPrompt extends React.Component {
 
   checkStreak() {
 
-    let photos = this.props.dashboard.modules[this.props.db_key].photos;
-    let allPhotoDates = Object.keys(photos);
+    let photos = this.props.dashboard.modules[this.props.db_key].photos || null;
+    let allPhotoDates = photos === null ? null : Object.keys(photos);
     let today = moment().format('MMMM Do YYYY');
     let yesterday = moment().subtract(1, 'days').format('MMMM Do YYYY');
     let mostRecent;
@@ -134,11 +134,13 @@ class PhotoPrompt extends React.Component {
       }
     }
 
-    allPhotoDates = allPhotoDates.map((key, index, array) => {
-      return photos[key].date;
-    })
+    if (allPhotoDates) {
+      allPhotoDates = allPhotoDates.map((key, index, array) => {
+        return photos[key].date;
+      })
 
-    mostRecent = moment(allPhotoDates[allPhotoDates.length - 1]).format('MMMM Do YYYY')
+      mostRecent = moment(allPhotoDates[allPhotoDates.length - 1]).format('MMMM Do YYYY')
+    }
 
     // first check if the most recent is yesterday, otherwise no streak.
     if (mostRecent === yesterday || mostRecent === today) {
