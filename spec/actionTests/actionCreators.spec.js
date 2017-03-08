@@ -31,14 +31,4 @@ describe('Action Creators', () => {
       expect(typeof Actions.deleteModule()).toBe('function');
     });
   });
-
-  describe('getGeolocation', () => {
-    it('should be a function', () => {
-      expect(typeof Actions.getGeolocation).toBe('function');
-    });
-
-    it('should return a function', () => {
-      expect(typeof Actions.getGeolocation()).toBe('function');
-    });
-  });
 });

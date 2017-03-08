@@ -20,7 +20,7 @@ class Dashboard extends React.Component {
   constructor() {
     super();
 
-    this.state = { 
+    this.state = {
       isModalOpen: false,
       databaseResponded: false
     }
@@ -52,10 +52,6 @@ class Dashboard extends React.Component {
         context.props.router.push('/signup');
       }
     })
-    // ask user for geocoordinates
-    if ("geolocation" in navigator) {
-      this.props.getGeolocation();
-    }
   }
 
   handleSettingsButton() {
