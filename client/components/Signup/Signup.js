@@ -12,10 +12,13 @@ class Signup extends React.Component {
     super();
     this.state = {
       user: null,
-      authInProcess: false
+      authInProcess: false,
+      clicked: false
     }
     this.authenticate = this.authenticate.bind(this);
     this.logCurrentUser = this.logCurrentUser.bind(this);
+    this.handleLoginModal = this.handleLoginModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
   authenticate(provider){
@@ -65,6 +68,18 @@ class Signup extends React.Component {
 
   }
 
+  handleLoginModal(){
+    this.setState({
+      clicked: !this.state.clicked
+    });
+  }
+
+  closeModal(){
+    this.setState({
+      clicked: false
+    });
+  }
+
   render() {
     let googleStyle = `${styles.google} button`
     let githubStyle = `${styles.github} button`
@@ -74,50 +89,79 @@ class Signup extends React.Component {
     let githubIconStyle = `${styles.loginIcon} fa fa-github`
     let facebookIconStyle = `${styles.loginIcon} fa fa-facebook`
     let twitterIconStyle = `${styles.loginIcon} fa fa-twitter`
+    let getStartedButton = `${styles.getStartedButton} button is-outlined`
     let loader = `${styles.loader}`;
 
 
     if (!this.state.authInProcess) {
       return (
         <nav className={styles.signup}>
-          <div className={styles.signupHeader}>
-            <span>SIGNUP</span>
+          <section className={styles.bentoMainSplash}>
+            <div className={styles.bentoMainSplashContent}>
+              <h1 className={styles.splashHeader}>Bento</h1>
+              <p className={styles.splashSubHeader}>Your own customizable productivity dashboard. Login below.</p>
+              <br/>
+              <div className={styles.loginButtons}>
+                <button className={googleStyle} onClick={() => this.authenticate('google')}>
+                  <span className={styles.buttonText}>
+                    Google
+                  </span>
+                  <span className="icon">
+                    <i className={googleIconStyle} aria-hidden="true"></i>
+                  </span>
+                </button>
+                <button className={githubStyle} onClick={() => this.authenticate('github')}>
+                  <span className={styles.buttonText}>
+                    Github
+                  </span>
+                  <span className="icon">
+                    <i className="fa fa-github" aria-hidden="true"></i>
+                  </span>
+                </button>
+                <button className={facebookStyle} onClick={() => this.authenticate('facebook')}>
+                  <span className={styles.buttonText}>
+                    Facebook
+                  </span>
+                  <span className="icon">
+                    <i className="fa fa-facebook-official" aria-hidden="true"></i>
+                  </span>
+                </button>
+                <button className={twitterStyle} onClick={() => this.authenticate('twitter')}>
+                  <span className={styles.buttonText}>
+                    Twitter
+                  </span>
+                  <span className="icon">
+                    <i className="fa fa-twitter" aria-hidden="true"></i>
+                  </span>
+                </button>
+              </div>
+            </div>
+          </section>
+          <div className={styles.aboutBento}>
+            <div className={styles.aboutText}>
+              <h1 className={styles.aboutHeader}>What is Bento?</h1>
+              <p className={styles.aboutSubHeader}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
           </div>
-          <div className={styles.loginButtons}>
-            <button className={googleStyle} onClick={() => this.authenticate('google')}>
-              <span className={styles.buttonText}>
-                Google
-              </span>
-              <span className="icon">
-                <i className={googleIconStyle} aria-hidden="true"></i>
-              </span>
-            </button>
-            <button className={githubStyle} onClick={() => this.authenticate('github')}>
-              <span className={styles.buttonText}>
-                Github
-              </span>
-              <span className="icon">
-                <i className="fa fa-github" aria-hidden="true"></i>
-              </span>
-            </button>
-            <button className={facebookStyle} onClick={() => this.authenticate('facebook')}>
-              <span className={styles.buttonText}>
-                Facebook
-              </span>
-              <span className="icon">
-                <i className="fa fa-facebook-official" aria-hidden="true"></i>
-              </span>
-            </button>
-            <button className={twitterStyle} onClick={() => this.authenticate('twitter')}>
-              <span className={styles.buttonText}>
-                Twitter
-              </span>
-              <span className="icon">
-                <i className="fa fa-twitter" aria-hidden="true"></i>
-              </span>
-            </button>
-          </div>
-          <div>
+          <div className={styles.iconSection}>
+            <div className={styles.iconStyle}>
+              <img src='http://www.languagenut.com/assets/media/placeholders/250x250-circle.png'/>
+              <h1>1</h1>
+              <p>Login</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+            <div className={styles.iconStyle}>
+              <img src='http://www.languagenut.com/assets/media/placeholders/250x250-circle.png'/>
+              <h1>2</h1>
+              <p>Add modules</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+            <div className={styles.iconStyle}>
+              <img src='http://www.languagenut.com/assets/media/placeholders/250x250-circle.png'/>
+              <h1>3</h1>
+              <p>Customize it!</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
           </div>
         </nav>
       );

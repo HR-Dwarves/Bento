@@ -3,13 +3,74 @@
   display: -ms-flexbox;  
   display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
   display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */  
-  justify-content: center;
+  /*justify-content: center;
   -webkit-justify-content: center;
   align-items: center;
-  -webkit-align-items: center;
+  -webkit-align-items: center;*/
   height: 100vh;
   flex-direction: column;
   -webkit-flex-direction: column;
+}
+
+.bentoMainSplash {
+  display: flex;
+  -webkit-align-items: center;
+  background-color: pink;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 200px;
+}
+
+.bentoMainSplashContent {
+}
+
+.splashHeader {
+  font-size: 4.75em;
+}
+
+.splashSubHeader {
+  font-size: 1.25em;
+}
+
+.getStartedButton {
+  width: 100%;
+}
+
+.aboutBento {
+  display: -webkit-box;   /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+  display: -ms-flexbox;  /* TWEENER - IE 10 */
+  display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+  display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */ 
+  padding-top: 15px;
+  justify-content: center;
+  text-align: center;
+}
+
+.aboutText {
+}
+
+.aboutPhoto {
+
+}
+
+.iconSection{
+  display: flex;
+}
+
+.iconStyle {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0;
+  text-align: center;
+}
+
+.aboutHeader{
+  font-size: 2.5em;
+}
+
+.aboutSubHeader{
+  font-size: 1.5em;
 }
 
 .signup > * {
