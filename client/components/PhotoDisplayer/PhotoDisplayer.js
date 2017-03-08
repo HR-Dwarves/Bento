@@ -14,7 +14,7 @@ class PhotoDisplayer extends React.Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
 
     var context = this;
 

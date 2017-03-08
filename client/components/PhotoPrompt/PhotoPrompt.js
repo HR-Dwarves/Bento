@@ -159,9 +159,6 @@ class PhotoPrompt extends React.Component {
 
   pickQuote() {
     length = quotes.length;
-    // http://stackoverflow.com/questions/1527803/
-    // generating-random-whole-numbers-in-javascript-in-a-specific-range
-    // Math.floor(Math.random() * (max - min +1)) + min
     var thisQuote = Math.floor(Math.random() * (length - 0 + 1));
     this.setState({quote: quotes[thisQuote]})
   }
@@ -253,7 +250,7 @@ class PhotoPrompt extends React.Component {
 
             {/* ALL PHOTOS */}
             {photos &&
-              Object.keys(photos).reverse().map((key, index) => {
+              Object.keys(photos).map((key, index) => {
               return <PhotoDisplayer
                       key={index}
                       src={photos[key].downloadUrl}
@@ -261,7 +258,7 @@ class PhotoPrompt extends React.Component {
                       date={photos[key].date}
                       photoId={key}
                       deletePhoto={this.deletePhoto.bind(this, key)} />
-            })}
+            }).reverse()}
           </div>
         </div>
       </div>
