@@ -11,7 +11,8 @@ const initialState = {
     'Hacker News': false,
     'News': false,
     'Sticky Note': false,
-    'One Photo Per Day': false
+    'One Photo Per Day': false,
+    'Default': false
   }
 };
 
@@ -23,6 +24,7 @@ function notifications(state = initialState, action = '') {
 
       let { types, items } = newState;
       let newItems = items.slice();
+      
       // Slice items array and mutate copy
       if (newMessage) {
         let moduleType = newMessage.moduleType;
@@ -34,7 +36,6 @@ function notifications(state = initialState, action = '') {
         }
         newState.items = newItems;
       }
-
       return newState;
     }
     case actionTypes.RemoveNotification: {
