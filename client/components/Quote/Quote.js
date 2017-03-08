@@ -26,7 +26,6 @@ class Quote extends React.Component {
     
     var context = this;
     var quotes = LS.getFromLS('quotes')
-    // console.log('Quotes object', quotes.value);
 
     if (!quotes.value) {
       console.log('LS Quotes not available');
@@ -70,7 +69,6 @@ class Quote extends React.Component {
     let quoteContent = `${styles.quoteContent} card-content`
     let footerStyle = `${styles.footer} card-footer`;
     let quoteTextStyle = `${styles.quoteText}`;
-    // let quoteTextStyle = `${styles.quoteText}`;
     let loadingStyle = `${styles.loading}`;
 
 

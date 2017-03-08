@@ -35,7 +35,6 @@ class Dashboard extends React.Component {
     firebaseApp.auth().onAuthStateChanged((user) => {
       if (user) {
         let {displayName, uid, email, photoURL} = user;
-        // console.log('USER', user);
         let userId = uid || 'testUser';
         context.props.authenticateUser(user);
         context.props.getDatabase(uid);
@@ -51,8 +50,6 @@ class Dashboard extends React.Component {
       } else {
         console.error('NO USER');
         context.props.router.push('/signup');
-        // Remove user information from state
-
       }
     })
     // ask user for geocoordinates

@@ -34,7 +34,7 @@ class Focus extends React.Component {
   handleChange(e){
     this.setState({
       tempFocus: e.target.value
-    })
+    });
   }
 
   handleSubmit(e) {
@@ -55,7 +55,7 @@ class Focus extends React.Component {
     db_ref.set(this.state.tempFocus);
     this.setState({
       tempFocus: ''
-    })
+    });
   }
 
   removeFocus() {

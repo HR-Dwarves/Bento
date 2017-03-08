@@ -34,8 +34,7 @@ class NewsFeed extends React.Component {
       that.getPostContent(response.data, key);
     })
     .catch(function(error) {
-      console.log('got an error:');
-      console.log(error);
+      console.err(error);
     });
   }
 
@@ -72,7 +71,7 @@ class NewsFeed extends React.Component {
 
   updateButtons(button) {
     const user = this.props.user.uid;
-    const db_key = this.props.db_key
+    const db_key = this.props.db_key;
 
     let buttonName = button.target.getAttribute('value');
     if(buttonName === 'Top') {
