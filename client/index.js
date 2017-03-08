@@ -8,8 +8,8 @@ import { render } from 'react-dom';
 // Import Components
 import App from './components/App';
 import Dashboard from './components/Dashboard/Dashboard';
-import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
+// import Login from './components/Login/Login';
 // import react router deps
 import { Router, Route, IndexRoute, browserHistory, Redirect } from 'react-router';
 import { Provider } from 'react-redux';
@@ -21,7 +21,6 @@ const router = (
       <Route path="/" component={App}>
         <IndexRoute component={Dashboard}></IndexRoute>
         <Route path="/signup" component={Signup}></Route>
-        <Route path="/login" component={Login}></Route>
       </Route>
     </Router>
   </Provider>
