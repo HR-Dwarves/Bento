@@ -138,6 +138,7 @@ class Focus extends React.Component {
                 <input className={styles.inputStyle} type="text"  maxLength='30' value={this.state.tempFocus} onChange={this.handleChange} className={styles.inputStyle}></input>
               </form>
             </div>
+            <div>
               <ReactCSSTransitionGroup 
                 transitionName={{
                   enter: 'fadeIn',
