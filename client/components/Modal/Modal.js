@@ -37,11 +37,11 @@ class Modal extends React.Component {
     });
   }
 
-  addModule(e) {
+  addModule(e, module) {
     e.preventDefault();
     let user = this.props.user.uid;
     let dbRef = database.ref(`users/${user}/modules/`);
-    if(e.target.value === 'Newsfeed') {
+    if(module === 'Newsfeed') {
       var newsFeedObj = {
         type: 'Hacker News',
         top: true,
@@ -52,14 +52,14 @@ class Modal extends React.Component {
       dbRef.push(newsFeedObj)
     } else {
       dbRef.push({
-        type: e.target.value
+        type: module
       });
     }
     
     dbRef.orderByChild('type').equalTo('DefaultModule').once('child_added', (snapshot) => {
       snapshot.ref.remove();
     });
-    this.state.list.push(e.target.value);
+    this.state.list.push(module);
   }
 
   removeModule(e) {
@@ -77,19 +77,31 @@ class Modal extends React.Component {
     if(!this.props.isOpen) {
       return null;
     }
-    let moduleHeader = `${styles.header} modal-card-head`
-    let moduleStyles = `${styles.moduleName}`
-    let deleteButton = `${styles.delete} icon fa fa-times-circle`;
-    let activeModal = `${styles.modalStyles} modal is-active animated`;
-    let modalCard = `${styles.modalCard} modal-card`
-    let modalCardBody = `${styles.modalCardBody} modal-card-body`
+
+    let modalStyles = `${styles.modalStyles} modal is-active animated`;
+    let modalCard = `${styles.modalCard} modal-card`;
+    let modalCardBody = `${styles.modalCardBody} modal-card-body box`;
+    let moduleEntry = `${styles.moduleEntry}`;
+    let moduleTitle = `${styles.moduleTitle}`;
+    let moduleButton = `${styles.moduleButton}`;
+    let moduleIcon = `${styles.moduleIcon}`;
 
     return(
-      <div className={activeModal}>
+      <div className={modalStyles}>
         <div className={modalCard}>
           <section className={modalCardBody}>
-            {this.props.modules.map((module, key) => <div key={key} className={moduleStyles}><span>{module}</span> 
-              <span className={moduleStyles}><span><button value={module} onClick={this.addModule} className='button is-dark'>Add</button></span></span></div>)}
+            {this.props.modules.map((module, key) => 
+              <div key={key} className={moduleEntry}>
+                <span className={moduleTitle}>
+                  {module}
+                </span> 
+                <span className={moduleButton}>
+                  <i  onClick={(e) => this.addModule(e, module)}
+                      className="fa fa-plus-circle" 
+                      aria-hidden="true">
+                  </i>
+                </span>
+              </div>)}
           </section>
         </div>
       </div>
