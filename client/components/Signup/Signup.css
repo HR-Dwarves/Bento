@@ -24,6 +24,10 @@
   background-color: #ECE9E6;
   text-align: center;
   min-height: 200px;
+  background-image: url("https://firebasestorage.googleapis.com/v0/b/dashboardapp-3d3c7.appspot.com/o/bento-shapes.png?alt=media&token=cdc2a8ba-3e49-4958-8803-0e72b4b981c9");
+  background-repeat: no-repeat;
+  background-position: 0 50%;
+  /*background-size: cover;*/
 }
 
 .bentoMainSplashContent {
@@ -209,10 +213,23 @@
   line-height: 230px;
 }
 
+.homepageImageHolders {
+  max-width: 400px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.homePageImage {
+  width: 100%;
+  height: auto;
+  border: 1px solid #4a4a4a;
+}
+
 .stepsHeader {
   font-size: 1.7em;
 }
 
 .steps {
   font-size: 1.3em;
+  margin-top: 20px;
 }
