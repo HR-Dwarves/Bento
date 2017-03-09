@@ -7,7 +7,7 @@
 
 .notification {
   border: 1px solid #2f2f2f;
-  width: 30em;
+  width: 40em;
   min-height: 5em;
   box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.15);
   background-color: whitesmoke;
@@ -37,4 +37,5 @@
 
 .text > * {
   line-height: 1.5em;
+  font-size: 1.2em;
 }

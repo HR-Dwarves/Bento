@@ -27,7 +27,7 @@ const clockHelp = `Add additional timezones by using the dropdown menu!
 `;
 
 const defaultHelp = `Add cards using the top-right button to get started!
-\n Cards can be resized using by dragging the icon in the bottom-right corner to create a personalized dashboard.
+\n Cards can be resized by dragging the icon in the bottom-right corner to create a personalized dashboard. Enjoy!
 `;
 
 var defaultNotifications = {
@@ -37,7 +37,7 @@ var defaultNotifications = {
   'Weather': {text: weatherHelp, dismiss: false, moduleType: 'Weather', timeout: 3000},
   'Focus': {text: focusHelp, dismiss: false, moduleType: 'Focus', timeout: 3000},
   'Clock': {text: clockHelp, dismiss: false, moduleType: 'Clock', timeout: 3000},
-  'Default': {text: defaultHelp, dismiss: false, moduleType: 'Other', timeout: 3000}
+  'Default': {text: defaultHelp, dismiss: false, moduleType: 'Default', timeout: 3000}
 }
 
 export default defaultNotifications;

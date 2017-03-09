@@ -111,6 +111,12 @@ p {
   display: flex;
   justify-content: space-around;
   padding-bottom: 0.5em;
+  overflow: hidden;
+  flex: 0 0 auto;
+}
+
+forecastDetails > * {
+  flex: 1 0 auto;
 }
 
 .forecastDetail {
