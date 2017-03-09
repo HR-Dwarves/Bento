@@ -9,23 +9,11 @@ const database = firebaseApp.database();
 class Notifications extends React.Component {
   constructor() {
     super();
-    this.state = {
-
-    };
-  }
-
-  componentDidMount() {
-
-  }
-
-  handleDismiss() {
-
   }
 
   render() {
     let notifications = this.props.notifications.items;
     let notificationsStyle = `${styles.notifications}`;
-    // console.log(Array.isArray(notifications));
 
     return (
       <div className={notificationsStyle}>
@@ -49,24 +37,25 @@ class Notifications extends React.Component {
 class NotificationItem extends React.Component {
   constructor() {
     super();
-
     this.handleDismiss = this.handleDismiss.bind(this);
-
   }
 
   componentDidMount() {
-    // If dismiss is true, add SetTimeout for automatic dismissal after [3] seconds
     if (this.props) {
       let dismiss = this.props.dismiss;
       let timeout = this.props.timeout || 3000;
       if (dismiss) {
         let index = this.props.index;
-        setTimeout(function(index){
+        this.timeout = setTimeout(function(index){
           console.log('SET TIMEOUT FIRED', index);
           this.props.removeNotification(index)
         }.bind(this, index), timeout);
       }
     }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timeout);
   }
 
   handleDismiss() {
