@@ -10,6 +10,7 @@ class BackgroundChanger extends React.Component {
     super(props);
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
   }
 
   handleSubmit(e) {
@@ -23,9 +24,17 @@ class BackgroundChanger extends React.Component {
     this.backgroundInput.reset();
   }
 
+  handleRemove() {
+    let user = this.props.user.uid;
+
+    this.props.RemoveBackground(user);
+  }
+
   render() {
+    let cardStyle = `${styles.cardStyle} card`;
+
     return (
-      <div className='card'>
+      <div className={cardStyle}>
         <header className='card-header'>
           <p className='card-header-title'>Background Changer</p>
           <div className='card-header-icon'>
@@ -46,6 +55,7 @@ class BackgroundChanger extends React.Component {
                     ref={(input) => this.backgroundUrl = input}
                     placeholder='Enter url to your image'/>
             <button className='button' type='submit'>Change</button>
+            <button className='button' onClick={this.handleRemove}>Remove Background</button>
           </form>
         </div>
       </div>
