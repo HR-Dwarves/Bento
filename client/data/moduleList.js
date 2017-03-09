@@ -21,7 +21,7 @@ var moduleList = {
   'Arcade': Arcade,
   'Focus': Focus,
   'Quote': Quote,
-  'BackgroundChanger': BackgroundChanger,
+  'Background Customizer': BackgroundChanger,
 };
 
 export default moduleList;

@@ -81,6 +81,7 @@
 
 .aboutSubHeader{
   font-size: 1.3em;
+  padding: 0 .8em;
 }
 
 .signup > * {
@@ -214,9 +215,10 @@
 }
 
 .homepageImageHolders {
-  max-width: 400px;
+  max-width: 500px;
   height: auto;
   margin: 0 auto;
+  padding: 0 .8em;
 }
 
 .homePageImage {

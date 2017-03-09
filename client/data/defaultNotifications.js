@@ -30,6 +30,13 @@ const arcadeHelp = `Everybody needs a break now and again.
 \nChoose a game from the dropdown menu and start enjoying yourself!
 `;
 
+const quoteHelp = `This module provides some inspiration for those especially tough Mondays (or any weekday, rather).
+\nEnjoy!
+`;
+
+const backgroundHelp = `Enter a photo URL to customize / change your background image.
+`;
+
 const photoPromptHelp = `Challenge your inner photographer to upload a new photo every day.
 \n You can use a pre-existing shot or take a new one with your device camera .
 \n The card will keep track of your current daily streak.
@@ -47,6 +54,8 @@ var defaultNotifications = {
   'Focus': {text: focusHelp, dismiss: false, moduleType: 'Focus', timeout: 3000},
   'Clock': {text: clockHelp, dismiss: false, moduleType: 'Clock', timeout: 3000},
   'Arcade': {text: arcadeHelp, dismiss: false, moduleType: 'Arcade', timeout: 3000},
+  'Quote': {text: quoteHelp, dismiss: false, moduleType: 'Quote', timeout: 3000},
+  'Background Customizer': {text: backgroundHelp, dismiss: false, moduleType: 'Background Customizer', timeout: 3000},
   'One Photo Per Day': {text: photoPromptHelp, dismiss: false, moduleType: 'One Photo Per Day', timeout: 3000},
   'Default': {text: defaultHelp, dismiss: false, moduleType: 'Default', timeout: 3000}
 }
