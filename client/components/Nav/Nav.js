@@ -86,6 +86,7 @@ class Nav extends React.Component {
     }
 
 
+
     return(
       <div className={mainNavPanelCSS}>
         <div className={userInfoStyle} >

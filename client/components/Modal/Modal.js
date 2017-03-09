@@ -87,6 +87,10 @@ class Modal extends React.Component {
     return(
       <div className={activeModal}>
         <div className={modalCard}>
+          <header className={moduleHeader}>
+            <p className="modal-card-title">Modules</p>
+            <i className={deleteButton} onClick={this.props.onClose} aria-hidden="true"></i>
+          </header>
           <section className={modalCardBody}>
             {this.props.modules.map((module, key) => <div key={key} className={moduleStyles}><span>{module}</span> 
               <span className={moduleStyles}><span><button value={module} onClick={this.addModule} className='button is-dark'>Add</button></span></span></div>)}

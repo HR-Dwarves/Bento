@@ -43,3 +43,8 @@
 .modalCardBody {
   border: 1px solid #cacaca;
 }
+
+.modalCardBody {
+  border: 1px solid #cacaca;
+  border-top: none;
+}
