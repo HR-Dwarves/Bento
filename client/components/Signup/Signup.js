@@ -103,7 +103,7 @@ class Signup extends React.Component {
             <section className={splash}>
               <div className={styles.bentoMainSplashContent}>
                 <h1 className={styles.splashHeader}>Bento</h1>
-                <p className={styles.splashSubHeader}>Your own customizable productivity dashboard. Login below.</p>
+                <p className={styles.splashSubHeader}>Your own customizable productivity dashboard.</p>
                 <br/>
                 <div className={styles.loginButtons}>
                   <button className={googleStyle} onClick={() => this.authenticate('google')}>
@@ -152,22 +152,31 @@ class Signup extends React.Component {
           </div>
           <div className='columns'>
               <div className={iconStyle}>
-                <img src='http://www.languagenut.com/assets/media/placeholders/250x250-circle.png'/>
-                <h1>1</h1>
-                <p>Login</p>
-                <p>Login using your favorite social media account</p>
+                <div>
+                  <span className={`${styles.homepageIcons} icon`}>
+                    <i className={`${styles.signin} fa fa-sign-in`} aria-hidden="true"></i>
+                  </span>
+                </div>
+                <h1 className={styles.stepsHeader}>1: Login</h1>
+                <p className={styles.steps}>Login using your favorite social media account</p>
               </div>
               <div className={iconStyle}>
-                <img src='http://www.languagenut.com/assets/media/placeholders/250x250-circle.png'/>
-                <h1>2</h1>
-                <p>Add modules</p>
-                <p>Add as many modules as you like</p>
+                <div>
+                  <span className={`${styles.homepageIcons} icon`}>
+                    <i className={`${styles.signin} fa fa-cogs`} aria-hidden="true"></i>
+                  </span>
+                </div>
+                <h1 className={styles.stepsHeader}>2: Add modules</h1>
+                <p className={styles.steps}>Add as many modules as you like</p>
               </div>
               <div className={iconStyle}>
-                <img src='http://www.languagenut.com/assets/media/placeholders/250x250-circle.png'/>
-                <h1>3</h1>
-                <p>Customize it!</p>
-                <p>Drag and drop to customize your dashboard</p>
+                <div>
+                  <span className={`${styles.homepageIcons} icon`}>
+                    <i className={`${styles.signin} fa fa-space-shuttle`} aria-hidden="true"></i>
+                  </span>
+                </div>
+                <h1 className={styles.stepsHeader}>3: Customize it!</h1>
+                <p className={styles.steps}>Drag and drop to customize your dashboard</p>
               </div>
             </div>
         </div>
