@@ -23,7 +23,7 @@ export function ChangeBackground(inputUrl, db_key, user = 'test') {
 
 export function RemoveBackground(user = 'test') {
   return dispatch => {
-    dispatch(RemoveBackgroundRequestAction());
+    dispatch(ChangeBackgroundRequestAction());
 
     let url = database.ref(`users/${user}/background`);
 
