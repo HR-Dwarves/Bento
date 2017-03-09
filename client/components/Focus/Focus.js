@@ -126,10 +126,11 @@ class Focus extends React.Component {
               </span>
             </div>
           </header>
-          <div className='card-content'>
-            <div className={styles.focusStyle}>
-              <div>
-                <p>What is your intent for today?<br/><br/></p>
+            <div className='card-content'>
+              <div className={styles.focusStyle}>
+                <div>
+                  <p>What is your intent for today?<br/><br/></p>
+                </div>
               </div>
             </div>
             <div className={styles.formDiv}>

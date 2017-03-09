@@ -78,6 +78,13 @@ class Nav extends React.Component {
     } else {
       displayname = '';
     }
+    let toggle;
+    if(this.state.isModalOpen) {
+      toggle = 'fa fa-toggle-on'
+    } else {
+      toggle = 'fa fa-toggle-off'
+    }
+
 
 
     return(
@@ -91,7 +98,7 @@ class Nav extends React.Component {
         </Link>
         <div className={modalButtonStyle}>
           <button style={displayButton} onClick={this.handleSettingsButton} className="button is-dark modal-button">
-            <i className="fa fa-plus" aria-hidden="true"></i>
+            <i className={toggle} aria-hidden="true"></i>
           </button>
           <ReactCSSTransitionGroup 
             transitionName={ {
