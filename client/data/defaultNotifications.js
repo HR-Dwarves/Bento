@@ -8,8 +8,10 @@ const stickyNoteHelp = `Sticky Note Card
 \n
 `;
 
-const newsHelp = `News Card
-\n
+const newsHelp = `Use the newsfeed card to keep update to date with your favorite news sources!
+\nSelect your perfered news source by clicking the down arrow next to the news source name.
+\nToggle between the latest and the top news items by clicking the bottom buttons.
+\nView more news items by clicking the 'More!' button in the top right!
 `;
 
 const weatherHelp = `Weather Card
