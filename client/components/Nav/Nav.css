@@ -1,11 +1,8 @@
 .mainNavPanel {
-  width: 100%;
+  width: 100vw;
   height: 6em;
-  /* offset-x | offset-y | blur-radius | spread-radius | color */
   box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.15);
-  /*position: absolute;*/
   position: fixed;
-  /*position: block;*/
   display: flex;
   z-index: 999;
   background-color: white;
