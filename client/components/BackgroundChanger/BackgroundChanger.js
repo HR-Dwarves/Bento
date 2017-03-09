@@ -32,7 +32,9 @@ class BackgroundChanger extends React.Component {
 
   render() {
     let cardStyle = `${styles.cardStyle} card`;
-
+    let submitButtonStyle = `${styles.submitButton} button is-dark`;
+    let removeButtonStyle = `${styles.removeButton} button is-dark`;
+    
     return (
       <div className={cardStyle}>
         <header className='card-header'>
@@ -44,18 +46,26 @@ class BackgroundChanger extends React.Component {
           </div>
         </header>
         <div className='card-content'>
-          <p>Upload an image by url:</p>
+          <p className={styles.uploadText}>Upload an image by url:</p>
           <form action='submit'
-                className='formclasshere'
+                className={styles.formStyling}
                 onSubmit={(e) => this.handleSubmit(e)}
                 ref={(input) => this.backgroundInput = input}
                 >
-            <input className='input' 
-                    type='text' 
-                    ref={(input) => this.backgroundUrl = input}
-                    placeholder='Enter url to your image'/>
-            <button className='button' type='submit'>Change</button>
-            <button className='button' onClick={this.handleRemove}>Remove Background</button>
+            <div>
+              <input className='input' 
+                      type='text' 
+                      ref={(input) => this.backgroundUrl = input}
+                      placeholder='Enter url to your image'/>
+            </div>
+            <div className={styles.buttons}>
+              <div className={styles.submitButton}>
+                <button className='button is-dark' type='submit'>Change</button>
+              </div>
+              <div className={styles.removeButton}>
+                <button className='button is-dark' onClick={this.handleRemove}>Remove Background</button>
+              </div>
+            </div>
           </form>
         </div>
       </div>
