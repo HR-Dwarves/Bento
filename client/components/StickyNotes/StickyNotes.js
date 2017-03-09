@@ -39,11 +39,12 @@ class StickyNotes extends React.Component {
     let stickynoteStyles = `${styles.stickynote} card`;
     let headerStyles = `${styles.header} card-header`;
     let contentStyles = `${styles.content} card-content`;
+    let headerInputStyles = `${styles.inputStyle} card-header-title sticky-header`;
 
     return(
         <div className={stickynoteStyles}>
           <header className={headerStyles}>
-            <input className='card-header-title sticky-header'
+            <input className={headerInputStyles}
                     type="text"
                     maxLength='30' 
                     onBlur={this.handleStickyHeaderEntry}

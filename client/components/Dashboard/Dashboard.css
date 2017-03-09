@@ -6,6 +6,10 @@ body {
   background: linear-gradient(to left, #ECE9E6 , #FFFFFF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   margin: 0;
   -webkit-font-smoothing: subpixel-antialiased;
+
+  /*background-image: url('https://images4.alphacoders.com/669/669660.png');*/
+  background-size: cover;
+  background-position: center;
 }
 
 div, button, input, textarea, option, nav, span, p, form, select {

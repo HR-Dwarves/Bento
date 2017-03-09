@@ -77,9 +77,10 @@ class LatLong extends React.Component {
 
     let selectStyles = `${styles.thisSelect} select`;
     let headerStyles = `${styles.header} card-header`;
+    let cardStyles = `${styles.LatLong} card`;
 
     return (
-      <div className='card'>
+      <div className={cardStyles}>
         <header className={headerStyle}>
           <p className="card-header-title">Time</p>
           <div className="card-header-icon">
