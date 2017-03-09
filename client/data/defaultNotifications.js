@@ -37,6 +37,11 @@ const quoteHelp = `This module provides some inspiration for those especially to
 const backgroundHelp = `Enter a photo URL to customize / change your background image.
 `;
 
+const photoPromptHelp = `Challenge your inner photographer to upload a new photo every day.
+\n You can use a pre-existing shot or take a new one with your device camera .
+\n The card will keep track of your current daily streak.
+`;
+
 const defaultHelp = `Add cards using the top-right button to get started!
 \n Cards can be resized by dragging the icon in the bottom-right corner to create a personalized dashboard. Enjoy!
 `;
@@ -51,6 +56,7 @@ var defaultNotifications = {
   'Arcade': {text: arcadeHelp, dismiss: false, moduleType: 'Arcade', timeout: 3000},
   'Quote': {text: quoteHelp, dismiss: false, moduleType: 'Quote', timeout: 3000},
   'Background Customizer': {text: backgroundHelp, dismiss: false, moduleType: 'Background Customizer', timeout: 3000},
+  'One Photo Per Day': {text: photoPromptHelp, dismiss: false, moduleType: 'One Photo Per Day', timeout: 3000},
   'Default': {text: defaultHelp, dismiss: false, moduleType: 'Default', timeout: 3000}
 }
 
