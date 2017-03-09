@@ -31,22 +31,8 @@
   line-height: 1.5em;
 }
 
-.height {
-  max-height: 1200px;
-  -webkit-transition: max-height 0.3s; 
-  -moz-transition: max-height 0.3s; 
-  -ms-transition: max-height 0.3s; 
-  -o-transition: max-height 0.3s; 
-  transition: max-height .3s;
-  overflow-y: auto;
-}
-
-.collapsedStyle {
-  max-height: 0;
-  -webkit-transition: max-height 0.3s; 
-  -moz-transition: max-height 0.3s; 
-  -ms-transition: max-height 0.3s; 
-  -o-transition: max-height 0.3s; 
-  transition: max-height .3s;
-  overflow: hidden;
+.select:after {
+  border: 1px solid #2f2f2f;
+  border-right: 0;
+  border-top: 0;
 }
