@@ -26,6 +26,7 @@ var moduleList = {
   'Focus': Focus,
   'Quote': Quote,
   'BackgroundChanger': BackgroundChanger,
+  'Background Customizer': BackgroundChanger,
 };
 
 export default moduleList;
