@@ -22,7 +22,8 @@ class ReactGrid extends React.PureComponent {
       layouts: props.layouts,
       mounted: false,
       cols: undefined,
-      breakpoint: undefined
+      breakpoint: undefined,
+      currentLayout: undefined
     }
     this.onBreakpointChange = this.onBreakpointChange.bind(this);
     this.onLayoutChange = this.onLayoutChange.bind(this);
@@ -64,9 +65,15 @@ class ReactGrid extends React.PureComponent {
     let user = this.props.user.uid;
     let currentBreakpoint = this.state.breakpoint;
     let newLayouts = Object.assign({}, layouts);
-
+    // console.log(JSON.stringify(layout));
     this.props.updateLayouts(user, newLayouts);
-
+    var currLayouts = layout.reduce((acc, curr) => {
+      acc[curr.i] = curr;
+      return acc;
+    }, {})
+    this.setState({
+      currentLayout: currLayouts
+    })
   }
 
   render() {
@@ -85,8 +92,11 @@ class ReactGrid extends React.PureComponent {
           //Create wrappers for each module
           wrappers = moduleKeys.map((moduleKey, ind, array) => {
             let moduleType = modules[moduleKey].type;
-
-            var additionalProps = { key: moduleKey, db_key: moduleKey, type: moduleType};
+            let moduleLayout = {};
+            if (this.state.currentLayout) {
+              moduleLayout = this.state.currentLayout[moduleKey];
+            }
+            var additionalProps = { key: moduleKey, db_key: moduleKey, type: moduleType, layout: moduleLayout};
             var newProps = Object.assign({}, this.props, additionalProps);
             defaultItemProps = { i: moduleKeys[ind], w: 3, h: 2, x: numberOfModules * 2 % (this.state.cols || 12), y: Infinity, minW: 3, minH: 2 };
             let defaultModuleProps = defaultGridProps[moduleType];
