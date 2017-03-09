@@ -22,7 +22,12 @@ const focusHelp = `Use the Focus card to set your daily intentions!
 \n
 `;
 
-const defaultHelp = `Add cards using the button above to get started!
+const clockHelp = `Add additional timezones by using the dropdown menu!
+\n Feel free to add / delete as many timezones as you prefer.
+`;
+
+const defaultHelp = `Add cards using the top-right button to get started!
+\n Cards can be resized using by dragging the icon in the bottom-right corner to create a personalized dashboard.
 `;
 
 var defaultNotifications = {
@@ -31,6 +36,7 @@ var defaultNotifications = {
   'Hacker News': {text: newsHelp, dismiss: false, moduleType: 'Hacker News', timeout: 3000},
   'Weather': {text: weatherHelp, dismiss: false, moduleType: 'Weather', timeout: 3000},
   'Focus': {text: focusHelp, dismiss: false, moduleType: 'Focus', timeout: 3000},
+  'Clock': {text: clockHelp, dismiss: false, moduleType: 'Clock', timeout: 3000},
   'Default': {text: defaultHelp, dismiss: false, moduleType: 'Other', timeout: 3000}
 }
 
