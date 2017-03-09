@@ -12,11 +12,11 @@ module.exports = {
   plugins: [
     // https://github.com/webpack/webpack/issues/1964
     // new webpack.optimize.OccurrenceOrderPlugin(),
-    // new webpack.DefinePlugin({
-    //   'process.env': {
-    //     'NODE_ENV': "'production'"
-    //   }
-    // }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify("production")
+      }
+    }),
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
         warnings: false
