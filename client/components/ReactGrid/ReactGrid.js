@@ -80,6 +80,7 @@ class ReactGrid extends React.PureComponent {
         modules = dashboard.modules
         if (modules) {
           let moduleKeys = Object.keys(modules);
+          let numberOfModules = moduleKeys.length;
 
           //Create wrappers for each module
           wrappers = moduleKeys.map((moduleKey, ind, array) => {
@@ -87,7 +88,7 @@ class ReactGrid extends React.PureComponent {
 
             var additionalProps = { key: moduleKey, db_key: moduleKey, type: moduleType};
             var newProps = Object.assign({}, this.props, additionalProps);
-            defaultItemProps = { i: moduleKeys[ind], w: 3, h: 2, x: 0, y: Infinity, minW: 3, minH: 2 };
+            defaultItemProps = { i: moduleKeys[ind], w: 3, h: 2, x: numberOfModules * 2 % (this.state.cols || 12), y: Infinity, minW: 3, minH: 2 };
             let defaultModuleProps = defaultGridProps[moduleType];
             let currentBreakpoint = this.state.breakpoint;
             let currentLayout = this.state.layouts[currentBreakpoint];
