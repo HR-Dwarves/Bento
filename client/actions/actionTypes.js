@@ -67,6 +67,9 @@ const actionTypes = {
   DeletePhotoFromPhotoPromptRejected: 'DELETE_PHOTO_FROM_PHOTO_PROMPT_REJECTED',
   DeletePhotoFromPhotoPromptFulfilled: 'DELETE_PHOTO_FROM_PHOTO_PROMPT_FULFILLED',
 
+  ChangeBackgroundRequested: 'CHANGE_BACKGROUND_REQUESTED',
+  ChangeBackgroundRejected: 'CHANGE_BACKGROUND_REJECTED',
+  ChangeBackgroundFulfilled: 'CHANGE_BACKGROUND_FULFILLED',
 };
 
 export default actionTypes;
