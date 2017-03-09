@@ -175,6 +175,7 @@ class NewsFeed extends React.Component {
     let headerStyles = `${styles.header} card-header`;
     let footerStyles = `${styles.footer} card-footer`;
     let contentStyles = `${styles.content} card-content`;
+    let selectStyles = `${styles.select} select`;
     let newClasses = classnames('card-footer-item', `${styles.newsButtons}`, this.props.dashboard.modules[this.props.db_key].new ? `${styles.selectedButton}` : '');
     let topClasses = classnames('card-footer-item', `${styles.newsButtons}`, this.props.dashboard.modules[this.props.db_key].new ? '' : `${styles.selectedButton}`);
     let spinnerClasses = classnames('button is-loading', `${styles.spinner}`);
@@ -182,11 +183,11 @@ class NewsFeed extends React.Component {
     let fiveButtonStyle = ''
     let moreButtonStyle = ''
     if(this.state.numberOfPosts === '5') {
-      fiveButtonStyle = `${styles.postButton} button is-primary is-focused`;
-      moreButtonStyle = `${styles.postButton} button is-focused`;
+      fiveButtonStyle = `${styles.postButton} button is-dark is-focused`;
+      moreButtonStyle = `${styles.postButton} button is-inverted`;
     } else {
-      moreButtonStyle = `${styles.postButton} button is-primary is-focused`;
-      fiveButtonStyle = `${styles.postButton} button is-focused`;
+      moreButtonStyle = `${styles.postButton} button is-dark is-focused`;
+      fiveButtonStyle = `${styles.postButton} button is-inverted`;
     }
 
     //render x amount of posts
@@ -222,8 +223,8 @@ class NewsFeed extends React.Component {
         <div className={newsfeedStyles}>
           <header className={headerStyles}>
             <div className="card-header-title">
-              <p className='control'>
-                <span className="select">
+              <p className="control">
+                <span className={selectStyles}>
                   <select value={selectedNewsSource} onChange={this.handleNewsChange} className={`${styles.removeBorder}`}>
                     {newsSource.map((item, key) => <option value={Object.keys(item)[0]}>{item[Object.keys(item)[0]]}</option>)}
                   </select>
