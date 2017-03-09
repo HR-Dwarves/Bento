@@ -56,7 +56,6 @@ class Arcade extends React.Component {
     let cardStyle = `${styles.arcade} card`;
 
     return (
-
       <div className='card'>
         <header className={headerStyles}>
           <p className='card-header-title'>
@@ -77,6 +76,10 @@ class Arcade extends React.Component {
               <i className='fa fa-gamepad' aria-hidden='true'></i>
             </span>
           </div>
+        </header>
+        <div className={contentStyle}>
+            <embed className={styles.embeddedGame} key={this.state.currentGame} src={this.state.games[gameToRender]} wmode='window'/>
+        </div>
       </div>
     );
   }

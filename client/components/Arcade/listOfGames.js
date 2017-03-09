@@ -6,6 +6,6 @@ var games = {
   'SPACE_INVADERS': 'https://firebasestorage.googleapis.com/v0/b/dashboardapp-3d3c7.appspot.com/o/arcade-games%2F1-space-invaders.swf?alt=media&token=b439d968-d7cd-4bbb-8c82-11cc0cc1c647',
   'TRON': 'https://firebasestorage.googleapis.com/v0/b/dashboardapp-3d3c7.appspot.com/o/arcade-games%2Ftron.swf?alt=media&token=92bd7332-7f39-4195-a349-f024833b3b8f',
   'TETRIS': 'https://firebasestorage.googleapis.com/v0/b/dashboardapp-3d3c7.appspot.com/o/arcade-games%2Fflash-tetris.swf?alt=media&token=a11c7ce2-256e-4ce2-8090-741a65ea3c28',
-}
+};
 
 module.exports = games;
