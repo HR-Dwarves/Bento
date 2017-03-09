@@ -30,6 +30,13 @@ const arcadeHelp = `Everybody needs a break now and again.
 \nChoose a game from the dropdown menu and start enjoying yourself!
 `;
 
+const quoteHelp = `This module provides some inspiration for those especially tough Mondays (or any weekday, rather).
+\nEnjoy!
+`;
+
+const backgroundHelp = `Enter a photo URL to customize / change your background image.
+`;
+
 const defaultHelp = `Add cards using the top-right button to get started!
 \n Cards can be resized by dragging the icon in the bottom-right corner to create a personalized dashboard. Enjoy!
 `;
@@ -42,6 +49,8 @@ var defaultNotifications = {
   'Focus': {text: focusHelp, dismiss: false, moduleType: 'Focus', timeout: 3000},
   'Clock': {text: clockHelp, dismiss: false, moduleType: 'Clock', timeout: 3000},
   'Arcade': {text: arcadeHelp, dismiss: false, moduleType: 'Arcade', timeout: 3000},
+  'Quote': {text: quoteHelp, dismiss: false, moduleType: 'Quote', timeout: 3000},
+  'Background Customizer': {text: backgroundHelp, dismiss: false, moduleType: 'Background Customizer', timeout: 3000},
   'Default': {text: defaultHelp, dismiss: false, moduleType: 'Default', timeout: 3000}
 }
 
