@@ -111,7 +111,7 @@ class WeatherDetails extends React.Component {
     let h = this.props.layout.h;
     let w = this.props.layout.w;
 
-    console.log(h, w);
+    // console.log(h, w);
 
     if (w >= 3 && h >= 3) {
       return (
