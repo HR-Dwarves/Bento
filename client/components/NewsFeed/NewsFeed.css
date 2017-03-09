@@ -72,3 +72,9 @@
 .postButton {
   margin-right: 5px;
 }
+
+.select:after {
+  border: 1px solid #2f2f2f;
+  border-right: 0;
+  border-top: 0;
+}
