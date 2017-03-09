@@ -30,6 +30,11 @@ const arcadeHelp = `Everybody needs a break now and again.
 \nChoose a game from the dropdown menu and start enjoying yourself!
 `;
 
+const photoPromptHelp = `Challenge your inner photographer to upload a new photo every day.
+\n You can use a pre-existing shot or take a new one with your device camera .
+\n The card will keep track of your current daily streak.
+`;
+
 const defaultHelp = `Add cards using the top-right button to get started!
 \n Cards can be resized by dragging the icon in the bottom-right corner to create a personalized dashboard. Enjoy!
 `;
@@ -42,6 +47,7 @@ var defaultNotifications = {
   'Focus': {text: focusHelp, dismiss: false, moduleType: 'Focus', timeout: 3000},
   'Clock': {text: clockHelp, dismiss: false, moduleType: 'Clock', timeout: 3000},
   'Arcade': {text: arcadeHelp, dismiss: false, moduleType: 'Arcade', timeout: 3000},
+  'One Photo Per Day': {text: photoPromptHelp, dismiss: false, moduleType: 'One Photo Per Day', timeout: 3000},
   'Default': {text: defaultHelp, dismiss: false, moduleType: 'Default', timeout: 3000}
 }
 
