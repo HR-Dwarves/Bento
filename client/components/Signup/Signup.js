@@ -103,7 +103,7 @@ class Signup extends React.Component {
             <section className={splash}>
               <div className={styles.bentoMainSplashContent}>
                 <h1 className={styles.splashHeader}>Bento</h1>
-                <p className={styles.splashSubHeader}>Your own customizable productivity dashboard.</p>
+                <p className={styles.splashSubHeader}>Revitalizing productivity</p>
                 <br/>
                 <div className={styles.loginButtons}>
                   <button className={googleStyle} onClick={() => this.authenticate('google')}>
@@ -146,7 +146,7 @@ class Signup extends React.Component {
             <div className={aboutBento}>
               <div className={styles.aboutText}>
                 <h1 className={styles.aboutHeader}>What is Bento?</h1>
-                <p className={styles.aboutSubHeader}>Bento is a fully customizable productivity dashboard that provides you with a dashboard that you cater to your needs.</p>
+                <p className={styles.aboutSubHeader}>Bento is a fully customizable productivity application providing you with a personalized dashboard</p>
               </div>
             </div>
           </div>
@@ -163,7 +163,7 @@ class Signup extends React.Component {
                 </div>
                 {/*<h1 className={styles.stepsHeader}>1: Login</h1>
                 <p className={styles.steps}>Login using your favorite social media account</p>*/}
-                <p className={styles.steps}>Choose your custom set from 9 productivity modules.</p>
+                <p className={styles.steps}>Choose your own custom set from 9 productivity modules</p>
               </div>
               <div className={iconStyle}>
                 {/*<div>
@@ -177,7 +177,7 @@ class Signup extends React.Component {
                 </div>
                 {/*<h1 className={styles.stepsHeader}>2: Add modules</h1>
                 <p className={styles.steps}>Add as many modules as you like</p>*/}
-                <p className={styles.steps}>Arrange to be your most productive you.</p>
+                <p className={styles.steps}>Arrange to become your most productive you</p>
               </div>
               {/*<div className={iconStyle}>
                 <div>
