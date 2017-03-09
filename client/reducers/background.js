@@ -16,17 +16,13 @@ function background(state = {}, action = '') {
       });
     }
     case actionTypes.ChangeBackgroundFulfilled: {
-      console.log('gets here');
-      const { inputUrl } = action.inputUrl;
-      console.log(inputUrl);
+      let { inputUrl } = action;
       const newState = Object.assign({}, state, {
         inProgress: false,
         success: 'Got url',
         inputUrl
       });
 
-      console.log(newState);
-      
       return newState;
     }
     default:
