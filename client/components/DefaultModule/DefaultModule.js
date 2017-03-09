@@ -25,12 +25,3 @@ class DefaultModule extends React.Component{
 }
 
 export default DefaultModule;
-
-// <header className="card-header">
-//   <div className="card-header-title">
-//     Welcome!
-//   </div>
-// </header>
-// <div className="card-content">
-//   <p>To get started, click the settings button above to add modules to your dashboard!</p>
-// </div>
