@@ -2,6 +2,7 @@
   left: inherit;
   top: 8em;
   bottom: initial;
+  position: absolute;
 }
 
 .modalCard {
