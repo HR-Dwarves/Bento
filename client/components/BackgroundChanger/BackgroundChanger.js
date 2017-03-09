@@ -36,7 +36,7 @@ class BackgroundChanger extends React.Component {
     return (
       <div className={cardStyle}>
         <header className='card-header'>
-          <p className='card-header-title'>Background Changer</p>
+          <p className='card-header-title'>Background Customization</p>
           <div className='card-header-icon'>
             <span className='icon'>
               <i className="fa fa-picture-o" aria-hidden='true'></i>
