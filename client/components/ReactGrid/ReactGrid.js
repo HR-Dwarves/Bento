@@ -82,7 +82,6 @@ class ReactGrid extends React.PureComponent {
     let layouts = this.state.layouts;
     if (layouts) {
       let layout = this.state.layouts[this.state.breakpoint];
-      // console.log(layout);
       if (dashboard && layout) {
         modules = dashboard.modules
         if (modules) {
@@ -116,12 +115,13 @@ class ReactGrid extends React.PureComponent {
         }
       }
     }
-    let defaultModule = <div className={componentStyle}><DefaultModule {...this.props} key={'abcd'}/></div>;
+    let defaultModule = <DefaultModule {...this.props} key={'abcd'}/>;
 
     // layout is an array of objects, see the demo for more complete usage
     var layoutStyle = `${styles.layout} layout`;
     let componentStyle = `${styles.component}`;
 
+    console.log(wrappers);
     if (this.state.breakpoint) {
       return (
         <ResponsiveReactGridLayout 
@@ -134,7 +134,7 @@ class ReactGrid extends React.PureComponent {
         onBreakpointChange={this.onBreakpointChange}
         useCSSTransforms={this.state.mounted}
         >
-          {wrappers ? wrappers : defaultModule }
+          { wrappers ? wrappers : defaultModule }
         </ResponsiveReactGridLayout>
       );
     } else {
