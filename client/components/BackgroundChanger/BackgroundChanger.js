@@ -46,7 +46,7 @@ class BackgroundChanger extends React.Component {
           </div>
         </header>
         <div className='card-content'>
-          <p>Upload an image by url:</p>
+          <p className={styles.uploadText}>Upload an image by url:</p>
           <form action='submit'
                 className={styles.formStyling}
                 onSubmit={(e) => this.handleSubmit(e)}
