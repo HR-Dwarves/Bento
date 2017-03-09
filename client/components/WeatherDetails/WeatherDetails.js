@@ -106,8 +106,15 @@ class WeatherDetails extends React.Component {
     };
 
     let forecast = this.state.forecast;
+    let x = this.props.layout.x;
+    let y = this.props.layout.y;
+    let h = this.props.layout.h;
+    let w = this.props.layout.w;
 
-    return (
+    console.log(h, w);
+
+    if (w >= 3 && h >= 3) {
+      return (
         <div className={cssCard}>
           <header className={cssHeader}>
             <p className='card-header-title'>Weather</p>
@@ -143,25 +150,66 @@ class WeatherDetails extends React.Component {
               </div>
             </div>
             <div className={styles.forecastDetails}>
-              {forecast ? forecast.map((details, index) => {
-                                  if (index < 5) {
-                                    return (
-                                      <div className={styles.forecastDetail}>
-                                        <p className={styles.forecastDay}>{details.day}</p>
-                                        <p className={styles.forecastDate}>{details.date.substring(3, 6)} {details.date.substring(0, 2)}</p>
-                                        <div className={styles.forecastIconTemp}>
-                                          <i className={forecastIcon(details.code)}></i>
-                                          <p className={styles.forecastTemp}>{Math.floor((parseInt(details.high) + parseInt(details.low))/ 2)}º</p>
-                                        </div>
-                                        <p className={styles.forecastDate}>{details.text}</p>
-                                      </div>
-                                    );
-                                  }
-                                }) : []}
+              {forecast ? forecast.map((details, index) => 
+                {
+                  if (index < 5) {
+                    return (
+                      <div className={styles.forecastDetail}>
+                        <p className={styles.forecastDay}>{details.day}</p>
+                        <p className={styles.forecastDate}>{details.date.substring(3, 6)} {details.date.substring(0, 2)}</p>
+                        <div className={styles.forecastIconTemp}>
+                          <i className={forecastIcon(details.code)}></i>
+                          <p className={styles.forecastTemp}>{Math.floor((parseInt(details.high) + parseInt(details.low))/ 2)}º</p>
+                        </div>
+                        <p className={styles.forecastDate}>{details.text}</p>
+                      </div>
+                    );
+                  }
+                }) : []}
             </div>
           </div>
         </div>
-    )
+      )
+    } else {
+      return (
+        <div className={cssCard}>
+          <header className={cssHeader}>
+            <p className='card-header-title'>Weather</p>
+            <div className={styles.searchIcon}><i className='fa fa-search' aria-hidden='true'></i></div>
+            <form action='submit'
+              className={styles.weatherForm}
+              onSubmit={e => this.handleSubmit(e)}
+              ref={input => this.zipForm = input}
+              >
+              <input className={styles.weatherInput} 
+                type='text' 
+                ref={input => this.searchInput = input}
+                placeholder=' Enter location'
+                />               
+            </form>
+            <div className="card-header-icon">
+              <span className="icon">
+                <i className='fa fa-cloud' aria-hidden='true'></i>
+              </span>
+            </div>
+          </header>
+          <div className={cssCardContent}>
+            <div className={styles.cardContent}>
+              <div>
+                <p className={styles.location}>{this.state.location}</p>
+                <p className={styles.condition}>{this.state.condition}</p>
+              </div>
+              <div>
+                <i className={weatherIcon}></i>
+                <p className={styles.temperature}> 
+                  {this.state.temperature}ºF
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    }
   }
 }
 
