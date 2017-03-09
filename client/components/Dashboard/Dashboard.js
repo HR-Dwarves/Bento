@@ -36,10 +36,11 @@ class Dashboard extends React.Component {
       if (user) {
         let {displayName, uid, email, photoURL} = user;
         let userId = uid || 'testUser';
+
         context.props.authenticateUser(user);
         context.props.getDatabase(uid);
-        // GET LAYOUTS HERE
         context.props.getLayouts(uid);
+
         database.ref(`users/${userId}`).on('value', (snapshot) => {
           let data = snapshot.val();
           context.setState({
@@ -48,7 +49,6 @@ class Dashboard extends React.Component {
           this.props.setDatabase(data);
         });
       } else {
-        console.error('NO USER');
         context.props.router.push('/signup');
       }
     })
