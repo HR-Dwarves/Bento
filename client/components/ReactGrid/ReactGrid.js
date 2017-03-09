@@ -121,7 +121,7 @@ class ReactGrid extends React.PureComponent {
     var layoutStyle = `${styles.layout} layout`;
     let componentStyle = `${styles.component}`;
 
-    console.log(wrappers);
+    // console.log(wrappers);
     if (this.state.breakpoint) {
       return (
         <ResponsiveReactGridLayout 

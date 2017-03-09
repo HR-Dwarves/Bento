@@ -4,7 +4,7 @@ const listHelp = `Use the list card to stay focused on your priorities!
 \nDelete list items using the "Edit" button and clicking on the "X" icon.
 `;
 
-const stickyNoteHelp = `Sticky Note Card
+const stickyNoteHelp = `Use this sticky note to write down whatever information you so desire. Both the card title and body can be edited!
 \n
 `;
 
@@ -14,8 +14,8 @@ const newsHelp = `Use the newsfeed card to keep update to date with your favorit
 \nView more news items by clicking the 'More!' button in the top right!
 `;
 
-const weatherHelp = `Weather Card
-\n
+const weatherHelp = `Enter a city name or zip code into the input field in the top right!
+\nIf you're interested in a 5-day forecast, try rescaling the card to a larger size.
 `;
 
 const focusHelp = `Use the Focus card to set your daily intentions!
@@ -23,7 +23,11 @@ const focusHelp = `Use the Focus card to set your daily intentions!
 `;
 
 const clockHelp = `Add additional timezones by using the dropdown menu!
-\n Feel free to add / delete as many timezones as you prefer.
+\nFeel free to add / delete as many timezones as you prefer.
+`;
+
+const arcadeHelp = `Everybody needs a break now and again.
+\nChoose a game from the dropdown menu and start enjoying yourself!
 `;
 
 const defaultHelp = `Add cards using the top-right button to get started!
@@ -37,6 +41,7 @@ var defaultNotifications = {
   'Weather': {text: weatherHelp, dismiss: false, moduleType: 'Weather', timeout: 3000},
   'Focus': {text: focusHelp, dismiss: false, moduleType: 'Focus', timeout: 3000},
   'Clock': {text: clockHelp, dismiss: false, moduleType: 'Clock', timeout: 3000},
+  'Arcade': {text: arcadeHelp, dismiss: false, moduleType: 'Arcade', timeout: 3000},
   'Default': {text: defaultHelp, dismiss: false, moduleType: 'Default', timeout: 3000}
 }
 
