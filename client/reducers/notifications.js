@@ -12,6 +12,7 @@ const initialState = {
     'News': false,
     'Sticky Note': false,
     'One Photo Per Day': false,
+    'Focus': false,
     'Default': false
   }
 };
