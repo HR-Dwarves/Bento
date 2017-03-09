@@ -23,7 +23,6 @@ class Dashboard extends React.Component {
     this.state = {
       isModalOpen: false,
       databaseResponded: false,
-      backgroundImage: null,
     }
     this.handleSettingsButton = this.handleSettingsButton.bind(this);
     this.closeModal = this.closeModal.bind(this);
@@ -71,13 +70,17 @@ class Dashboard extends React.Component {
     let dashContainer = `${styles.dashContainer}`;
     let mainDashboardPanelCSS = `${styles.mainDashboardPanel}`;
 
+    let dashboard = this.props.dashboard;
+    let db_key = this.props.db_key
+    let backgroundUrl = dashboard.background;
+
     let context = this;
     let backgroundImageStyle = null;
+
     // console.log('RENDERING THE DASHBOARD. HERE ARE ITS PROPS: ', this.props);
-    if (!!this.state.background) {
-      console.log('GETS OVER HEREEEREKLRJ:ELKJA:LJ');
+    if (!!backgroundUrl) {
       backgroundImageStyle = {
-        backgroundImage: `url(${context.state.backgroundImage})`,
+        backgroundImage: `url(${backgroundUrl})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }
