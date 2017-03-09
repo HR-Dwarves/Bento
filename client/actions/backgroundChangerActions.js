@@ -12,14 +12,30 @@ export function ChangeBackground(inputUrl, db_key, user = 'test') {
 
     url.set(inputUrl)
     .then((snap) => {
-      console.log('set the database');
-      dispatch(ChangeBackgroundFulfilledAction({inputUrl: inputUrl}));
+      dispatch(ChangeBackgroundFulfilledAction(inputUrl));
     })
     .catch(error => {
       console.error(error);
       dispatch(ChangeBackgroundRejectedAction());
     });
  }   
+}
+
+export function RemoveBackground(user = 'test') {
+  return dispatch => {
+    dispatch(RemoveBackgroundRequestAction());
+
+    let url = database.ref(`users/${user}/background`);
+
+    url.set('')
+    .then(() => {
+      dispatch(ChangeBackgroundFulfilledAction(''));
+    })
+    .catch(error => {
+      console.error(error);
+      dispatch(ChangeBackgroundRejectedAction());
+    });
+  }
 }
 
 function ChangeBackgroundRequestedAction() {
