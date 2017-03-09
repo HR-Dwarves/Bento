@@ -17,12 +17,13 @@ const database = firebaseApp.database();
 
 
 class Dashboard extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       isModalOpen: false,
-      databaseResponded: false
+      databaseResponded: false,
+      backgroundImage: null,
     }
     this.handleSettingsButton = this.handleSettingsButton.bind(this);
     this.closeModal = this.closeModal.bind(this);
@@ -70,9 +71,21 @@ class Dashboard extends React.Component {
     let dashContainer = `${styles.dashContainer}`;
     let mainDashboardPanelCSS = `${styles.mainDashboardPanel}`;
 
+    let context = this;
+    let backgroundImageStyle = null;
+    // console.log('RENDERING THE DASHBOARD. HERE ARE ITS PROPS: ', this.props);
+    if (!!this.state.background) {
+      console.log('GETS OVER HEREEEREKLRJ:ELKJA:LJ');
+      backgroundImageStyle = {
+        backgroundImage: `url(${context.state.backgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }
+    }
+
     if (this.state.databaseResponded) {
       return (
-        <div className={dashContainer}>
+        <div className={dashContainer} style={backgroundImageStyle ? backgroundImageStyle : {backgroundImage: 'none'}}>
           <Nav {...this.props}/>
           <div className={mainDashboardPanelCSS}>
             <Notifications {...this.props} />
