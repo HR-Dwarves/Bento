@@ -112,7 +112,7 @@ class ReactGrid extends React.PureComponent {
     var layoutStyle = `${styles.layout} layout`;
     let componentStyle = `${styles.component}`;
 
-    if (this.state.breakpoint && this.props.dashboard.modules) {
+    if (this.state.breakpoint) {
       return (
         <ResponsiveReactGridLayout 
         {...this.props}
@@ -128,7 +128,7 @@ class ReactGrid extends React.PureComponent {
         </ResponsiveReactGridLayout>
       );
     } else {
-      return defaultModule;
+      return <div></div>;
     }
   }
 }
