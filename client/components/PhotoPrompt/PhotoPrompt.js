@@ -165,9 +165,10 @@ class PhotoPrompt extends React.Component {
   render() {
     let photos = this.props.dashboard.modules[this.props.db_key].photos;
     let iconStyle = `${this.state.todaysPhotoIsTaken ? styles.iconGreen : styles.iconRed} icon`;
+    let cardStyles = `${styles.photoprompt} card`;
 
     return (
-      <div className='card'>
+      <div className={cardStyles}>
 
         <header className={`${styles.header} card-header`}>
           <p className="card-header-title">One Photo Every Day Challenge</p>

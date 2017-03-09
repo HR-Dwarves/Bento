@@ -8,8 +8,9 @@ import newsfeed from './newsfeed';
 import authentication from './authentication';
 import layouts from './layouts';
 import notifications from './notifications';
+import background from './background';
 
 // pass reducers into combineReducers (in first object)
-const rootReducer = combineReducers({dashboard, list, newsfeed, authentication, layouts, notifications, routing: routerReducer });
+const rootReducer = combineReducers({dashboard, list, newsfeed, authentication, layouts, notifications, background, routing: routerReducer });
 
 export default rootReducer;

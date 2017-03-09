@@ -52,31 +52,33 @@ class Arcade extends React.Component {
     let contentStyle = `${styles.cardBody} 'card-content`
     let headerStyles = `${styles.header} card-header`;
 
+    let cardStyle = `${styles.arcade} card`;
+
     return (
-      <div className='card'>
-        <header className={headerStyles}>
-          <p className='card-header-title'>
-            <span className='select'>
-              <select value={gameToRender} onChange={this.handleGameChange} className={styles.removeBorder}>
-                <option value='BUBBLE BOBBLE'>Bubble Bobble</option>
-                <option value='GALAGA'>Galaga</option>
-                <option value='PACMAN'>Pac-Man</option>
-                <option value='RAIDENX'>Raiden X</option>
-                <option value='SPACE INVADERS'>Space Invaders</option>
-                <option value='TRON'>Tron</option>
-                <option value='TETRIS'>Tetris</option>
-              </select>
-            </span>
-          </p>
-          <div className='card-header-icon'>
-            <span className='icon'>
-              <i className='fa fa-gamepad' aria-hidden='true'></i>
-            </span>
+      <div className={cardStyle}>
+          <header className={headerStyles}>
+            <p className='card-header-title'>
+              <span className='select'>
+                <select value={gameToRender} onChange={this.handleGameChange} className={styles.removeBorder}>
+                  <option value='BUBBLE BOBBLE'>Bubble Bobble</option>
+                  <option value='GALAGA'>Galaga</option>
+                  <option value='PACMAN'>Pac-Man</option>
+                  <option value='RAIDENX'>Raiden X</option>
+                  <option value='SPACE INVADERS'>Space Invaders</option>
+                  <option value='TRON'>Tron</option>
+                  <option value='TETRIS'>Tetris</option>
+                </select>
+              </span>
+            </p>
+            <div className='card-header-icon'>
+              <span className='icon'>
+                <i className='fa fa-gamepad' aria-hidden='true'></i>
+              </span>
+            </div>
+          </header>
+          <div className={contentStyle}>
+              <embed className={styles.embeddedGame} key={this.state.currentGame} src={this.state.games[gameToRender]} wmode='window'/>
           </div>
-        </header>
-        <div className={contentStyle}>
-            <embed className={styles.embeddedGame} key={this.state.currentGame} src={this.state.games[gameToRender]} wmode='window'/>
-        </div>
       </div>
     );
   }

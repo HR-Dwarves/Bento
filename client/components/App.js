@@ -9,6 +9,7 @@ import * as clocksActionCreators from '../actions/clocksActions';
 import * as hackerNewsActionCreators from '../actions/hackerNewsActions';
 import * as authenticationActionCreators from '../actions/authenticationActions';
 import * as photoPromptActionCreators from '../actions/photoPromptActions';
+import * as backgroundChangerActionCreators from '../actions/backgroundChangerActions';
 import Main from './Main/Main';
 import bulma from '../../node_modules/bulma/css/bulma.css';
 import firebaseApp from '../base';
@@ -23,7 +24,8 @@ var bundledActionCreators = Object.assign({},
                                           stickyNoteActionCreators,
                                           hackerNewsActionCreators,
                                           authenticationActionCreators,
-                                          photoPromptActionCreators);
+                                          photoPromptActionCreators,
+                                          backgroundChangerActionCreators);
 
 // Map each reducers state to props
 function mapStateToProps(state) {
@@ -31,7 +33,7 @@ function mapStateToProps(state) {
     dashboard: state.dashboard,
     user: state.authentication,
     layouts: state.layouts,
-    notifications: state.notifications
+    notifications: state.notifications,
   }
 }
 

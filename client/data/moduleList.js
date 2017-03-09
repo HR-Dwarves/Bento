@@ -8,6 +8,7 @@ import PhotoPrompt from '../components/PhotoPrompt/PhotoPrompt';
 import Arcade from '../components/Arcade/Arcade';
 import Focus from '../components/Focus/Focus';
 import Quote from '../components/Quote/Quote';
+import BackgroundChanger from '../components/BackgroundChanger/BackgroundChanger';
 import DefaultModule from '../components/DefaultModule/DefaultModule'
 
 var moduleList = {
@@ -19,7 +20,8 @@ var moduleList = {
   'One Photo Per Day': PhotoPrompt,
   'Arcade': Arcade,
   'Focus': Focus,
-  'Quote': Quote
+  'Quote': Quote,
+  'BackgroundChanger': BackgroundChanger,
 };
 
 export default moduleList;

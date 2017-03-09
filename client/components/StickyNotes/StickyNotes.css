@@ -1,6 +1,7 @@
 .stickynote {
   display: flex;
   flex-direction: column;
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
 .header {
@@ -10,6 +11,10 @@
 
 .content {
   /*overflow-y: scroll;*/
+}
+
+.inputStyle {
+  background-color: rgba(255, 255, 255, 0);
 }
 
 textarea {
@@ -34,5 +39,4 @@ span {
 input {
   border: none;
   resize: none;
-  background-color: none;
 }
