@@ -26,7 +26,8 @@ const clockHelp = `Add additional timezones by using the dropdown menu!
 \n Feel free to add / delete as many timezones as you prefer.
 `;
 
-const defaultHelp = `Add cards using the button above to get started!
+const defaultHelp = `Add cards using the top-right button to get started!
+\n Cards can be resized using by dragging the icon in the bottom-right corner to create a personalized dashboard.
 `;
 
 var defaultNotifications = {
