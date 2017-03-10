@@ -47,7 +47,6 @@ class NotificationItem extends React.Component {
       if (dismiss) {
         let index = this.props.index;
         this.timeout = setTimeout(function(index){
-          console.log('SET TIMEOUT FIRED', index);
           this.props.removeNotification(index)
         }.bind(this, index), timeout);
       }

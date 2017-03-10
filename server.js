@@ -9,7 +9,6 @@ var app = express();
 app.use(cors());
 app.use(compression());
 
-
 app.get('/news/:newsSource/:time', function(req, res) {
   var newsSource = req.params.newsSource;
   var time = req.params.time;
@@ -29,13 +28,6 @@ app.get('/news/:newsSource/:time', function(req, res) {
   });
 });
 
-// app.get('*.js', function (req, res, next) {
-//   req.url = req.url + '.gz';
-//   res.set('Content-Encoding', 'gzip');
-//   res.set('Content-Type', 'application/javascript');
-//   next();
-// });
-
 app.get('/bundle.js', function(req, res) {
   res.sendFile(path.join(__dirname, './dist/bundle.js'));
 });
@@ -43,9 +35,6 @@ app.get('/bundle.js', function(req, res) {
 app.get('*', function(req, res) {
   res.sendFile(path.join(__dirname, './dist/index.html'));
 });
-
-
-
 
 // error handlers
 

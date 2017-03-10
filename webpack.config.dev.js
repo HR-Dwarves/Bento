@@ -26,8 +26,8 @@ module.exports = {
       }
     }),
     new CompressionPlugin({
-      asset: "[path].gz[query]",
-      algorithm: "gzip",
+      asset: '[path].gz[query]',
+      algorithm: 'gzip',
       test: /\.js$|\.css$|\.html$/,
       threshold: 0,
       minRatio: 0.8
@@ -48,9 +48,6 @@ module.exports = {
       }
     ]
   },
-  // postcss: function() {
-  //     return postCSSConfig;
-  //   },
   resolve: {
     extensions: ['.webpack.js', '.web.js', '.js', '.jsx'],
     alias: {'react-grid-layout': path.join(__dirname, '/index-dev.js')}
