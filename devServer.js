@@ -39,12 +39,12 @@ app.get('/news/:newsSource/:time', function(req, res) {
 
 app.use(require('webpack-hot-middleware')(compiler));
 
-app.get('*.js', function (req, res, next) {
-  req.url = req.url + '.gz';
-  res.set('Content-Encoding', 'gzip');
-  res.set('Content-Type', 'application/javascript');
-  next();
-});
+// app.get('*.js', function (req, res, next) {
+//   req.url = req.url + '.gz';
+//   res.set('Content-Encoding', 'gzip');
+//   res.set('Content-Type', 'application/javascript');
+//   next();
+// });
 
 app.get('*', function(req, res) {
   res.sendFile(path.join(__dirname, 'index.html'));
