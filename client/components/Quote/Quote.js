@@ -28,7 +28,6 @@ class Quote extends React.Component {
     var quotes = LS.getFromLS('quotes')
 
     if (!quotes.value) {
-      console.log('LS Quotes not available');
       axios.get('https://firebasestorage.googleapis.com/v0/b/dashboardapp-3d3c7.appspot.com/o/Quotes.json?alt=media&token=ac034d18-b70a-4fa3-ad9b-55fae3c70487')
       .then(function(response) {
         console.log(response.data);
@@ -48,7 +47,6 @@ class Quote extends React.Component {
         console.error(err);
       })
     } else {
-      console.log('LS Quotes available!');
       var index = Math.floor(Math.random() * Object.keys(quotes.value).length);
       var quoteArray = quotes.value[index];
       this.setState({
