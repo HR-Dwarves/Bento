@@ -36,13 +36,12 @@ app.get('/news/:newsSource/:time', function(req, res) {
   });
 });
 
-
 app.use(require('webpack-hot-middleware')(compiler));
 
-// app.get('*.js', function (req, res, next) {
-//   req.url = req.url + '.gz';
+// app.get('*.css', function (req, res, next) {
 //   res.set('Content-Encoding', 'gzip');
-//   res.set('Content-Type', 'application/javascript');
+//   res.set('Accept-Encoding', 'gzip');
+//   res.set('Content-Type', 'text/css');
 //   next();
 // });
 
