@@ -94,7 +94,7 @@ class Nav extends React.Component {
           <div></div>
         </div>
         <Link to="/">
-          <div className={pageTitleCSS}>bento</div>
+          <div className={pageTitleCSS}>Bento</div>
         </Link>
         <div className={modalButtonStyle}>
           <button style={displayButton} onClick={this.handleSettingsButton} className="button is-dark modal-button">
