@@ -1,12 +1,15 @@
 var path = require('path');
 var express = require('express');
 var cors = require('cors');
+var compression = require('compression');
 var webpack = require('webpack');
 var config = require('./webpack.config.dev');
 var axios = require('axios');
 
 var app = express();
 app.use(cors());
+app.use(compression());
+
 var compiler = webpack(config);
 
 app.use(require('webpack-dev-middleware')(compiler, {
