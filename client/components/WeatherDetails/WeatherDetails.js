@@ -97,6 +97,7 @@ class WeatherDetails extends React.Component {
   }
 
   render() {
+    
     let cssCard = `${styles.card} card`;
     let cssHeader = `${styles.header} card-header`;
     let cssCardContent = `${styles.content} card-content`;
@@ -105,10 +106,12 @@ class WeatherDetails extends React.Component {
       return `${styles.forecastIconStyle} wi wi-yahoo-${code}`;
     };
     let forecast = this.state.forecast;
-    let h = this.props.layout.h;
-    let w = this.props.layout.w;
-
-    // console.log(h, w);
+    
+    let h, w;
+    if (this.props.layout) {
+      h = this.props.layout.h;
+      w = this.props.layout.w; 
+    }
 
     if (w >= 3 && h >= 3) {
       return (
