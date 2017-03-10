@@ -56,7 +56,7 @@ class Arcade extends React.Component {
     let cardStyle = `${styles.arcade} card`;
 
     return (
-      <div className='card'>
+      <div className={cardStyle}>
         <header className={headerStyles}>
           <p className='card-header-title'>
             <span className={selectStyles}>

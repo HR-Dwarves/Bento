@@ -11,6 +11,7 @@
 
 .removeBorder {
   border: none !important;
+  background-color: rgba(255, 255, 255, 0) !important;
 }
 
 .embedDiv {
@@ -29,6 +30,9 @@
   flex: 0 0 auto;
   height: 42px;
   line-height: 1.5em;
+}
+
+.select {
 }
 
 .select:after {
