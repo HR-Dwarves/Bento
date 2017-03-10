@@ -5,10 +5,12 @@ var compression = require('compression');
 var webpack = require('webpack');
 var config = require('./webpack.config.dev');
 var axios = require('axios');
+var morgan = require('morgan');
 
 var app = express();
 app.use(cors());
 app.use(compression());
+app.use(morgan('dev'));
 
 var compiler = webpack(config);
 
@@ -16,6 +18,8 @@ app.use(require('webpack-dev-middleware')(compiler, {
   noInfo: true,
   publicPath: config.output.publicPath
 }));
+
+app.use(express.static(path.join(__dirname, 'client', 'styles')));
 
 app.get('/news/:newsSource/:time', function(req, res) {
   var newsSource = req.params.newsSource;
