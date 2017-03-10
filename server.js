@@ -29,12 +29,12 @@ app.get('/news/:newsSource/:time', function(req, res) {
   });
 });
 
-app.get('*.js', function (req, res, next) {
-  req.url = req.url + '.gz';
-  res.set('Content-Encoding', 'gzip');
-  res.set('Content-Type', 'application/javascript');
-  next();
-});
+// app.get('*.js', function (req, res, next) {
+//   req.url = req.url + '.gz';
+//   res.set('Content-Encoding', 'gzip');
+//   res.set('Content-Type', 'application/javascript');
+//   next();
+// });
 
 app.get('/bundle.js', function(req, res) {
   res.sendFile(path.join(__dirname, './dist/bundle.js'));
