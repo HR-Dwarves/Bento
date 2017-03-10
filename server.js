@@ -1,13 +1,13 @@
 var path = require('path');
 var express = require('express');
 var cors = require('cors');
-// var compression = require('compression');
+var compression = require('compression');
 var axios = require('axios');
 
 var app = express();
 
 app.use(cors());
-// app.use(compression());
+app.use(compression());
 
 
 app.get('/news/:newsSource/:time', function(req, res) {
@@ -27,6 +27,13 @@ app.get('/news/:newsSource/:time', function(req, res) {
         res.send(error);
       });
   });
+});
+
+app.get('*.js', function (req, res, next) {
+  req.url = req.url + '.gz';
+  res.set('Content-Encoding', 'gzip');
+  res.set('Content-Type', 'application/javascript');
+  next();
 });
 
 app.get('/bundle.js', function(req, res) {

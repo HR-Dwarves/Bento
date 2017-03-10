@@ -1,6 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var postCSSConfig = require('./postcss.config.js');
+var CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
   devtool: 'source-map',
@@ -17,13 +18,20 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.LoaderOptionsPlugin({
-             test: /\.css$/, // may apply this only for some modules
-             options: {
-              postcss: function() {
-                return postCSSConfig;
-              }
-             }
-           })
+      test: /\.css$/, // may apply this only for some modules
+      options: {
+        postcss: function() {
+          return postCSSConfig;
+        }
+      }
+    }),
+    new CompressionPlugin({
+      asset: "[path].gz[query]",
+      algorithm: "gzip",
+      test: /\.js$|\.css$|\.html$/,
+      threshold: 0,
+      minRatio: 0.8
+    })
   ],
   module: {
     loaders: [
