@@ -102,7 +102,7 @@ class Signup extends React.Component {
           <div className='columns'>
             <section className={splash}>
               <div className={styles.bentoMainSplashContent}>
-                <h1 className={styles.splashHeader}>bento</h1>
+                <h1 className={styles.splashHeader}>Bento</h1>
                 <p className={styles.splashSubHeader}>Revitalizing productivity</p>
                 <br/>
                 <div className={styles.loginButtons}>
