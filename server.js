@@ -1,13 +1,13 @@
 var path = require('path');
 var express = require('express');
 var cors = require('cors');
-var compression = require('compression');
+// var compression = require('compression');
 var axios = require('axios');
 
 var app = express();
 
 app.use(cors());
-app.use(compression());
+// app.use(compression());
 
 
 app.get('/news/:newsSource/:time', function(req, res) {
