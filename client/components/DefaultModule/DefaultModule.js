@@ -10,9 +10,13 @@ class DefaultModule extends React.Component{
   }
 
   componentDidMount() {
-    let notification = defaultNotifications['Default'];
-    let newNotification = Object.assign({}, notification);
-    this.props.addNotification(newNotification);
+    let exists = this.props.notifications.types['Default'];
+    if (!exists) {
+      let notification = defaultNotifications['Default'];
+      let newNotification = Object.assign({}, notification);
+      this.props.addNotification(newNotification);
+    }
+
   }
 
   render() {
