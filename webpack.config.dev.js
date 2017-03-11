@@ -2,6 +2,8 @@ var path = require('path');
 var webpack = require('webpack');
 var postCSSConfig = require('./postcss.config.js');
 var CompressionPlugin = require('compression-webpack-plugin');
+var postcssImport = require('postcss-import');
+var autoprefixer = require('autoprefixer');
 
 module.exports = {
   devtool: 'source-map',
@@ -18,7 +20,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.LoaderOptionsPlugin({
-      test: /\.css$/, // may apply this only for some modules
+      test: /\.css$/,
       options: {
         postcss: function() {
           return postCSSConfig;
@@ -35,7 +37,7 @@ module.exports = {
   ],
   module: {
     loaders: [
-    // js
+      // js
       {
         test: /\.js$/,
         loaders: ['babel-loader'],

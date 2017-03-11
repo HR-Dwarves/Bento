@@ -80,21 +80,22 @@ class Signup extends React.Component {
   }
 
   render() {
-    let googleStyle = `${styles.google} button`
-    let githubStyle = `${styles.github} button`
-    let facebookStyle = `${styles.facebook} button`
-    let twitterStyle = `${styles.twitter} button`
-    let googleIconStyle = `${styles.loginIcon} fa fa-google`
-    let githubIconStyle = `${styles.loginIcon} fa fa-github`
-    let facebookIconStyle = `${styles.loginIcon} fa fa-facebook`
-    let twitterIconStyle = `${styles.loginIcon} fa fa-twitter`
-    let getStartedButton = `${styles.getStartedButton} button is-outlined`
-    let loader = `${styles.loader}`
-    let splash = `${styles.bentoMainSplash} column`
-    let aboutBento = `${styles.aboutBento} column`
-    let iconSection = `${styles.iconSection} column`
-    let iconStyle = `${styles.iconStyle} column`
-
+    let googleStyle = `${styles.google} button ${styles.loginButton}`;
+    let githubStyle = `${styles.github} button ${styles.loginButton}`;
+    let facebookStyle = `${styles.facebook} button ${styles.loginButton}`;
+    let twitterStyle = `${styles.twitter} button ${styles.loginButton}`;
+    let googleIconStyle = `${styles.loginIcon} fa fa-google`;
+    let githubIconStyle = `${styles.loginIcon} fa fa-github`;
+    let facebookIconStyle = `${styles.loginIcon} fa fa-facebook`;
+    let twitterIconStyle = `${styles.loginIcon} fa fa-twitter`;
+    let getStartedButton = `${styles.getStartedButton} button is-outlined`;
+    let loader = `${styles.loader}`;
+    let splash = `${styles.bentoMainSplash} column`;
+    let aboutBento = `${styles.aboutBento} column`;
+    let iconSection = `${styles.iconSection} column`;
+    let iconStyle = `${styles.iconStyle} column`;
+    let loginButton = `${styles.loginButton}`;
+    let iconSpan = `${styles.iconSpan} icon`;
 
     if (!this.state.authInProcess) {
       return (
@@ -110,7 +111,7 @@ class Signup extends React.Component {
                     <span className={styles.buttonText}>
                       Google
                     </span>
-                    <span className="icon">
+                    <span className={iconSpan}>
                       <i className={googleIconStyle} aria-hidden="true"></i>
                     </span>
                   </button>
@@ -118,7 +119,7 @@ class Signup extends React.Component {
                     <span className={styles.buttonText}>
                       Github
                     </span>
-                    <span className="icon">
+                    <span className={iconSpan}>
                       <i className="fa fa-github" aria-hidden="true"></i>
                     </span>
                   </button>
@@ -126,7 +127,7 @@ class Signup extends React.Component {
                     <span className={styles.buttonText}>
                       Facebook
                     </span>
-                    <span className="icon">
+                    <span className={iconSpan}>
                       <i className="fa fa-facebook-official" aria-hidden="true"></i>
                     </span>
                   </button>
@@ -134,7 +135,7 @@ class Signup extends React.Component {
                     <span className={styles.buttonText}>
                       Twitter
                     </span>
-                    <span className="icon">
+                    <span className={iconSpan}>
                       <i className="fa fa-twitter" aria-hidden="true"></i>
                     </span>
                   </button>

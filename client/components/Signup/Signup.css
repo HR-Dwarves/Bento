@@ -111,6 +111,12 @@
   width: 96%;
   margin-left: 2%;
   margin-bottom: 12px;
+  min-height: 2em;
+  /*margin: .2em;*/
+}
+
+.loginButton > * {
+  text-align: center;
 }
 
 .loader {
@@ -122,7 +128,20 @@
 
 @media all and (max-width: 550px) {
   .loginButtons {
+    webkit-flex-direction: column;
     flex-direction: column;
+    min-height: 3em;
+    text-align: center;
+    vertical-align: center;
+    /*margin: 0 auto;*/
+    /*display: inline;*/
+    /*width: 95%;*/
+    /*margin: 0 auto;*/
+  }
+
+  .loginButtons > * {
+    text-align: center;
+    /*margin: 0 auto;*/
   }
 }
 
@@ -136,7 +155,10 @@
   display: flex;
   align-items: center;
   text-align: center;
-  /*-webkit-align-items: center;*/
+  height: 100%;
+  -webkit-align-items: center;
+  min-height: 2em;
+
 }
 
 .loginIcon {
@@ -146,6 +168,10 @@
 .buttonText {
   vertical-align: middle;
   text-align: center;
+}
+
+.iconSpan {
+  margin: auto 0;
 }
 
 .google {
