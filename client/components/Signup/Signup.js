@@ -15,7 +15,6 @@ class Signup extends React.Component {
       authInProcess: false
     }
     this.authenticate = this.authenticate.bind(this);
-    this.logCurrentUser = this.logCurrentUser.bind(this);
     this.handleLoginModal = this.handleLoginModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
@@ -26,10 +25,9 @@ class Signup extends React.Component {
     this.setState({
       authInProcess: true
     })
+
     firebaseApp.auth().signInWithPopup(authProvider)
     .then(function(result) {
-      // Save user information within auth container
-      // console.log(result);
       context.setState({
         authInProcess: false
       })
@@ -57,14 +55,6 @@ class Signup extends React.Component {
         authInProcess: false
       })
     })
-  }
-
-  logCurrentUser() {
-    console.log(firebaseApp.auth().currentUser);
-  }
-
-  alertLoginError() {
-
   }
 
   handleLoginModal(){
@@ -141,6 +131,7 @@ class Signup extends React.Component {
                   </button>
                   </div>
                 </div>
+                <div>***Please disable popup blockers before logging in</div>
               </section>
           </div>
           <div className='columns'>
@@ -153,46 +144,20 @@ class Signup extends React.Component {
           </div>
           <div className='columns'>
               <div className={iconStyle}>
-                {/*<div>
-                  <span className={`${styles.homepageIcons} icon`}>
-                    <i className={`${styles.signin} fa fa-sign-in`} aria-hidden="true"></i>
-                  </span>
-                </div>*/}
                 <div className={styles.homepageImageHolders}>
                   <img className={styles.homePageImage}
                     src='https://firebasestorage.googleapis.com/v0/b/dashboardapp-3d3c7.appspot.com/o/splashPage%2Fmodlist.png?alt=media&token=30139a0f-9cc0-4c25-8836-b1e4d9fae8cd'/>
                 </div>
-                {/*<h1 className={styles.stepsHeader}>1: Login</h1>
-                <p className={styles.steps}>Login using your favorite social media account</p>*/}
                 <p className={styles.steps}>Choose your own custom set from 9 productivity modules</p>
               </div>
               <div className={iconStyle}>
-                {/*<div>
-                  <span className={`${styles.homepageIcons} icon`}>
-                    <i className={`${styles.signin} fa fa-cogs`} aria-hidden="true"></i>
-                  </span>
-                </div>*/}
+
                 <div className={styles.homepageImageHolders}>
                   <img className={styles.homePageImage}
                     src='https://firebasestorage.googleapis.com/v0/b/dashboardapp-3d3c7.appspot.com/o/splashPage%2Fallmods.png?alt=media&token=c244421c-6bef-443c-9b65-4d66321fe85e'/>
                 </div>
-                {/*<h1 className={styles.stepsHeader}>2: Add modules</h1>
-                <p className={styles.steps}>Add as many modules as you like</p>*/}
                 <p className={styles.steps}>Arrange to become your most productive you</p>
               </div>
-              {/*<div className={iconStyle}>
-                <div>
-                  <span className={`${styles.homepageIcons} icon`}>
-                    <i className={`${styles.signin} fa fa-space-shuttle`} aria-hidden="true"></i>
-                  </span>
-                </div>
-                <div className={styles.homepageImageHolders}>
-                  <img className={styles.homePageImage}
-                    src='https://firebasestorage.googleapis.com/v0/b/dashboardapp-3d3c7.appspot.com/o/splashPage%2Fallmods.png?alt=media&token=6db55984-b2a3-4150-b410-1172ed42b628' />
-                </div>
-                <h1 className={styles.stepsHeader}>3: Customize it!</h1>
-                <p className={styles.steps}>Drag and drop to customize your dashboard</p>
-              </div>*/}
             </div>
         </div>
       );
