@@ -9,7 +9,7 @@
     "test": "npm run test-server && npm run jest",
     "test-server": "NODE_ENV=production mocha './test/**/*.spec.js'",
     "clean": "rimraf dist/bundle.js",
-    "dev": "NODE_ENV=local PORT=3000 node ./bin/www",
+    "dev": "node devServer.js",
     "start": "npm run build && node ./bin/www",
     "tunnel": "browser-sync start --proxy localhost:7770 --tunnel wesbos",
     "jest": "jest ./spec/**/*.spec.js",
