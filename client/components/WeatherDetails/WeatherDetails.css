@@ -21,8 +21,6 @@
   justify-content: space-between;
   text-align: center;
   align-items: center;
-  overflow-y: scroll;
-  /*height: 100%;*/
 }
 
 .details {
@@ -44,10 +42,7 @@
 
 .temperature {
   font-size: 3em;
-  /*font-family: 'Slabo 27px', serif;*/
-  /*font-family: 'Sansita', serif;*/
   font-family: 'Lato', serif;
-  /*font-family: 'Roboto', serif;*/
 }
 
 .image {
@@ -56,7 +51,6 @@
 }
 
 .searchIcon {
-  /*padding-top: 11px;*/
   align-self: center;
   padding-right: 8px;
   display: flex;
@@ -87,8 +81,6 @@
 }
 
 input {
-  /*padding-top: 8px;*/
-  /*border: none !important;*/
 }
 
 input:focus {
@@ -115,7 +107,7 @@ p {
   flex: 0 0 auto;
 }
 
-forecastDetails > * {
+.forecastDetails > * {
   flex: 1 0 auto;
 }
 
@@ -127,6 +119,10 @@ forecastDetails > * {
   text-align: center;
 }
 
+.forecastDetail > * {
+  /*padding-bottom: .1em;*/
+}
+
 .forecastTemp {
   font-size: 1.5em;
   padding-left: 0.1em;
@@ -135,6 +131,7 @@ forecastDetails > * {
 
 .forecastDate {
   font-size: .85em;
+  /*margin-bottom: .2em;*/
 }
 
 .forecastDay {
@@ -144,6 +141,8 @@ forecastDetails > * {
 .forecastIconStyle {
   font-size: 1.8em;
   padding-right: 0.1em;
+  padding-top: .2em;
+  padding-bottom: .2em;
 }
 
 .forecastIconTemp {
@@ -154,5 +153,4 @@ forecastDetails > * {
 }
 
 .content {
-  overflow-y: scroll;
 }
