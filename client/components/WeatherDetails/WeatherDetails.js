@@ -29,7 +29,6 @@ class WeatherDetails extends React.Component {
     };
 
     this.weatherInterval = null;
-
     this.getWeatherData = this.getWeatherData.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.clearInterval = this.clearInterval.bind(this);
