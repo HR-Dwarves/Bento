@@ -11,6 +11,11 @@
 
 }
 
+.instructions {
+  font-size: 1.5em;
+  margin: 0 .5em;
+}
+
 .bentoMainSplash {
   background-color: #ECE9E6;
   text-align: center;

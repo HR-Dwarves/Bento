@@ -77,7 +77,7 @@ class Signup extends React.Component {
                 <h1 className={styles.splashHeader}>Bento</h1>
                 <p className={styles.splashSubHeader}>Revitalizing productivity</p>
                 <br/>
-                <div>Please login using your preferred provider below</div>
+                <div className={styles.instructions}>Please login using your preferred provider below</div>
                 <div className={styles.loginButtons}>
                   {Object.keys(authProviders).map(provider => {
                     return <AuthProvider 
