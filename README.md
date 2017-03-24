@@ -23,15 +23,48 @@ Bento is a modular productivity application utilizing a card-based dashboard of 
 ## Technologies Utilized
 - **Client:** React, Redux, Masonry (React Grid Layout)
 - **Server:** Node.js, Express.js
-- **Database / Authenication:** Firebase
+- **Database / Authentication:** Firebase
 - **Hosting:** Google Cloud Platform / Google App Engine
 - **Deployment:** Webpack, CircleCI
 - **Testing:** Mocha, Chai, Jest
 
 ## Planned Features
 - [ ] Color customization of cards
-- [ ] Confirm deletion of cards using personalized information
+- [ ] Confirm deletion of cards storing personalized information
 - [ ] Add toggle system for cards only needed once
+- [ ] Improved cross-browser styling
 
 
 ## Bento Development
+If you'd like to work on improving Bento by adding your own productivity modules, we welcome you to make a pull request!
+
+To run Bento in a development environment, please fork and clone the repo. Next, from the repo's root folder within your teminal run:
+```
+npm install
+```
+Once all of the dependencies are installed, run the command below within your terminal:
+```
+npm run dev
+```
+... and Bento will now be running at localhost:3000.
+
+In order to be able to develop modules that require data persistence, we recommend creating a new project with Firebase and using your personal API keys / database so that you'll have access to your own Firebase project console.
+
+To create a new project, visit the Firebase console (https://console.firebase.google.com/), login with your Google account, and navigate to 'CREATE NEW PROJECT'.
+
+From the overview tab, click 'Add Firebase to your web app' and copy the applicable API key, authenticaion domain, database URL and storage bucket URL. Place the new keys in their respective locations within the client/base.js file (example below):
+
+```
+import firebase from 'firebase';
+
+const config = {
+  apiKey: '[YOUR API KEY]',
+  authDomain: '[YOUR AUTH DOMAIN]',
+  databaseURL: '[YOUR DATABASE URL]',
+  storageBucket: '[YOUR STORAGE BUCKET URL]'
+};
+
+var firebaseApp = firebase.initializeApp(config);
+
+export default firebaseApp;
+```
