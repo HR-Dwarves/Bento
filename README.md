@@ -52,7 +52,7 @@ In order to be able to develop modules that require data persistence, we recomme
 
 To create a new project, visit the Firebase console (https://console.firebase.google.com/), login with your Google account, and navigate to 'CREATE NEW PROJECT'.
 
-From the overview tab, click 'Add Firebase to your web app' and copy the applicable API key, authenticaion domain, database URL and storage bucket URL. Place the new keys in their respective locations within the client/base.js file (example below):
+From the overview tab, click 'Add Firebase to your web app' and copy the applicable API key, authentication domain, database URL and storage bucket URL. Place the new keys in their respective locations within the client/base.js file (example below):
 
 ```
 import firebase from 'firebase';
@@ -68,3 +68,6 @@ var firebaseApp = firebase.initializeApp(config);
 
 export default firebaseApp;
 ```
+... and now you should be able to make changes to your Bento database within the 'Database' tab of your Firebase console.
+(Keep in mind that within our production Firebase database we have security rules only authorizing users to make changes to a database key that corresponds with Firebase authentication user ID)
+
