@@ -1,4 +1,4 @@
 var globalVariable = {
   primary: 'blue'
-}
-module.exports = globalVariable
+};
+module.exports = globalVariable;

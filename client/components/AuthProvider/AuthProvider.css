@@ -1,0 +1,70 @@
+.loginButton {
+  flex: 1 1 100%;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.loginButton > * {
+  text-align: center;
+}
+
+.buttonText {
+  vertical-align: middle;
+  text-align: center;
+}
+
+.iconSpan {
+  margin: auto 0;
+}
+
+.google:hover {
+  border: 1px solid #db3236;
+  color: black;
+  background-color: white;
+}
+
+.google {
+  border: 1px solid white;
+  background-color: #db3236;
+  color: white;
+}
+
+.github:hover {
+  border: 1px solid #24292e;
+  color: black;
+  padding-bottom: 2px;
+  background-color: white;
+}
+
+.github {
+  border: 1px solid white;
+  background-color: #24292e;
+  color: white;
+}
+
+.facebook:hover {
+  border: 1px solid #3b5998;
+  padding-bottom: 2px;
+  color: black;
+  background-color: white;
+}
+
+.facebook {
+  border: 1px solid white;
+  background-color: #3b5998;
+  color: white;
+}
+
+.twitter:hover {
+  border: 1px solid #00aced;
+  padding-bottom: 2px;
+  color: black;
+  background-color: white;
+}
+
+.twitter {
+  border: 1px solid white;
+  background-color: #00aced;
+  color: white;
+}
+

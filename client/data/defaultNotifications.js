@@ -38,7 +38,7 @@ const backgroundHelp = `Enter a photo URL to customize / change your background 
 `;
 
 const photoPromptHelp = `Challenge your inner photographer to upload a new photo every day.
-\n You can use a pre-existing shot or take a new one with your device camera .
+\n You can use a pre-existing shot or take a new one with your device camera.
 \n The card will keep track of your current daily streak.
 `;
 

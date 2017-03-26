@@ -29,7 +29,6 @@ class WeatherDetails extends React.Component {
     };
 
     this.weatherInterval = null;
-
     this.getWeatherData = this.getWeatherData.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.clearInterval = this.clearInterval.bind(this);
@@ -157,10 +156,8 @@ class WeatherDetails extends React.Component {
                       <div className={styles.forecastDetail}>
                         <p className={styles.forecastDay}>{details.day}</p>
                         <p className={styles.forecastDate}>{details.date.substring(3, 6)} {details.date.substring(0, 2)}</p>
-                        <div className={styles.forecastIconTemp}>
-                          <i className={forecastIcon(details.code)}></i>
-                          <p className={styles.forecastTemp}>{Math.floor((parseInt(details.high) + parseInt(details.low))/ 2)}º</p>
-                        </div>
+                        <p className={styles.forecastTemp}>{Math.floor((parseInt(details.high) + parseInt(details.low))/ 2)}º</p>
+                        <i className={forecastIcon(details.code)}></i>
                         <p className={styles.forecastDate}>{details.text}</p>
                       </div>
                     );

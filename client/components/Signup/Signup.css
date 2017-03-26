@@ -1,23 +1,19 @@
 .signup {
   display: -webkit-box;
   display: -ms-flexbox;
-  display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
-  display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
-  /*justify-content: center;
-  -webkit-justify-content: center;
-  align-items: center;
-  -webkit-align-items: center;*/
-  /*display: -webkit-box;    */
-  /*display: -ms-flexbox;  */
-  /*display: -webkit-flex; */
+  display: -webkit-flex;
+  display: flex;
   display: flex;
   justify-content: center;
-  /*-webkit-justify-content: center;*/
   align-items: center;
-  /*-webkit-align-items: center;*/
   height: 100vh;
   flex-direction: column;
-  /*-webkit-flex-direction: column;*/
+
+}
+
+.instructions {
+  font-size: 1.5em;
+  margin: 0 .5em;
 }
 
 .bentoMainSplash {
@@ -27,7 +23,6 @@
   background-image: url("https://firebasestorage.googleapis.com/v0/b/dashboardapp-3d3c7.appspot.com/o/bento-shapes.png?alt=media&token=cdc2a8ba-3e49-4958-8803-0e72b4b981c9");
   background-repeat: no-repeat;
   background-position: 0 50%;
-  /*background-size: cover;*/
 }
 
 .bentoMainSplashContent {
@@ -86,33 +81,20 @@
 
 .signup > * {
   flex: 1 1 100%;
-  /*-webkit-flex: 1 1 100%;*/
-  /*align-self: center;*/
 }
 
 .signupHeader {
   flex: 1 1 100%;
-  /*-webkit-flex: 1 1 100%;*/
-  /*align-self: flex-end;*/
-  /*justify-content: flex-end;*/
-  /*-webkit-justify-content: flex-end;*/
 }
 
 .loginButtons {
-  display: -webkit-box;   /* OLD - iOS 6-, Safari 3.1-6, BB7 */
   width: auto;
-  /*display: -webkit-box;
-  display: -ms-flexbox;
-  display: -webkit-flex; */
   display: flex;
-  /*flex-direction: column;*/
   text-align: center;
-  /*-webkit-flex-direction: column;*/
   width: 96%;
   margin-left: 2%;
   margin-bottom: 12px;
   min-height: 2em;
-  /*margin: .2em;*/
 }
 
 .loginButton > * {
@@ -123,7 +105,6 @@
   max-height: 13em;
   max-width: 13em;
   align-self: auto;
-  /*-webkit-align-self: auto;*/
 }
 
 @media all and (max-width: 550px) {
@@ -133,99 +114,22 @@
     min-height: 3em;
     text-align: center;
     vertical-align: center;
-    /*margin: 0 auto;*/
-    /*display: inline;*/
-    /*width: 95%;*/
-    /*margin: 0 auto;*/
   }
 
   .loginButtons > * {
     text-align: center;
-    /*margin: 0 auto;*/
   }
 }
 
 .loginButtons > * {
   flex: 1 1 100%;
-  /*-webkit-flex: 1 1 100%;*/
   margin: .2rem;
-  /*display: -webkit-box;   */
-  /*display: -ms-flexbox;  */
-  /*display: -webkit-flex; */
   display: flex;
   align-items: center;
   text-align: center;
   height: 100%;
   -webkit-align-items: center;
   min-height: 2em;
-
-}
-
-.loginIcon {
-  /*padding-top: 1px;*/
-}
-
-.buttonText {
-  vertical-align: middle;
-  text-align: center;
-}
-
-.iconSpan {
-  margin: auto 0;
-}
-
-.google {
-  flex: 1 1 100%;
-  /*-webkit-flex: 1 1 100%;*/
-  border: 1px solid #db3236;
-  font-size: 1.5rem;
-  font-weight: 700;
-  /*padding-bottom: 2px;*/
-}
-
-.google:hover {
-  border: 1px solid white;
-  background-color: #db3236;
-  color: white;
-}
-
-.github {
-  border: 1px solid #24292e;
-  font-size: 1.5rem;
-  font-weight: 700;
-  padding-bottom: 2px;
-}
-
-.github:hover {
-  border: 1px solid white;
-  background-color: #24292e;
-  color: white;
-}
-
-.facebook {
-  border: 1px solid #3b5998;
-  font-size: 1.5rem;
-  font-weight: 700;
-  padding-bottom: 2px;
-}
-
-.facebook:hover {
-  border: 1px solid white;
-  background-color: #3b5998;
-  color: white;
-}
-
-.twitter {
-  border: 1px solid #00aced;
-  font-size: 1.5rem;
-  font-weight: 700;
-  padding-bottom: 2px;
-}
-
-.twitter:hover {
-  border: 1px solid white;
-  background-color: #00aced;
-  color: white;
 }
 
 .signin {
