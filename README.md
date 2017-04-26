@@ -16,7 +16,7 @@ Bento is a modular productivity application utilizing a card-based dashboard of 
 - **Sticky Note:** Quickly save down anything you'd like to remember later
 - **Clock:** Keep track of various time zones with an easy to read clock
 - **Focus:** State your focus for the day to remind yourself what you'd like to accomplish
-- **Quote:** Stay motivated with inspirational quotes from influential peopel
+- **Quote:** Stay motivated with inspirational quotes from influential people
 - **Photo Per Day:** Take Bento's photo per day challenge and track yourself over time
 - **Background Customizer:** Customize your Bento background using your favorite photo's url
 
